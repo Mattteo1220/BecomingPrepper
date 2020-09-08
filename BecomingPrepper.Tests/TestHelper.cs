@@ -18,22 +18,22 @@ namespace BecomingPrepper.Tests
         public static IConfiguration GetMockConfiguration(bool isInvalidConnString = false)
         {
             var testContext = GetTestContext();
-            var connectionString = isInvalidConnString ? "TestConnString" : testContext.MongoClient;
+            var mongoClient = isInvalidConnString ? "TestConnString" : testContext.MongoClient;
 
-            IConfigurationSection mockDatabaseName = Mock.Of<IConfigurationSection>
+            IConfigurationSection mockDatabase = Mock.Of<IConfigurationSection>
             (
-                section => section.Value == testContext.Database
+                section => section.Key == "Database" && section.Value == testContext.Database
             );
 
-            IConfigurationSection mockConnectionString = Mock.Of<IConfigurationSection>
+            IConfigurationSection mockMongoClient = Mock.Of<IConfigurationSection>
             (
-                section => section.Value == connectionString
+                section => section.Key == "Connection" && section.Value == mongoClient
             );
 
             IConfiguration mockConfiguration = Mock.Of<IConfiguration>
             (
-                config => config.GetSection(testContext.ConnectionStringConfigurationSection) == mockConnectionString &&
-                          config.GetSection(testContext.DatabaseConfigurationSection) == mockDatabaseName
+                config => config.GetSection("MongoClient").GetSection("Connection") == mockMongoClient &&
+                          config.GetSection("Database").GetSection("Dev") == mockDatabase
             );
 
             return mockConfiguration;
@@ -43,8 +43,6 @@ namespace BecomingPrepper.Tests
         {
             public string MongoClient { get; set; }
             public string Database { get; set; }
-            public string ConnectionStringConfigurationSection { get; set; }
-            public string DatabaseConfigurationSection { get; set; }
         }
     }
 }

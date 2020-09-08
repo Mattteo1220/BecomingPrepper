@@ -8,14 +8,17 @@ namespace BecomingPrepper.Data
 {
     public class Database : IDatabase
     {
-        public MongoClient Connect(IConfiguration configuration, string dbConnectionString)
+        public MongoClient Connect(IConfiguration configuration, string environment)
         {
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            if (string.IsNullOrWhiteSpace(environment)) throw new ArgumentNullException(nameof(environment));
+
             var mongoClientConnectionString = configuration.GetSection("MongoClient").GetSection("Connection").Value;
-            var database = configuration.GetSection($"Databases").GetSection(dbConnectionString).Value;
+            var database = configuration.GetSection($"Database").GetSection(environment).Value;
 
             try
             {
-                var mongoClient = new MongoClient(database);
+                var mongoClient = new MongoClient(mongoClientConnectionString);
                 return mongoClient;
             }
             catch (Exception e)
@@ -24,11 +27,14 @@ namespace BecomingPrepper.Data
             }
         }
 
-        public bool IsAlive(MongoClient mongoClient, string dbConnectionString)
+        public bool IsAlive(MongoClient mongoClient, string database)
         {
-            if (!mongoClient.GetDatabase(dbConnectionString).RunCommandAsync((Command<BsonDocument>)"{ping:1}").Wait(10000))
+            if (mongoClient == null) throw new ArgumentNullException(nameof(mongoClient));
+            if (string.IsNullOrWhiteSpace(database)) throw new ArgumentNullException(nameof(database));
+
+            if (!mongoClient.GetDatabase(database).RunCommandAsync((Command<BsonDocument>)"{ping:1}").Wait(10000))
             {
-                throw new MongoClientException($"Failed to connect to {nameof(dbConnectionString)}");
+                throw new MongoClientException($"Failed to connect to {nameof(database)}");
             }
             return true;
         }

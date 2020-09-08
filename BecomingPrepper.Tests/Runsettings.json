@@ -1,6 +1,4 @@
 {
 "MongoClient" : "mongodb+srv://MaSaDev:MaSaDev@mcentire-develop-zmhcg.mongodb.net/BecomingPrepper_Dev?retryWrites=true&w=majority",
-"Database": "BecomingPrepper_Dev",
-"ConnectionStringConfigurationSection" : "Database:BecomingPrepper_Dev",
-"DatabaseConfigurationSection" : "Databases:DevDatabase"
+"Database": "BecomingPrepper_Dev"
 }

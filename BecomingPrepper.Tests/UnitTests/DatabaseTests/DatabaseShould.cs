@@ -14,9 +14,14 @@ namespace BecomingPrepper.Tests.UnitTests.DatabaseTests
         private IConfiguration _mockConfiguration;
         private IDatabase _database;
         private IConfiguration _mockInvalidMongoClient;
-        private Action _invalidMongoClientAction;
-        private readonly string MongoDatabase = "BecomingPrepper_Dev";
+        private const string MongoDatabase = "Dev";
         private MongoClient _mongoClient;
+
+        private Action _invalidMongoClientTestAction;
+        private Action _nullConfigurationTestAction;
+        private Action _emptyEnvironmentTestAction;
+        private Action _nullMongoClientTestAction;
+        private Action _emptyDatabaseTestAction;
 
         public DatabaseShould()
         {
@@ -24,7 +29,11 @@ namespace BecomingPrepper.Tests.UnitTests.DatabaseTests
             _database = new Database();
             _mongoClient = _database.Connect(_mockConfiguration, MongoDatabase);
             _mockInvalidMongoClient = TestHelper.GetMockConfiguration(true);
-            _invalidMongoClientAction = () => _database.Connect(_mockConfiguration, MongoDatabase);
+            _invalidMongoClientTestAction = () => _database.Connect(_mockInvalidMongoClient, MongoDatabase);
+            _nullConfigurationTestAction = () => _database.Connect(null, MongoDatabase);
+            _emptyEnvironmentTestAction = () => _database.Connect(_mockConfiguration, string.Empty);
+            _nullMongoClientTestAction = () => _database.IsAlive(null, MongoDatabase);
+            _emptyDatabaseTestAction = () => _database.IsAlive(_mongoClient, string.Empty);
         }
 
         [Fact]
@@ -36,13 +45,37 @@ namespace BecomingPrepper.Tests.UnitTests.DatabaseTests
         [Fact]
         public void BeAlive()
         {
-            _database.IsAlive(_mongoClient, MongoDatabase).Should().Be(true);
+            _database.IsAlive(_mongoClient, MongoDatabase).Should().Be(true, "Correct MongoClient ConnectionString was provided.");
         }
 
         [Fact]
         public void ThrowExceptionOnInvalidConnectionString()
         {
-            _invalidMongoClientAction.Should().Throw<Exception>("The connection string was invalid.");
+            _invalidMongoClientTestAction.Should().Throw<Exception>("The connection string was invalid.");
+        }
+
+        [Fact]
+        public void ThrowExceptionWhenConfigurationIsNull()
+        {
+            _nullConfigurationTestAction.Should().Throw<ArgumentNullException>("Configuration was null.");
+        }
+
+        [Fact]
+        public void ThrowExceptionWhenEnvironmentProvidedToConnectIsEmpty()
+        {
+            _emptyEnvironmentTestAction.Should().Throw<ArgumentNullException>("Environment provided was Empty.");
+        }
+
+        [Fact]
+        public void ThrowExceptionWhenMongoClientIsNull()
+        {
+            _nullMongoClientTestAction.Should().Throw<ArgumentNullException>("MongoClient was null.");
+        }
+
+        [Fact]
+        public void ThrowExceptionWhenDatabaseProvidedToIsAliveIsEmpty()
+        {
+            _emptyDatabaseTestAction.Should().Throw<ArgumentNullException>("Database provided was Empty.");
         }
     }
 }
