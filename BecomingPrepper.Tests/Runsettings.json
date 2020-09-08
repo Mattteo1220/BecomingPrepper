@@ -1,0 +1,7 @@
+{
+"ClusterConnection" : "mongodb+srv://MaSaDev:MaSaDev@mcentire-develop-zmhcg.mongodb.net/Prepper_Dev?retryWrites=true&w=majority",
+"DevDatabase": "Prepper_Dev",
+"ConnectionStringConfigurationSection" : "ConnectionStrings:MyPrepperStateConnectionString",
+"DatabaseConfigurationSection" : "Databases:DevDatabase",
+
+}
