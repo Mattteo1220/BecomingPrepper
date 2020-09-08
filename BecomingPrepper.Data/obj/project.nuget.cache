@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8oRquOsmTE1VEYvtnI6dOUTc2HLjd/yMUS9iZ+Klm/Jft0VXsWXVSpHjT4sbrbUNy+g7vB3zU6oJcQK1uddfGA==",
+  "dgSpecHash": "wFqYC1W4SqsK2MLNiNvD2KONEuN1vkGb2ZBPjEnVmaGzRcvu/UYrsTMyJylJ7fLljYfFzPKpALcOs0qDbFsT0g==",
   "success": true,
   "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.bson\\2.11.1\\mongodb.bson.2.11.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.driver\\2.11.1\\mongodb.driver.2.11.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.driver.core\\2.11.1\\mongodb.driver.core.2.11.1.nupkg.sha512",
+    "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.driver.gridfs\\2.11.1\\mongodb.driver.gridfs.2.11.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.libmongocrypt\\1.0.0\\mongodb.libmongocrypt.1.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

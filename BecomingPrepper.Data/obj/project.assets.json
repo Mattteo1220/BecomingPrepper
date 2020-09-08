@@ -103,6 +103,20 @@
           }
         }
       },
+      "MongoDB.Driver.GridFS/2.11.1": {
+        "type": "package",
+        "dependencies": {
+          "MongoDB.Bson": "2.11.1",
+          "MongoDB.Driver": "2.11.1",
+          "MongoDB.Driver.Core": "2.11.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MongoDB.Driver.GridFS.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MongoDB.Driver.GridFS.dll": {}
+        }
+      },
       "MongoDB.Libmongocrypt/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -1476,6 +1490,25 @@
         "runtimes/win/native/libzstd.dll",
         "runtimes/win/native/snappy32.dll",
         "runtimes/win/native/snappy64.dll"
+      ]
+    },
+    "MongoDB.Driver.GridFS/2.11.1": {
+      "sha512": "KoT0m723omOF7c1dULRCL908XOFzajTlh8qCUeGUyeNTrs7GvknOcdGwIQbOcEewKuZrpk8I5hteI6mfk8jyXA==",
+      "type": "package",
+      "path": "mongodb.driver.gridfs/2.11.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "lib/net452/MongoDB.Driver.GridFS.dll",
+        "lib/net452/MongoDB.Driver.GridFS.xml",
+        "lib/netstandard1.5/MongoDB.Driver.GridFS.dll",
+        "lib/netstandard1.5/MongoDB.Driver.GridFS.xml",
+        "lib/netstandard2.0/MongoDB.Driver.GridFS.dll",
+        "lib/netstandard2.0/MongoDB.Driver.GridFS.xml",
+        "mongodb.driver.gridfs.2.11.1.nupkg.sha512",
+        "mongodb.driver.gridfs.nuspec",
+        "packageIcon.png"
       ]
     },
     "MongoDB.Libmongocrypt/1.0.0": {
@@ -4738,7 +4771,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "MongoDB.Driver >= 2.11.1"
+      "MongoDB.Driver >= 2.11.1",
+      "MongoDB.Driver.GridFS >= 2.11.1"
     ]
   },
   "packageFolders": {
@@ -4786,6 +4820,10 @@
       "netcoreapp3.1": {
         "dependencies": {
           "MongoDB.Driver": {
+            "target": "Package",
+            "version": "[2.11.1, )"
+          },
+          "MongoDB.Driver.GridFS": {
             "target": "Package",
             "version": "[2.11.1, )"
           }
