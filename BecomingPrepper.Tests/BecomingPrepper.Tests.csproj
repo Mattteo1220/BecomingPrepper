@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoFixture.Xunit2" Version="4.13.0" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.14.5" />
     <PackageReference Include="xunit" Version="2.4.0" />
@@ -18,8 +19,11 @@
 
   <ItemGroup>
     <Folder Include="IntegrationTests\" />
-    <Folder Include="UnitTests\" />
     <Folder Include="SystemTests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BecomingPrepper.Data\BecomingPrepper.Data.csproj" />
   </ItemGroup>
 
 </Project>
