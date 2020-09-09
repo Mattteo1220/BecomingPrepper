@@ -138,6 +138,10 @@
               "target": "Package",
               "version": "[4.14.5, )"
             },
+            "SpecFlow.xUnit": {
+              "target": "Package",
+              "version": "[3.4.3, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[1.2.0, )"

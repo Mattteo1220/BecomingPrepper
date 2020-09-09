@@ -5,6 +5,7 @@ using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using Xunit;
+using static FluentAssertions.AssertionExtensions;
 
 namespace BecomingPrepper.Tests.UnitTests.DatabaseTests
 {
@@ -14,7 +15,7 @@ namespace BecomingPrepper.Tests.UnitTests.DatabaseTests
         private IConfiguration _mockConfiguration;
         private IDatabase _database;
         private IConfiguration _mockInvalidMongoClient;
-        private const string MongoDatabase = "Dev";
+        private const string Environment = "Dev";
         private MongoClient _mongoClient;
 
         private Action _invalidMongoClientTestAction;
@@ -27,17 +28,18 @@ namespace BecomingPrepper.Tests.UnitTests.DatabaseTests
         {
             _mockConfiguration = TestHelper.GetMockConfiguration();
             _database = new Database();
-            _mongoClient = _database.Connect(_mockConfiguration, MongoDatabase);
+            _mongoClient = _database.Connect(_mockConfiguration, Environment);
             _mockInvalidMongoClient = TestHelper.GetMockConfiguration(true);
-            _invalidMongoClientTestAction = () => _database.Connect(_mockInvalidMongoClient, MongoDatabase);
-            _nullConfigurationTestAction = () => _database.Connect(null, MongoDatabase);
+            _invalidMongoClientTestAction = () => _database.Connect(_mockInvalidMongoClient, Environment);
+            _nullConfigurationTestAction = () => _database.Connect(null, Environment);
             _emptyEnvironmentTestAction = () => _database.Connect(_mockConfiguration, string.Empty);
-            _nullMongoClientTestAction = () => _database.IsAlive(null, MongoDatabase);
+            _nullMongoClientTestAction = () => _database.IsAlive(null, Environment);
             _emptyDatabaseTestAction = () => _database.IsAlive(_mongoClient, string.Empty);
+            _database.Connect(_mockConfiguration, Environment);
         }
 
         [Fact]
-        public void ReturnMongoClientOnConnect()
+        public void ReturnMongoClientWithDatabaseOnConnect()
         {
             _mongoClient.Should().NotBe(null);
         }
@@ -45,7 +47,7 @@ namespace BecomingPrepper.Tests.UnitTests.DatabaseTests
         [Fact]
         public void BeAlive()
         {
-            _database.IsAlive(_mongoClient, MongoDatabase).Should().Be(true, "Correct MongoClient ConnectionString was provided.");
+            _database.IsAlive(_mongoClient, Environment).Should().Be(true, "Correct MongoClient ConnectionString was provided.");
         }
 
         [Fact]
@@ -76,6 +78,12 @@ namespace BecomingPrepper.Tests.UnitTests.DatabaseTests
         public void ThrowExceptionWhenDatabaseProvidedToIsAliveIsEmpty()
         {
             _emptyDatabaseTestAction.Should().Throw<ArgumentNullException>("Database provided was Empty.");
+        }
+
+        [Fact]
+        public void InstantiateMongoDatabase_UponConnect()
+        {
+            _database.MongoDatabase.Should().NotBe(null);
         }
     }
 }

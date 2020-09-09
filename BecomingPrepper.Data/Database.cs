@@ -8,6 +8,7 @@ namespace BecomingPrepper.Data
 {
     public class Database : IDatabase
     {
+        public IMongoDatabase MongoDatabase { get; set; }
         public MongoClient Connect(IConfiguration configuration, string environment)
         {
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -19,6 +20,7 @@ namespace BecomingPrepper.Data
             try
             {
                 var mongoClient = new MongoClient(mongoClientConnectionString);
+                MongoDatabase = GetDatabase(mongoClient, database);
                 return mongoClient;
             }
             catch (Exception e)
@@ -37,6 +39,11 @@ namespace BecomingPrepper.Data
                 throw new MongoClientException($"Failed to connect to {nameof(database)}");
             }
             return true;
+        }
+
+        public IMongoDatabase GetDatabase(MongoClient mongoClient, string database)
+        {
+            return mongoClient.GetDatabase(database);
         }
     }
 }
