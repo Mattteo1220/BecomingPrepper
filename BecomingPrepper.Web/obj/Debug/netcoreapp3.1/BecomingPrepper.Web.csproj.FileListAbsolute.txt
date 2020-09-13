@@ -57,7 +57,6 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\obj\Debug\netcoreapp3.1\BecomingPrepper.Web.csprojAssemblyReference.cache
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\obj\Debug\netcoreapp3.1\BecomingPrepper.Web.AssemblyInfoInputs.cache
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\obj\Debug\netcoreapp3.1\BecomingPrepper.Web.AssemblyInfo.cs
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\obj\Debug\netcoreapp3.1\BecomingPrepper.Web.csproj.CoreCompileInputs.cache
@@ -86,3 +85,4 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\obj\Debug\netcoreapp3.1\BecomingPrepper.Web.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\obj\Debug\netcoreapp3.1\BecomingPrepper.Web.pdb
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\obj\Debug\netcoreapp3.1\BecomingPrepper.Web.genruntimeconfig.cache
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Web\obj\Debug\netcoreapp3.1\BecomingPrepper.Web.csprojAssemblyReference.cache

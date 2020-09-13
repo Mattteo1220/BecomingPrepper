@@ -9,22 +9,47 @@
   <ItemGroup>
     <PackageReference Include="AutoFixture.Xunit2" Version="4.13.0" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.14.5" />
-    <PackageReference Include="SpecFlow.xUnit" Version="3.4.3" />
-    <PackageReference Include="xunit" Version="2.4.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="SpecFlow" Version="3.4.8" />
+    <PackageReference Include="SpecFlow.Assist.Dynamic" Version="1.4.2" />
+    <PackageReference Include="SpecFlow.xUnit" Version="3.4.8" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="IntegrationTests\" />
+    <Folder Include="Drivers\" />
     <Folder Include="SystemTests\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BecomingPrepper.Data\BecomingPrepper.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="IntegrationTests\RepositoryTests\ProgressTrackerRepositoryTests\ProgressTrackerRepository.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Update="IntegrationTests\RepositoryTests\UserRepositoryTests\UserRepository.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\ProgressTrackerRepositoryTests\ProgressTrackerRepository.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProgressTrackerRepository.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\UserRepositoryTests\UserRepository.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UserRepository.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 </Project>

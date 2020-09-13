@@ -8,6 +8,9 @@ namespace BecomingPrepper.Data.Repositories
 {
     public class PrepGuideRepository : IDatabaseCollection<PrepGuideEntity>
     {
+        private bool _disposed = false;
+        public IMongoCollection<PrepGuideEntity> Collection { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public Task Add(PrepGuideEntity t)
         {
             throw new NotImplementedException();
@@ -31,6 +34,21 @@ namespace BecomingPrepper.Data.Repositories
         public Task Update(FilterDefinition<PrepGuideEntity> queryFilter, UpdateDefinition<PrepGuideEntity> updateFilter)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                Collection = null;
+                _disposed = true;
+            }
         }
     }
 }

@@ -1,6 +1,9 @@
 using System.IO;
 using System.Reflection;
+using BecomingPrepper.Data;
+using BecomingPrepper.Data.Interfaces;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Driver;
 using Moq;
 using Newtonsoft.Json;
 
@@ -8,6 +11,9 @@ namespace BecomingPrepper.Tests
 {
     public class TestHelper
     {
+        private const string Environment = "Dev";
+        private const string Database = "BecomingPrepper_Dev";
+        public const string RecommendedQuantityId = "5f59291f65554c3ddaa060b3";
         public static TestConfiguration GetTestContext()
         {
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Runsettings.json");
@@ -37,6 +43,29 @@ namespace BecomingPrepper.Tests
             );
 
             return mockConfiguration;
+        }
+
+        public static Mock<IDatabase> GetMockDatabase()
+        {
+            var mockConfiguration = GetMockConfiguration();
+            var mockMongoDatabase = new Mock<IMongoDatabase>();
+            var mockDatabase = new Mock<IDatabase>();
+            mockDatabase.Setup(db => db.Connect(mockConfiguration, Environment)).Returns(new MongoClient());
+            mockDatabase.Setup(db => db.GetDatabase(mockDatabase.Object.MongoClient, Database)).Returns(mockMongoDatabase.Object);
+            mockDatabase.SetupGet(db => db.MongoClient).Returns(new MongoClient());
+            mockDatabase.SetupGet(db => db.MongoDatabase).Returns(mockMongoDatabase.Object);
+            mockDatabase.Object.Connect(mockConfiguration, Environment);
+            mockDatabase.Object.GetDatabase(mockDatabase.Object.MongoClient, Database);
+
+            return mockDatabase;
+        }
+
+        public static IMongoDatabase GetDatabase()
+        {
+            var mockConfiguration = GetMockConfiguration();
+            var database = new Database();
+            database.Connect(mockConfiguration, Environment);
+            return database.MongoDatabase;
         }
 
         public class TestConfiguration

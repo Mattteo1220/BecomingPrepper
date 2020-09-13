@@ -9,6 +9,7 @@ namespace BecomingPrepper.Data
     public class Database : IDatabase
     {
         public IMongoDatabase MongoDatabase { get; set; }
+        public MongoClient MongoClient { get; set; }
         public MongoClient Connect(IConfiguration configuration, string environment)
         {
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -19,9 +20,13 @@ namespace BecomingPrepper.Data
 
             try
             {
-                var mongoClient = new MongoClient(mongoClientConnectionString);
-                MongoDatabase = GetDatabase(mongoClient, database);
-                return mongoClient;
+                MongoClient = new MongoClient(mongoClientConnectionString);
+                if (IsAlive(this.MongoClient, database))
+                {
+                    MongoDatabase = GetDatabase(MongoClient, database);
+                    return MongoClient;
+                }
+                throw new Exception();
             }
             catch (Exception e)
             {
@@ -43,6 +48,9 @@ namespace BecomingPrepper.Data
 
         public IMongoDatabase GetDatabase(MongoClient mongoClient, string database)
         {
+            if (mongoClient == null) throw new ArgumentNullException(nameof(mongoClient));
+            if (string.IsNullOrWhiteSpace(database)) throw new ArgumentNullException(nameof(database));
+
             return mongoClient.GetDatabase(database);
         }
     }

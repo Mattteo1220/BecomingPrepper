@@ -10,13 +10,13 @@ namespace BecomingPrepper.Data.Repositories
     public class UserRepository : IDatabaseCollection<UserEntity>
     {
         private const string UserCollectionString = "UserCollection";
-        public IMongoCollection<UserEntity> UserCollection { get; set; }
+        private bool _disposed = false;
+        public IMongoCollection<UserEntity> Collection { get; set; }
 
-        public IMongoCollection<UserEntity> Init(IMongoDatabase database)
+        public UserRepository(IMongoDatabase mongoDatabase)
         {
-            if (database == null) throw new ArgumentNullException(nameof(database));
-            UserCollection = database.GetCollection<UserEntity>(UserCollectionString);
-            return UserCollection;
+            if (mongoDatabase == null) throw new ArgumentNullException(nameof(mongoDatabase));
+            Collection = mongoDatabase.GetCollection<UserEntity>(UserCollectionString);
         }
 
         public async Task Add(UserEntity userEntity)
@@ -24,7 +24,7 @@ namespace BecomingPrepper.Data.Repositories
             if (userEntity == null) throw new ArgumentNullException(nameof(userEntity));
             try
             {
-                await UserCollection.InsertOneAsync(userEntity);
+                await Collection.InsertOneAsync(userEntity);
             }
             catch (Exception e)
             {
@@ -39,7 +39,7 @@ namespace BecomingPrepper.Data.Repositories
             UserEntity entity = null;
             try
             {
-                using IAsyncCursor<UserEntity> asyncCursor = await UserCollection.FindAsync(queryFilter);
+                using IAsyncCursor<UserEntity> asyncCursor = await Collection.FindAsync(queryFilter);
                 while (await asyncCursor.MoveNextAsync())
                 {
                     foreach (var cursor in asyncCursor.Current)
@@ -63,7 +63,7 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                await UserCollection.FindOneAndUpdateAsync(queryFilter, updateFilter);
+                await Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
             }
             catch (Exception e)
             {
@@ -77,11 +77,26 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                await UserCollection.FindOneAndDeleteAsync(deleteFilter);
+                await Collection.FindOneAndDeleteAsync(deleteFilter);
             }
             catch (Exception e)
             {
                 throw new Exception($"Failed to update Entity 'UserEntity' : {deleteFilter.ToJson()}");
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                Collection = null;
+                _disposed = true;
             }
         }
     }
