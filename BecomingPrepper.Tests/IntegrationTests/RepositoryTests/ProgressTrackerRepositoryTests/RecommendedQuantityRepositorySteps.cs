@@ -46,7 +46,6 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.ProgressTracker
         [Then(@"That recommended Quantity is returned")]
         public void ThenThatRecommendedQuantityIsReturned()
         {
-            var result = _recommendedQuantityAmountContext.QueryResult.Invoke();
             _recommendedQuantityAmountContext.QueryResult.Invoke().Result.Should().NotBeNull("The Entity exists in the MongoDatabase");
         }
 
