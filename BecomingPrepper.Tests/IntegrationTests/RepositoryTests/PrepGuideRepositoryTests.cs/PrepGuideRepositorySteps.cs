@@ -2,6 +2,7 @@
 using AutoFixture;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Tests.Contexts;
+using FluentAssertions;
 using MongoDB.Driver;
 using TechTalk.SpecFlow;
 
@@ -44,8 +45,8 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
         public void ThenANewTipIsAdded()
         {
             var queryFilter = Builders<PrepGuideEntity>.Filter.Eq(p => p._id, _prepGuideContext.PrepGuide._id);
-            var prepGuide = _prepGuideContext.PrepGuideRepository.Get(queryFilter);
-            prepGuide.Result.Pilot.Tips.Any(tip => tip.TipName == _tip.TipName);
+            var wasTipAdded = _prepGuideContext.PrepGuideRepository.Get(queryFilter).Result.Pilot.Tips.Any(tip => tip.TipName == _tip.TipName);
+            wasTipAdded.Should().Be(true);
         }
         #endregion
     }
