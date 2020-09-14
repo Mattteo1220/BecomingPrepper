@@ -45,15 +45,15 @@
           "dependencies": {
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
-              "version": "[3.1.7, )"
+              "version": "[3.1.8, )"
             },
             "MongoDB.Driver": {
               "target": "Package",
-              "version": "[2.11.1, )"
+              "version": "[2.11.2, )"
             },
             "MongoDB.Driver.GridFS": {
               "target": "Package",
-              "version": "[2.11.1, )"
+              "version": "[2.11.2, )"
             }
           },
           "imports": [

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XcbMcuIBcVc0ZJQrRBWUZRG5/HQLp/k2XAgPZXhgmZNgK6cXpQnTzcKrrDxiByZHyQE0uizVONGaZBWbzbSfcw==",
+  "dgSpecHash": "huSHDZwDhwXo4Lb5jZ8XUgLplBSpghPMslEAA10goi8BVNW6dONAAaTli9IC4zX2osPc/qZekAgTscGKMFewsw==",
   "success": true,
   "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Tests\\BecomingPrepper.Tests.csproj",
   "expectedPackageFiles": [
@@ -26,10 +26,10 @@
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.testplatform.objectmodel\\16.5.0\\microsoft.testplatform.objectmodel.16.5.0.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.testplatform.testhost\\16.5.0\\microsoft.testplatform.testhost.16.5.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
-    "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.bson\\2.11.1\\mongodb.bson.2.11.1.nupkg.sha512",
-    "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.driver\\2.11.1\\mongodb.driver.2.11.1.nupkg.sha512",
-    "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.driver.core\\2.11.1\\mongodb.driver.core.2.11.1.nupkg.sha512",
-    "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.driver.gridfs\\2.11.1\\mongodb.driver.gridfs.2.11.1.nupkg.sha512",
+    "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.bson\\2.11.2\\mongodb.bson.2.11.2.nupkg.sha512",
+    "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.driver\\2.11.2\\mongodb.driver.2.11.2.nupkg.sha512",
+    "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.driver.core\\2.11.2\\mongodb.driver.core.2.11.2.nupkg.sha512",
+    "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.driver.gridfs\\2.11.2\\mongodb.driver.gridfs.2.11.2.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\mongodb.libmongocrypt\\1.0.0\\mongodb.libmongocrypt.1.0.0.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\moq\\4.14.5\\moq.4.14.5.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",

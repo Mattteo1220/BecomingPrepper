@@ -9,9 +9,16 @@ namespace BecomingPrepper.Data.Repositories
     public class FoodStorageInventoryRepository : IDatabaseCollection<FoodStorageInventoryEntity>
     {
         private bool _disposed = false;
-        public IMongoCollection<FoodStorageInventoryEntity> Collection { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private const string FoodStorageInventoryCollection = "FoodStorageInventoryCollection";
+        public IMongoCollection<FoodStorageInventoryEntity> Collection { get; set; }
 
-        public Task Add(FoodStorageInventoryEntity t)
+        public FoodStorageInventoryRepository(IMongoDatabase mongoDatabase)
+        {
+            if (mongoDatabase == null) throw new ArgumentNullException(nameof(mongoDatabase));
+            Collection = mongoDatabase.GetCollection<FoodStorageInventoryEntity>(FoodStorageInventoryCollection);
+        }
+
+        public Task Add(FoodStorageInventoryEntity entity)
         {
             throw new NotImplementedException();
         }
@@ -22,11 +29,6 @@ namespace BecomingPrepper.Data.Repositories
         }
 
         public Task<FoodStorageInventoryEntity> Get(FilterDefinition<FoodStorageInventoryEntity> queryFilter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IMongoCollection<FoodStorageInventoryEntity> Init(IMongoDatabase database)
         {
             throw new NotImplementedException();
         }

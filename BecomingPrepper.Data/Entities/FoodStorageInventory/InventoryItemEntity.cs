@@ -19,6 +19,8 @@ namespace BecomingPrepper.Data.Entities
         [BsonElement]
         public double Weight { get; set; }
         [BsonElement]
+        public byte[] DefaultImageData { get; set; }
+        [BsonElement]
         public DateTime ModifiedDate { get; set; }
         [BsonElement]
         public string ModifiedBy { get; set; }
