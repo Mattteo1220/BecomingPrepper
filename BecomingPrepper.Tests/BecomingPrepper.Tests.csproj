@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="IntegrationTests\RepositoryTests\ProgressTrackerRepositoryTests\ProgressTrackerRepository.feature.cs">
+    <Compile Update="IntegrationTests\RepositoryTests\ProgressTrackerRepositoryTests\RecommendedQuantityRepository.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Update="IntegrationTests\RepositoryTests\UserRepositoryTests\UserRepository.feature.cs">
@@ -42,9 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\ProgressTrackerRepositoryTests\ProgressTrackerRepository.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\ProgressTrackerRepositoryTests\RecommendedQuantityRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ProgressTrackerRepository.feature.cs</LastGenOutput>
+      <LastGenOutput>RecommendedQuantityRepository.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\UserRepositoryTests\UserRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
