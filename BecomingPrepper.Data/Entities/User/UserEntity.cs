@@ -9,7 +9,9 @@ namespace BecomingPrepper.Data.Entities
         public ObjectId _id { get; set; }
         [BsonElement]
         public string AccountId { get; set; }
+        [BsonElement]
         public AccountEntity Account { get; set; }
+        [BsonElement]
         public PrepperEntity Prepper { get; set; }
     }
 }

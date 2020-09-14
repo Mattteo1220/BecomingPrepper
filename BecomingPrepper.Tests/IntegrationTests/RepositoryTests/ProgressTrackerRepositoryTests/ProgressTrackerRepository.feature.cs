@@ -91,11 +91,11 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.ProgressTracker
         [Xunit.SkippableFactAttribute(DisplayName="Get Recommended Quantity")]
         [Xunit.TraitAttribute("FeatureTitle", "RecommendedQuantityRepository")]
         [Xunit.TraitAttribute("Description", "Get Recommended Quantity")]
-        [Xunit.TraitAttribute("Category", "RecommendedQuantityRepository")]
+        [Xunit.TraitAttribute("Category", "RecommendedQuantityAmountRepository")]
         public virtual void GetRecommendedQuantity()
         {
             string[] tagsOfScenario = new string[] {
-                    "RecommendedQuantityRepository"};
+                    "RecommendedQuantityAmountRepository"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Recommended Quantity", null, tagsOfScenario, argumentsOfScenario);
 #line 10

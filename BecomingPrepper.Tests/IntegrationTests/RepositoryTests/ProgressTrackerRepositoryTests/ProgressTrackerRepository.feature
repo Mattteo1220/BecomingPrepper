@@ -6,7 +6,7 @@
 	Background: 
 		#Given a Recommended Quantity amount
 
-@RecommendedQuantityRepository
+@RecommendedQuantityAmountRepository
 Scenario: Get Recommended Quantity
 	Given That recommended Quantity Amount exists in the Mongo Database
 	When RecommendedQuantity Get is called

@@ -15,8 +15,7 @@ namespace BecomingPrepper.Tests.Hooks
             _recommendedQuantityAmountContext = userContext;
         }
 
-        [BeforeScenario("RecommendedQuantityRepository")]
-        [BeforeStep("NewDbInstantiation")]
+        [BeforeScenario("RecommendedQuantityAmountRepository")]
         public void BeforeScenario()
         {
             _recommendedQuantityAmountContext.RecommendedQuantityRepository = new RecommendedQuantityRepository(MongoDatabase);
@@ -29,7 +28,7 @@ namespace BecomingPrepper.Tests.Hooks
             _recommendedQuantityAmountContext.RecommendedQuantityRepository.Delete(filter);
         }
 
-        [AfterScenario("UserRepository", Order = 200)]
+        [AfterScenario("RecommendedQuantityAmountRepository", Order = 200)]
         public void AfterDeleteScenario()
         {
             _recommendedQuantityAmountContext.RecommendedQuantityRepository.Dispose();
