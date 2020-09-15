@@ -117,32 +117,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "dependencies": {
-            "Serilog.AspNetCore": {
-              "target": "Package",
-              "version": "[3.4.0, )"
-            },
-            "Serilog.Extensions.Logging": {
-              "target": "Package",
-              "version": "[3.0.1, )"
-            },
-            "Serilog.Settings.Configuration": {
-              "target": "Package",
-              "version": "[3.1.0, )"
-            },
-            "Serilog.Sinks.ColoredConsole": {
-              "target": "Package",
-              "version": "[3.0.1, )"
-            },
-            "Serilog.Sinks.MongoDB": {
-              "target": "Package",
-              "version": "[4.0.0, )"
-            },
-            "Unity": {
-              "target": "Package",
-              "version": "[5.11.7, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -154,9 +128,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -269,9 +240,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

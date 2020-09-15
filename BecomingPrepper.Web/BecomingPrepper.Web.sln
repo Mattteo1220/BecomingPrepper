@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.Tests", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.Web", "BecomingPrepper.Web.csproj", "{A153BAAE-AD49-4E1C-8C20-7298CF6E030A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.Api", "..\BecomingPrepper.Api\BecomingPrepper.Api.csproj", "{03FF14D3-A44F-4298-8011-DE9A4AE8A088}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BecomingPrepper.Logger", "..\BecomingPrepper.Logger\BecomingPrepper.Logger.csproj", "{EADCB563-1EC0-4E7F-9A65-235FCF7331BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{A153BAAE-AD49-4E1C-8C20-7298CF6E030A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A153BAAE-AD49-4E1C-8C20-7298CF6E030A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A153BAAE-AD49-4E1C-8C20-7298CF6E030A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03FF14D3-A44F-4298-8011-DE9A4AE8A088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03FF14D3-A44F-4298-8011-DE9A4AE8A088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03FF14D3-A44F-4298-8011-DE9A4AE8A088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03FF14D3-A44F-4298-8011-DE9A4AE8A088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EADCB563-1EC0-4E7F-9A65-235FCF7331BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EADCB563-1EC0-4E7F-9A65-235FCF7331BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EADCB563-1EC0-4E7F-9A65-235FCF7331BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EADCB563-1EC0-4E7F-9A65-235FCF7331BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
