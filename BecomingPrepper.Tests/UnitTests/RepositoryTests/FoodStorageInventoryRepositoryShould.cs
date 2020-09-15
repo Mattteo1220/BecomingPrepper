@@ -14,7 +14,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             Action foodStorageInventoryRepository;
 
             //Act
-            foodStorageInventoryRepository = () => new FoodStorageInventoryRepository(null);
+            foodStorageInventoryRepository = () => new FoodStorageInventoryRepository(null, "FoodStorageInventory");
 
             //Assert
             foodStorageInventoryRepository.Should().Throw<ArgumentNullException>("No IMongo database was supplied.");
@@ -27,7 +27,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             var mockDatabase = TestHelper.GetMockDatabase();
 
             //Act
-            var foodStorageInventoryRepository = new FoodStorageInventoryRepository(mockDatabase.Object.MongoDatabase);
+            var foodStorageInventoryRepository = new FoodStorageInventoryRepository(mockDatabase.Object.MongoDatabase, "FoodStorageInventory");
             foodStorageInventoryRepository.Dispose();
 
             //Asssert

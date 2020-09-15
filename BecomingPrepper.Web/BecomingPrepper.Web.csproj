@@ -13,4 +13,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BecomingPrepper.Data\BecomingPrepper.Data.csproj" />
+    <ProjectReference Include="..\BecomingPrepper.Logger\BecomingPrepper.Logger.csproj" />
+  </ItemGroup>
+
 </Project>

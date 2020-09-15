@@ -8,7 +8,7 @@ namespace BecomingPrepper.Tests.Contexts
     public class RecommendedQuantityAmountContext
     {
         public RecommendedQuantityAmountEntity RecommendedQuantityAmountEntity { get; set; }
-        public IDatabaseCollection<RecommendedQuantityAmountEntity> RecommendedQuantityRepository { get; set; }
+        public IRepository<RecommendedQuantityAmountEntity> RecommendedQuantityRepository { get; set; }
 
         public Func<Task<RecommendedQuantityAmountEntity>> QueryResult { get; set; }
 

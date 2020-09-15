@@ -6,16 +6,20 @@ using MongoDB.Driver;
 
 namespace BecomingPrepper.Data.Repositories
 {
-    public class FoodStorageInventoryRepository : IDatabaseCollection<FoodStorageInventoryEntity>
+    public class FoodStorageInventoryRepository : IRepository<FoodStorageInventoryEntity>
     {
         private bool _disposed = false;
-        private const string FoodStorageInventoryCollection = "FoodStorageInventoryCollection";
         public IMongoCollection<FoodStorageInventoryEntity> Collection { get; set; }
 
-        public FoodStorageInventoryRepository(IMongoDatabase mongoDatabase)
+        public FoodStorageInventoryRepository(IMongoDatabase mongoDatabase, string collection)
         {
             if (mongoDatabase == null) throw new ArgumentNullException(nameof(mongoDatabase));
-            Collection = mongoDatabase.GetCollection<FoodStorageInventoryEntity>(FoodStorageInventoryCollection);
+            Collection = mongoDatabase.GetCollection<FoodStorageInventoryEntity>(collection);
+        }
+
+        public FoodStorageInventoryRepository(IMongoCollection<FoodStorageInventoryEntity> collection)
+        {
+            Collection = collection;
         }
 
         public Task Add(FoodStorageInventoryEntity entity)

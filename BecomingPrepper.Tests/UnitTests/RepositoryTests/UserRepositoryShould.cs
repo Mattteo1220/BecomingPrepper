@@ -14,7 +14,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             Action userRepository;
 
             //Act
-            userRepository = () => new UserRepository(null);
+            userRepository = () => new UserRepository(null, "Users");
 
             //Assert
             userRepository.Should().Throw<ArgumentNullException>("No IMongo database was supplied.");
@@ -27,7 +27,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             var mockDatabase = TestHelper.GetMockDatabase();
 
             //Act
-            var userRepository = new UserRepository(mockDatabase.Object.MongoDatabase);
+            var userRepository = new UserRepository(mockDatabase.Object.MongoDatabase, "Users");
             userRepository.Dispose();
 
             //Asssert

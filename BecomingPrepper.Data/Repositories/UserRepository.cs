@@ -2,21 +2,24 @@
 using System.Threading.Tasks;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace BecomingPrepper.Data.Repositories
 {
-    public class UserRepository : IDatabaseCollection<UserEntity>
+    public class UserRepository : IRepository<UserEntity>
     {
-        private const string UserCollectionString = "UserCollection";
         private bool _disposed = false;
         public IMongoCollection<UserEntity> Collection { get; set; }
 
-        public UserRepository(IMongoDatabase mongoDatabase)
+        public UserRepository(IMongoDatabase mongoDatabase, string collection)
         {
             if (mongoDatabase == null) throw new ArgumentNullException(nameof(mongoDatabase));
-            Collection = mongoDatabase.GetCollection<UserEntity>(UserCollectionString);
+            Collection = mongoDatabase.GetCollection<UserEntity>(collection);
+        }
+
+        public UserRepository(IMongoCollection<UserEntity> collection)
+        {
+            Collection = collection;
         }
 
         public async Task Add(UserEntity userEntity)
@@ -28,7 +31,8 @@ namespace BecomingPrepper.Data.Repositories
             }
             catch (Exception e)
             {
-                throw new Exception($"Failed to Add Entity 'UserEntity': {userEntity.Account.Username}" + e.StackTrace);
+                //TODO: Add logging
+                throw;
             }
         }
 
@@ -50,7 +54,8 @@ namespace BecomingPrepper.Data.Repositories
             }
             catch (Exception e)
             {
-                throw new Exception($"Failed to Get 'Entity': 'UserEntity': {queryFilter.ToJson()}");
+                //TODO: Add logging
+                throw;
             }
 
             return entity;
@@ -67,7 +72,9 @@ namespace BecomingPrepper.Data.Repositories
             }
             catch (Exception e)
             {
-                throw new Exception($"Failed to update Entity 'UserEntity' : {queryFilter.ToJson()}");
+
+                //TODO: Add logging
+                throw;
             }
         }
 
@@ -81,7 +88,8 @@ namespace BecomingPrepper.Data.Repositories
             }
             catch (Exception e)
             {
-                throw new Exception($"Failed to update Entity 'UserEntity' : {deleteFilter.ToJson()}");
+                //TODO: Add logging
+                throw;
             }
         }
 

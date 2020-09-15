@@ -30,14 +30,14 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
         {
             var fixture = new Fixture();
             _tip = fixture.Create<TipEntity>();
-            _prepGuideContext.PrepGuide.Pilot.Tips.Add(_tip);
+            _prepGuideContext.PrepGuide.Tips.Add(_tip);
         }
 
         [When(@"PrepGuide Repository Update is called")]
         public void WhenPrepGuideRepositoryAddIsCalled()
         {
             var queryFilter = Builders<PrepGuideEntity>.Filter.Eq(p => p._id, _prepGuideContext.PrepGuide._id);
-            var updateFilter = Builders<PrepGuideEntity>.Update.Set(p => p.Pilot.Tips, _prepGuideContext.PrepGuide.Pilot.Tips);
+            var updateFilter = Builders<PrepGuideEntity>.Update.Set(p => p.Tips, _prepGuideContext.PrepGuide.Tips);
             _prepGuideContext.PrepGuideRepository.Update(queryFilter, updateFilter);
         }
 
@@ -45,7 +45,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
         public void ThenANewTipIsAdded()
         {
             var queryFilter = Builders<PrepGuideEntity>.Filter.Eq(p => p._id, _prepGuideContext.PrepGuide._id);
-            var wasTipAdded = _prepGuideContext.PrepGuideRepository.Get(queryFilter).Result.Pilot.Tips.Any(tip => tip.TipName == _tip.TipName);
+            var wasTipAdded = _prepGuideContext.PrepGuideRepository.Get(queryFilter).Result.Tips.Any(tip => tip.TipName == _tip.TipName);
             wasTipAdded.Should().Be(true);
         }
         #endregion

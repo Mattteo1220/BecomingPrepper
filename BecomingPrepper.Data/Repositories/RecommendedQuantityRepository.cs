@@ -7,15 +7,19 @@ using MongoDB.Driver;
 
 namespace BecomingPrepper.Data.Repositories
 {
-    public class RecommendedQuantityRepository : IDatabaseCollection<RecommendedQuantityAmountEntity>
+    public class RecommendedQuantityRepository : IRepository<RecommendedQuantityAmountEntity>
     {
-        private const string ProgressTracking = "RecommendedQuantityCollection";
         private bool _disposed = false;
         public IMongoCollection<RecommendedQuantityAmountEntity> Collection { get; set; }
-        public RecommendedQuantityRepository(IMongoDatabase mongoDatabase)
+        public RecommendedQuantityRepository(IMongoDatabase mongoDatabase, string collection)
         {
             if (mongoDatabase == null) throw new ArgumentNullException(nameof(mongoDatabase));
-            Collection = mongoDatabase.GetCollection<RecommendedQuantityAmountEntity>(ProgressTracking);
+            Collection = mongoDatabase.GetCollection<RecommendedQuantityAmountEntity>(collection);
+        }
+
+        public RecommendedQuantityRepository(IMongoCollection<RecommendedQuantityAmountEntity> collection)
+        {
+            Collection = collection;
         }
 
         public async Task Add(RecommendedQuantityAmountEntity recommendedQuantityAmountEntity)
