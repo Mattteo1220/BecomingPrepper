@@ -8,7 +8,7 @@ namespace BecomingPrepper.Tests.Contexts
     public class PrepGuideContext
     {
         public PrepGuideEntity PrepGuide { get; set; }
-        public IDatabaseCollection<PrepGuideEntity> PrepGuideRepository { get; set; }
+        public IRepository<PrepGuideEntity> PrepGuideRepository { get; set; }
 
         public Func<Task<PrepGuideEntity>> QueryResult { get; set; }
 

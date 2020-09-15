@@ -15,7 +15,7 @@ namespace BecomingPrepper.Tests.RepostioryTests.UnitTests
     [Trait("Unit", "UserRepositoryTests")]
     public class DatabaseCollectionShould
     {
-        private IDatabaseCollection<UserEntity> _userRepository;
+        private IRepository<UserEntity> _userRepository;
         private Action _initCollectionTest;
         private Func<Task> _nullUserEntityTest;
         private Func<Task> _getNullQueryFilterTest;
@@ -31,9 +31,9 @@ namespace BecomingPrepper.Tests.RepostioryTests.UnitTests
 
             var fixture = new Fixture();
             fixture.Register(ObjectId.GenerateNewId);
-            _userRepository = new UserRepository(mockDatabase.Object.MongoDatabase);
+            _userRepository = new UserRepository(mockDatabase.Object.MongoDatabase, "Users");
 
-            _initCollectionTest = () => new UserRepository(null);
+            _initCollectionTest = () => new UserRepository(null, "Users");
             _nullUserEntityTest = async () => await _userRepository.Add(null);
             _getNullQueryFilterTest = async () => await _userRepository.Get(null);
             _updateQueryFilterTest = async () => await _userRepository.Update(null, Builders<UserEntity>.Update.Combine(Builders<UserEntity>.Update.Set(i => i._id, ObjectId.GenerateNewId())));

@@ -54,6 +54,10 @@
             "MongoDB.Driver.GridFS": {
               "target": "Package",
               "version": "[2.11.2, )"
+            },
+            "Unity": {
+              "target": "Package",
+              "version": "[5.11.7, )"
             }
           },
           "imports": [

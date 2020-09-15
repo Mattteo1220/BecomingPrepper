@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using BecomingPrepper.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using BecomingPrepper.Web.Models;
 
 namespace BecomingPrepper.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICoreSettings _settings;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICoreSettings settings)
         {
-            _logger = logger;
+            _settings = settings;
         }
 
         public IActionResult Index()

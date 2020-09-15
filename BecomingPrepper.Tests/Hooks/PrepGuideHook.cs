@@ -19,7 +19,7 @@ namespace BecomingPrepper.Tests.Hooks
         [BeforeStep("NewDbInstantiation")]
         public void BeforeScenario()
         {
-            _prepGuideContext.PrepGuideRepository = new PrepGuideRepository(MongoDatabase);
+            _prepGuideContext.PrepGuideRepository = new PrepGuideRepository(MongoDatabase, "PrepGuides");
         }
 
         [AfterScenario("DisposePrepGuide", Order = 100)]

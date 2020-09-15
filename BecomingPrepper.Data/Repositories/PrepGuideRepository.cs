@@ -7,18 +7,21 @@ using MongoDB.Driver;
 
 namespace BecomingPrepper.Data.Repositories
 {
-    public class PrepGuideRepository : IDatabaseCollection<PrepGuideEntity>
+    public class PrepGuideRepository : IRepository<PrepGuideEntity>
     {
         private bool _disposed = false;
-        private const string PrepGuideCollection = "PrepGuideCollection";
         public IMongoCollection<PrepGuideEntity> Collection { get; set; }
 
-        public PrepGuideRepository(IMongoDatabase mongoDatabase)
+        public PrepGuideRepository(IMongoDatabase mongoDatabase, string collection)
         {
             if (mongoDatabase == null) throw new ArgumentNullException(nameof(mongoDatabase));
-            Collection = mongoDatabase.GetCollection<PrepGuideEntity>(PrepGuideCollection);
+            Collection = mongoDatabase.GetCollection<PrepGuideEntity>(collection);
         }
 
+        public PrepGuideRepository(IMongoCollection<PrepGuideEntity> collection)
+        {
+            Collection = collection;
+        }
         public async Task Add(PrepGuideEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));

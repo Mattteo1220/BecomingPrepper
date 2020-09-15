@@ -14,7 +14,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             Action PrepGuideRepository;
 
             //Act
-            PrepGuideRepository = () => new PrepGuideRepository(null);
+            PrepGuideRepository = () => new PrepGuideRepository(null, "PrepGuides");
 
             //Assert
             PrepGuideRepository.Should().Throw<ArgumentNullException>("No IMongo database was supplied.");
@@ -27,7 +27,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             var mockDatabase = TestHelper.GetMockDatabase();
 
             //Act
-            var prepGuideRepository = new PrepGuideRepository(mockDatabase.Object.MongoDatabase);
+            var prepGuideRepository = new PrepGuideRepository(mockDatabase.Object.MongoDatabase, "PrepGuides");
             prepGuideRepository.Dispose();
 
             //Asssert

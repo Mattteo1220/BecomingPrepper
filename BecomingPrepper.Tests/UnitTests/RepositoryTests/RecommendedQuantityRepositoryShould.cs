@@ -14,7 +14,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             Action recommendedQuantityRespository;
 
             //Act
-            recommendedQuantityRespository = () => new RecommendedQuantityRepository(null);
+            recommendedQuantityRespository = () => new RecommendedQuantityRepository(null, "RecommendedQuantities");
 
             //Assert
             recommendedQuantityRespository.Should().Throw<ArgumentNullException>("No IMongo database was supplied.");
@@ -27,7 +27,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             var mockDatabase = TestHelper.GetMockDatabase();
 
             //Act
-            var recommendedQuantityRepository = new RecommendedQuantityRepository(mockDatabase.Object.MongoDatabase);
+            var recommendedQuantityRepository = new RecommendedQuantityRepository(mockDatabase.Object.MongoDatabase, "RecommendedQuantities");
             recommendedQuantityRepository.Dispose();
 
             //Asssert

@@ -8,7 +8,7 @@ namespace BecomingPrepper.Tests.IntegrationTests
     public class UserContext
     {
         public UserEntity UserEntity { get; set; }
-        public IDatabaseCollection<UserEntity> UserRepository { get; set; }
+        public IRepository<UserEntity> UserRepository { get; set; }
 
         public Func<Task<UserEntity>> QueryResult { get; set; }
 
