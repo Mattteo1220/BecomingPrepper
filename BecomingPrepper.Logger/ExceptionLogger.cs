@@ -3,7 +3,7 @@ using Serilog;
 
 namespace BecomingPrepper.Logger
 {
-    public class ExceptionLogger
+    public class ExceptionLogger : IExceptionLogger
     {
         private ILogger _logger;
         public ExceptionLogger(ILogger logger)

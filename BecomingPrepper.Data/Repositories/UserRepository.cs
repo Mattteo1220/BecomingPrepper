@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
+using BecomingPrepper.Logger;
 using MongoDB.Driver;
 
 namespace BecomingPrepper.Data.Repositories
@@ -10,6 +11,7 @@ namespace BecomingPrepper.Data.Repositories
     {
         private bool _disposed = false;
         public IMongoCollection<UserEntity> Collection { get; set; }
+        private IExceptionLogger _logger;
 
         public UserRepository(IMongoDatabase mongoDatabase, string collection)
         {
@@ -17,9 +19,10 @@ namespace BecomingPrepper.Data.Repositories
             Collection = mongoDatabase.GetCollection<UserEntity>(collection);
         }
 
-        public UserRepository(IMongoCollection<UserEntity> collection)
+        public UserRepository(IMongoCollection<UserEntity> collection, IExceptionLogger logger)
         {
             Collection = collection;
+            _logger = logger;
         }
 
         public async Task Add(UserEntity userEntity)
@@ -31,7 +34,7 @@ namespace BecomingPrepper.Data.Repositories
             }
             catch (Exception e)
             {
-                //TODO: Add logging
+                _logger.LogError(e);
                 throw;
             }
         }
@@ -54,7 +57,7 @@ namespace BecomingPrepper.Data.Repositories
             }
             catch (Exception e)
             {
-                //TODO: Add logging
+                _logger.LogError(e);
                 throw;
             }
 
@@ -73,7 +76,7 @@ namespace BecomingPrepper.Data.Repositories
             catch (Exception e)
             {
 
-                //TODO: Add logging
+                _logger.LogError(e);
                 throw;
             }
         }
@@ -88,7 +91,7 @@ namespace BecomingPrepper.Data.Repositories
             }
             catch (Exception e)
             {
-                //TODO: Add logging
+                _logger.LogError(e);
                 throw;
             }
         }

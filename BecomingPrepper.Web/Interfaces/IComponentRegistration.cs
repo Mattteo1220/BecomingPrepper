@@ -1,8 +1,8 @@
 ﻿using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Data.Interfaces;
+using BecomingPrepper.Logger;
 using MongoDB.Driver;
-using Serilog;
 
 namespace BecomingPrepper.Web.Models
 {
@@ -13,6 +13,6 @@ namespace BecomingPrepper.Web.Models
         IRepository<PrepGuideEntity> PrepGuides { get; set; }
         IRepository<RecommendedQuantityAmountEntity> RecommendedQuantities { get; set; }
         IRepository<FoodStorageInventoryEntity> FoodStorageInventory { get; set; }
-        ILogger Logger { get; set; }
+        IExceptionLogger ExceptionLogger { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Data.Repositories;
+using BecomingPrepper.Logger;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
@@ -17,7 +18,7 @@ namespace BecomingPrepper.Web.Models
         public IRepository<PrepGuideEntity> PrepGuides { get; set; }
         public IRepository<RecommendedQuantityAmountEntity> RecommendedQuantities { get; set; }
         public IRepository<FoodStorageInventoryEntity> FoodStorageInventory { get; set; }
-        public ILogger Logger { get; set; }
+        public IExceptionLogger ExceptionLogger { get; set; }
 
         public void Register(ref IServiceCollection services, IConfiguration configuration)
         {
@@ -36,7 +37,14 @@ namespace BecomingPrepper.Web.Models
             var recommendedQuantitiesCollection = mongoDatabase.GetCollection<RecommendedQuantityAmountEntity>(recommendedQuantities);
             var foodStorageInventoryCollection = mongoDatabase.GetCollection<FoodStorageInventoryEntity>(foodStorageInventory);
 
-            var usersRepository = new UserRepository(usersCollections);
+            //ExceptionLogger
+            var logger = new LoggerConfiguration()
+                .WriteTo.MongoDB(connectionString, collectionName: exceptionLogs, period: TimeSpan.Zero)
+                .MinimumLevel.Debug()
+                .CreateLogger();
+            var exceptionLogger = new ExceptionLogger(logger);
+
+            var usersRepository = new UserRepository(usersCollections, exceptionLogger);
             var prepGuidesRepository = new PrepGuideRepository(prepGuidesColleciton);
             var recommendedQuantitiesRepository = new RecommendedQuantityRepository(recommendedQuantitiesCollection);
             var foodStorageInventoryRepository = new FoodStorageInventoryRepository(foodStorageInventoryCollection);
@@ -47,10 +55,7 @@ namespace BecomingPrepper.Web.Models
             services.Add(new ServiceDescriptor(typeof(IRepository<RecommendedQuantityAmountEntity>), recommendedQuantitiesRepository));
             services.Add(new ServiceDescriptor(typeof(IRepository<FoodStorageInventoryEntity>), foodStorageInventoryRepository));
 
-            Logger = new LoggerConfiguration()
-                .WriteTo.MongoDB(connectionString, collectionName: exceptionLogs, period: TimeSpan.Zero)
-                .MinimumLevel.Debug()
-                .CreateLogger();
+
 
             services.Add(new ServiceDescriptor(typeof(IComponentRegistration), new ComponentRegistration()
             {
@@ -59,7 +64,7 @@ namespace BecomingPrepper.Web.Models
                 PrepGuides = prepGuidesRepository,
                 RecommendedQuantities = recommendedQuantitiesRepository,
                 FoodStorageInventory = foodStorageInventoryRepository,
-                Logger = Logger
+                ExceptionLogger = exceptionLogger
             }));
         }
     }
