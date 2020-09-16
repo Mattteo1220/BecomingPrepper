@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Data.Interfaces;
-using MongoDB.Bson;
+using BecomingPrepper.Logger;
 using MongoDB.Driver;
 
 namespace BecomingPrepper.Data.Repositories
@@ -11,15 +11,17 @@ namespace BecomingPrepper.Data.Repositories
     {
         private bool _disposed = false;
         public IMongoCollection<RecommendedQuantityAmountEntity> Collection { get; set; }
+        private IExceptionLogger _logger;
         public RecommendedQuantityRepository(IMongoDatabase mongoDatabase, string collection)
         {
             if (mongoDatabase == null) throw new ArgumentNullException(nameof(mongoDatabase));
             Collection = mongoDatabase.GetCollection<RecommendedQuantityAmountEntity>(collection);
         }
 
-        public RecommendedQuantityRepository(IMongoCollection<RecommendedQuantityAmountEntity> collection)
+        public RecommendedQuantityRepository(IMongoCollection<RecommendedQuantityAmountEntity> collection, IExceptionLogger exceptionLogger)
         {
             Collection = collection;
+            _logger = exceptionLogger;
         }
 
         public async Task Add(RecommendedQuantityAmountEntity recommendedQuantityAmountEntity)
@@ -50,7 +52,8 @@ namespace BecomingPrepper.Data.Repositories
             }
             catch (Exception e)
             {
-                throw new Exception($"Failed to Get 'Entity': 'RecommendedQuantityAmountEntity': {entity.ToJson()}");
+                _logger.LogError(e);
+                throw;
             }
 
             return entity;
@@ -67,7 +70,8 @@ namespace BecomingPrepper.Data.Repositories
             }
             catch (Exception e)
             {
-                throw new Exception($"Failed to update Entity 'UserEntity' : {queryFilter.ToJson()}");
+                _logger.LogError(e);
+                throw;
             }
         }
 

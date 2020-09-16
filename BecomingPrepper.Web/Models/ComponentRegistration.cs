@@ -46,7 +46,7 @@ namespace BecomingPrepper.Web.Models
 
             var usersRepository = new UserRepository(usersCollections, exceptionLogger);
             var prepGuidesRepository = new PrepGuideRepository(prepGuidesColleciton);
-            var recommendedQuantitiesRepository = new RecommendedQuantityRepository(recommendedQuantitiesCollection);
+            var recommendedQuantitiesRepository = new RecommendedQuantityRepository(recommendedQuantitiesCollection, exceptionLogger);
             var foodStorageInventoryRepository = new FoodStorageInventoryRepository(foodStorageInventoryCollection);
 
             services.Add(new ServiceDescriptor(typeof(IMongoDatabase), mongoDatabase));
