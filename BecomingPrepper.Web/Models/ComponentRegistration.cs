@@ -31,12 +31,6 @@ namespace BecomingPrepper.Web.Models
             var exceptionLogs = configuration.GetSection("Collections").GetSection("ExceptionLogsCollection").Value;
             var mongoDatabase = new MongoClient(connectionString).GetDatabase(database);
 
-            //Collections
-            var usersCollections = mongoDatabase.GetCollection<UserEntity>(users);
-            var prepGuidesColleciton = mongoDatabase.GetCollection<PrepGuideEntity>(prepGuides);
-            var recommendedQuantitiesCollection = mongoDatabase.GetCollection<RecommendedQuantityAmountEntity>(recommendedQuantities);
-            var foodStorageInventoryCollection = mongoDatabase.GetCollection<FoodStorageInventoryEntity>(foodStorageInventory);
-
             //ExceptionLogger
             var logger = new LoggerConfiguration()
                 .WriteTo.MongoDB(connectionString, collectionName: exceptionLogs, period: TimeSpan.Zero)
@@ -44,19 +38,23 @@ namespace BecomingPrepper.Web.Models
                 .CreateLogger();
             var exceptionLogger = new ExceptionLogger(logger);
 
+            //Collections
+            var usersCollections = mongoDatabase.GetCollection<UserEntity>(users);
+            var prepGuidesColleciton = mongoDatabase.GetCollection<PrepGuideEntity>(prepGuides);
+            var recommendedQuantitiesCollection = mongoDatabase.GetCollection<RecommendedQuantityAmountEntity>(recommendedQuantities);
+            var foodStorageInventoryCollection = mongoDatabase.GetCollection<FoodStorageInventoryEntity>(foodStorageInventory);
+
             var usersRepository = new UserRepository(usersCollections, exceptionLogger);
-            var prepGuidesRepository = new PrepGuideRepository(prepGuidesColleciton);
+            var prepGuidesRepository = new PrepGuideRepository(prepGuidesColleciton, exceptionLogger);
             var recommendedQuantitiesRepository = new RecommendedQuantityRepository(recommendedQuantitiesCollection, exceptionLogger);
             var foodStorageInventoryRepository = new FoodStorageInventoryRepository(foodStorageInventoryCollection);
 
+            //Add To Services
             services.Add(new ServiceDescriptor(typeof(IMongoDatabase), mongoDatabase));
             services.Add(new ServiceDescriptor(typeof(IRepository<UserEntity>), usersRepository));
             services.Add(new ServiceDescriptor(typeof(IRepository<PrepGuideEntity>), prepGuidesRepository));
             services.Add(new ServiceDescriptor(typeof(IRepository<RecommendedQuantityAmountEntity>), recommendedQuantitiesRepository));
             services.Add(new ServiceDescriptor(typeof(IRepository<FoodStorageInventoryEntity>), foodStorageInventoryRepository));
-
-
-
             services.Add(new ServiceDescriptor(typeof(IComponentRegistration), new ComponentRegistration()
             {
                 MongoDatabase = mongoDatabase,
