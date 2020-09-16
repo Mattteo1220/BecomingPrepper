@@ -2147,8 +2147,7 @@
           "Serilog.Extensions.Logging": "3.0.1",
           "Serilog.Settings.Configuration": "3.1.0",
           "Serilog.Sinks.ColoredConsole": "3.0.1",
-          "Serilog.Sinks.MongoDB": "4.0.0",
-          "Unity": "5.11.7"
+          "Serilog.Sinks.MongoDB": "4.0.0"
         },
         "runtime": {
           "BecomingPrepper.Logger.dll": {}

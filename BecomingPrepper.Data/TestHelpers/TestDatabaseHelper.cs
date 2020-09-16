@@ -6,7 +6,7 @@ using MongoDB.Driver;
 
 namespace BecomingPrepper.Data
 {
-    public class Database : IDatabase
+    public class TestDatabaseHelper : IDatabase
     {
         public IMongoDatabase MongoDatabase { get; set; }
         public MongoClient MongoClient { get; set; }

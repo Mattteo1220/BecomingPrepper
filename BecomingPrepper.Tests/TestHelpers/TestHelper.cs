@@ -63,7 +63,7 @@ namespace BecomingPrepper.Tests
         public static IMongoDatabase GetDatabase()
         {
             var mockConfiguration = GetMockConfiguration();
-            var database = new Database();
+            var database = new TestDatabaseHelper();
             database.Connect(mockConfiguration, Environment);
             return database.MongoDatabase;
         }

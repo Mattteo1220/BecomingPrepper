@@ -8,11 +8,11 @@ namespace BecomingPrepper.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICoreSettings _settings;
+        private readonly IComponentRegistration _registration;
 
-        public HomeController(ICoreSettings settings)
+        public HomeController(IComponentRegistration registration)
         {
-            _settings = settings;
+            _registration = registration;
         }
 
         public IActionResult Index()

@@ -1,7 +1,3 @@
-using BecomingPrepper.Data.Entities;
-using BecomingPrepper.Data.Entities.ProgressTracker;
-using BecomingPrepper.Data.Interfaces;
-using BecomingPrepper.Data.Repositories;
 using BecomingPrepper.Web.Data;
 using BecomingPrepper.Web.Models;
 using Microsoft.AspNetCore.Builder;
@@ -11,9 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MongoDB.Driver;
-using PrepGuideEntity = BecomingPrepper.Data.Entities.PrepGuideEntity;
-using PrepGuideRepository = BecomingPrepper.Data.Repositories.PrepGuideRepository;
 
 namespace BecomingPrepper.Web
 {
@@ -29,32 +22,9 @@ namespace BecomingPrepper.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetSection("MongoClient").GetSection("Connection").Value;
-            var database = Configuration.GetSection("Database").GetSection("Dev").Value;
-            var users = Configuration.GetSection("Collections").GetSection("UsersCollection").Value;
-            var prepGuides = Configuration.GetSection("Collections").GetSection("PrepGuidesCollection").Value;
-            var recommendedQuantityCollection = Configuration.GetSection("Collections").GetSection("RecommendedQuantityCollection").Value;
-            var foodStorageInventoryCollection = Configuration.GetSection("Collections").GetSection("FoodStorageInventoryCollection").Value;
-            var mongoDatabase = new MongoClient(connectionString).GetDatabase(database);
-            var usersRepository = new UserRepository(mongoDatabase, users);
-            var prepGuidesRepository = new PrepGuideRepository(mongoDatabase, prepGuides);
-            var recommendedQuantitiesRepository = new RecommendedQuantityRepository(mongoDatabase, recommendedQuantityCollection);
-            var foodStorageInventoryRepository = new FoodStorageInventoryRepository(mongoDatabase, foodStorageInventoryCollection);
+            var componentRegistration = new ComponentRegistration();
+            componentRegistration.Register(ref services, Configuration);
 
-            services.Add(new ServiceDescriptor(typeof(IMongoDatabase), mongoDatabase));
-            services.Add(new ServiceDescriptor(typeof(IRepository<UserEntity>), usersRepository));
-            services.Add(new ServiceDescriptor(typeof(IRepository<PrepGuideEntity>), prepGuidesRepository));
-            services.Add(new ServiceDescriptor(typeof(IRepository<RecommendedQuantityAmountEntity>), recommendedQuantitiesRepository));
-            services.Add(new ServiceDescriptor(typeof(IRepository<FoodStorageInventoryEntity>), foodStorageInventoryRepository));
-
-            services.Add(new ServiceDescriptor(typeof(ICoreSettings), new CoreSettings()
-            {
-                MongoDatabase = mongoDatabase,
-                Users = usersRepository,
-                PrepGuides = prepGuidesRepository,
-                RecommendedQuantities = recommendedQuantitiesRepository,
-                FoodStorageInventory = foodStorageInventoryRepository
-            }));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

@@ -16,5 +16,8 @@ namespace BecomingPrepper.Data.Entities
         public string ModifiedBy { get; set; }
         [BsonElement]
         public DateTime ModifiedDate { get; set; }
+
+        [BsonElement]
+        public string PreferredLanguage { get; set; } = "English";
     }
 }

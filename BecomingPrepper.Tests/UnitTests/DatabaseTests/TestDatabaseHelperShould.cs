@@ -9,14 +9,14 @@ using static FluentAssertions.AssertionExtensions;
 namespace BecomingPrepper.Tests.UnitTests.DatabaseTests
 {
     [Trait("Unit", "DatabaseTests")]
-    public class DatabaseShould
+    public class TestDatabaseHelperShould
     {
         private Mock<IDatabase> _mockDatabase;
         private IConfiguration _mockConfiguration;
         private IConfiguration _mockInvalidMongoClient;
         private const string Environment = "Dev";
 
-        public DatabaseShould()
+        public TestDatabaseHelperShould()
         {
             _mockDatabase = TestHelper.GetMockDatabase();
             _mockConfiguration = TestHelper.GetMockConfiguration();
