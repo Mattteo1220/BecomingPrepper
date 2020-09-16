@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
+using BecomingPrepper.Logger;
 using MongoDB.Driver;
 
 namespace BecomingPrepper.Data.Repositories
@@ -10,6 +11,7 @@ namespace BecomingPrepper.Data.Repositories
     {
         private bool _disposed = false;
         public IMongoCollection<FoodStorageInventoryEntity> Collection { get; set; }
+        private IExceptionLogger _logger;
 
         public FoodStorageInventoryRepository(IMongoDatabase mongoDatabase, string collection)
         {
@@ -17,29 +19,80 @@ namespace BecomingPrepper.Data.Repositories
             Collection = mongoDatabase.GetCollection<FoodStorageInventoryEntity>(collection);
         }
 
-        public FoodStorageInventoryRepository(IMongoCollection<FoodStorageInventoryEntity> collection)
+        public FoodStorageInventoryRepository(IMongoCollection<FoodStorageInventoryEntity> collection, IExceptionLogger logger)
         {
             Collection = collection;
+            _logger = logger;
         }
 
-        public Task Add(FoodStorageInventoryEntity entity)
+        public async Task Add(FoodStorageInventoryEntity entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+            try
+            {
+                await Collection.InsertOneAsync(entity);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e);
+                throw;
+            }
         }
 
-        public Task Delete(FilterDefinition<FoodStorageInventoryEntity> deleteFilter)
+        public async Task Delete(FilterDefinition<FoodStorageInventoryEntity> deleteFilter)
         {
-            throw new NotImplementedException();
+            if (deleteFilter == null) throw new ArgumentNullException(nameof(deleteFilter));
+
+            try
+            {
+                await Collection.FindOneAndDeleteAsync(deleteFilter);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e);
+                throw;
+            }
         }
 
-        public Task<FoodStorageInventoryEntity> Get(FilterDefinition<FoodStorageInventoryEntity> queryFilter)
+        public async Task<FoodStorageInventoryEntity> Get(FilterDefinition<FoodStorageInventoryEntity> queryFilter)
         {
-            throw new NotImplementedException();
+            if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
+
+            FoodStorageInventoryEntity entity = null;
+            try
+            {
+                using IAsyncCursor<FoodStorageInventoryEntity> asyncCursor = await Collection.FindAsync(queryFilter);
+                while (await asyncCursor.MoveNextAsync())
+                {
+                    foreach (var cursor in asyncCursor.Current)
+                    {
+                        entity = cursor;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e);
+                throw;
+            }
+
+            return entity;
         }
 
-        public Task Update(FilterDefinition<FoodStorageInventoryEntity> queryFilter, UpdateDefinition<FoodStorageInventoryEntity> updateFilter)
+        public async Task Update(FilterDefinition<FoodStorageInventoryEntity> queryFilter, UpdateDefinition<FoodStorageInventoryEntity> updateFilter)
         {
-            throw new NotImplementedException();
+            if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
+            if (updateFilter == null) throw new ArgumentNullException(nameof(updateFilter));
+
+            try
+            {
+                await Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e);
+                throw;
+            }
         }
 
         public void Dispose()
