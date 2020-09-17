@@ -13,16 +13,10 @@ namespace BecomingPrepper.Data.Repositories
         public IMongoCollection<UserEntity> Collection { get; set; }
         private IExceptionLogger _logger;
 
-        public UserRepository(IMongoDatabase mongoDatabase, string collection)
-        {
-            if (mongoDatabase == null) throw new ArgumentNullException(nameof(mongoDatabase));
-            Collection = mongoDatabase.GetCollection<UserEntity>(collection);
-        }
-
         public UserRepository(IMongoCollection<UserEntity> collection, IExceptionLogger logger)
         {
-            Collection = collection;
-            _logger = logger;
+            Collection = collection ?? throw new ArgumentNullException("No Collection was provided");
+            _logger = logger ?? throw new ArgumentNullException("No IExceptionLogger was provided");
         }
 
         public async Task Add(UserEntity userEntity)

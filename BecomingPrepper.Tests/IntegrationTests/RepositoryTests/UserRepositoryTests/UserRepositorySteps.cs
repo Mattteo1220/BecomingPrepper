@@ -1,4 +1,7 @@
-﻿using System.Threading;
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 using AutoFixture;
 using BecomingPrepper.Data.Entities;
 using FluentAssertions;
@@ -34,7 +37,9 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void ThenTheUserIsAddedToTheMongoDatabase()
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
-            var addedUser = _userContext.UserRepository.Get(filter);
+            Task<UserEntity> addedUser = null;
+            WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
+            addedUser = _userContext.UserRepository.Get(filter);
             addedUser.Should().NotBeNull("User was added to the Mongo DB");
         }
         #endregion
@@ -45,6 +50,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void WhenGetIsCalled()
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
+            WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
             _userContext.QueryResult = async () => await _userContext.UserRepository.Get(filter);
         }
 
@@ -68,13 +74,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void WhenDeleteIsCalled()
         {
             _userContext.ExecutionResult.Invoke();
-            Thread.Sleep(2000);
         }
 
         [Then(@"The user is removed from the Mongo Database")]
         public void ThenTheUserIsRemovedFromTheMongoDatabase()
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
+            WaitUntil(() => _userContext.UserRepository.Get(filter) == null, TimeSpan.FromMilliseconds(30000));
             _userContext.UserRepository.Get(filter).Result.Should().BeNull($"Entity: {_userContext.UserEntity._id} was deleted");
         }
 
@@ -96,13 +102,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void WhenUpdateIsCalled()
         {
             _userContext.ExecutionResult.Invoke();
-            Thread.Sleep(2000);
         }
 
         [Then(@"The user with its updated property should be returned")]
         public void ThenTheUserWithItsUpdatedPropertyShouldBeReturned()
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
+            WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
             _userContext.UserRepository.Get(filter).Result.Account.HashedPassword.Should().BeEquivalentTo(_userContext.UserEntity.Account.HashedPassword, "Hashed password was updated.");
         }
 
@@ -112,6 +118,17 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void GivenThatUserIsRegistered()
         {
             _userContext.UserRepository.Add(_userContext.UserEntity);
+        }
+
+        private void WaitUntil(Func<bool> func, TimeSpan timeToRetry)
+        {
+            var stopWatch = Stopwatch.StartNew();
+            var passed = false;
+            while (!passed && stopWatch.Elapsed <= timeToRetry)
+            {
+                Thread.Sleep(TimeSpan.FromMilliseconds(1000));
+                passed = func();
+            }
         }
     }
 }

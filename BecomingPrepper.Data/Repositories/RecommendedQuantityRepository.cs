@@ -12,16 +12,11 @@ namespace BecomingPrepper.Data.Repositories
         private bool _disposed = false;
         public IMongoCollection<RecommendedQuantityAmountEntity> Collection { get; set; }
         private IExceptionLogger _logger;
-        public RecommendedQuantityRepository(IMongoDatabase mongoDatabase, string collection)
-        {
-            if (mongoDatabase == null) throw new ArgumentNullException(nameof(mongoDatabase));
-            Collection = mongoDatabase.GetCollection<RecommendedQuantityAmountEntity>(collection);
-        }
 
         public RecommendedQuantityRepository(IMongoCollection<RecommendedQuantityAmountEntity> collection, IExceptionLogger exceptionLogger)
         {
-            Collection = collection;
-            _logger = exceptionLogger;
+            Collection = collection ?? throw new ArgumentNullException("No Collection was provided");
+            _logger = exceptionLogger ?? throw new ArgumentNullException("No IExceptionLogger was provided");
         }
 
         public async Task Add(RecommendedQuantityAmountEntity recommendedQuantityAmountEntity)

@@ -13,16 +13,10 @@ namespace BecomingPrepper.Data.Repositories
         public IMongoCollection<PrepGuideEntity> Collection { get; set; }
         private IExceptionLogger _logger;
 
-        public PrepGuideRepository(IMongoDatabase mongoDatabase, string collection)
-        {
-            if (mongoDatabase == null) throw new ArgumentNullException(nameof(mongoDatabase));
-            Collection = mongoDatabase.GetCollection<PrepGuideEntity>(collection);
-        }
-
         public PrepGuideRepository(IMongoCollection<PrepGuideEntity> collection, IExceptionLogger exceptionLogger)
         {
-            Collection = collection;
-            _logger = exceptionLogger;
+            Collection = collection ?? throw new ArgumentNullException("No Collection was provided");
+            _logger = exceptionLogger ?? throw new ArgumentNullException("No IExceptionLogger was provided");
         }
 
         public async Task Add(PrepGuideEntity entity)

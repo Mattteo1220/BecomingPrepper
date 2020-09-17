@@ -1,12 +1,29 @@
 ﻿using System;
+using AutoFixture;
+using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Repositories;
+using BecomingPrepper.Logger;
 using FluentAssertions;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using Moq;
 using Xunit;
 
 namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
 {
     public class UserRepositoryShould
     {
+        private Mock<IMongoCollection<UserEntity>> _mockFoodStorageInventoryCollection;
+        private Mock<IExceptionLogger> _mockLogger;
+        private Fixture _fixture;
+        public UserRepositoryShould()
+        {
+            _fixture = new Fixture();
+            _fixture.Register(ObjectId.GenerateNewId);
+            _mockFoodStorageInventoryCollection = new Mock<IMongoCollection<UserEntity>>();
+            _mockLogger = new Mock<IExceptionLogger>();
+        }
+
         [Fact]
         public void ThrowIfNoMongoDatabaseIsSupplied()
         {
@@ -14,7 +31,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             Action userRepository;
 
             //Act
-            userRepository = () => new UserRepository(null, "Users");
+            userRepository = () => new UserRepository(null, _mockLogger.Object);
 
             //Assert
             userRepository.Should().Throw<ArgumentNullException>("No IMongo database was supplied.");
@@ -27,7 +44,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             var mockDatabase = TestHelper.GetMockDatabase();
 
             //Act
-            var userRepository = new UserRepository(mockDatabase.Object.MongoDatabase, "Users");
+            var userRepository = new UserRepository(_mockFoodStorageInventoryCollection.Object, _mockLogger.Object);
             userRepository.Dispose();
 
             //Asssert

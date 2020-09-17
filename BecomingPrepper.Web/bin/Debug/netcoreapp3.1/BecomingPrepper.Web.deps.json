@@ -2129,6 +2129,7 @@
       },
       "BecomingPrepper.Data/1.0.0": {
         "dependencies": {
+          "BecomingPrepper.Logger": "1.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "3.1.8",
           "MongoDB.Driver": "2.11.2",
           "MongoDB.Driver.GridFS": "2.11.2",

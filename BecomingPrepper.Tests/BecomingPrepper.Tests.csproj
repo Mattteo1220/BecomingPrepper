@@ -34,6 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="IntegrationTests\RepositoryTests\FoodStorageInventoryTests.cs\FoodStorageInventoryRepository.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Update="IntegrationTests\RepositoryTests\PrepGuideRepositoryTests.cs\PrepGuideRepository.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
@@ -46,6 +49,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\FoodStorageInventoryTests.cs\FoodStorageInventoryRepository.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FoodStorageInventoryRepository.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\PrepGuideRepositoryTests.cs\PrepGuideRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PrepGuideRepository.feature.cs</LastGenOutput>

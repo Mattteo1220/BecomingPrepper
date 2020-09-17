@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AutoFixture;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Data.Repositories;
+using BecomingPrepper.Logger;
 using FluentAssertions;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -23,17 +23,22 @@ namespace BecomingPrepper.Tests.RepostioryTests.UnitTests
         private Func<Task> _updateFilterTest;
         private Func<Task> _deleteFilterTest;
         private Action _disposeTest;
+        private Mock<IMongoCollection<UserEntity>> _mockUserCollection;
+        private Mock<IExceptionLogger> _mockLogger;
+        private Mock<IRepository<UserRepository>> _mockUserRepository;
+
         public DatabaseCollectionShould()
         {
             var mockDatabase = TestHelper.GetMockDatabase();
             var mockUserEntityCollection = new Mock<IMongoCollection<UserEntity>>();
             mockDatabase.Setup(db => db.MongoDatabase.GetCollection<UserEntity>(It.IsAny<string>(), null)).Returns(mockUserEntityCollection.Object);
 
-            var fixture = new Fixture();
-            fixture.Register(ObjectId.GenerateNewId);
-            _userRepository = new UserRepository(mockDatabase.Object.MongoDatabase, "Users");
+            _mockUserCollection = new Mock<IMongoCollection<UserEntity>>();
+            _mockLogger = new Mock<IExceptionLogger>();
+            _mockUserRepository = new Mock<IRepository<UserRepository>>();
+            _userRepository = new UserRepository(_mockUserCollection.Object, _mockLogger.Object);
 
-            _initCollectionTest = () => new UserRepository(null, "Users");
+            _initCollectionTest = () => new UserRepository(null, _mockLogger.Object);
             _nullUserEntityTest = async () => await _userRepository.Add(null);
             _getNullQueryFilterTest = async () => await _userRepository.Get(null);
             _updateQueryFilterTest = async () => await _userRepository.Update(null, Builders<UserEntity>.Update.Combine(Builders<UserEntity>.Update.Set(i => i._id, ObjectId.GenerateNewId())));

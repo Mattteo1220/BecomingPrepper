@@ -19,7 +19,7 @@ namespace BecomingPrepper.Tests.Hooks
         [BeforeStep("NewDbInstantiation")]
         public void BeforeScenario()
         {
-            _userContext.UserRepository = new UserRepository(MongoDatabase, "Users");
+            _userContext.UserRepository = new UserRepository(Users, MockExceptionLogger.Object);
         }
 
         [AfterScenario("DisposeUser", Order = 100)]

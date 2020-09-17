@@ -18,7 +18,7 @@ namespace BecomingPrepper.Tests.Hooks
         [BeforeScenario("RecommendedQuantityRepository")]
         public void BeforeScenario()
         {
-            _recommendedQuantityAmountContext.RecommendedQuantityRepository = new RecommendedQuantityRepository(MongoDatabase, "RecommendedQuantityCollection");
+            _recommendedQuantityAmountContext.RecommendedQuantityRepository = new RecommendedQuantityRepository(RecommendedQuantities, MockExceptionLogger.Object);
         }
 
         [AfterScenario("DisposeRecommendedQuantityEntity", Order = 100)]
