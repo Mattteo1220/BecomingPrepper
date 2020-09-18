@@ -21,12 +21,31 @@ namespace BecomingPrepper.Data.Repositories
 
         public async Task Add(RecommendedQuantityAmountEntity recommendedQuantityAmountEntity)
         {
-            throw new NotImplementedException();
+            if (recommendedQuantityAmountEntity == null) throw new ArgumentNullException(nameof(recommendedQuantityAmountEntity));
+            try
+            {
+                await Collection.InsertOneAsync(recommendedQuantityAmountEntity);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e);
+                throw;
+            }
         }
 
         public async Task Delete(FilterDefinition<RecommendedQuantityAmountEntity> deleteFilter)
         {
-            throw new NotImplementedException();
+            if (deleteFilter == null) throw new ArgumentNullException(nameof(deleteFilter));
+
+            try
+            {
+                await Collection.FindOneAndDeleteAsync(deleteFilter);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e);
+                throw;
+            }
         }
 
         public async Task<RecommendedQuantityAmountEntity> Get(FilterDefinition<RecommendedQuantityAmountEntity> filter)

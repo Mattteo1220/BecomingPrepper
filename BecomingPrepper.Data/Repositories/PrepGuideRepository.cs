@@ -33,19 +33,9 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public async Task Delete(FilterDefinition<PrepGuideEntity> deleteFilter)
+        public async Task Delete(FilterDefinition<PrepGuideEntity> filterDefinition)
         {
-            if (deleteFilter == null) throw new ArgumentNullException(nameof(deleteFilter));
-
-            try
-            {
-                await Collection.FindOneAndDeleteAsync(deleteFilter);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e);
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public async Task<PrepGuideEntity> Get(FilterDefinition<PrepGuideEntity> queryFilter)

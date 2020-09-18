@@ -91,18 +91,18 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="CRUD Tip")]
+        [Xunit.SkippableFactAttribute(DisplayName="Add Tip")]
         [Xunit.TraitAttribute("FeatureTitle", "PrepGuideRepository")]
-        [Xunit.TraitAttribute("Description", "CRUD Tip")]
+        [Xunit.TraitAttribute("Description", "Add Tip")]
         [Xunit.TraitAttribute("Category", "PrepGuideRepository")]
         [Xunit.TraitAttribute("Category", "DisposePrepGuide")]
-        public virtual void CRUDTip()
+        public virtual void AddTip()
         {
             string[] tagsOfScenario = new string[] {
                     "PrepGuideRepository",
                     "DisposePrepGuide"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("CRUD Tip", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Tip", null, tagsOfScenario, argumentsOfScenario);
 #line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -127,16 +127,164 @@ this.ScenarioInitialize(scenarioInfo);
  this.FeatureBackground();
 #line hidden
 #line 11
-  testRunner.And("The Prep Guide Already Exists", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 12
   testRunner.And("The prepper needs to add a new tip", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 13
- testRunner.When("PrepGuide Repository Update is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 12
+ testRunner.When("PrepGuide Repository Add is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 14
+#line 13
  testRunner.Then("A new Tip is added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Get Tip")]
+        [Xunit.TraitAttribute("FeatureTitle", "PrepGuideRepository")]
+        [Xunit.TraitAttribute("Description", "Get Tip")]
+        [Xunit.TraitAttribute("Category", "PrepGuideRepository")]
+        [Xunit.TraitAttribute("Category", "DisposePrepGuide")]
+        public virtual void GetTip()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "PrepGuideRepository",
+                    "DisposePrepGuide"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Tip", null, tagsOfScenario, argumentsOfScenario);
+#line 16
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+ this.FeatureBackground();
+#line hidden
+#line 17
+ testRunner.And("that tip exists in the Database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 18
+ testRunner.When("PrepGuide Repository Get is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 19
+ testRunner.Then("That tip is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Update Tip")]
+        [Xunit.TraitAttribute("FeatureTitle", "PrepGuideRepository")]
+        [Xunit.TraitAttribute("Description", "Update Tip")]
+        [Xunit.TraitAttribute("Category", "PrepGuideRepository")]
+        [Xunit.TraitAttribute("Category", "DisposePrepGuide")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
+        public virtual void UpdateTip()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "PrepGuideRepository",
+                    "DisposePrepGuide",
+                    "NewDbInstantiation"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Tip", null, tagsOfScenario, argumentsOfScenario);
+#line 22
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+ this.FeatureBackground();
+#line hidden
+#line 23
+ testRunner.And("that tip exists in the Database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 24
+ testRunner.And("that the tip Name is updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 25
+ testRunner.When("PrepGuideRepository update is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 26
+ testRunner.Then("the Tip name is updated and returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Delete Tip")]
+        [Xunit.TraitAttribute("FeatureTitle", "PrepGuideRepository")]
+        [Xunit.TraitAttribute("Description", "Delete Tip")]
+        [Xunit.TraitAttribute("Category", "PrepGuideRepository")]
+        [Xunit.TraitAttribute("Category", "DisposePrepGuide")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
+        public virtual void DeleteTip()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "PrepGuideRepository",
+                    "DisposePrepGuide",
+                    "NewDbInstantiation"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Tip", null, tagsOfScenario, argumentsOfScenario);
+#line 29
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+ this.FeatureBackground();
+#line hidden
+#line 30
+ testRunner.And("that tip exists in the Database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 31
+ testRunner.When("PrepGuideRepository Delete is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 32
+ testRunner.Then("The Tip is deleted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

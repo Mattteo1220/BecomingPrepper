@@ -14,21 +14,21 @@ Scenario: Add Inventory
 	Then The Inventory is added to the Mongo Database
 
 @GetInventory @FoodStorageInventoryRepository
-Scenario: Get User
-		And That user is registered
-	When Get is called
-	Then the User Entity should be returned
+Scenario: Get Inventory
+		And That Inventory has been registered
+	When FoodStorageInventory Get is called
+	Then the Inventory should be returned
 
 @FoodStorageInventoryRepository @DeleteInventory
-Scenario: Delete User
-		And That user is registered
-		And That user wants to be deleted
-	When Delete is called
-	Then The user is removed from the Mongo Database
+Scenario: Delete inventory
+		And That Inventory has been registered
+		And That Inventory needs to be deleted
+	When FoodStorageInventoryRepository Delete is called
+	Then The Inventory is removed from the Mongo Database
 
-@UpdateInventory @FoodStorageInventoryRepository @NewDbInstantiation
-Scenario: Update User
-		And That user is registered
-		And That user has updated a property
-	When Update is called
-	Then The user with its updated property should be returned
+@UpdateInventory @FoodStorageInventoryRepository @NewDbInstantiation @Ignore
+Scenario: Update Inventory
+		And That Inventory has been registered
+		And That Inventory has an updated property
+	When FoodStorageInventoryRepository Update is called
+	Then The Inventory with its updated property should be returned

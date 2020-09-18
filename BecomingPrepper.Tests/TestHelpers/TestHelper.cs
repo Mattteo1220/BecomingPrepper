@@ -1,5 +1,8 @@
+using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using BecomingPrepper.Data;
 using BecomingPrepper.Data.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -72,6 +75,17 @@ namespace BecomingPrepper.Tests
         {
             public string MongoClient { get; set; }
             public string Database { get; set; }
+        }
+
+        public static void WaitUntil(Func<bool> func, TimeSpan timeToRetry)
+        {
+            var stopWatch = Stopwatch.StartNew();
+            var passed = false;
+            while (!passed && stopWatch.Elapsed <= timeToRetry)
+            {
+                Thread.Sleep(TimeSpan.FromMilliseconds(1000));
+                passed = func();
+            }
         }
     }
 }

@@ -6,6 +6,8 @@ namespace BecomingPrepper.Data.Entities
     public class TipEntity
     {
         [BsonElement]
+        public string TipId { get; set; }
+        [BsonElement]
         public string TipName { get; set; }
         [BsonElement]
         public string HyperLink { get; set; }

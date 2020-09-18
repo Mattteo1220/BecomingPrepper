@@ -6,8 +6,6 @@ namespace BecomingPrepper.Data.Entities
 {
     public class InventoryItemEntity
     {
-        [BsonId]
-        public ObjectId _id { get; set; }
         [BsonElement]
         public int Category { get; set; }
         [BsonElement]
@@ -18,8 +16,6 @@ namespace BecomingPrepper.Data.Entities
         public int Quantity { get; set; }
         [BsonElement]
         public double Weight { get; set; }
-        [BsonElement]
-        public byte[] DefaultImageData { get; set; }
         [BsonElement]
         public DateTime ModifiedDate { get; set; }
         [BsonElement]

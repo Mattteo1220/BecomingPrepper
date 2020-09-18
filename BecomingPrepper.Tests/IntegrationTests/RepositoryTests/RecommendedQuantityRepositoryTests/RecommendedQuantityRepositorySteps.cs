@@ -1,6 +1,9 @@
-﻿using BecomingPrepper.Data.Entities.ProgressTracker;
+﻿using System;
+using AutoFixture;
+using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Tests.Contexts;
 using FluentAssertions;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using TechTalk.SpecFlow;
 
@@ -26,7 +29,32 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.ProgressTracker
         #endregion
 
         #region Update Recommended Quantity
-        //Not implemented
+        [Given(@"The recommended Quantity is updated")]
+        public void GivenTheRecommendedQuantityIsUpdated()
+        {
+            var fixture = new Fixture();
+            fixture.Register(ObjectId.GenerateNewId);
+            _recommendedQuantityAmountContext.PropertyUpdate = fixture.Create<double>();
+            var filter = Builders<RecommendedQuantityAmountEntity>.Filter.Eq(u => u._id, _recommendedQuantityAmountContext.RecommendedQuantityAmountEntity._id);
+            var update = Builders<RecommendedQuantityAmountEntity>.Update.Set(u => u.TwoWeekRecommendedAmount.Beans, (double)_recommendedQuantityAmountContext.PropertyUpdate);
+
+            _recommendedQuantityAmountContext.ExecutionResult = async () => await _recommendedQuantityAmountContext.RecommendedQuantityRepository.Update(filter, update);
+        }
+
+        [When(@"RecommenedQuantityRepository Update Is Called")]
+        public void WhenRecommenedQuantityRepositoryUpdateIsCalled()
+        {
+            _recommendedQuantityAmountContext.ExecutionResult.Invoke();
+        }
+
+        [Then(@"The updated RecommendedQuantity is saved and returned from the Mongo Database")]
+        public void ThenTheUpdatedRecommendedQuantityIsSavedAndReturnedFromTheMongoDatabase()
+        {
+            var filter = Builders<RecommendedQuantityAmountEntity>.Filter.Eq(u => u._id, _recommendedQuantityAmountContext.RecommendedQuantityAmountEntity._id);
+            TestHelper.WaitUntil(() => _recommendedQuantityAmountContext.RecommendedQuantityRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
+            _recommendedQuantityAmountContext.RecommendedQuantityRepository.Get(filter).Result.TwoWeekRecommendedAmount.Beans.Should().Be(_recommendedQuantityAmountContext.PropertyUpdate, "The Two Beans recommendedAmount was updated.");
+        }
+
         #endregion
 
         #region Get Recommended Quantity
@@ -34,6 +62,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.ProgressTracker
         public void GivenThatRecommendedQuantityAmountExistsInTheMongoDatabase()
         {
             _objectId = TestHelper.RecommendedQuantityId;
+            _recommendedQuantityAmountContext.RecommendedQuantityRepository.Add(_recommendedQuantityAmountContext.RecommendedQuantityAmountEntity);
         }
 
         [When(@"RecommendedQuantity Get is called")]

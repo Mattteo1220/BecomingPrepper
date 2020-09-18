@@ -81,6 +81,9 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.RecommendedQuan
         {
 #line 6
  #line hidden
+#line 7
+  testRunner.Given("a Recommended Quantity amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
         }
         
         void System.IDisposable.Dispose()
@@ -129,6 +132,57 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 13
  testRunner.Then("That recommended Quantity is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Update Recommended Quantity")]
+        [Xunit.TraitAttribute("FeatureTitle", "RecommendedQuantityRepository")]
+        [Xunit.TraitAttribute("Description", "Update Recommended Quantity")]
+        [Xunit.TraitAttribute("Category", "RecommendedQuantityRepository")]
+        [Xunit.TraitAttribute("Category", "DisposeRecommendedQuantityEntity")]
+        public virtual void UpdateRecommendedQuantity()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "RecommendedQuantityRepository",
+                    "DisposeRecommendedQuantityEntity"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Recommended Quantity", null, tagsOfScenario, argumentsOfScenario);
+#line 16
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+ this.FeatureBackground();
+#line hidden
+#line 17
+ testRunner.Given("That recommended Quantity Amount exists in the Mongo Database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 18
+ testRunner.And("The recommended Quantity is updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 19
+ testRunner.When("RecommenedQuantityRepository Update Is Called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 20
+ testRunner.Then("The updated RecommendedQuantity is saved and returned from the Mongo Database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

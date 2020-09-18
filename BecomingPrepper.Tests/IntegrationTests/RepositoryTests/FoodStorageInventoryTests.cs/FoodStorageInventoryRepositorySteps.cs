@@ -1,4 +1,7 @@
-﻿using BecomingPrepper.Data.Entities;
+﻿using System;
+using System.Linq;
+using AutoFixture;
+using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Tests.Contexts;
 using FluentAssertions;
 using MongoDB.Driver;
@@ -38,6 +41,77 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         #endregion
 
         #region GetInventory
+        [Given(@"That Inventory has been registered")]
+        public void GivenThatInventoryHasBeenRegistered()
+        {
+            _context.FoodStorageInventoryRepository.Add(_context.FoodStorageInventoryEntity);
+        }
+
+        [When(@"FoodStorageInventory Get is called")]
+        public void WhenFoodStorageInventoryGetIsCalled()
+        {
+            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            TestHelper.WaitUntil(() => _context.FoodStorageInventoryRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
+            _context.QueryResult = async () => await _context.FoodStorageInventoryRepository.Get(filter);
+        }
+
+        [Then(@"the Inventory should be returned")]
+        public void ThenTheInventoryShouldBeReturned()
+        {
+            _context.QueryResult.Invoke().Should().NotBe(null, because: "The inventory was registered in the database");
+        }
+
+        #endregion
+
+        #region DeleteInventory
+        [Given(@"That Inventory needs to be deleted")]
+        public void GivenThatInventoryNeedsToBeDeleted()
+        {
+            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            _context.ExecutionResult = async () => await _context.FoodStorageInventoryRepository.Delete(filter);
+        }
+
+        [When(@"FoodStorageInventoryRepository Delete is called")]
+        public void WhenFoodStorageInventoryRepositoryDeleteIsCalled()
+        {
+            _context.ExecutionResult.Invoke();
+        }
+
+        [Then(@"The Inventory is removed from the Mongo Database")]
+        public void ThenTheInventoryIsRemovedFromTheMongoDatabase()
+        {
+            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            TestHelper.WaitUntil(() => _context.FoodStorageInventoryRepository.Get(filter) == null, TimeSpan.FromMilliseconds(30000));
+            _context.FoodStorageInventoryRepository.Get(filter).Result.Should().BeNull($"Entity: {_context.FoodStorageInventoryEntity._id} was deleted");
+        }
+
+        #endregion
+
+        #region UpdateInventory
+        [Given(@"That Inventory has an updated property")]
+        public void GivenThatInventoryHasAnUpdatedProperty()
+        {
+            _context.PropertyUpdate = new Fixture().Create<string>();
+            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            var update = Builders<FoodStorageInventoryEntity>.Update.Set(u => u.Inventory.FirstOrDefault().ExpiryDateRange, _context.PropertyUpdate);
+
+            _context.ExecutionResult = async () => await _context.FoodStorageInventoryRepository.Update(filter, update);
+        }
+
+        [When(@"FoodStorageInventoryRepository Update is called")]
+        public void WhenFoodStorageInventoryRepositoryUpdateIsCalled()
+        {
+            _context.ExecutionResult.Invoke();
+        }
+
+        [Then(@"The Inventory with its updated property should be returned")]
+        public void ThenTheInventoryWithItsUpdatedPropertyShouldBeReturned()
+        {
+            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            TestHelper.WaitUntil(() => _context.FoodStorageInventoryRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
+            var result = _context.FoodStorageInventoryRepository.Get(filter).Result.Inventory.FirstOrDefault();
+            result.ExpiryDateRange.Should().BeEquivalentTo(_context.PropertyUpdate, "Expiry DateRange was updated.");
+        }
 
         #endregion
     }

@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AutoFixture;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Tests.Contexts;
 using FluentAssertions;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using TechTalk.SpecFlow;
 
@@ -12,42 +14,114 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
     public class PrepGuideRepositorySteps
     {
         private PrepGuideContext _prepGuideContext;
-        private TipEntity _tip;
         public PrepGuideRepositorySteps(PrepGuideContext prepGuideContext)
         {
             _prepGuideContext = prepGuideContext;
         }
 
-        #region Add Update Get Tip
-        [Given(@"The Prep Guide Already Exists")]
-        public void GivenThePrepGuideAlreadyExists()
-        {
-            _prepGuideContext.PrepGuideRepository.Add(_prepGuideContext.PrepGuide);
-        }
-
+        #region Add PrepGuide
         [Given(@"The prepper needs to add a new tip")]
         public void GivenThePrepperNeedsToAddANewTip()
         {
-            var fixture = new Fixture();
-            _tip = fixture.Create<TipEntity>();
-            _prepGuideContext.PrepGuide.Tips.Add(_tip);
+            _prepGuideContext.ExecutionResult = async () => await _prepGuideContext.PrepGuideRepository.Add(_prepGuideContext.PrepGuide);
         }
 
-        [When(@"PrepGuide Repository Update is called")]
+        [When(@"PrepGuide Repository Add is called")]
         public void WhenPrepGuideRepositoryAddIsCalled()
         {
-            var queryFilter = Builders<PrepGuideEntity>.Filter.Eq(p => p._id, _prepGuideContext.PrepGuide._id);
-            var updateFilter = Builders<PrepGuideEntity>.Update.Set(p => p.Tips, _prepGuideContext.PrepGuide.Tips);
-            _prepGuideContext.PrepGuideRepository.Update(queryFilter, updateFilter);
+            _prepGuideContext.ExecutionResult.Invoke();
         }
 
         [Then(@"A new Tip is added")]
         public void ThenANewTipIsAdded()
         {
             var queryFilter = Builders<PrepGuideEntity>.Filter.Eq(p => p._id, _prepGuideContext.PrepGuide._id);
-            var wasTipAdded = _prepGuideContext.PrepGuideRepository.Get(queryFilter).Result.Tips.Any(tip => tip.TipName == _tip.TipName);
+            var wasTipAdded = _prepGuideContext.PrepGuideRepository.Get(queryFilter).Result.Tips.Any(tip => tip.TipName == _prepGuideContext.PrepGuide.Tips.FirstOrDefault().TipName);
             wasTipAdded.Should().Be(true);
         }
         #endregion
+
+        #region Get PrepGuide
+        [Given(@"that tip exists in the Database")]
+        public void GivenThatTipExistsInTheDatabase()
+        {
+            _prepGuideContext.PrepGuideRepository.Add(_prepGuideContext.PrepGuide);
+        }
+
+        [When(@"PrepGuide Repository Get is called")]
+        public void WhenPrepGuideRepositoryGetIsCalled()
+        {
+            var filter = Builders<PrepGuideEntity>.Filter.Eq(r => r._id, _prepGuideContext.PrepGuide._id);
+            _prepGuideContext.QueryResult = async () => await _prepGuideContext.PrepGuideRepository.Get(filter);
+        }
+
+        [Then(@"That tip is returned")]
+        public void ThenThatTipIsReturned()
+        {
+            _prepGuideContext.QueryResult.Invoke().Result._id.Should().BeEquivalentTo(_prepGuideContext.PrepGuide._id);
+        }
+
+        #endregion
+
+        #region Update PrepGuide
+        [Given(@"that the tip Name is updated")]
+        public void GivenThatTheTipNameIsUpdated()
+        {
+            var fixture = new Fixture();
+            fixture.Register(ObjectId.GenerateNewId);
+            _prepGuideContext.PropertyUpdate = fixture.Create<string>();
+            var arrayFilter = Builders<PrepGuideEntity>.Filter.And(
+                Builders<PrepGuideEntity>.Filter.Where(x => x._id == _prepGuideContext.PrepGuide._id),
+                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.TipId == _prepGuideContext.PrepGuide.Tips.First().TipId));
+            var update = Builders<PrepGuideEntity>.Update.Set(u => u.Tips[-1].TipName, _prepGuideContext.PropertyUpdate);// [-1] means update first matching array element
+
+            _prepGuideContext.ExecutionResult = async () => await _prepGuideContext.PrepGuideRepository.Update(arrayFilter, update);
+        }
+
+        [When(@"PrepGuideRepository update is called")]
+        public void WhenPrepGuideRepositoryUpdateIsCalled()
+        {
+            _prepGuideContext.ExecutionResult.Invoke();
+        }
+
+        [Then(@"the Tip name is updated and returned")]
+        public void ThenTheTipNameIsUpdatedAndReturned()
+        {
+            var filter = Builders<PrepGuideEntity>.Filter.Eq(u => u._id, _prepGuideContext.PrepGuide._id);
+            TestHelper.WaitUntil(() => _prepGuideContext.PrepGuideRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
+            var updatedTipName = _prepGuideContext.PrepGuideRepository.Get(filter).Result.Tips.First().TipName;
+            updatedTipName.Should().BeEquivalentTo(_prepGuideContext.PropertyUpdate, "The Tip Name was updated.");
+        }
+
+        #endregion
+
+        #region Delete Tip
+        [When(@"PrepGuideRepository Delete is called")]
+        public void WhenPrepGuideRepositoryDeleteIsCalled()
+        {
+            _prepGuideContext.PropertyUpdate = _prepGuideContext.PrepGuide.Tips.First().TipId;
+            var arrayFilter = Builders<PrepGuideEntity>.Filter.And(
+                Builders<PrepGuideEntity>.Filter.Where(x => x._id == _prepGuideContext.PrepGuide._id),
+                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.TipId == _prepGuideContext.PrepGuide.Tips.First().TipId));
+            var update = Builders<PrepGuideEntity>.Update.PullFilter(u => u.Tips, t => t.TipId == _prepGuideContext.PropertyUpdate);// [-1] means update first matching array element
+
+            _prepGuideContext.PrepGuideRepository.Update(arrayFilter, update);
+        }
+
+        [Then(@"The Tip is deleted")]
+        public void ThenTheTipIsDeleted()
+        {
+            var filter = Builders<PrepGuideEntity>.Filter.Eq(u => u._id, _prepGuideContext.PrepGuide._id);
+            TestHelper.WaitUntil(() => _prepGuideContext.PrepGuideRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
+            _prepGuideContext.PrepGuideRepository.Get(filter).Result.Tips.Should().NotContain(x => x.TipId == _prepGuideContext.PropertyUpdate);
+        }
+
+        #endregion
+
+        [Given(@"The Prep Guide Already Exists")]
+        public void GivenThePrepGuideAlreadyExists()
+        {
+            _prepGuideContext.PrepGuideRepository.Add(_prepGuideContext.PrepGuide);
+        }
     }
 }

@@ -138,18 +138,18 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Get User")]
+        [Xunit.SkippableFactAttribute(DisplayName="Get Inventory")]
         [Xunit.TraitAttribute("FeatureTitle", "FoodStorageInventoryRepository")]
-        [Xunit.TraitAttribute("Description", "Get User")]
+        [Xunit.TraitAttribute("Description", "Get Inventory")]
         [Xunit.TraitAttribute("Category", "GetInventory")]
         [Xunit.TraitAttribute("Category", "FoodStorageInventoryRepository")]
-        public virtual void GetUser()
+        public virtual void GetInventory()
         {
             string[] tagsOfScenario = new string[] {
                     "GetInventory",
                     "FoodStorageInventoryRepository"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get User", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Inventory", null, tagsOfScenario, argumentsOfScenario);
 #line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -174,30 +174,30 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 18
-  testRunner.And("That user is registered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("That Inventory has been registered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 19
- testRunner.When("Get is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("FoodStorageInventory Get is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 20
- testRunner.Then("the User Entity should be returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the Inventory should be returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Delete User")]
+        [Xunit.SkippableFactAttribute(DisplayName="Delete inventory")]
         [Xunit.TraitAttribute("FeatureTitle", "FoodStorageInventoryRepository")]
-        [Xunit.TraitAttribute("Description", "Delete User")]
+        [Xunit.TraitAttribute("Description", "Delete inventory")]
         [Xunit.TraitAttribute("Category", "FoodStorageInventoryRepository")]
         [Xunit.TraitAttribute("Category", "DeleteInventory")]
-        public virtual void DeleteUser()
+        public virtual void DeleteInventory()
         {
             string[] tagsOfScenario = new string[] {
                     "FoodStorageInventoryRepository",
                     "DeleteInventory"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete User", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete inventory", null, tagsOfScenario, argumentsOfScenario);
 #line 23
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -222,35 +222,37 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 24
-  testRunner.And("That user is registered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("That Inventory has been registered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 25
-  testRunner.And("That user wants to be deleted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("That Inventory needs to be deleted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 26
- testRunner.When("Delete is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("FoodStorageInventoryRepository Delete is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 27
- testRunner.Then("The user is removed from the Mongo Database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The Inventory is removed from the Mongo Database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Update User")]
+        [Xunit.SkippableFactAttribute(DisplayName="Update Inventory")]
         [Xunit.TraitAttribute("FeatureTitle", "FoodStorageInventoryRepository")]
-        [Xunit.TraitAttribute("Description", "Update User")]
+        [Xunit.TraitAttribute("Description", "Update Inventory")]
         [Xunit.TraitAttribute("Category", "UpdateInventory")]
         [Xunit.TraitAttribute("Category", "FoodStorageInventoryRepository")]
         [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
-        public virtual void UpdateUser()
+        [Xunit.TraitAttribute("Category", "Ignore")]
+        public virtual void UpdateInventory()
         {
             string[] tagsOfScenario = new string[] {
                     "UpdateInventory",
                     "FoodStorageInventoryRepository",
-                    "NewDbInstantiation"};
+                    "NewDbInstantiation",
+                    "Ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update User", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Inventory", null, tagsOfScenario, argumentsOfScenario);
 #line 30
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -275,16 +277,16 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 31
-  testRunner.And("That user is registered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("That Inventory has been registered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 32
-  testRunner.And("That user has updated a property", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("That Inventory has an updated property", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 33
- testRunner.When("Update is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("FoodStorageInventoryRepository Update is called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 34
- testRunner.Then("The user with its updated property should be returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The Inventory with its updated property should be returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

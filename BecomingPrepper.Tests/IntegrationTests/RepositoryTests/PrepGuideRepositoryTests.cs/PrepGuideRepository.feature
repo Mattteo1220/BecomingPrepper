@@ -7,8 +7,26 @@
 		Given A Prep Guide
 
 @PrepGuideRepository @DisposePrepGuide
-Scenario: CRUD Tip
-		And The Prep Guide Already Exists
+Scenario: Add Tip
 		And The prepper needs to add a new tip
-	When PrepGuide Repository Update is called
+	When PrepGuide Repository Add is called
 	Then A new Tip is added
+
+@PrepGuideRepository @DisposePrepGuide
+Scenario: Get Tip
+	And that tip exists in the Database
+	When PrepGuide Repository Get is called
+	Then That tip is returned
+
+@PrepGuideRepository @DisposePrepGuide @NewDbInstantiation
+Scenario: Update Tip
+	And that tip exists in the Database
+	And that the tip Name is updated
+	When PrepGuideRepository update is called
+	Then the Tip name is updated and returned
+
+@PrepGuideRepository @DisposePrepGuide @NewDbInstantiation
+Scenario: Delete Tip
+	And that tip exists in the Database
+	When PrepGuideRepository Delete is called
+	Then The Tip is deleted

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
 using BecomingPrepper.Data.Entities;
@@ -38,7 +36,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
             Task<UserEntity> addedUser = null;
-            WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
+            TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
             addedUser = _userContext.UserRepository.Get(filter);
             addedUser.Should().NotBeNull("User was added to the Mongo DB");
         }
@@ -50,7 +48,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void WhenGetIsCalled()
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
-            WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
+            TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
             _userContext.QueryResult = async () => await _userContext.UserRepository.Get(filter);
         }
 
@@ -80,7 +78,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void ThenTheUserIsRemovedFromTheMongoDatabase()
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
-            WaitUntil(() => _userContext.UserRepository.Get(filter) == null, TimeSpan.FromMilliseconds(30000));
+            TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) == null, TimeSpan.FromMilliseconds(30000));
             _userContext.UserRepository.Get(filter).Result.Should().BeNull($"Entity: {_userContext.UserEntity._id} was deleted");
         }
 
@@ -91,9 +89,8 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void GivenThatUserHasUpdatedAProperty()
         {
             _userContext.PropertyUpdate = new Fixture().Create<string>();
-            _userContext.UserEntity.Account.HashedPassword = _userContext.PropertyUpdate;
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
-            var update = Builders<UserEntity>.Update.Set(u => u.Account.HashedPassword, _userContext.UserEntity.Account.HashedPassword);
+            var update = Builders<UserEntity>.Update.Set(u => u.Account.HashedPassword, _userContext.PropertyUpdate);
 
             _userContext.ExecutionResult = async () => await _userContext.UserRepository.Update(filter, update);
         }
@@ -108,8 +105,8 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void ThenTheUserWithItsUpdatedPropertyShouldBeReturned()
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
-            WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            _userContext.UserRepository.Get(filter).Result.Account.HashedPassword.Should().BeEquivalentTo(_userContext.UserEntity.Account.HashedPassword, "Hashed password was updated.");
+            TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
+            _userContext.UserRepository.Get(filter).Result.Account.HashedPassword.Should().BeEquivalentTo(_userContext.PropertyUpdate, "Hashed password was updated.");
         }
 
         #endregion
@@ -118,17 +115,6 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void GivenThatUserIsRegistered()
         {
             _userContext.UserRepository.Add(_userContext.UserEntity);
-        }
-
-        private void WaitUntil(Func<bool> func, TimeSpan timeToRetry)
-        {
-            var stopWatch = Stopwatch.StartNew();
-            var passed = false;
-            while (!passed && stopWatch.Elapsed <= timeToRetry)
-            {
-                Thread.Sleep(TimeSpan.FromMilliseconds(1000));
-                passed = func();
-            }
         }
     }
 }

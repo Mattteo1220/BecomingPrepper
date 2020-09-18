@@ -13,6 +13,6 @@ namespace BecomingPrepper.Tests.Contexts
         public Func<Task<RecommendedQuantityAmountEntity>> QueryResult { get; set; }
 
         public Func<Task> ExecutionResult { get; set; }
-        public string PropertyUpdate { get; set; }
+        public dynamic PropertyUpdate { get; set; }
     }
 }
