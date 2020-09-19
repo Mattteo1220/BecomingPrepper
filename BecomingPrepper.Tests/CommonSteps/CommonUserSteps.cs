@@ -20,12 +20,20 @@ namespace BecomingPrepper.Tests.IntegrationTests
             var fixture = new Fixture();
             fixture.Register(ObjectId.GenerateNewId);
             _userContext.UserEntity = fixture.Create<UserEntity>();
+            _userContext.UserEntity.Account.Password = "Qwerty";
         }
 
         [Given(@"A User")]
         public void GivenAUser()
         {
             GivenASimpleUserEntity();
+        }
+
+        [Given(@"That user is registered")]
+        public void GivenThatUserIsRegistered()
+        {
+            _userContext.UserEntity.Account.Password = _userContext.SecureService.Hash(_userContext.UserEntity.Account.Password);
+            _userContext.UserRepository.Add(_userContext.UserEntity);
         }
     }
 }

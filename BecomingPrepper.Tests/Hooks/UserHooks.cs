@@ -1,5 +1,7 @@
-﻿using BecomingPrepper.Data.Entities;
+﻿using BecomingPrepper.Core.UserUtility;
+using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Repositories;
+using BecomingPrepper.Security;
 using BecomingPrepper.Tests.IntegrationTests;
 using MongoDB.Driver;
 using TechTalk.SpecFlow;
@@ -20,6 +22,8 @@ namespace BecomingPrepper.Tests.Hooks
         public void BeforeScenario()
         {
             _userContext.UserRepository = new UserRepository(Users, MockExceptionLogger.Object);
+            _userContext.SecureService = new SecureService(new HashingOptions());
+            _userContext.Login = new Login(_userContext.UserRepository, _userContext.SecureService, MockExceptionLogger.Object);
         }
 
         [AfterScenario("DisposeUser", Order = 100)]

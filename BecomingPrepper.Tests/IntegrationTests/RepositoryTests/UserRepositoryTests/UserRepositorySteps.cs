@@ -88,7 +88,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         {
             _userContext.PropertyUpdate = new Fixture().Create<string>();
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
-            var update = Builders<UserEntity>.Update.Set(u => u.Account.HashedPassword, _userContext.PropertyUpdate);
+            var update = Builders<UserEntity>.Update.Set(u => u.Account.Password, _userContext.PropertyUpdate);
 
             _userContext.ExecutionResult = () => _userContext.UserRepository.Update(filter, update);
         }
@@ -104,15 +104,9 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
             TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            _userContext.UserRepository.Get(filter).Account.HashedPassword.Should().BeEquivalentTo(_userContext.PropertyUpdate, "Hashed password was updated.");
+            _userContext.UserRepository.Get(filter).Account.Password.Should().BeEquivalentTo(_userContext.PropertyUpdate, "Hashed password was updated.");
         }
 
         #endregion
-
-        [Given(@"That user is registered")]
-        public void GivenThatUserIsRegistered()
-        {
-            _userContext.UserRepository.Add(_userContext.UserEntity);
-        }
     }
 }

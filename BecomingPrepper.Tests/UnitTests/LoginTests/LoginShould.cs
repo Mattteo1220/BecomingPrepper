@@ -28,7 +28,6 @@ namespace BecomingPrepper.Tests.UnitTests.LoginTests
             _mockExceptionLogger = new Mock<IExceptionLogger>();
             _mockSecureService = new Mock<ISecureService>();
             _fixture = new Fixture();
-
         }
 
         [Theory]

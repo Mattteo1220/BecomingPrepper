@@ -19,6 +19,7 @@ namespace BecomingPrepper.Security
         public string Hash(string password)
         {
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
+
             using (var algorithm = new Rfc2898DeriveBytes(password, SaltSize, Options.Iterations, HashAlgorithmName.SHA512))
             {
                 var key = Convert.ToBase64String(algorithm.GetBytes(KeySize));

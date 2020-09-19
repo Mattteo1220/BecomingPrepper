@@ -25,16 +25,14 @@ namespace BecomingPrepper.Core.UserUtility
             if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
 
-            var hashedPassword = _secureService.Hash(password);
-
-            var filter = Builders<UserEntity>.Filter.Eq(u => u.Account.HashedPassword, hashedPassword);
+            var filter = Builders<UserEntity>.Filter.Where(p => p.Account.Username == username);
             var userEntity = _userRepo.Get(filter);
             if (userEntity == null)
             {
                 return false;
             }
 
-            var result = _secureService.Validate(userEntity.Account.HashedPassword, password);
+            var result = _secureService.Validate(userEntity.Account.Password, password);
 
             if (result.NeedsUpgrade)
             {
