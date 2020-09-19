@@ -23,7 +23,7 @@ namespace BecomingPrepper.Data.Repositories
             if (entity == null) throw new ArgumentNullException(nameof(entity));
             try
             {
-                Collection.InsertOneAsync(entity);
+                Collection.InsertOne(entity);
             }
             catch (Exception e)
             {
@@ -32,9 +32,19 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public void Delete(FilterDefinition<PrepGuideEntity> filterDefinition)
+        public void Delete(FilterDefinition<PrepGuideEntity> deleteFilter)
         {
-            throw new NotImplementedException();
+            if (deleteFilter == null) throw new ArgumentNullException(nameof(deleteFilter));
+
+            try
+            {
+                Collection.FindOneAndDelete(deleteFilter);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e);
+                throw;
+            }
         }
 
         public PrepGuideEntity Get(FilterDefinition<PrepGuideEntity> queryFilter)
@@ -62,7 +72,7 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
+                Collection.FindOneAndUpdate(queryFilter, updateFilter);
             }
             catch (Exception e)
             {

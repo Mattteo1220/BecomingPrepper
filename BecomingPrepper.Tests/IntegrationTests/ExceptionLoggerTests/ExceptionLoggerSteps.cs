@@ -2,6 +2,7 @@
 using System.Threading;
 using AutoFixture;
 using BecomingPrepper.Tests.Contexts;
+using FluentAssertions;
 using TechTalk.SpecFlow;
 
 namespace BecomingPrepper.Tests.IntegrationTests.ExceptionLoggerTests
@@ -34,7 +35,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ExceptionLoggerTests
         [Then(@"the exception is stored in the ExceptionLogs in the Mongo Database")]
         public void ThenTheExceptionIsStoredInTheExceptionLogsInTheMongoDatabase()
         {
-            //Manually check this step
+            _context.Exception.Should().NotBe(null, "It was instantiated");
         }
         #endregion
 
@@ -49,7 +50,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ExceptionLoggerTests
         [Then(@"The infromation is stored in the ExceptionLogs in the mongo datbase")]
         public void ThenTheInfromationIsStoredInTheExceptionLogsInTheMongoDatbase()
         {
-            //Manually check this step
+            _context.Exception.Should().NotBe(null, "It was instantiated");
         }
 
         #endregion
@@ -65,7 +66,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ExceptionLoggerTests
         [Then(@"the warning is stored in the ExceptionLogs in the mongo Database")]
         public void ThenTheWarningIsStoredInTheExceptionLogsInTheMongoDatabase()
         {
-            //Manually check this step
+            _context.Exception.Should().NotBe(null, "It was instantiated");
         }
 
         #endregion

@@ -26,7 +26,7 @@ Scenario: Delete inventory
 	When FoodStorageInventoryRepository Delete is called
 	Then The Inventory is removed from the Mongo Database
 
-@UpdateInventory @FoodStorageInventoryRepository @NewDbInstantiation @Ignore
+@UpdateInventory @FoodStorageInventoryRepository @NewDbInstantiation 
 Scenario: Update Inventory
 		And That Inventory has been registered
 		And That Inventory has an updated property

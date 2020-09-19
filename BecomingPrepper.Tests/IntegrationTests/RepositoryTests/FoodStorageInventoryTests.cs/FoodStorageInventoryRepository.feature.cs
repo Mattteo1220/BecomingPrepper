@@ -243,14 +243,12 @@ this.FeatureBackground();
         [Xunit.TraitAttribute("Category", "UpdateInventory")]
         [Xunit.TraitAttribute("Category", "FoodStorageInventoryRepository")]
         [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
-        [Xunit.TraitAttribute("Category", "Ignore")]
         public virtual void UpdateInventory()
         {
             string[] tagsOfScenario = new string[] {
                     "UpdateInventory",
                     "FoodStorageInventoryRepository",
-                    "NewDbInstantiation",
-                    "Ignore"};
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Inventory", null, tagsOfScenario, argumentsOfScenario);
 #line 30

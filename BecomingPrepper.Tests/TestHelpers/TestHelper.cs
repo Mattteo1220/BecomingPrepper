@@ -78,7 +78,6 @@ namespace BecomingPrepper.Tests
             var testContext = GetTestContext();
 
             var loggerConfig = new LoggerConfiguration()
-                .AuditTo.File("C:\\random\\Errors.txt")
                 .WriteTo.MongoDB(testContext.MongoClient, collectionName: LogCollection, period: TimeSpan.FromSeconds(5), batchPostingLimit: 1)
                 .MinimumLevel.Debug()
                 .CreateLogger();

@@ -92,10 +92,12 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         public void GivenThatInventoryHasAnUpdatedProperty()
         {
             _context.PropertyUpdate = new Fixture().Create<string>();
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
-            var update = Builders<FoodStorageInventoryEntity>.Update.Set(u => u.Inventory.FirstOrDefault().ExpiryDateRange, _context.PropertyUpdate);
+            var arrayFilter = Builders<FoodStorageInventoryEntity>.Filter.And(
+                Builders<FoodStorageInventoryEntity>.Filter.Where(x => x._id == _context.FoodStorageInventoryEntity._id),
+                Builders<FoodStorageInventoryEntity>.Filter.ElemMatch(x => x.Inventory, i => i.ExpiryDateRange == _context.FoodStorageInventoryEntity.Inventory.First().ExpiryDateRange));
+            var update = Builders<FoodStorageInventoryEntity>.Update.Set(u => u.Inventory[-1].ExpiryDateRange, _context.PropertyUpdate);
 
-            _context.ExecutionResult = () => _context.FoodStorageInventoryRepository.Update(filter, update);
+            _context.ExecutionResult = () => _context.FoodStorageInventoryRepository.Update(arrayFilter, update);
         }
 
         [When(@"FoodStorageInventoryRepository Update is called")]

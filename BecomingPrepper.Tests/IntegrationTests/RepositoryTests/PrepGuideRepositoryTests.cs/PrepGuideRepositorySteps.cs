@@ -72,7 +72,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
             _prepGuideContext.PropertyUpdate = fixture.Create<string>();
             var arrayFilter = Builders<PrepGuideEntity>.Filter.And(
                 Builders<PrepGuideEntity>.Filter.Where(x => x._id == _prepGuideContext.PrepGuide._id),
-                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.TipId == _prepGuideContext.PrepGuide.Tips.First().TipId));
+                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.TipName == _prepGuideContext.PrepGuide.Tips.First().TipName));
             var update = Builders<PrepGuideEntity>.Update.Set(u => u.Tips[-1].TipName, _prepGuideContext.PropertyUpdate);// [-1] means update first matching array element
 
             _prepGuideContext.ExecutionResult = () => _prepGuideContext.PrepGuideRepository.Update(arrayFilter, update);

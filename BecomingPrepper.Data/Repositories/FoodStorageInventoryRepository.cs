@@ -24,7 +24,7 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                Collection.InsertOneAsync(entity);
+                Collection.InsertOne(entity);
             }
             catch (Exception e)
             {
@@ -39,7 +39,7 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                Collection.FindOneAndDeleteAsync(deleteFilter);
+                Collection.FindOneAndDelete(deleteFilter);
             }
             catch (Exception e)
             {
@@ -73,7 +73,7 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
+                Collection.FindOneAndUpdate(queryFilter, updateFilter);
             }
             catch (Exception e)
             {
