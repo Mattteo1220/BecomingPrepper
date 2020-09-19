@@ -10,4 +10,12 @@
     <None Remove="Enums\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FoodStorageInventoryUtility\" />
+    <Folder Include="ProgressTrackerProcessor\" />
+    <Folder Include="PrepGuideUtility\" />
+    <Folder Include="RecommenedQuantitiesUtility\" />
+    <Folder Include="UserUtility\" />
+  </ItemGroup>
+
 </Project>
