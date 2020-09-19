@@ -679,6 +679,18 @@
           "lib/netstandard2.0/Serilog.Settings.Configuration.dll": {}
         }
       },
+      "Serilog.Sinks.Async/1.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.8.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Serilog.Sinks.Async.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Serilog.Sinks.Async.dll": {}
+        }
+      },
       "Serilog.Sinks.ColoredConsole/3.0.1": {
         "type": "package",
         "dependencies": {
@@ -1795,6 +1807,7 @@
           "Serilog.AspNetCore": "3.4.0",
           "Serilog.Extensions.Logging": "3.0.1",
           "Serilog.Settings.Configuration": "3.1.0",
+          "Serilog.Sinks.Async": "1.4.0",
           "Serilog.Sinks.ColoredConsole": "3.0.1",
           "Serilog.Sinks.MongoDB": "4.0.0"
         },
@@ -2627,6 +2640,25 @@
         "lib/netstandard2.0/Serilog.Settings.Configuration.xml",
         "serilog.settings.configuration.3.1.0.nupkg.sha512",
         "serilog.settings.configuration.nuspec"
+      ]
+    },
+    "Serilog.Sinks.Async/1.4.0": {
+      "sha512": "OZDmB/qs/uXO9oLyLIY4h85b0sCoJnFmPqI3P79jLumViEKq2su7h70Vqs1cdqEftl2oWuBgkkS54fOK4PjP0w==",
+      "type": "package",
+      "path": "serilog.sinks.async/1.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Serilog.Sinks.Async.dll",
+        "lib/net45/Serilog.Sinks.Async.xml",
+        "lib/net461/Serilog.Sinks.Async.dll",
+        "lib/net461/Serilog.Sinks.Async.xml",
+        "lib/netstandard1.1/Serilog.Sinks.Async.dll",
+        "lib/netstandard1.1/Serilog.Sinks.Async.xml",
+        "lib/netstandard2.0/Serilog.Sinks.Async.dll",
+        "lib/netstandard2.0/Serilog.Sinks.Async.xml",
+        "serilog.sinks.async.1.4.0.nupkg.sha512",
+        "serilog.sinks.async.nuspec"
       ]
     },
     "Serilog.Sinks.ColoredConsole/3.0.1": {

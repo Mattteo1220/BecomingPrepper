@@ -137,6 +137,10 @@
               "target": "Package",
               "version": "[3.1.0, )"
             },
+            "Serilog.Sinks.Async": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
             "Serilog.Sinks.ColoredConsole": {
               "target": "Package",
               "version": "[3.0.1, )"

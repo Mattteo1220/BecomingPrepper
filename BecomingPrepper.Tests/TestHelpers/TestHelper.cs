@@ -76,11 +76,10 @@ namespace BecomingPrepper.Tests
         public static Serilog.Core.Logger GetLogger()
         {
             var testContext = GetTestContext();
-            var file = File.CreateText("Errors.txt");
-            Serilog.Debugging.SelfLog.Enable(TextWriter.Synchronized(file));
 
             var loggerConfig = new LoggerConfiguration()
-                .WriteTo.MongoDB(testContext.MongoClient, collectionName: LogCollection, period: TimeSpan.Zero, batchPostingLimit: 1)
+                .AuditTo.File("C:\\random\\Errors.txt")
+                .WriteTo.MongoDB(testContext.MongoClient, collectionName: LogCollection, period: TimeSpan.FromSeconds(5), batchPostingLimit: 1)
                 .MinimumLevel.Debug()
                 .CreateLogger();
             return loggerConfig;

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "T6AXhRovVX76FUIOvFEzKfy87AR9NQlCFRS/1mvbGTxsyF03gg6vB+qjAlTwJVv6/zO5i9w4OBRQ3LURdyO9ig==",
+  "dgSpecHash": "1M8aIyKvNh2rWG8f/mjFUZ59Eplg8L0pRJwDbwwTEVfkMflv4eDVLBae5A8PapIIkUHATShu+FE5Xd1dhzyrcA==",
   "success": true,
   "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
   "expectedPackageFiles": [
@@ -52,6 +52,7 @@
     "C:\\Users\\mmcentire\\.nuget\\packages\\serilog.extensions.logging\\3.0.1\\serilog.extensions.logging.3.0.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\serilog.formatting.compact\\1.1.0\\serilog.formatting.compact.1.1.0.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\serilog.settings.configuration\\3.1.0\\serilog.settings.configuration.3.1.0.nupkg.sha512",
+    "C:\\Users\\mmcentire\\.nuget\\packages\\serilog.sinks.async\\1.4.0\\serilog.sinks.async.1.4.0.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\serilog.sinks.coloredconsole\\3.0.1\\serilog.sinks.coloredconsole.3.0.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\serilog.sinks.console\\3.1.1\\serilog.sinks.console.3.1.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\serilog.sinks.debug\\1.0.1\\serilog.sinks.debug.1.0.1.nupkg.sha512",
