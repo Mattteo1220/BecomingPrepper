@@ -1,13 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "gWzvGfkBznPvcHiu0M6NMBa1w5EGguVKAEmEU+SBzaJz3nRY/tbl0tWwkqkGe/1SZWDlHh0Tkhz1XEs5GVnb/Q==",
+  "dgSpecHash": "AAyhUNnBOwccpHisJxTbVSwuNcgyxOIxkvNotie7si/7lMQGRU4WGmAyT5gWS2bUcr2N1ZxzZx71oFJOIM/Qlw==",
   "success": true,
   "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mmcentire\\.nuget\\packages\\dotnetcore.security\\12.31.0\\dotnetcore.security.12.31.0.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.7\\microsoft.extensions.dependencyinjection.3.1.7.nupkg.sha512",
-    "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.7\\microsoft.extensions.dependencyinjection.abstractions.3.1.7.nupkg.sha512",
+    "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.8\\microsoft.extensions.dependencyinjection.abstractions.3.1.8.nupkg.sha512",
+    "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.extensions.options\\3.1.8\\microsoft.extensions.options.3.1.8.nupkg.sha512",
+    "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.8\\microsoft.extensions.primitives.3.1.8.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\6.7.1\\microsoft.identitymodel.jsonwebtokens.6.7.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.identitymodel.logging\\6.7.1\\microsoft.identitymodel.logging.6.7.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.7.1\\microsoft.identitymodel.tokens.6.7.1.nupkg.sha512",

@@ -9,12 +9,14 @@ using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using Moq;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace BecomingPrepper.Tests
 {
     public class TestHelper
     {
         private const string Environment = "Dev";
+        private const string LogCollection = "ExceptionLogs";
         private const string Database = "BecomingPrepper_Dev";
         public const string RecommendedQuantityId = "5f59291f65554c3ddaa060b3";
         public static TestConfiguration GetTestContext()
@@ -69,6 +71,19 @@ namespace BecomingPrepper.Tests
             var database = new TestDatabaseHelper();
             database.Connect(mockConfiguration, Environment);
             return database.MongoDatabase;
+        }
+
+        public static Serilog.Core.Logger GetLogger()
+        {
+            var testContext = GetTestContext();
+            var file = File.CreateText("Errors.txt");
+            Serilog.Debugging.SelfLog.Enable(TextWriter.Synchronized(file));
+
+            var loggerConfig = new LoggerConfiguration()
+                .WriteTo.MongoDB(testContext.MongoClient, collectionName: LogCollection, period: TimeSpan.Zero, batchPostingLimit: 1)
+                .MinimumLevel.Debug()
+                .CreateLogger();
+            return loggerConfig;
         }
 
         public class TestConfiguration

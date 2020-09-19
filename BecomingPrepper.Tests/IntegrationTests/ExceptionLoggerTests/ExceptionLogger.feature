@@ -1,0 +1,12 @@
+﻿Feature: ExceptionLogger
+	In order to address issues
+	The system will need to log additional information when an error is thrown
+	So that the issues can be diagnosed, understood and addressed.
+
+Background: 
+	Given system information needs to be logged
+
+@ExceptionLogger
+Scenario: Log Error
+	When LogError is called
+	Then the exception is stored in the ExceptionLogs in the Mongo Database

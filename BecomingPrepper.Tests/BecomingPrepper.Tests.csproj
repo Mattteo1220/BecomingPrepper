@@ -31,9 +31,13 @@
   <ItemGroup>
     <ProjectReference Include="..\BecomingPrepper.Data\BecomingPrepper.Data.csproj" />
     <ProjectReference Include="..\BecomingPrepper.Logger\BecomingPrepper.Logger.csproj" />
+    <ProjectReference Include="..\BecomingPrepper.Security\BecomingPrepper.Security.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="IntegrationTests\ExceptionLoggerTests\ExceptionLogger.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Update="IntegrationTests\RepositoryTests\FoodStorageInventoryTests.cs\FoodStorageInventoryRepository.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
@@ -49,6 +53,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SpecFlowFeatureFiles Update="IntegrationTests\ExceptionLoggerTests\ExceptionLogger.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ExceptionLogger.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\FoodStorageInventoryTests.cs\FoodStorageInventoryRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>FoodStorageInventoryRepository.feature.cs</LastGenOutput>
