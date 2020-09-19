@@ -1,0 +1,76 @@
+﻿using System;
+using AutoFixture;
+using BecomingPrepper.Core.UserUtility;
+using BecomingPrepper.Core.UserUtility.Interfaces;
+using BecomingPrepper.Data.Entities;
+using BecomingPrepper.Data.Interfaces;
+using BecomingPrepper.Logger;
+using BecomingPrepper.Security;
+using FluentAssertions;
+using MongoDB.Bson;
+using Moq;
+using Xunit;
+
+namespace BecomingPrepper.Tests.UnitTests.RegisterTests
+{
+    [Trait("Unit", "RegisterUser")]
+    public class RegisterShould
+    {
+        private IRegister _register;
+        private Mock<IRepository<UserEntity>> _mockUserRepo;
+        private Mock<IExceptionLogger> _mockExceptionLogger;
+        private Mock<ISecureService> _mockSecureService;
+        private Fixture _fixture;
+        public RegisterShould()
+        {
+            _register = Mock.Of<IRegister>();
+            _mockUserRepo = new Mock<IRepository<UserEntity>>();
+            _mockExceptionLogger = new Mock<IExceptionLogger>();
+            _mockSecureService = new Mock<ISecureService>();
+            _fixture = new Fixture();
+            _fixture.Register(ObjectId.GenerateNewId);
+        }
+
+        [Fact]
+        public void Throw_WhenNoEntitySupplied()
+        {
+            _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            Action nullEntityTest = () => _register.Register(null);
+
+            nullEntityTest.Should().Throw<ArgumentNullException>("No Entity was supplied");
+        }
+
+        [Fact]
+        public void HashPassword()
+        {
+            _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            _register.Register(_fixture.Create<UserEntity>());
+            _mockSecureService.Verify(ss => ss.Hash(It.IsAny<string>()), Times.Once);
+        }
+
+        [Fact]
+        public void SaveUserToDatabase()
+        {
+            _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            _register.Register(_fixture.Create<UserEntity>());
+            _mockUserRepo.Verify(ur => ur.Add(It.IsAny<UserEntity>()), Times.Once);
+        }
+
+        [Fact]
+        public void LogWhenUserHasBeenRegistered()
+        {
+            _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            _register.Register(_fixture.Create<UserEntity>());
+            _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Once);
+        }
+
+        [Fact]
+        public void NotLogUserHasBeenRegistered_WhenUserRepositoryGetHasThrownAnException()
+        {
+            _mockUserRepo.Setup(ur => ur.Add(It.IsAny<UserEntity>())).Throws<Exception>();
+            _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            _register.Register(_fixture.Create<UserEntity>());
+            _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Never);
+        }
+    }
+}

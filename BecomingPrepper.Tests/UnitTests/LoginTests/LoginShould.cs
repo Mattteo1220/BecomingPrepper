@@ -14,6 +14,7 @@ using Xunit;
 
 namespace BecomingPrepper.Tests.UnitTests.LoginTests
 {
+    [Trait("Unit", "LoginUser")]
     public class LoginShould
     {
         private ILogin _login;
@@ -43,7 +44,6 @@ namespace BecomingPrepper.Tests.UnitTests.LoginTests
         [Fact]
         public void FailToAuthenticate_WhenNullReturnedFromUserRepository()
         {
-            _mockUserRepo = new Mock<IRepository<UserEntity>>();
             _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Returns((UserEntity)null);
             _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
 
@@ -53,12 +53,37 @@ namespace BecomingPrepper.Tests.UnitTests.LoginTests
         [Fact]
         public void LogNeedsUpgrading_WhenNeedsUpgradingIsTrue()
         {
-            _mockUserRepo = new Mock<IRepository<UserEntity>>();
             _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Returns(GenerateUserEntity);
             _mockSecureService.Setup(ss => ss.Validate(It.IsAny<string>(), It.IsAny<string>())).Returns((false, true));
             _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
             _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
             _mockExceptionLogger.Verify(el => el.LogWarning(It.IsAny<SecurityException>()), Times.Once);
+        }
+
+        [Fact]
+        public void GetUserFromDatabase()
+        {
+            _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
+            _mockUserRepo.Verify(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>()), Times.Once);
+        }
+
+        [Fact]
+        public void LogWhenUserHasBeenVerified()
+        {
+            _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Returns(GenerateUserEntity);
+            _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
+            _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Once);
+        }
+
+        [Fact]
+        public void NotLogUserHasBeenRegistered_WhenUserRepositoryGetHasThrownAnException()
+        {
+            _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Throws<Exception>();
+            _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
+            _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Never);
         }
 
         #region helperMethods

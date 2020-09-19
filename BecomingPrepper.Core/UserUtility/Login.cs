@@ -26,7 +26,16 @@ namespace BecomingPrepper.Core.UserUtility
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
 
             var filter = Builders<UserEntity>.Filter.Where(p => p.Account.Username == username);
-            var userEntity = _userRepo.Get(filter);
+            UserEntity userEntity = null;
+            try
+            {
+                userEntity = _userRepo.Get(filter);
+            }
+            catch
+            {
+                return false;
+            }
+
             if (userEntity == null)
             {
                 return false;
@@ -38,6 +47,8 @@ namespace BecomingPrepper.Core.UserUtility
             {
                 _exceptionLog.LogWarning(new SecurityException($"'Needs upgrading' returned true for user {username}"));
             }
+
+            _exceptionLog.LogInformation($"User '{userEntity.AccountId}' has been verified");
 
             return result.Verified;
         }
