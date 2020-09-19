@@ -38,7 +38,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.ProgressTracker
             var filter = Builders<RecommendedQuantityAmountEntity>.Filter.Eq(u => u._id, _recommendedQuantityAmountContext.RecommendedQuantityAmountEntity._id);
             var update = Builders<RecommendedQuantityAmountEntity>.Update.Set(u => u.TwoWeekRecommendedAmount.Beans, (double)_recommendedQuantityAmountContext.PropertyUpdate);
 
-            _recommendedQuantityAmountContext.ExecutionResult = async () => await _recommendedQuantityAmountContext.RecommendedQuantityRepository.Update(filter, update);
+            _recommendedQuantityAmountContext.ExecutionResult = () => _recommendedQuantityAmountContext.RecommendedQuantityRepository.Update(filter, update);
         }
 
         [When(@"RecommenedQuantityRepository Update Is Called")]
@@ -52,7 +52,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.ProgressTracker
         {
             var filter = Builders<RecommendedQuantityAmountEntity>.Filter.Eq(u => u._id, _recommendedQuantityAmountContext.RecommendedQuantityAmountEntity._id);
             TestHelper.WaitUntil(() => _recommendedQuantityAmountContext.RecommendedQuantityRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            _recommendedQuantityAmountContext.RecommendedQuantityRepository.Get(filter).Result.TwoWeekRecommendedAmount.Beans.Should().Be(_recommendedQuantityAmountContext.PropertyUpdate, "The Two Beans recommendedAmount was updated.");
+            _recommendedQuantityAmountContext.RecommendedQuantityRepository.Get(filter).TwoWeekRecommendedAmount.Beans.Should().Be(_recommendedQuantityAmountContext.PropertyUpdate, "The Two Beans recommendedAmount was updated.");
         }
 
         #endregion
@@ -69,13 +69,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.ProgressTracker
         public void WhenRecommendedQuantityGetIsCalled()
         {
             var filter = Builders<RecommendedQuantityAmountEntity>.Filter.Eq(r => r.Id, _objectId);
-            _recommendedQuantityAmountContext.QueryResult = async () => await _recommendedQuantityAmountContext.RecommendedQuantityRepository.Get(filter);
+            _recommendedQuantityAmountContext.QueryResult = () => _recommendedQuantityAmountContext.RecommendedQuantityRepository.Get(filter);
         }
 
         [Then(@"That recommended Quantity is returned")]
         public void ThenThatRecommendedQuantityIsReturned()
         {
-            _recommendedQuantityAmountContext.QueryResult.Invoke().Result.Should().NotBeNull("The Entity exists in the MongoDatabase");
+            _recommendedQuantityAmountContext.QueryResult.Invoke().Should().NotBeNull("The Entity exists in the MongoDatabase");
         }
 
         #endregion

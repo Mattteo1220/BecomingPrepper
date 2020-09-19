@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Data.Repositories;
@@ -17,11 +16,11 @@ namespace BecomingPrepper.Tests.RepostioryTests.UnitTests
     {
         private IRepository<UserEntity> _userRepository;
         private Action _initCollectionTest;
-        private Func<Task> _nullUserEntityTest;
-        private Func<Task> _getNullQueryFilterTest;
-        private Func<Task> _updateQueryFilterTest;
-        private Func<Task> _updateFilterTest;
-        private Func<Task> _deleteFilterTest;
+        private Action _nullUserEntityTest;
+        private Action _getNullQueryFilterTest;
+        private Action _updateQueryFilterTest;
+        private Action _updateFilterTest;
+        private Action _deleteFilterTest;
         private Action _disposeTest;
         private Mock<IMongoCollection<UserEntity>> _mockUserCollection;
         private Mock<IExceptionLogger> _mockLogger;
@@ -39,11 +38,11 @@ namespace BecomingPrepper.Tests.RepostioryTests.UnitTests
             _userRepository = new UserRepository(_mockUserCollection.Object, _mockLogger.Object);
 
             _initCollectionTest = () => new UserRepository(null, _mockLogger.Object);
-            _nullUserEntityTest = async () => await _userRepository.Add(null);
-            _getNullQueryFilterTest = async () => await _userRepository.Get(null);
-            _updateQueryFilterTest = async () => await _userRepository.Update(null, Builders<UserEntity>.Update.Combine(Builders<UserEntity>.Update.Set(i => i._id, ObjectId.GenerateNewId())));
-            _updateFilterTest = async () => await _userRepository.Update(Builders<UserEntity>.Filter.Empty, null);
-            _deleteFilterTest = async () => await _userRepository.Delete(null);
+            _nullUserEntityTest = () => _userRepository.Add(null);
+            _getNullQueryFilterTest = () => _userRepository.Get(null);
+            _updateQueryFilterTest = () => _userRepository.Update(null, Builders<UserEntity>.Update.Combine(Builders<UserEntity>.Update.Set(i => i._id, ObjectId.GenerateNewId())));
+            _updateFilterTest = () => _userRepository.Update(Builders<UserEntity>.Filter.Empty, null);
+            _deleteFilterTest = () => _userRepository.Delete(null);
             _disposeTest = () => _userRepository.Dispose();
         }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Logger;
@@ -19,12 +18,12 @@ namespace BecomingPrepper.Data.Repositories
             _logger = exceptionLogger ?? throw new ArgumentNullException("No IExceptionLogger was provided");
         }
 
-        public async Task Add(PrepGuideEntity entity)
+        public void Add(PrepGuideEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
             try
             {
-                await Collection.InsertOneAsync(entity);
+                Collection.InsertOneAsync(entity);
             }
             catch (Exception e)
             {
@@ -33,26 +32,19 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public async Task Delete(FilterDefinition<PrepGuideEntity> filterDefinition)
+        public void Delete(FilterDefinition<PrepGuideEntity> filterDefinition)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<PrepGuideEntity> Get(FilterDefinition<PrepGuideEntity> queryFilter)
+        public PrepGuideEntity Get(FilterDefinition<PrepGuideEntity> queryFilter)
         {
             if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
 
             PrepGuideEntity entity = null;
             try
             {
-                using IAsyncCursor<PrepGuideEntity> asyncCursor = await Collection.FindAsync(queryFilter);
-                while (await asyncCursor.MoveNextAsync())
-                {
-                    foreach (var cursor in asyncCursor.Current)
-                    {
-                        entity = cursor;
-                    }
-                }
+                entity = Collection.Find(queryFilter).Limit(1).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -63,14 +55,14 @@ namespace BecomingPrepper.Data.Repositories
             return entity;
         }
 
-        public async Task Update(FilterDefinition<PrepGuideEntity> queryFilter, UpdateDefinition<PrepGuideEntity> updateFilter)
+        public void Update(FilterDefinition<PrepGuideEntity> queryFilter, UpdateDefinition<PrepGuideEntity> updateFilter)
         {
             if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
             if (updateFilter == null) throw new ArgumentNullException(nameof(updateFilter));
 
             try
             {
-                await Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
+                Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
             }
             catch (Exception e)
             {

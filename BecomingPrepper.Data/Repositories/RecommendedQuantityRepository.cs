@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Logger;
@@ -19,12 +18,12 @@ namespace BecomingPrepper.Data.Repositories
             _logger = exceptionLogger ?? throw new ArgumentNullException("No IExceptionLogger was provided");
         }
 
-        public async Task Add(RecommendedQuantityAmountEntity recommendedQuantityAmountEntity)
+        public void Add(RecommendedQuantityAmountEntity recommendedQuantityAmountEntity)
         {
             if (recommendedQuantityAmountEntity == null) throw new ArgumentNullException(nameof(recommendedQuantityAmountEntity));
             try
             {
-                await Collection.InsertOneAsync(recommendedQuantityAmountEntity);
+                Collection.InsertOneAsync(recommendedQuantityAmountEntity);
             }
             catch (Exception e)
             {
@@ -33,13 +32,13 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public async Task Delete(FilterDefinition<RecommendedQuantityAmountEntity> deleteFilter)
+        public void Delete(FilterDefinition<RecommendedQuantityAmountEntity> deleteFilter)
         {
             if (deleteFilter == null) throw new ArgumentNullException(nameof(deleteFilter));
 
             try
             {
-                await Collection.FindOneAndDeleteAsync(deleteFilter);
+                Collection.FindOneAndDeleteAsync(deleteFilter);
             }
             catch (Exception e)
             {
@@ -48,21 +47,14 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public async Task<RecommendedQuantityAmountEntity> Get(FilterDefinition<RecommendedQuantityAmountEntity> filter)
+        public RecommendedQuantityAmountEntity Get(FilterDefinition<RecommendedQuantityAmountEntity> filter)
         {
             if (filter == null) throw new ArgumentNullException(nameof(filter));
 
             RecommendedQuantityAmountEntity entity = null;
             try
             {
-                using IAsyncCursor<RecommendedQuantityAmountEntity> asyncCursor = await Collection.FindAsync(filter);
-                while (await asyncCursor.MoveNextAsync())
-                {
-                    foreach (var cursor in asyncCursor.Current)
-                    {
-                        entity = cursor;
-                    }
-                }
+                entity = Collection.Find(filter).Limit(1).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -73,14 +65,14 @@ namespace BecomingPrepper.Data.Repositories
             return entity;
         }
 
-        public async Task Update(FilterDefinition<RecommendedQuantityAmountEntity> queryFilter, UpdateDefinition<RecommendedQuantityAmountEntity> updateFilter)
+        public void Update(FilterDefinition<RecommendedQuantityAmountEntity> queryFilter, UpdateDefinition<RecommendedQuantityAmountEntity> updateFilter)
         {
             if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
             if (updateFilter == null) throw new ArgumentNullException(nameof(updateFilter));
 
             try
             {
-                await Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
+                Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
             }
             catch (Exception e)
             {

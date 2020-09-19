@@ -161,3 +161,5 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Security.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Security.pdb
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\Serilog.Sinks.Async.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Core.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Core.pdb

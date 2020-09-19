@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Logger;
@@ -19,13 +18,13 @@ namespace BecomingPrepper.Data.Repositories
             _logger = logger ?? throw new ArgumentNullException("No IExceptionLogger was provided");
         }
 
-        public async Task Add(FoodStorageInventoryEntity entity)
+        public void Add(FoodStorageInventoryEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
             try
             {
-                await Collection.InsertOneAsync(entity);
+                Collection.InsertOneAsync(entity);
             }
             catch (Exception e)
             {
@@ -34,13 +33,13 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public async Task Delete(FilterDefinition<FoodStorageInventoryEntity> deleteFilter)
+        public void Delete(FilterDefinition<FoodStorageInventoryEntity> deleteFilter)
         {
             if (deleteFilter == null) throw new ArgumentNullException(nameof(deleteFilter));
 
             try
             {
-                await Collection.FindOneAndDeleteAsync(deleteFilter);
+                Collection.FindOneAndDeleteAsync(deleteFilter);
             }
             catch (Exception e)
             {
@@ -49,21 +48,14 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public async Task<FoodStorageInventoryEntity> Get(FilterDefinition<FoodStorageInventoryEntity> queryFilter)
+        public FoodStorageInventoryEntity Get(FilterDefinition<FoodStorageInventoryEntity> queryFilter)
         {
             if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
 
             FoodStorageInventoryEntity entity = null;
             try
             {
-                using IAsyncCursor<FoodStorageInventoryEntity> asyncCursor = await Collection.FindAsync(queryFilter);
-                while (await asyncCursor.MoveNextAsync())
-                {
-                    foreach (var cursor in asyncCursor.Current)
-                    {
-                        entity = cursor;
-                    }
-                }
+                entity = Collection.Find(queryFilter).Limit(1).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -74,14 +66,14 @@ namespace BecomingPrepper.Data.Repositories
             return entity;
         }
 
-        public async Task Update(FilterDefinition<FoodStorageInventoryEntity> queryFilter, UpdateDefinition<FoodStorageInventoryEntity> updateFilter)
+        public void Update(FilterDefinition<FoodStorageInventoryEntity> queryFilter, UpdateDefinition<FoodStorageInventoryEntity> updateFilter)
         {
             if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
             if (updateFilter == null) throw new ArgumentNullException(nameof(updateFilter));
 
             try
             {
-                await Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
+                Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
             }
             catch (Exception e)
             {

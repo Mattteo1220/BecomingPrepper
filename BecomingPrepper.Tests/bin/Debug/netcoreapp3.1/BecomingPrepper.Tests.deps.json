@@ -9,6 +9,7 @@
       "BecomingPrepper.Tests/1.0.0": {
         "dependencies": {
           "AutoFixture.Xunit2": "4.13.0",
+          "BecomingPrepper.Core": "1.0.0",
           "BecomingPrepper.Data": "1.0.0",
           "BecomingPrepper.Logger": "1.0.0",
           "BecomingPrepper.Security": "1.0.0",
@@ -1891,6 +1892,16 @@
           }
         }
       },
+      "BecomingPrepper.Core/1.0.0": {
+        "dependencies": {
+          "BecomingPrepper.Data": "1.0.0",
+          "BecomingPrepper.Logger": "1.0.0",
+          "BecomingPrepper.Security": "1.0.0"
+        },
+        "runtime": {
+          "BecomingPrepper.Core.dll": {}
+        }
+      },
       "BecomingPrepper.Data/1.0.0": {
         "dependencies": {
           "BecomingPrepper.Logger": "1.0.0",
@@ -3087,6 +3098,11 @@
       "sha512": "sha512-CQETcfKyEq6Uki9pExNZI5sEHeKqdt9Fc4pdLHu1mgaboQp0aI4W45M+UUnG6Zc2hxWTDmbD2AFVKA1wjU19YA==",
       "path": "xunit.skippablefact/1.3.12",
       "hashPath": "xunit.skippablefact.1.3.12.nupkg.sha512"
+    },
+    "BecomingPrepper.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "BecomingPrepper.Data/1.0.0": {
       "type": "project",

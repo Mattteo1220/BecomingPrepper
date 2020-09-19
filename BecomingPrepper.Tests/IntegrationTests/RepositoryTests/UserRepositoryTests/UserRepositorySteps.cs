@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using AutoFixture;
 using BecomingPrepper.Data.Entities;
 using FluentAssertions;
@@ -22,7 +21,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         [Given(@"That user has never registered")]
         public void GivenThatUserHasNeverRegistered()
         {
-            _userContext.ExecutionResult = async () => await _userContext.UserRepository.Add(_userContext.UserEntity);
+            _userContext.ExecutionResult = () => _userContext.UserRepository.Add(_userContext.UserEntity);
         }
 
         [When(@"UserRepositoryAdd is Called")]
@@ -34,10 +33,9 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         [Then(@"The user is added to the Mongo Database")]
         public void ThenTheUserIsAddedToTheMongoDatabase()
         {
-            var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
-            Task<UserEntity> addedUser = null;
+            var filter = Builders<UserEntity>.Filter.Eq(u => u.AccountId, _userContext.UserEntity.AccountId);
             TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            addedUser = _userContext.UserRepository.Get(filter);
+            var addedUser = _userContext.UserRepository.Get(filter);
             addedUser.Should().NotBeNull("User was added to the Mongo DB");
         }
         #endregion
@@ -49,13 +47,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
             TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            _userContext.QueryResult = async () => await _userContext.UserRepository.Get(filter);
+            _userContext.QueryResult = () => _userContext.UserRepository.Get(filter);
         }
 
         [Then(@"the User Entity should be returned")]
         public void ThenTheUserEntityShouldBeReturned()
         {
-            _userContext.QueryResult.Invoke().Result.Should().NotBeNull("The user exists in the MongoDatabase");
+            _userContext.QueryResult.Invoke().Should().NotBeNull("The user exists in the MongoDatabase");
         }
 
         #endregion
@@ -65,7 +63,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         public void GivenThatUserWantsToBeDeleted()
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
-            _userContext.ExecutionResult = async () => await _userContext.UserRepository.Delete(filter);
+            _userContext.ExecutionResult = () => _userContext.UserRepository.Delete(filter);
         }
 
         [When(@"Delete is called")]
@@ -79,7 +77,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
             TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) == null, TimeSpan.FromMilliseconds(30000));
-            _userContext.UserRepository.Get(filter).Result.Should().BeNull($"Entity: {_userContext.UserEntity._id} was deleted");
+            _userContext.UserRepository.Get(filter).Should().BeNull($"Entity: {_userContext.UserEntity._id} was deleted");
         }
 
         #endregion
@@ -92,7 +90,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
             var update = Builders<UserEntity>.Update.Set(u => u.Account.HashedPassword, _userContext.PropertyUpdate);
 
-            _userContext.ExecutionResult = async () => await _userContext.UserRepository.Update(filter, update);
+            _userContext.ExecutionResult = () => _userContext.UserRepository.Update(filter, update);
         }
 
         [When(@"Update is called")]
@@ -106,7 +104,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
             TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            _userContext.UserRepository.Get(filter).Result.Account.HashedPassword.Should().BeEquivalentTo(_userContext.PropertyUpdate, "Hashed password was updated.");
+            _userContext.UserRepository.Get(filter).Account.HashedPassword.Should().BeEquivalentTo(_userContext.PropertyUpdate, "Hashed password was updated.");
         }
 
         #endregion

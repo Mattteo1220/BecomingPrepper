@@ -2679,6 +2679,24 @@
           "lib/netstandard1.1/Xunit.SkippableFact.dll": {}
         }
       },
+      "BecomingPrepper.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "BecomingPrepper.Data": "1.0.0",
+          "BecomingPrepper.Logger": "1.0.0",
+          "BecomingPrepper.Security": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BecomingPrepper.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BecomingPrepper.Core.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "BecomingPrepper.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -8586,6 +8604,11 @@
         "xunit.skippablefact.nuspec"
       ]
     },
+    "BecomingPrepper.Core/1.0.0": {
+      "type": "project",
+      "path": "../BecomingPrepper.Core/BecomingPrepper.Core.csproj",
+      "msbuildProject": "../BecomingPrepper.Core/BecomingPrepper.Core.csproj"
+    },
     "BecomingPrepper.Data/1.0.0": {
       "type": "project",
       "path": "../BecomingPrepper.Data/BecomingPrepper.Data.csproj",
@@ -8605,6 +8628,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "AutoFixture.Xunit2 >= 4.13.0",
+      "BecomingPrepper.Core >= 1.0.0",
       "BecomingPrepper.Data >= 1.0.0",
       "BecomingPrepper.Logger >= 1.0.0",
       "BecomingPrepper.Security >= 1.0.0",
@@ -8653,6 +8677,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
+            "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj": {
+              "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj"
+            },
             "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj": {
               "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj"
             },

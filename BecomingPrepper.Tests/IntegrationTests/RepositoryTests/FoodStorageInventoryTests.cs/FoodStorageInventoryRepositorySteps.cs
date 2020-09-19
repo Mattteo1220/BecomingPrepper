@@ -22,7 +22,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         [Given(@"That Inventory has never been registered")]
         public void GivenThatInventoryHasNeverBeenRegistered()
         {
-            _context.ExecutionResult = async () => await _context.FoodStorageInventoryRepository.Add(_context.FoodStorageInventoryEntity);
+            _context.ExecutionResult = () => _context.FoodStorageInventoryRepository.Add(_context.FoodStorageInventoryEntity);
         }
 
         [When(@"FoodStorageInventory Add is Called")]
@@ -52,7 +52,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         {
             var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
             TestHelper.WaitUntil(() => _context.FoodStorageInventoryRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            _context.QueryResult = async () => await _context.FoodStorageInventoryRepository.Get(filter);
+            _context.QueryResult = () => _context.FoodStorageInventoryRepository.Get(filter);
         }
 
         [Then(@"the Inventory should be returned")]
@@ -68,7 +68,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         public void GivenThatInventoryNeedsToBeDeleted()
         {
             var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
-            _context.ExecutionResult = async () => await _context.FoodStorageInventoryRepository.Delete(filter);
+            _context.ExecutionResult = () => _context.FoodStorageInventoryRepository.Delete(filter);
         }
 
         [When(@"FoodStorageInventoryRepository Delete is called")]
@@ -82,7 +82,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         {
             var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
             TestHelper.WaitUntil(() => _context.FoodStorageInventoryRepository.Get(filter) == null, TimeSpan.FromMilliseconds(30000));
-            _context.FoodStorageInventoryRepository.Get(filter).Result.Should().BeNull($"Entity: {_context.FoodStorageInventoryEntity._id} was deleted");
+            _context.FoodStorageInventoryRepository.Get(filter).Should().BeNull($"Entity: {_context.FoodStorageInventoryEntity._id} was deleted");
         }
 
         #endregion
@@ -95,7 +95,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
             var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
             var update = Builders<FoodStorageInventoryEntity>.Update.Set(u => u.Inventory.FirstOrDefault().ExpiryDateRange, _context.PropertyUpdate);
 
-            _context.ExecutionResult = async () => await _context.FoodStorageInventoryRepository.Update(filter, update);
+            _context.ExecutionResult = () => _context.FoodStorageInventoryRepository.Update(filter, update);
         }
 
         [When(@"FoodStorageInventoryRepository Update is called")]
@@ -109,7 +109,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         {
             var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
             TestHelper.WaitUntil(() => _context.FoodStorageInventoryRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            var result = _context.FoodStorageInventoryRepository.Get(filter).Result.Inventory.FirstOrDefault();
+            var result = _context.FoodStorageInventoryRepository.Get(filter).Inventory.FirstOrDefault();
             result.ExpiryDateRange.Should().BeEquivalentTo(_context.PropertyUpdate, "Expiry DateRange was updated.");
         }
 

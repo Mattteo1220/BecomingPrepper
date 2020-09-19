@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Logger;
@@ -19,12 +18,12 @@ namespace BecomingPrepper.Data.Repositories
             _logger = logger ?? throw new ArgumentNullException("No IExceptionLogger was provided");
         }
 
-        public async Task Add(UserEntity userEntity)
+        public void Add(UserEntity userEntity)
         {
             if (userEntity == null) throw new ArgumentNullException(nameof(userEntity));
             try
             {
-                await Collection.InsertOneAsync(userEntity);
+                Collection.InsertOne(userEntity);
             }
             catch (Exception e)
             {
@@ -33,21 +32,14 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public async Task<UserEntity> Get(FilterDefinition<UserEntity> queryFilter)
+        public UserEntity Get(FilterDefinition<UserEntity> queryFilter)
         {
             if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
 
             UserEntity entity = null;
             try
             {
-                using IAsyncCursor<UserEntity> asyncCursor = await Collection.FindAsync(queryFilter);
-                while (await asyncCursor.MoveNextAsync())
-                {
-                    foreach (var cursor in asyncCursor.Current)
-                    {
-                        entity = cursor;
-                    }
-                }
+                entity = Collection.Find(queryFilter).Limit(1).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -58,14 +50,14 @@ namespace BecomingPrepper.Data.Repositories
             return entity;
         }
 
-        public async Task Update(FilterDefinition<UserEntity> queryFilter, UpdateDefinition<UserEntity> updateFilter)
+        public void Update(FilterDefinition<UserEntity> queryFilter, UpdateDefinition<UserEntity> updateFilter)
         {
             if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
             if (updateFilter == null) throw new ArgumentNullException(nameof(updateFilter));
 
             try
             {
-                await Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
+                Collection.FindOneAndUpdate(queryFilter, updateFilter);
             }
             catch (Exception e)
             {
@@ -75,13 +67,13 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public async Task Delete(FilterDefinition<UserEntity> deleteFilter)
+        public void Delete(FilterDefinition<UserEntity> deleteFilter)
         {
             if (deleteFilter == null) throw new ArgumentNullException(nameof(deleteFilter));
 
             try
             {
-                await Collection.FindOneAndDeleteAsync(deleteFilter);
+                Collection.FindOneAndDelete(deleteFilter);
             }
             catch (Exception e)
             {

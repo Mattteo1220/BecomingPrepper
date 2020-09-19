@@ -4,6 +4,7 @@ using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Data.Repositories;
 using BecomingPrepper.Logger;
+using BecomingPrepper.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
@@ -19,6 +20,7 @@ namespace BecomingPrepper.Web.Models
         public IRepository<RecommendedQuantityAmountEntity> RecommendedQuantities { get; set; }
         public IRepository<FoodStorageInventoryEntity> FoodStorageInventory { get; set; }
         public IExceptionLogger ExceptionLogger { get; set; }
+        public ISecureService SecureService { get; set; }
 
         public void Register(ref IServiceCollection services, IConfiguration configuration)
         {
@@ -38,14 +40,17 @@ namespace BecomingPrepper.Web.Models
                 .CreateLogger();
             var exceptionLogger = new ExceptionLogger(logger);
 
+            //Secure Service
+            var secureService = new SecureService(new HashingOptions());
+
             //Collections
             var usersCollections = mongoDatabase.GetCollection<UserEntity>(users);
-            var prepGuidesColleciton = mongoDatabase.GetCollection<PrepGuideEntity>(prepGuides);
+            var prepGuidesCollection = mongoDatabase.GetCollection<PrepGuideEntity>(prepGuides);
             var recommendedQuantitiesCollection = mongoDatabase.GetCollection<RecommendedQuantityAmountEntity>(recommendedQuantities);
             var foodStorageInventoryCollection = mongoDatabase.GetCollection<FoodStorageInventoryEntity>(foodStorageInventory);
 
             var usersRepository = new UserRepository(usersCollections, exceptionLogger);
-            var prepGuidesRepository = new PrepGuideRepository(prepGuidesColleciton, exceptionLogger);
+            var prepGuidesRepository = new PrepGuideRepository(prepGuidesCollection, exceptionLogger);
             var recommendedQuantitiesRepository = new RecommendedQuantityRepository(recommendedQuantitiesCollection, exceptionLogger);
             var foodStorageInventoryRepository = new FoodStorageInventoryRepository(foodStorageInventoryCollection, exceptionLogger);
 
@@ -57,7 +62,8 @@ namespace BecomingPrepper.Web.Models
                 PrepGuides = prepGuidesRepository,
                 RecommendedQuantities = recommendedQuantitiesRepository,
                 FoodStorageInventory = foodStorageInventoryRepository,
-                ExceptionLogger = exceptionLogger
+                ExceptionLogger = exceptionLogger,
+                SecureService = secureService
             }));
         }
     }
