@@ -35,5 +35,12 @@ namespace BecomingPrepper.Tests.IntegrationTests
             _userContext.UserEntity.Account.Password = _userContext.SecureService.Hash(_userContext.UserEntity.Account.Password);
             _userContext.UserRepository.Add(_userContext.UserEntity);
         }
+
+        [Given(@"That user has never registered")]
+        public void GivenThatUserHasNeverRegistered()
+        {
+            _userContext.UserEntity.Account.Password = _userContext.SecureService.Hash(_userContext.UserEntity.Account.Password);
+            _userContext.ExecutionResult = () => _userContext.UserRepository.Add(_userContext.UserEntity);
+        }
     }
 }

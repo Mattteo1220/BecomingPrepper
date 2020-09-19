@@ -18,11 +18,6 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         }
 
         #region Add User
-        [Given(@"That user has never registered")]
-        public void GivenThatUserHasNeverRegistered()
-        {
-            _userContext.ExecutionResult = () => _userContext.UserRepository.Add(_userContext.UserEntity);
-        }
 
         [When(@"UserRepositoryAdd is Called")]
         public void WhenUserRepositoryAddIsCalled()

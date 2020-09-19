@@ -42,6 +42,9 @@
     <Compile Update="IntegrationTests\LoginTests\Login.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="IntegrationTests\RegisterTests\Register.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Update="IntegrationTests\RepositoryTests\FoodStorageInventoryTests.cs\FoodStorageInventoryRepository.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
@@ -64,6 +67,10 @@
     <SpecFlowFeatureFiles Update="IntegrationTests\LoginTests\Login.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Login.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\RegisterTests\Register.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Register.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\FoodStorageInventoryTests.cs\FoodStorageInventoryRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -78,7 +78,7 @@ namespace BecomingPrepper.Tests.UnitTests.LoginTests
         }
 
         [Fact]
-        public void NotLogUserHasBeenRegistered_WhenUserRepositoryGetHasThrownAnException()
+        public void NotLogUserHasBeenVerified_WhenUserRepositoryGetHasThrownAnException()
         {
             _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Throws<Exception>();
             _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
