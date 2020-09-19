@@ -18,6 +18,7 @@ namespace BecomingPrepper.Security
 
         public string Hash(string password)
         {
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
             using (var algorithm = new Rfc2898DeriveBytes(password, SaltSize, Options.Iterations, HashAlgorithmName.SHA512))
             {
                 var key = Convert.ToBase64String(algorithm.GetBytes(KeySize));
@@ -27,8 +28,11 @@ namespace BecomingPrepper.Security
             }
         }
 
-        public (bool Verified, bool NeedsUpgrade) Check(string hash, string password)
+        public (bool Verified, bool NeedsUpgrade) Validate(string hash, string password)
         {
+            if (string.IsNullOrWhiteSpace(hash)) throw new ArgumentNullException(nameof(hash));
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
+
             var parts = hash.Split('.', 3);
 
             if (parts.Length != 3)
