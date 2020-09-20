@@ -60,6 +60,9 @@
     <Compile Update="IntegrationTests\ServiceAccountTests\UpdateEmail\UpdateEmail.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="IntegrationTests\ServiceAccountTests\UpdateFamilySize\UpdateFamilySize.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -94,6 +97,10 @@
     <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdateEmail\UpdateEmail.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UpdateEmail.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdateFamilySize\UpdateFamilySize.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdateFamilySize.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
   </ItemGroup>
 

@@ -22,7 +22,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ServiceAccountTests.UpdateEmail
         {
             _userContext.PropertyUpdate = new Fixture().Create<string>();
             var filter = Builders<UserEntity>.Filter.Eq(u => u.AccountId, _userContext.UserEntity.AccountId);
-            var update = Builders<UserEntity>.Update.Set(u => u.Account.Email, _userContext.PropertyUpdate);
+            var update = Builders<UserEntity>.Update.Set(u => u.Account.Email, (string)_userContext.PropertyUpdate);
 
             _userContext.UserRepository.Update(filter, update);
         }

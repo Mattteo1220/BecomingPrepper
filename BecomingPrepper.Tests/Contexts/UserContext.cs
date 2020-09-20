@@ -14,7 +14,7 @@ namespace BecomingPrepper.Tests.IntegrationTests
         public Func<UserEntity> QueryResult { get; set; }
 
         public Action ExecutionResult { get; set; }
-        public string PropertyUpdate { get; set; }
+        public dynamic PropertyUpdate { get; set; }
         public ILogin Login { get; set; }
         public ISecureService SecureService { get; set; }
 

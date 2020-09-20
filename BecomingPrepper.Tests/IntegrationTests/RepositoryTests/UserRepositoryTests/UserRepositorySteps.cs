@@ -83,7 +83,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         {
             _userContext.PropertyUpdate = new Fixture().Create<string>();
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
-            var update = Builders<UserEntity>.Update.Set(u => u.Account.Password, _userContext.PropertyUpdate);
+            var update = Builders<UserEntity>.Update.Set(u => u.Account.Password, (string)_userContext.PropertyUpdate);
 
             _userContext.ExecutionResult = () => _userContext.UserRepository.Update(filter, update);
         }

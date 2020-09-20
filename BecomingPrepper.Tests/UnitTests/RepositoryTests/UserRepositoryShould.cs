@@ -13,14 +13,14 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
 {
     public class UserRepositoryShould
     {
-        private Mock<IMongoCollection<UserEntity>> _mockFoodStorageInventoryCollection;
+        private Mock<IMongoCollection<UserEntity>> _mockUserRepo;
         private Mock<IExceptionLogger> _mockLogger;
         private Fixture _fixture;
         public UserRepositoryShould()
         {
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
-            _mockFoodStorageInventoryCollection = new Mock<IMongoCollection<UserEntity>>();
+            _mockUserRepo = new Mock<IMongoCollection<UserEntity>>();
             _mockLogger = new Mock<IExceptionLogger>();
         }
 
@@ -44,7 +44,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             var mockDatabase = TestHelper.GetMockDatabase();
 
             //Act
-            var userRepository = new UserRepository(_mockFoodStorageInventoryCollection.Object, _mockLogger.Object);
+            var userRepository = new UserRepository(_mockUserRepo.Object, _mockLogger.Object);
             userRepository.Dispose();
 
             //Asssert
