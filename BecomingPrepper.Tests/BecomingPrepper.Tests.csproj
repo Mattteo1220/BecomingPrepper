@@ -57,6 +57,9 @@
     <Compile Update="IntegrationTests\RepositoryTests\UserRepositoryTests\UserRepository.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="IntegrationTests\ServiceAccountTests\UpdateEmail\UpdateEmail.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -87,6 +90,10 @@
     <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\UserRepositoryTests\UserRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UserRepository.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdateEmail\UpdateEmail.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdateEmail.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
   </ItemGroup>
 
