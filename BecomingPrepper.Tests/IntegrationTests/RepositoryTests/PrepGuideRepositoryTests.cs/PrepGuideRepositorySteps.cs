@@ -117,11 +117,5 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
         }
 
         #endregion
-
-        [Given(@"The Prep Guide Already Exists")]
-        public void GivenThePrepGuideAlreadyExists()
-        {
-            _prepGuideContext.PrepGuideRepository.Add(_prepGuideContext.PrepGuide);
-        }
     }
 }

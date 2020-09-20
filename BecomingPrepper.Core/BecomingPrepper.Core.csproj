@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="FoodStorageInventoryUtility\" />
     <Folder Include="ProgressTrackerProcessor\" />
-    <Folder Include="PrepGuideUtility\" />
     <Folder Include="RecommenedQuantitiesUtility\" />
   </ItemGroup>
 

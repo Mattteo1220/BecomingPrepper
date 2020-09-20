@@ -6,4 +6,3 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\BecomingPrepper.Api.csproj.CoreCompileInputs.cache
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\BecomingPrepper.Api.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\BecomingPrepper.Api.pdb
-C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\BecomingPrepper.Api.csprojAssemblyReference.cache
