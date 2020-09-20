@@ -41,7 +41,7 @@ namespace BecomingPrepper.Tests.UnitTests.RegisterTests
         }
 
         [Fact]
-        public void HashPassword()
+        public void CallHashPassword()
         {
             _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
             _register.Register(_fixture.Create<UserEntity>());
@@ -49,7 +49,7 @@ namespace BecomingPrepper.Tests.UnitTests.RegisterTests
         }
 
         [Fact]
-        public void SaveUserToDatabase()
+        public void CallAddToDatabase()
         {
             _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
             _register.Register(_fixture.Create<UserEntity>());
@@ -57,7 +57,7 @@ namespace BecomingPrepper.Tests.UnitTests.RegisterTests
         }
 
         [Fact]
-        public void LogWhenUserHasBeenRegistered()
+        public void CallLogInformation_WhenUserHasBeenRegistered()
         {
             _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
             _register.Register(_fixture.Create<UserEntity>());
@@ -65,7 +65,7 @@ namespace BecomingPrepper.Tests.UnitTests.RegisterTests
         }
 
         [Fact]
-        public void NotLogUserHasBeenRegistered_WhenUserRepositoryGetHasThrownAnException()
+        public void NotCallLogUser_WhenUserRepositoryGetHasThrownAnException()
         {
             _mockUserRepo.Setup(ur => ur.Add(It.IsAny<UserEntity>())).Throws<Exception>();
             _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);

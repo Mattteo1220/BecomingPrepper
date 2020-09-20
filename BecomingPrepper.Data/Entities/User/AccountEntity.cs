@@ -13,5 +13,7 @@ namespace BecomingPrepper.Data.Entities
         public string Username { get; set; }
         [BsonElement]
         public string Password { get; set; }
+        [BsonElement]
+        public string Email { get; set; }
     }
 }

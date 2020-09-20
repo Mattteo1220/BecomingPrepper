@@ -3,9 +3,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using AutoFixture;
 using BecomingPrepper.Data;
+using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Moq;
 using Newtonsoft.Json;
@@ -82,6 +85,13 @@ namespace BecomingPrepper.Tests
                 .MinimumLevel.Debug()
                 .CreateLogger();
             return loggerConfig;
+        }
+
+        public static UserEntity GenerateUserEntity()
+        {
+            var fixture = new Fixture();
+            fixture.Register(ObjectId.GenerateNewId);
+            return fixture.Create<UserEntity>();
         }
 
         public class TestConfiguration

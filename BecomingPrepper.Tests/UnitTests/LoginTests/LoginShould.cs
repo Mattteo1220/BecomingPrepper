@@ -7,7 +7,6 @@ using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
 using FluentAssertions;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using Moq;
 using Xunit;
@@ -51,9 +50,9 @@ namespace BecomingPrepper.Tests.UnitTests.LoginTests
         }
 
         [Fact]
-        public void LogNeedsUpgrading_WhenNeedsUpgradingIsTrue()
+        public void CallLogInformation_WhenNeedsUpgradingIsTrue()
         {
-            _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Returns(GenerateUserEntity);
+            _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Returns(TestHelper.GenerateUserEntity);
             _mockSecureService.Setup(ss => ss.Validate(It.IsAny<string>(), It.IsAny<string>())).Returns((false, true));
             _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
             _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
@@ -61,7 +60,7 @@ namespace BecomingPrepper.Tests.UnitTests.LoginTests
         }
 
         [Fact]
-        public void GetUserFromDatabase()
+        public void CallGetUserFromDatabase()
         {
             _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
             _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
@@ -69,31 +68,21 @@ namespace BecomingPrepper.Tests.UnitTests.LoginTests
         }
 
         [Fact]
-        public void LogWhenUserHasBeenVerified()
+        public void CallLogInformation_WhenUserHasBeenVerified()
         {
-            _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Returns(GenerateUserEntity);
+            _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Returns(TestHelper.GenerateUserEntity);
             _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
             _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
             _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Once);
         }
 
         [Fact]
-        public void NotLogUserHasBeenVerified_WhenUserRepositoryGetHasThrownAnException()
+        public void NotCallLogInformation_WhenUserHasNotBeenVerified()
         {
             _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Throws<Exception>();
             _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
             _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
             _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Never);
         }
-
-        #region helperMethods
-
-        private UserEntity GenerateUserEntity()
-        {
-            _fixture.Register(ObjectId.GenerateNewId);
-            return _fixture.Create<UserEntity>();
-        }
-        #endregion
-
     }
 }
