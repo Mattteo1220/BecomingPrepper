@@ -13,6 +13,7 @@ namespace BecomingPrepper.Core.UserUtility
         private IRepository<UserEntity> _userRepo;
         private ISecureService _secureService;
         private IExceptionLogger _exceptionLogger;
+        public (bool HasError, string Message) Match { get; set; }
         public ServiceAccount(IRepository<UserEntity> userRepo, ISecureService secureService, IExceptionLogger exceptionLogger)
         {
             _userRepo = userRepo;
@@ -22,7 +23,7 @@ namespace BecomingPrepper.Core.UserUtility
 
         public void UpdateEmail(string accountId, string email)
         {
-            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(email));
+            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
             if (string.IsNullOrWhiteSpace(email)) throw new ArgumentNullException(nameof(email));
 
             var filter = Builders<UserEntity>.Filter.Eq(ue => ue.AccountId, accountId);
@@ -53,7 +54,32 @@ namespace BecomingPrepper.Core.UserUtility
 
         public void UpdatePassword(string accountId, string password)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
+
+            var initialFilter = Builders<UserEntity>.Filter.Where(p => p.AccountId == accountId);
+            UserEntity userEntity = null;
+            try
+            {
+                userEntity = _userRepo.Get(initialFilter);
+            }
+            catch
+            {
+                return;
+            }
+
+            if (_secureService.Validate(userEntity.Account.Password, password).Verified)
+            {
+                Match = (HasError: true, Message: "Reuse of passwords is forbidden");
+                return;
+            }
+
+            password = _secureService.Hash(password);
+
+            var finalFilter = Builders<UserEntity>.Filter.Eq(ue => ue.AccountId, accountId);
+            var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.AccountId, password);
+            UpdateValue(finalFilter, updateFilter, $"User '{accountId}' updated their Password to {password}");
+
         }
 
         private void UpdateValue(FilterDefinition<UserEntity> filter, UpdateDefinition<UserEntity> Update, string logMessage)

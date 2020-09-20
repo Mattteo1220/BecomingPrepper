@@ -6,5 +6,6 @@
         void UpdateFamilySize(string accountId, int familySize);
         void UpdateObjective(string accountId, int objective);
         void UpdateEmail(string accountId, string email);
+        (bool HasError, string Message) Match { get; set; }
     }
 }

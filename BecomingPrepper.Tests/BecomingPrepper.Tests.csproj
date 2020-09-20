@@ -66,6 +66,9 @@
     <Compile Update="IntegrationTests\ServiceAccountTests\UpdateObjective\UpdateObjective.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="IntegrationTests\ServiceAccountTests\UpdatePassword\UpdatePassword.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -108,6 +111,10 @@
     <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdateObjective\UpdateObjective.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UpdateObjective.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdatePassword\UpdatePassword.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdatePassword.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
   </ItemGroup>
 
