@@ -63,6 +63,9 @@
     <Compile Update="IntegrationTests\ServiceAccountTests\UpdateFamilySize\UpdateFamilySize.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="IntegrationTests\ServiceAccountTests\UpdateObjective\UpdateObjective.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -101,6 +104,10 @@
     <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdateFamilySize\UpdateFamilySize.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UpdateFamilySize.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdateObjective\UpdateObjective.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdateObjective.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
   </ItemGroup>
 

@@ -27,16 +27,8 @@ namespace BecomingPrepper.Core.UserUtility
 
             var filter = Builders<UserEntity>.Filter.Eq(ue => ue.AccountId, accountId);
             var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.Account.Email, email);
-            try
-            {
-                _userRepo.Update(filter, updateFilter);
-            }
-            catch
-            {
-                return;
-            }
+            UpdateValue(filter, updateFilter, $"User '{accountId}' updated Their email to {email}");
 
-            _exceptionLogger.LogInformation($"User '{accountId}' updated their email to {email}");
         }
 
         public void UpdateFamilySize(string accountId, int familySize)
@@ -46,26 +38,36 @@ namespace BecomingPrepper.Core.UserUtility
 
             var filter = Builders<UserEntity>.Filter.Eq(ue => ue.AccountId, accountId);
             var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.Prepper.FamilySize, familySize);
+            UpdateValue(filter, updateFilter, $"User '{accountId}' updated their FamilySize to {familySize}");
+        }
+
+        public void UpdateObjective(string accountId, int objective)
+        {
+            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
+            if (objective < 1 || objective > 9) throw new InvalidOperationException("Objective must be a supported objective");
+
+            var filter = Builders<UserEntity>.Filter.Eq(ue => ue.AccountId, accountId);
+            var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.Prepper.Objective, objective);
+            UpdateValue(filter, updateFilter, $"User '{accountId}' updated their Objective to {objective}");
+        }
+
+        public void UpdatePassword(string accountId, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateValue(FilterDefinition<UserEntity> filter, UpdateDefinition<UserEntity> Update, string logMessage)
+        {
             try
             {
-                _userRepo.Update(filter, updateFilter);
+                _userRepo.Update(filter, Update);
             }
             catch
             {
                 return;
             }
 
-            _exceptionLogger.LogInformation($"User '{accountId}' updated their FamilySize to {familySize}");
-        }
-
-        public void UpdateObjective(string accountId, int objective)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdatePassword(string accountId, string password)
-        {
-            throw new NotImplementedException();
+            _exceptionLogger.LogInformation(logMessage);
         }
     }
 }
