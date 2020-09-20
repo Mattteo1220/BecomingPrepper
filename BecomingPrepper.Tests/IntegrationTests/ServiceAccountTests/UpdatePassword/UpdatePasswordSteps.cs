@@ -11,6 +11,8 @@ namespace BecomingPrepper.Tests.IntegrationTests.ServiceAccountTests.UpdatePassw
     public class UpdatePasswordSteps
     {
         private readonly UserContext _userContext;
+        private string oldPassword;
+        private string newPassword;
 
         public UpdatePasswordSteps(UserContext userContext)
         {
@@ -20,19 +22,18 @@ namespace BecomingPrepper.Tests.IntegrationTests.ServiceAccountTests.UpdatePassw
         [When(@"that user changes their password")]
         public void WhenThatUserChangesTheirPassword()
         {
+            oldPassword = _userContext.UserEntity.Account.Password;
             _userContext.PropertyUpdate = new Fixture().Create<string>();
-            var filter = Builders<UserEntity>.Filter.Eq(u => u.AccountId, _userContext.UserEntity.AccountId);
-            var update = Builders<UserEntity>.Update.Set(u => u.Account.Password, (string)_userContext.PropertyUpdate);
-
-            _userContext.UserRepository.Update(filter, update);
+            _userContext.ServiceAccount.UpdatePassword(_userContext.UserEntity.AccountId, _userContext.PropertyUpdate);
         }
 
         [Then(@"That new password is saved in the database")]
         public void ThenThatNewPasswordIsSavedInTheDatabase()
         {
-            var filter = Builders<UserEntity>.Filter.Eq(u => u.AccountId, _userContext.UserEntity.AccountId);
+            var filter = Builders<UserEntity>.Filter.Where(u => u.AccountId == _userContext.UserEntity.AccountId);
             TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            _userContext.UserRepository.Get(filter).Account.Password.Should().BeEquivalentTo(_userContext.PropertyUpdate, "Password was updated.");
+            newPassword = _userContext.UserRepository.Get(filter).Account.Password;
+            newPassword.Should().NotBeEquivalentTo(oldPassword, "Password was updated.");
         }
     }
 }

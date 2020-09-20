@@ -21,10 +21,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ServiceAccountTests.UpdateFamil
         public void WhenThatUserUpdatesTheirFamilySize()
         {
             _userContext.PropertyUpdate = new Fixture().Create<int>();
-            var filter = Builders<UserEntity>.Filter.Eq(u => u.AccountId, _userContext.UserEntity.AccountId);
-            var update = Builders<UserEntity>.Update.Set(u => u.Prepper.FamilySize, (int)_userContext.PropertyUpdate);
-
-            _userContext.UserRepository.Update(filter, update);
+            _userContext.ServiceAccount.UpdateFamilySize(_userContext.UserEntity.AccountId, _userContext.PropertyUpdate);
         }
 
         [Then(@"the new family size is returned from the database")]

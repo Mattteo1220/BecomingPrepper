@@ -45,6 +45,9 @@
     <Compile Update="IntegrationTests\PrepGuideUtilityTests\DeleteTip\DeleteTip.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="IntegrationTests\PrepGuideUtilityTests\GetPrepGuide\GetPrepGuide.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Update="IntegrationTests\RegisterTests\Register.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
@@ -86,6 +89,10 @@
     <SpecFlowFeatureFiles Update="IntegrationTests\PrepGuideUtilityTests\DeleteTip\DeleteTip.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>DeleteTip.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\PrepGuideUtilityTests\GetPrepGuide\GetPrepGuide.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GetPrepGuide.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="IntegrationTests\RegisterTests\Register.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

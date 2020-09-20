@@ -1,5 +1,6 @@
 ﻿using System;
 using BecomingPrepper.Core.UserUtility;
+using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Security;
@@ -17,6 +18,7 @@ namespace BecomingPrepper.Tests.IntegrationTests
         public dynamic PropertyUpdate { get; set; }
         public ILogin Login { get; set; }
         public ISecureService SecureService { get; set; }
+        public IServiceAccount ServiceAccount { get; set; }
 
     }
 }

@@ -22,10 +22,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ServiceAccountTests.UpdateObjec
         public void WhenThatUserUpdatesTheirObjective()
         {
             _userContext.PropertyUpdate = CreateSupportedObjectiveRange();
-            var filter = Builders<UserEntity>.Filter.Eq(u => u.AccountId, _userContext.UserEntity.AccountId);
-            var update = Builders<UserEntity>.Update.Set(u => u.Prepper.Objective, (int)_userContext.PropertyUpdate);
-
-            _userContext.UserRepository.Update(filter, update);
+            _userContext.ServiceAccount.UpdateObjective(_userContext.UserEntity.AccountId, _userContext.PropertyUpdate);
         }
 
         [Then(@"The updated property is returned from the database")]

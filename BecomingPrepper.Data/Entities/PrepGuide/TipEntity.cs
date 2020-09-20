@@ -1,14 +1,21 @@
-﻿using MongoDB.Bson;
+﻿using System.Runtime.Serialization;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace BecomingPrepper.Data.Entities
 {
+    [BsonIgnoreExtraElements]
     public class TipEntity
     {
+        [DataMember]
         [BsonElement]
-        public string TipId { get; set; }
+        public string Id { get; set; }
+
+        [DataMember]
         [BsonElement]
-        public string TipName { get; set; }
+        public string Name { get; set; }
+
+        [DataMember]
         [BsonElement]
         public string HyperLink { get; set; }
     }

@@ -13,6 +13,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
         private ISecureService _secureService;
         private IExceptionLogger _exceptionLog;
         private IRepository<PrepGuideEntity> _prepGuideRepo;
+        private const string PrepGuideObjectId = "5f6795ec3266a7ff3e2aa32e";
         public PrepGuideUtility(IRepository<PrepGuideEntity> prepGuideRepo, ISecureService secureService, IExceptionLogger exceptionLog)
         {
             _prepGuideRepo = prepGuideRepo;
@@ -22,13 +23,17 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
 
         public void Delete(ObjectId objectId, string tipId)
         {
+            if (objectId == ObjectId.Empty)
+            {
+                objectId = ObjectId.Parse(PrepGuideObjectId);
+            }
             if (objectId == ObjectId.Empty) throw new ArgumentNullException(nameof(objectId));
             if (string.IsNullOrWhiteSpace(tipId)) throw new ArgumentNullException(nameof(tipId));
 
             var arrayFilter = Builders<PrepGuideEntity>.Filter.And(
                 Builders<PrepGuideEntity>.Filter.Where(x => x._id == objectId),
-                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.TipId == tipId));
-            var update = Builders<PrepGuideEntity>.Update.PullFilter(u => u.Tips, t => t.TipId == tipId);
+                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.Id == tipId));
+            var update = Builders<PrepGuideEntity>.Update.PullFilter(u => u.Tips, t => t.Id == tipId);
 
             try
             {
@@ -42,9 +47,11 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
             _exceptionLog.LogInformation($"Tip {tipId} was deleted");
         }
 
-        public void GetPrepGuide()
+        public PrepGuideEntity GetPrepGuide()
         {
-            throw new NotImplementedException();
+            var objectId = ObjectId.Parse(PrepGuideObjectId);
+            var filter = Builders<PrepGuideEntity>.Filter.Eq(pge => pge._id, objectId);
+            return _prepGuideRepo.Get(filter);
         }
 
         public void UpdateTip(ObjectId objectId, TipEntity tip)

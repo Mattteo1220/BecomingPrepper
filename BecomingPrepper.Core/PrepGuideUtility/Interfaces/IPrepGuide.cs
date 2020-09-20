@@ -5,7 +5,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
 {
     public interface IPrepGuide
     {
-        void GetPrepGuide();
+        PrepGuideEntity GetPrepGuide();
         void UpdateTip(ObjectId objectId, TipEntity tip);
         void Delete(ObjectId objectId, string tipId);
     }

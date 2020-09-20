@@ -36,7 +36,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
         public void ThenANewTipIsAdded()
         {
             var queryFilter = Builders<PrepGuideEntity>.Filter.Eq(p => p._id, _prepGuideContext.PrepGuide._id);
-            var wasTipAdded = _prepGuideContext.PrepGuideRepository.Get(queryFilter).Tips.Any(tip => tip.TipName == _prepGuideContext.PrepGuide.Tips.FirstOrDefault().TipName);
+            var wasTipAdded = _prepGuideContext.PrepGuideRepository.Get(queryFilter).Tips.Any(tip => tip.Name == _prepGuideContext.PrepGuide.Tips.FirstOrDefault().Name);
             wasTipAdded.Should().Be(true);
         }
         #endregion
@@ -72,8 +72,8 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
             _prepGuideContext.PropertyUpdate = fixture.Create<string>();
             var arrayFilter = Builders<PrepGuideEntity>.Filter.And(
                 Builders<PrepGuideEntity>.Filter.Where(x => x._id == _prepGuideContext.PrepGuide._id),
-                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.TipName == _prepGuideContext.PrepGuide.Tips.First().TipName));
-            var update = Builders<PrepGuideEntity>.Update.Set(u => u.Tips[-1].TipName, _prepGuideContext.PropertyUpdate);// [-1] means update first matching array element
+                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.Name == _prepGuideContext.PrepGuide.Tips.First().Name));
+            var update = Builders<PrepGuideEntity>.Update.Set(u => u.Tips[-1].Name, _prepGuideContext.PropertyUpdate);// [-1] means update first matching array element
 
             _prepGuideContext.ExecutionResult = () => _prepGuideContext.PrepGuideRepository.Update(arrayFilter, update);
         }
@@ -89,7 +89,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
         {
             var filter = Builders<PrepGuideEntity>.Filter.Eq(u => u._id, _prepGuideContext.PrepGuide._id);
             TestHelper.WaitUntil(() => _prepGuideContext.PrepGuideRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            var updatedTipName = _prepGuideContext.PrepGuideRepository.Get(filter).Tips.First().TipName;
+            var updatedTipName = _prepGuideContext.PrepGuideRepository.Get(filter).Tips.First().Name;
             updatedTipName.Should().BeEquivalentTo(_prepGuideContext.PropertyUpdate, "The Tip Name was updated.");
         }
 
@@ -99,11 +99,11 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
         [When(@"PrepGuideRepository Delete is called")]
         public void WhenPrepGuideRepositoryDeleteIsCalled()
         {
-            _prepGuideContext.PropertyUpdate = _prepGuideContext.PrepGuide.Tips.First().TipId;
+            _prepGuideContext.PropertyUpdate = _prepGuideContext.PrepGuide.Tips.First().Id;
             var arrayFilter = Builders<PrepGuideEntity>.Filter.And(
                 Builders<PrepGuideEntity>.Filter.Where(x => x._id == _prepGuideContext.PrepGuide._id),
-                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.TipId == _prepGuideContext.PrepGuide.Tips.First().TipId));
-            var update = Builders<PrepGuideEntity>.Update.PullFilter(u => u.Tips, t => t.TipId == _prepGuideContext.PropertyUpdate);// [-1] means update first matching array element
+                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.Id == _prepGuideContext.PrepGuide.Tips.First().Id));
+            var update = Builders<PrepGuideEntity>.Update.PullFilter(u => u.Tips, t => t.Id == _prepGuideContext.PropertyUpdate);// [-1] means update first matching array element
 
             _prepGuideContext.PrepGuideRepository.Update(arrayFilter, update);
         }
@@ -113,7 +113,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
         {
             var filter = Builders<PrepGuideEntity>.Filter.Eq(u => u._id, _prepGuideContext.PrepGuide._id);
             TestHelper.WaitUntil(() => _prepGuideContext.PrepGuideRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            _prepGuideContext.PrepGuideRepository.Get(filter).Tips.Should().NotContain(x => x.TipId == _prepGuideContext.PropertyUpdate);
+            _prepGuideContext.PrepGuideRepository.Get(filter).Tips.Should().NotContain(x => x.Id == _prepGuideContext.PropertyUpdate);
         }
 
         #endregion

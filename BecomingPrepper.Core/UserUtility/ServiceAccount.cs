@@ -76,8 +76,8 @@ namespace BecomingPrepper.Core.UserUtility
 
             password = _secureService.Hash(password);
 
-            var finalFilter = Builders<UserEntity>.Filter.Eq(ue => ue.AccountId, accountId);
-            var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.AccountId, password);
+            var finalFilter = Builders<UserEntity>.Filter.Where(ue => ue.AccountId == accountId);
+            var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.Account.Password, password);
             UpdateValue(finalFilter, updateFilter, $"User '{accountId}' updated their Password to {password}");
 
         }
