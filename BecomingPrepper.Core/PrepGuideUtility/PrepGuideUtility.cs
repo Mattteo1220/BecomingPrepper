@@ -21,12 +21,9 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
             _exceptionLog = exceptionLog;
         }
 
-        public void Delete(ObjectId objectId, string tipId)
+        public void Delete(ObjectId objectId, string tipId, bool isTest = false)
         {
-            if (objectId == ObjectId.Empty)
-            {
-                objectId = ObjectId.Parse(PrepGuideObjectId);
-            }
+            if (!isTest && objectId == ObjectId.Empty) objectId = ObjectId.Parse(PrepGuideObjectId);
             if (objectId == ObjectId.Empty) throw new ArgumentNullException(nameof(objectId));
             if (string.IsNullOrWhiteSpace(tipId)) throw new ArgumentNullException(nameof(tipId));
 
@@ -54,23 +51,25 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
             return _prepGuideRepo.Get(filter);
         }
 
-        public void UpdateTip(ObjectId objectId, TipEntity tip)
+        public void Add(ObjectId objectId, TipEntity tip, bool isTest = false)
         {
-            throw new NotImplementedException();
+            if (!isTest && objectId == ObjectId.Empty) objectId = ObjectId.Parse(PrepGuideObjectId);
+            if (objectId == ObjectId.Empty) throw new ArgumentNullException(nameof(objectId));
+            if (tip == null) throw new ArgumentNullException(nameof(tip));
+
+            var arrayFilter = Builders<PrepGuideEntity>.Filter.Where(x => x._id == objectId);
+            var update = Builders<PrepGuideEntity>.Update.Combine(Builders<PrepGuideEntity>.Update.Push(t => t.Tips, tip));
+
+            try
+            {
+                _prepGuideRepo.Update(arrayFilter, update);
+            }
+            catch
+            {
+                return;
+            }
+
+            _exceptionLog.LogInformation($"Tip {tip.Id} was added");
         }
-
-        //private void UpdateValue(FilterDefinition<UserEntity> filter, UpdateDefinition<UserEntity> Update, string logMessage)
-        //{
-        //    try
-        //    {
-        //        _userRepo.Update(filter, Update);
-        //    }
-        //    catch
-        //    {
-        //        return;
-        //    }
-
-        //    _exceptionLogger.LogInformation(logMessage);
-        //}
     }
 }
