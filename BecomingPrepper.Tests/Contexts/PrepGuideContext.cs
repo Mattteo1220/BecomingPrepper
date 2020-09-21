@@ -2,7 +2,6 @@
 using BecomingPrepper.Core.PrepGuideUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
-using BecomingPrepper.Security;
 
 namespace BecomingPrepper.Tests.Contexts
 {
@@ -16,6 +15,5 @@ namespace BecomingPrepper.Tests.Contexts
         public Action ExecutionResult { get; set; }
         public string PropertyUpdate { get; set; }
         public IPrepGuide PrepGuideUtility { get; set; }
-        public ISecureService SecureService { get; set; }
     }
 }

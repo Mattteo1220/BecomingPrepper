@@ -58,17 +58,11 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.ProgressTracker
         #endregion
 
         #region Get Recommended Quantity
-        [Given(@"That recommended Quantity Amount exists in the Mongo Database")]
-        public void GivenThatRecommendedQuantityAmountExistsInTheMongoDatabase()
-        {
-            _objectId = TestHelper.RecommendedQuantityId;
-            _recommendedQuantityAmountContext.RecommendedQuantityRepository.Add(_recommendedQuantityAmountContext.RecommendedQuantityAmountEntity);
-        }
 
         [When(@"RecommendedQuantity Get is called")]
         public void WhenRecommendedQuantityGetIsCalled()
         {
-            var filter = Builders<RecommendedQuantityAmountEntity>.Filter.Eq(r => r.Id, _objectId);
+            var filter = Builders<RecommendedQuantityAmountEntity>.Filter.Eq(r => r._id, ObjectId.Parse(TestHelper.RecommendedQuantityId));
             _recommendedQuantityAmountContext.QueryResult = () => _recommendedQuantityAmountContext.RecommendedQuantityRepository.Get(filter);
         }
 

@@ -2,7 +2,6 @@
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Logger;
-using BecomingPrepper.Security;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -10,14 +9,12 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
 {
     public class PrepGuideUtility : IPrepGuide
     {
-        private ISecureService _secureService;
         private IExceptionLogger _exceptionLog;
         private IRepository<PrepGuideEntity> _prepGuideRepo;
         private const string PrepGuideObjectId = "5f6795ec3266a7ff3e2aa32e";
-        public PrepGuideUtility(IRepository<PrepGuideEntity> prepGuideRepo, ISecureService secureService, IExceptionLogger exceptionLog)
+        public PrepGuideUtility(IRepository<PrepGuideEntity> prepGuideRepo, IExceptionLogger exceptionLog)
         {
             _prepGuideRepo = prepGuideRepo;
-            _secureService = secureService;
             _exceptionLog = exceptionLog;
         }
 

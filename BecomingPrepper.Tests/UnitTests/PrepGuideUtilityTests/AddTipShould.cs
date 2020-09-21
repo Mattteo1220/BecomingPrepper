@@ -4,7 +4,6 @@ using BecomingPrepper.Core.PrepGuideUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Logger;
-using BecomingPrepper.Security;
 using FluentAssertions;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -18,16 +17,14 @@ namespace BecomingPrepper.Tests.UnitTests.PrepGuideUtilityTests
         private IPrepGuide _prepGuideUtility;
         private Mock<IRepository<PrepGuideEntity>> _mockPrepGuideRepo;
         private Mock<IExceptionLogger> _mockExceptionLogger;
-        private Mock<ISecureService> _mockSecureService;
         private Fixture _fixture;
         public AddTipShould()
         {
             _mockPrepGuideRepo = new Mock<IRepository<PrepGuideEntity>>();
             _mockExceptionLogger = new Mock<IExceptionLogger>();
-            _mockSecureService = new Mock<ISecureService>();
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
-            _prepGuideUtility = new PrepGuideUtility(_mockPrepGuideRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            _prepGuideUtility = new PrepGuideUtility(_mockPrepGuideRepo.Object, _mockExceptionLogger.Object);
         }
 
         [Fact]

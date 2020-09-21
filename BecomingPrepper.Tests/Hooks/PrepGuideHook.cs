@@ -1,7 +1,6 @@
 ﻿using BecomingPrepper.Core.PrepGuideUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Repositories;
-using BecomingPrepper.Security;
 using BecomingPrepper.Tests.Contexts;
 using MongoDB.Driver;
 using TechTalk.SpecFlow;
@@ -22,8 +21,7 @@ namespace BecomingPrepper.Tests.Hooks
         public void BeforeScenario()
         {
             _prepGuideContext.PrepGuideRepository = new PrepGuideRepository(PrepGuides, MockExceptionLogger.Object);
-            _prepGuideContext.SecureService = new SecureService(new HashingOptions());
-            _prepGuideContext.PrepGuideUtility = new PrepGuideUtility(_prepGuideContext.PrepGuideRepository, _prepGuideContext.SecureService, MockExceptionLogger.Object);
+            _prepGuideContext.PrepGuideUtility = new PrepGuideUtility(_prepGuideContext.PrepGuideRepository, MockExceptionLogger.Object);
         }
 
         [AfterScenario("DisposePrepGuide", Order = 100)]

@@ -1,4 +1,5 @@
-﻿using BecomingPrepper.Data.Entities.ProgressTracker;
+﻿using BecomingPrepper.Core.RecommenedQuantitiesUtility;
+using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Data.Repositories;
 using BecomingPrepper.Tests.Contexts;
 using MongoDB.Driver;
@@ -13,6 +14,8 @@ namespace BecomingPrepper.Tests.Hooks
         public RecommendedQuantityAmountHook(ScenarioContext scenarioContext, RecommendedQuantityAmountContext userContext) : base(scenarioContext)
         {
             _recommendedQuantityAmountContext = userContext;
+            _recommendedQuantityAmountContext.RecommendService = new RecommendService(_recommendedQuantityAmountContext.RecommendedQuantityRepository, MockExceptionLogger.Object);
+
         }
 
         [BeforeScenario("RecommendedQuantityRepository")]

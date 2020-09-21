@@ -51,6 +51,12 @@
     <Compile Update="IntegrationTests\PrepGuideUtilityTests\GetPrepGuide\GetPrepGuide.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="IntegrationTests\RecommendedServiceTests\AddRecommendedAmount\AddRecommendedAmount.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Update="IntegrationTests\RecommendedServiceTests\GetRecommendedQuantity\GetRecommendedQuantities.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Update="IntegrationTests\RegisterTests\Register.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
@@ -100,6 +106,14 @@
     <SpecFlowFeatureFiles Update="IntegrationTests\PrepGuideUtilityTests\GetPrepGuide\GetPrepGuide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GetPrepGuide.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\RecommendedServiceTests\AddRecommendedAmount\AddRecommendedAmount.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddRecommendedAmount.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\RecommendedServiceTests\GetRecommendedQuantity\GetRecommendedQuantities.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GetRecommendedQuantities.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="IntegrationTests\RegisterTests\Register.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

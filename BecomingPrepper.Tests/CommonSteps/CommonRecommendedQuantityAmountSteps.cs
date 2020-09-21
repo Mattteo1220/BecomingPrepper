@@ -27,5 +27,11 @@ namespace BecomingPrepper.Tests.CommonSteps
         {
             GivenASimpleRecommendedQuantityAmountEntity();
         }
+
+        [Given(@"That recommended Quantity Amount exists in the Mongo Database")]
+        public void GivenThatRecommendedQuantityAmountExistsInTheMongoDatabase()
+        {
+            _recommendedQuantityAmountContext.RecommendedQuantityRepository.Add(_recommendedQuantityAmountContext.RecommendedQuantityAmountEntity);
+        }
     }
 }

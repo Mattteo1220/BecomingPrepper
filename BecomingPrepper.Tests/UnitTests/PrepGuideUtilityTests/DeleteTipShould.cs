@@ -27,7 +27,7 @@ namespace BecomingPrepper.Tests.UnitTests.PrepGuideUtilityTests
             _mockSecureService = new Mock<ISecureService>();
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
-            _prepGuideUtility = new PrepGuideUtility(_mockPrepGuideRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            _prepGuideUtility = new PrepGuideUtility(_mockPrepGuideRepo.Object, _mockExceptionLogger.Object);
         }
 
         [Fact]

@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\Logs\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BecomingPrepper.Logger\BecomingPrepper.Logger.csproj" />
   </ItemGroup>
 

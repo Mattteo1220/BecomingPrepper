@@ -1,9 +1,15 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using System.Runtime.Serialization;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace BecomingPrepper.Data.Entities.ProgressTracker.RecommendedQuantityEntity
 {
+    [BsonIgnoreExtraElements]
     public class ThreeMonthRecommendedAmount
     {
+        [BsonElement]
+        [DataMember]
+        public string AmountId { get; set; }
+
         [BsonElement]
         public double Grains { get; set; }
 
