@@ -38,7 +38,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         [InlineData("ieidjdls1234", null)]
         public void Throw_WhenNoEmailIsSupplied(string accountId, string email)
         {
-            Action invalidEmailTest = () => _serviceAccount.PutEmail(accountId, email);
+            Action invalidEmailTest = () => _serviceAccount.UpdateEmail(accountId, email);
             invalidEmailTest.Should().Throw<ArgumentNullException>("No Valid Email was supplied");
         }
 
@@ -47,7 +47,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>()));
 
-            _serviceAccount.PutEmail(_fixture.Create<string>(), _fixture.Create<string>());
+            _serviceAccount.UpdateEmail(_fixture.Create<string>(), _fixture.Create<string>());
             _mockUserRepo.Verify(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>()), Times.Once);
         }
 
@@ -56,7 +56,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>()));
 
-            _serviceAccount.PutEmail(_fixture.Create<string>(), _fixture.Create<string>());
+            _serviceAccount.UpdateEmail(_fixture.Create<string>(), _fixture.Create<string>());
             _mockExceptionLogger.Verify(ur => ur.LogInformation(It.IsAny<string>()), Times.Once);
         }
 
@@ -65,7 +65,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>())).Throws<Exception>();
 
-            _serviceAccount.PutEmail(_fixture.Create<string>(), _fixture.Create<string>());
+            _serviceAccount.UpdateEmail(_fixture.Create<string>(), _fixture.Create<string>());
             _mockExceptionLogger.Verify(ur => ur.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }
