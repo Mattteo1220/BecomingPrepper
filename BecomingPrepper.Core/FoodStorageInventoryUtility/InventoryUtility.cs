@@ -1,14 +1,27 @@
 ﻿using System;
 using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
+using BecomingPrepper.Data.Interfaces;
+using BecomingPrepper.Logger;
 
 namespace BecomingPrepper.Core.FoodStorageInventoryUtility
 {
-    class InventoryUtility : IInventoryUtility
+    public class InventoryUtility : IInventoryUtility
     {
+
+        private IExceptionLogger _exceptionLog;
+        private IRepository<FoodStorageInventoryEntity> _inventoryRepository;
+        public InventoryUtility(IRepository<FoodStorageInventoryEntity> inventoryRepo, IExceptionLogger exceptionLog)
+        {
+            _inventoryRepository = inventoryRepo ?? throw new ArgumentNullException(nameof(inventoryRepo));
+            _exceptionLog = exceptionLog ?? throw new ArgumentNullException(nameof(exceptionLog));
+        }
+
         public void AddInventory(FoodStorageInventoryEntity entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+
         }
 
         public void AddInventoryItem(string accountId, InventoryItemEntity entity)
