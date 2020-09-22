@@ -21,7 +21,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ServiceAccountTests.UpdateEmail
         public void WhenThatUserUpdatesTheirEmail()
         {
             _userContext.PropertyUpdate = new Fixture().Create<string>();
-            _userContext.ServiceAccount.UpdateEmail(_userContext.UserEntity.AccountId, _userContext.PropertyUpdate);
+            _userContext.ServiceAccount.PutEmail(_userContext.UserEntity.AccountId, _userContext.PropertyUpdate);
         }
 
         [Then(@"it is saved to the database")]

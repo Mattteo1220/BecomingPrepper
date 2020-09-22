@@ -36,7 +36,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         [InlineData(null)]
         public void ThrowWhenNoValidAccountIdSupplied(string accountId)
         {
-            Action invalidAccountIdTest = () => _serviceAccount.UpdateFamilySize(accountId, 1);
+            Action invalidAccountIdTest = () => _serviceAccount.PutFamilySize(accountId, 1);
             invalidAccountIdTest.Should().Throw<ArgumentNullException>("No Valid AccountId was supplied");
         }
 
@@ -45,7 +45,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         [InlineData(-1)]
         public void ThrowWhenNoValidFamilySizeSupplied(int familySize)
         {
-            Action invalidFamilySizeTest = () => _serviceAccount.UpdateFamilySize(_fixture.Create<string>(), familySize);
+            Action invalidFamilySizeTest = () => _serviceAccount.PutFamilySize(_fixture.Create<string>(), familySize);
             invalidFamilySizeTest.Should().Throw<InvalidOperationException>("familySize Size must be greater than 0");
         }
 
@@ -54,7 +54,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>()));
 
-            _serviceAccount.UpdateFamilySize(_fixture.Create<string>(), _fixture.Create<int>());
+            _serviceAccount.PutFamilySize(_fixture.Create<string>(), _fixture.Create<int>());
             _mockUserRepo.Verify(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>()), Times.Once);
         }
 
@@ -63,7 +63,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>()));
 
-            _serviceAccount.UpdateFamilySize(_fixture.Create<string>(), _fixture.Create<int>());
+            _serviceAccount.PutFamilySize(_fixture.Create<string>(), _fixture.Create<int>());
             _mockExceptionLogger.Verify(ur => ur.LogInformation(It.IsAny<string>()), Times.Once);
         }
 
@@ -72,7 +72,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>())).Throws<Exception>();
 
-            _serviceAccount.UpdateFamilySize(_fixture.Create<string>(), _fixture.Create<int>());
+            _serviceAccount.PutFamilySize(_fixture.Create<string>(), _fixture.Create<int>());
             _mockExceptionLogger.Verify(ur => ur.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }

@@ -36,7 +36,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         [InlineData(null)]
         public void ThrowWhenNoValidAccountIdSupplied(string accountId)
         {
-            Action invalidAccountIdTest = () => _serviceAccount.UpdateObjective(accountId, 1);
+            Action invalidAccountIdTest = () => _serviceAccount.PutObjective(accountId, 1);
             invalidAccountIdTest.Should().Throw<ArgumentNullException>("No Valid AccountId was supplied");
         }
 
@@ -47,7 +47,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         [InlineData(11)]
         public void ThrowWhenNoValidObjectiveSupplied(int objective)
         {
-            Action invalidObjectiveTest = () => _serviceAccount.UpdateObjective(_fixture.Create<string>(), objective);
+            Action invalidObjectiveTest = () => _serviceAccount.PutObjective(_fixture.Create<string>(), objective);
             invalidObjectiveTest.Should().Throw<InvalidOperationException>("Objective must be a supported type");
         }
 
@@ -56,7 +56,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>()));
 
-            _serviceAccount.UpdateObjective(_fixture.Create<string>(), 5);
+            _serviceAccount.PutObjective(_fixture.Create<string>(), 5);
             _mockUserRepo.Verify(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>()), Times.Once);
         }
 
@@ -65,7 +65,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>()));
 
-            _serviceAccount.UpdateObjective(_fixture.Create<string>(), 3);
+            _serviceAccount.PutObjective(_fixture.Create<string>(), 3);
             _mockExceptionLogger.Verify(ur => ur.LogInformation(It.IsAny<string>()), Times.Once);
         }
 
@@ -74,7 +74,7 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>())).Throws<Exception>();
 
-            _serviceAccount.UpdateObjective(_fixture.Create<string>(), 7);
+            _serviceAccount.PutObjective(_fixture.Create<string>(), 7);
             _mockExceptionLogger.Verify(ur => ur.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }
