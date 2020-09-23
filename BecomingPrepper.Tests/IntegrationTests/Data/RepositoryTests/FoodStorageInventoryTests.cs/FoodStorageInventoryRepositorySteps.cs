@@ -19,11 +19,6 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         }
 
         #region AddInventory
-        [Given(@"That Inventory has never been registered")]
-        public void GivenThatInventoryHasNeverBeenRegistered()
-        {
-            _context.ExecutionResult = () => _context.FoodStorageInventoryRepository.Add(_context.FoodStorageInventoryEntity);
-        }
 
         [When(@"FoodStorageInventory Add is Called")]
         public void WhenFoodStorageInventoryAddIsCalled()

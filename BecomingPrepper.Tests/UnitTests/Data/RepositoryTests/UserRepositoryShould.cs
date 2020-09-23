@@ -14,14 +14,14 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
     public class UserRepositoryShould
     {
         private Mock<IMongoCollection<UserEntity>> _mockUserRepo;
-        private Mock<IExceptionLogger> _mockLogger;
+        private Mock<ILogManager> _mockLogger;
         private Fixture _fixture;
         public UserRepositoryShould()
         {
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
             _mockUserRepo = new Mock<IMongoCollection<UserEntity>>();
-            _mockLogger = new Mock<IExceptionLogger>();
+            _mockLogger = new Mock<ILogManager>();
         }
 
         [Fact]

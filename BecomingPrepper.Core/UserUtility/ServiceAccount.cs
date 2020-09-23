@@ -12,13 +12,13 @@ namespace BecomingPrepper.Core.UserUtility
     {
         private IRepository<UserEntity> _userRepo;
         private ISecureService _secureService;
-        private IExceptionLogger _exceptionLogger;
+        private ILogManager _logManager;
         public (bool HasError, string Message) Match { get; set; }
-        public ServiceAccount(IRepository<UserEntity> userRepo, ISecureService secureService, IExceptionLogger exceptionLogger)
+        public ServiceAccount(IRepository<UserEntity> userRepo, ISecureService secureService, ILogManager logManager)
         {
             _userRepo = userRepo;
             _secureService = secureService;
-            _exceptionLogger = exceptionLogger;
+            _logManager = logManager;
         }
 
         public void UpdateEmail(string accountId, string email)
@@ -93,7 +93,7 @@ namespace BecomingPrepper.Core.UserUtility
                 return;
             }
 
-            _exceptionLogger.LogInformation(logMessage);
+            _logManager.LogInformation(logMessage);
         }
     }
 }

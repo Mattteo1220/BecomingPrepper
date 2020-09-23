@@ -19,7 +19,7 @@ namespace BecomingPrepper.Web.Models
         public IRepository<PrepGuideEntity> PrepGuides { get; set; }
         public IRepository<RecommendedQuantityAmountEntity> RecommendedQuantities { get; set; }
         public IRepository<FoodStorageInventoryEntity> FoodStorageInventory { get; set; }
-        public IExceptionLogger ExceptionLogger { get; set; }
+        public ILogManager LogManager { get; set; }
         public ISecureService SecureService { get; set; }
 
         public void Register(ref IServiceCollection services, IConfiguration configuration)
@@ -33,12 +33,12 @@ namespace BecomingPrepper.Web.Models
             var exceptionLogs = configuration.GetSection("Collections").GetSection("ExceptionLogsCollection").Value;
             var mongoDatabase = new MongoClient(connectionString).GetDatabase(database);
 
-            //ExceptionLogger
+            //LogManager
             var logger = new LoggerConfiguration()
                 .WriteTo.MongoDB(connectionString, collectionName: exceptionLogs, period: TimeSpan.Zero)
                 .MinimumLevel.Debug()
                 .CreateLogger();
-            var exceptionLogger = new ExceptionLogger(logger);
+            var exceptionLogger = new LogManager(logger);
 
             //Secure Service
             var secureService = new SecureService(new HashingOptions());
@@ -62,7 +62,7 @@ namespace BecomingPrepper.Web.Models
                 PrepGuides = prepGuidesRepository,
                 RecommendedQuantities = recommendedQuantitiesRepository,
                 FoodStorageInventory = foodStorageInventoryRepository,
-                ExceptionLogger = exceptionLogger,
+                LogManager = exceptionLogger,
                 SecureService = secureService
             }));
         }

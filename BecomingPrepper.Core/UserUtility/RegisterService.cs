@@ -10,9 +10,9 @@ namespace BecomingPrepper.Core.UserUtility
     public class RegisterService : IRegister
     {
         private ISecureService _secureService;
-        private IExceptionLogger _exceptionLog;
+        private ILogManager _exceptionLog;
         private IRepository<UserEntity> _userRepo;
-        public RegisterService(IRepository<UserEntity> userRepo, ISecureService secureService, IExceptionLogger exceptionLog)
+        public RegisterService(IRepository<UserEntity> userRepo, ISecureService secureService, ILogManager exceptionLog)
         {
             _userRepo = userRepo;
             _secureService = secureService;

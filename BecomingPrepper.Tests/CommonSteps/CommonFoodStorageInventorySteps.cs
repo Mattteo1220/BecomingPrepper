@@ -28,5 +28,11 @@ namespace BecomingPrepper.Tests.CommonSteps
         {
             GivenASimpleUserEntity();
         }
+
+        [Given(@"That Inventory has never been registered")]
+        public void GivenThatInventoryHasNeverBeenRegistered()
+        {
+            _foodStorageInventoryContext.ExecutionResult = () => _foodStorageInventoryContext.FoodStorageInventoryRepository.Add(_foodStorageInventoryContext.FoodStorageInventoryEntity);
+        }
     }
 }

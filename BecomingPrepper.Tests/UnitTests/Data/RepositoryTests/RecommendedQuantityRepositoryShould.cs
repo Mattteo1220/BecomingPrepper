@@ -14,14 +14,14 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
     public class RecommendedQuantityRepositoryShould
     {
         private Mock<IMongoCollection<RecommendedQuantityAmountEntity>> _mockFoodStorageInventoryCollection;
-        private Mock<IExceptionLogger> _mockLogger;
+        private Mock<ILogManager> _mockLogger;
         private Fixture _fixture;
         public RecommendedQuantityRepositoryShould()
         {
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
             _mockFoodStorageInventoryCollection = new Mock<IMongoCollection<RecommendedQuantityAmountEntity>>();
-            _mockLogger = new Mock<IExceptionLogger>();
+            _mockLogger = new Mock<ILogManager>();
         }
 
         [Fact]

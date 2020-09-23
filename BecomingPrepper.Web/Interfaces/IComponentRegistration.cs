@@ -14,7 +14,7 @@ namespace BecomingPrepper.Web.Models
         IRepository<PrepGuideEntity> PrepGuides { get; set; }
         IRepository<RecommendedQuantityAmountEntity> RecommendedQuantities { get; set; }
         IRepository<FoodStorageInventoryEntity> FoodStorageInventory { get; set; }
-        IExceptionLogger ExceptionLogger { get; set; }
+        ILogManager LogManager { get; set; }
         ISecureService SecureService { get; set; }
     }
 }

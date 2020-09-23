@@ -10,9 +10,9 @@ namespace BecomingPrepper.Data.Repositories
     {
         private bool _disposed = false;
         public IMongoCollection<UserEntity> Collection { get; set; }
-        private IExceptionLogger _logger;
+        private ILogManager _logger;
 
-        public UserRepository(IMongoCollection<UserEntity> collection, IExceptionLogger logger)
+        public UserRepository(IMongoCollection<UserEntity> collection, ILogManager logger)
         {
             Collection = collection ?? throw new ArgumentNullException(nameof(collection));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

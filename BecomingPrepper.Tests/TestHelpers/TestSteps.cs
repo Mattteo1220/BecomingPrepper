@@ -11,7 +11,7 @@ namespace BecomingPrepper.Tests
     public class TestSteps : Steps
     {
         public ScenarioContext ScenarioContext;
-        public Mock<IExceptionLogger> MockExceptionLogger;
+        public Mock<ILogManager> MockExceptionLogger;
         public IMongoCollection<UserEntity> Users;
         public IMongoCollection<RecommendedQuantityAmountEntity> RecommendedQuantities;
         public IMongoCollection<PrepGuideEntity> PrepGuides;
@@ -20,7 +20,7 @@ namespace BecomingPrepper.Tests
         public TestSteps(ScenarioContext scenarioContext)
         {
             this.ScenarioContext = scenarioContext ?? throw new ArgumentNullException(nameof(scenarioContext));
-            MockExceptionLogger = new Mock<IExceptionLogger>();
+            MockExceptionLogger = new Mock<ILogManager>();
             Users = TestHelper.GetDatabase().GetCollection<UserEntity>("Users");
             RecommendedQuantities = TestHelper.GetDatabase().GetCollection<RecommendedQuantityAmountEntity>("RecommendedQuantities");
             PrepGuides = TestHelper.GetDatabase().GetCollection<PrepGuideEntity>("PrepGuides");

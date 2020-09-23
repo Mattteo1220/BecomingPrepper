@@ -18,14 +18,14 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
     {
         private IServiceAccount _serviceAccount;
         private Mock<IRepository<UserEntity>> _mockUserRepo;
-        private Mock<IExceptionLogger> _mockExceptionLogger;
+        private Mock<ILogManager> _mockExceptionLogger;
         private Mock<ISecureService> _mockSecureService;
         private Fixture _fixture;
         public UpdateFamilySizeShould()
         {
             _serviceAccount = Mock.Of<IServiceAccount>();
             _mockUserRepo = new Mock<IRepository<UserEntity>>();
-            _mockExceptionLogger = new Mock<IExceptionLogger>();
+            _mockExceptionLogger = new Mock<ILogManager>();
             _mockSecureService = new Mock<ISecureService>();
             _fixture = new Fixture();
             _serviceAccount = new ServiceAccount(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);

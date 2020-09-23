@@ -2,7 +2,7 @@
 
 namespace BecomingPrepper.Logger
 {
-    public interface IExceptionLogger
+    public interface ILogManager
     {
         void LogError(Exception exception);
 

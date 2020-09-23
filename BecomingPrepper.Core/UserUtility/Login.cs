@@ -11,9 +11,9 @@ namespace BecomingPrepper.Core.UserUtility
     public class Login : ILogin
     {
         private ISecureService _secureService;
-        private IExceptionLogger _exceptionLog;
+        private ILogManager _exceptionLog;
         private IRepository<UserEntity> _userRepo;
-        public Login(IRepository<UserEntity> userRepo, ISecureService secureService, IExceptionLogger exceptionLog)
+        public Login(IRepository<UserEntity> userRepo, ISecureService secureService, ILogManager exceptionLog)
         {
             _userRepo = userRepo;
             _secureService = secureService;

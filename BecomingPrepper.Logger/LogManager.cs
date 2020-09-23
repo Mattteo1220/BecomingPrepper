@@ -3,10 +3,10 @@ using Serilog;
 
 namespace BecomingPrepper.Logger
 {
-    public class ExceptionLogger : IExceptionLogger
+    public class LogManager : ILogManager
     {
         private ILogger _logger;
-        public ExceptionLogger(ILogger logger)
+        public LogManager(ILogger logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }

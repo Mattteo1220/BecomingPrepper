@@ -9,7 +9,7 @@ namespace BecomingPrepper.Tests.UnitTests.LoggerTests
 {
     public class ExceptionLoggerShould
     {
-        private IExceptionLogger _mockExceptionLogger;
+        private ILogManager _mockLogManager;
         private ILogger _mockLogger;
         private Action _missingConstructorInjectionTest;
         private Action _missingLogErrorParameter;
@@ -17,19 +17,19 @@ namespace BecomingPrepper.Tests.UnitTests.LoggerTests
         private Action _missingLogWarningParameter;
         public ExceptionLoggerShould()
         {
-            _mockExceptionLogger = Mock.Of<IExceptionLogger>();
+            _mockLogManager = Mock.Of<ILogManager>();
             _mockLogger = Mock.Of<ILogger>();
-            _mockExceptionLogger = new ExceptionLogger(_mockLogger);
-            _missingConstructorInjectionTest = () => new ExceptionLogger(null);
-            _missingLogErrorParameter = () => _mockExceptionLogger.LogError(null);
-            _missingLogInfoParameter = () => _mockExceptionLogger.LogInformation(null);
-            _missingLogWarningParameter = () => _mockExceptionLogger.LogWarning(null);
+            _mockLogManager = new LogManager(_mockLogger);
+            _missingConstructorInjectionTest = () => new LogManager(null);
+            _missingLogErrorParameter = () => _mockLogManager.LogError(null);
+            _missingLogInfoParameter = () => _mockLogManager.LogInformation(null);
+            _missingLogWarningParameter = () => _mockLogManager.LogWarning(null);
         }
 
         [Fact]
         public void ThrowWhenNoIExceptionLoggerSupplied()
         {
-            _missingConstructorInjectionTest.Should().Throw<ArgumentNullException>("No IExceptionLogger DI was supplied");
+            _missingConstructorInjectionTest.Should().Throw<ArgumentNullException>("No ILogManager DI was supplied");
         }
 
         [Fact]

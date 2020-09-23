@@ -3,15 +3,16 @@ using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Logger;
+using MongoDB.Driver;
 
 namespace BecomingPrepper.Core.FoodStorageInventoryUtility
 {
     public class InventoryUtility : IInventoryUtility
     {
 
-        private IExceptionLogger _exceptionLog;
+        private ILogManager _exceptionLog;
         private IRepository<FoodStorageInventoryEntity> _inventoryRepository;
-        public InventoryUtility(IRepository<FoodStorageInventoryEntity> inventoryRepo, IExceptionLogger exceptionLog)
+        public InventoryUtility(IRepository<FoodStorageInventoryEntity> inventoryRepo, ILogManager exceptionLog)
         {
             _inventoryRepository = inventoryRepo ?? throw new ArgumentNullException(nameof(inventoryRepo));
             _exceptionLog = exceptionLog ?? throw new ArgumentNullException(nameof(exceptionLog));
@@ -35,7 +36,22 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
 
         public void AddInventoryItem(string accountId, InventoryItemEntity entity)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fs => fs.AccountId == accountId);
+            var updateFilter = Builders<FoodStorageInventoryEntity>.Update.Push(i => i.Inventory, entity);
+
+            try
+            {
+                _inventoryRepository.Update(filter, updateFilter);
+            }
+            catch
+            {
+                return;
+            }
+
+            _exceptionLog.LogInformation($"Successfully added Inventory Item for account: {accountId}");
         }
 
         public void DeleteInventory(FoodStorageInventoryEntity entity)

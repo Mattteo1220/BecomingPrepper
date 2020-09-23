@@ -28,7 +28,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ExceptionLoggerTests
         [When(@"LogError is called")]
         public void WhenLogErrorIsCalled()
         {
-            _context.ExceptionLogger.LogError(_context.Exception);
+            _context.LogManager.LogError(_context.Exception);
             Thread.Sleep(500);
         }
 
@@ -43,7 +43,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ExceptionLoggerTests
         [When(@"LogInformation is called")]
         public void WhenLogInformationIsCalled()
         {
-            _context.ExceptionLogger.LogInformation(_context.Exception.Message);
+            _context.LogManager.LogInformation(_context.Exception.Message);
             Thread.Sleep(500);
         }
 
@@ -59,7 +59,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ExceptionLoggerTests
         [When(@"LogWarning is called")]
         public void WhenLogWarningIsCalled()
         {
-            _context.ExceptionLogger.LogWarning(_context.Exception);
+            _context.LogManager.LogWarning(_context.Exception);
             Thread.Sleep(500);
         }
 

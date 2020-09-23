@@ -23,7 +23,7 @@ namespace BecomingPrepper.Tests.RepostioryTests.UnitTests
         private Action _deleteFilterTest;
         private Action _disposeTest;
         private Mock<IMongoCollection<UserEntity>> _mockUserCollection;
-        private Mock<IExceptionLogger> _mockLogger;
+        private Mock<ILogManager> _mockLogger;
         private Mock<IRepository<UserRepository>> _mockUserRepository;
 
         public DatabaseCollectionShould()
@@ -33,7 +33,7 @@ namespace BecomingPrepper.Tests.RepostioryTests.UnitTests
             mockDatabase.Setup(db => db.MongoDatabase.GetCollection<UserEntity>(It.IsAny<string>(), null)).Returns(mockUserEntityCollection.Object);
 
             _mockUserCollection = new Mock<IMongoCollection<UserEntity>>();
-            _mockLogger = new Mock<IExceptionLogger>();
+            _mockLogger = new Mock<ILogManager>();
             _mockUserRepository = new Mock<IRepository<UserRepository>>();
             _userRepository = new UserRepository(_mockUserCollection.Object, _mockLogger.Object);
 

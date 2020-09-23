@@ -16,14 +16,14 @@ namespace BecomingPrepper.Tests.UnitTests.RecommendServiceTests
     {
         private IRecommendService _recommendService;
         private Mock<IRepository<RecommendedQuantityAmountEntity>> _mockRecommendRepo;
-        private Mock<IExceptionLogger> _mockExceptionLogger;
+        private Mock<ILogManager> _mockExceptionLogger;
         private Fixture _fixture;
 
         public AddRecommendedAmountShould()
         {
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
-            _mockExceptionLogger = new Mock<IExceptionLogger>();
+            _mockExceptionLogger = new Mock<ILogManager>();
             _mockRecommendRepo = new Mock<IRepository<RecommendedQuantityAmountEntity>>();
             _recommendService = new RecommendService(_mockRecommendRepo.Object, _mockExceptionLogger.Object);
         }

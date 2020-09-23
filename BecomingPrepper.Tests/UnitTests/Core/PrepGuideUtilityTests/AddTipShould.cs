@@ -16,12 +16,12 @@ namespace BecomingPrepper.Tests.UnitTests.PrepGuideUtilityTests
     {
         private IPrepGuide _prepGuideUtility;
         private Mock<IRepository<PrepGuideEntity>> _mockPrepGuideRepo;
-        private Mock<IExceptionLogger> _mockExceptionLogger;
+        private Mock<ILogManager> _mockExceptionLogger;
         private Fixture _fixture;
         public AddTipShould()
         {
             _mockPrepGuideRepo = new Mock<IRepository<PrepGuideEntity>>();
-            _mockExceptionLogger = new Mock<IExceptionLogger>();
+            _mockExceptionLogger = new Mock<ILogManager>();
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
             _prepGuideUtility = new PrepGuideUtility(_mockPrepGuideRepo.Object, _mockExceptionLogger.Object);

@@ -11,12 +11,12 @@ namespace BecomingPrepper.Core.RecommenedQuantitiesUtility
     public class RecommendService : IRecommendService
     {
         private IRepository<RecommendedQuantityAmountEntity> _recommendRepo;
-        private IExceptionLogger _exceptionLogger;
+        private ILogManager _logManager;
         private const string RecommendedAmountObjectId = "5f59291f65554c3ddaa060b3";
-        public RecommendService(IRepository<RecommendedQuantityAmountEntity> recommendRepo, IExceptionLogger exceptionLogger)
+        public RecommendService(IRepository<RecommendedQuantityAmountEntity> recommendRepo, ILogManager logManager)
         {
             _recommendRepo = recommendRepo;
-            _exceptionLogger = exceptionLogger;
+            _logManager = logManager;
         }
 
         public void AddRecommendedAmount(dynamic recommendedAmount)
@@ -32,7 +32,7 @@ namespace BecomingPrepper.Core.RecommenedQuantitiesUtility
                 return;
             }
 
-            _exceptionLogger.LogInformation($"New Recommended Amount was Added");
+            _logManager.LogInformation($"New Recommended Amount was Added");
         }
 
         public RecommendedQuantityAmountEntity GetRecommendedAmounts()

@@ -6,17 +6,18 @@ using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Logger;
 using FluentAssertions;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using Moq;
 using Xunit;
 
 namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
 {
-    public class AddInventoryShould
+    public class AddInventoryItemShould
     {
         private Mock<ILogManager> _mockLogger;
         private Mock<IRepository<FoodStorageInventoryEntity>> _mockInventoryRepo;
         private Fixture _fixture;
-        public AddInventoryShould()
+        public AddInventoryItemShould()
         {
             _mockLogger = new Mock<ILogManager>();
             _mockInventoryRepo = new Mock<IRepository<FoodStorageInventoryEntity>>();
@@ -24,50 +25,46 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
             _fixture.Register(ObjectId.GenerateNewId);
         }
 
-        [Fact]
-        public void ThrowWhenIRepositorySupplied()
-        {
-            Action nullParameterTest = () => new InventoryUtility(null, _mockLogger.Object);
-            nullParameterTest.Should().Throw<ArgumentNullException>("There was No IRepository supplied");
-        }
-
-        [Fact]
-        public void ThrowWhenIExceptionLoggerSupplied()
-        {
-            Action nullParameterTest = () => new InventoryUtility(_mockInventoryRepo.Object, null);
-            nullParameterTest.Should().Throw<ArgumentNullException>("There was No ILogManager supplied");
-        }
-
-        [Fact]
-        public void ThrowWhenNoArgumentSupplied()
+        [Theory]
+        [InlineData(null)]
+        [InlineData(" ")]
+        public void ThrowArgumentNullExceptionWhenNoAccountIdSupplied(string accountId)
         {
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
-            Action nullParameterTest = () => inventoryUtility.AddInventory(null);
-            nullParameterTest.Should().Throw<ArgumentNullException>("There was No Entity supplied");
+            Action nullAccountIdTest = () => inventoryUtility.AddInventoryItem(accountId, new InventoryItemEntity());
+            nullAccountIdTest.Should().Throw<ArgumentNullException>("No AccountId was supplied");
         }
 
         [Fact]
-        public void CallAddToCreateAnInventory()
+        public void ThrowArgumentNullExceptionWhenNoEntitySupplied()
         {
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
-            inventoryUtility.AddInventory(_fixture.Create<FoodStorageInventoryEntity>());
-            _mockInventoryRepo.Verify(ir => ir.Add(It.IsAny<FoodStorageInventoryEntity>()), Times.Once);
+            Action nullAccountIdTest = () => inventoryUtility.AddInventoryItem(_fixture.Create<string>(), null);
+            nullAccountIdTest.Should().Throw<ArgumentNullException>("No InventoryItem Entity was supplied");
+        }
+
+        [Fact]
+        public void CallAddInventoryItem()
+        {
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
+            inventoryUtility.AddInventoryItem(_fixture.Create<string>(), _fixture.Create<InventoryItemEntity>());
+            _mockInventoryRepo.Verify(ir => ir.Update(It.IsAny<FilterDefinition<FoodStorageInventoryEntity>>(), It.IsAny<UpdateDefinition<FoodStorageInventoryEntity>>()), Times.Once);
         }
 
         [Fact]
         public void CallLogInformation()
         {
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
-            inventoryUtility.AddInventory(_fixture.Create<FoodStorageInventoryEntity>());
+            inventoryUtility.AddInventoryItem(_fixture.Create<string>(), _fixture.Create<InventoryItemEntity>());
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Once);
         }
 
         [Fact]
         public void NotCallLogInformationWhenAddThrowsAnException()
         {
-            _mockInventoryRepo.Setup(ir => ir.Add(It.IsAny<FoodStorageInventoryEntity>())).Throws<Exception>();
+            _mockInventoryRepo.Setup(ir => ir.Update(It.IsAny<FilterDefinition<FoodStorageInventoryEntity>>(), It.IsAny<UpdateDefinition<FoodStorageInventoryEntity>>())).Throws<Exception>();
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
-            inventoryUtility.AddInventory(_fixture.Create<FoodStorageInventoryEntity>());
+            inventoryUtility.AddInventoryItem(_fixture.Create<string>(), _fixture.Create<InventoryItemEntity>());
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }

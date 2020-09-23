@@ -36,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="IntegrationTests\Core\FoodStorageInventoryTests\AddInventoryItem\AddInventoryItem.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Update="IntegrationTests\Core\FoodStorageInventoryTests\AddInventory\CreateInventory.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
@@ -90,6 +93,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\FoodStorageInventoryTests\AddInventoryItem\AddInventoryItem.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddInventoryItem.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="IntegrationTests\Core\FoodStorageInventoryTests\AddInventory\CreateInventory.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CreateInventory.feature.cs</LastGenOutput>

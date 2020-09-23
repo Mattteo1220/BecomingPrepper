@@ -15,7 +15,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
     public class FoodStorageInventoryRepositoryShould
     {
         private Mock<IMongoCollection<FoodStorageInventoryEntity>> _mockFoodStorageInventoryCollection;
-        private Mock<IExceptionLogger> _mockLogger;
+        private Mock<ILogManager> _mockLogger;
         private Mock<IRepository<FoodStorageInventoryEntity>> _mockInventoryRepository;
         private Fixture _fixture;
         public FoodStorageInventoryRepositoryShould()
@@ -23,7 +23,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
             _mockFoodStorageInventoryCollection = new Mock<IMongoCollection<FoodStorageInventoryEntity>>();
-            _mockLogger = new Mock<IExceptionLogger>();
+            _mockLogger = new Mock<ILogManager>();
             _mockInventoryRepository = new Mock<IRepository<FoodStorageInventoryEntity>>();
         }
 
@@ -50,7 +50,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             foodStorageInventoryRepository = () => new FoodStorageInventoryRepository(_mockFoodStorageInventoryCollection.Object, null);
 
             //Assert
-            foodStorageInventoryRepository.Should().Throw<ArgumentNullException>(because: "No ExceptionLogger was supplied");
+            foodStorageInventoryRepository.Should().Throw<ArgumentNullException>(because: "No LogManager was supplied");
         }
 
         [Fact]

@@ -9,10 +9,10 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
 {
     public class PrepGuideUtility : IPrepGuide
     {
-        private IExceptionLogger _exceptionLog;
+        private ILogManager _exceptionLog;
         private IRepository<PrepGuideEntity> _prepGuideRepo;
         private const string PrepGuideObjectId = "5f6795ec3266a7ff3e2aa32e";
-        public PrepGuideUtility(IRepository<PrepGuideEntity> prepGuideRepo, IExceptionLogger exceptionLog)
+        public PrepGuideUtility(IRepository<PrepGuideEntity> prepGuideRepo, ILogManager exceptionLog)
         {
             _prepGuideRepo = prepGuideRepo;
             _exceptionLog = exceptionLog;

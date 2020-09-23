@@ -13,11 +13,11 @@ namespace BecomingPrepper.Tests.Hooks
             _context = context;
         }
 
-        [BeforeScenario("ExceptionLogger")]
+        [BeforeScenario("LogManager")]
         public void BeforeScenario()
         {
             _context.Logger = TestHelper.GetLogger();
-            _context.ExceptionLogger = new ExceptionLogger(_context.Logger);
+            _context.LogManager = new LogManager(_context.Logger);
         }
     }
 }

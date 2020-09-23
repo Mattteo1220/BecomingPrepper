@@ -10,12 +10,12 @@ namespace BecomingPrepper.Data.Repositories
     {
         private bool _disposed = false;
         public IMongoCollection<RecommendedQuantityAmountEntity> Collection { get; set; }
-        private IExceptionLogger _logger;
+        private ILogManager _logger;
 
-        public RecommendedQuantityRepository(IMongoCollection<RecommendedQuantityAmountEntity> collection, IExceptionLogger exceptionLogger)
+        public RecommendedQuantityRepository(IMongoCollection<RecommendedQuantityAmountEntity> collection, ILogManager logManager)
         {
             Collection = collection ?? throw new ArgumentNullException(nameof(collection));
-            _logger = exceptionLogger ?? throw new ArgumentNullException(nameof(exceptionLogger));
+            _logger = logManager ?? throw new ArgumentNullException(nameof(logManager));
         }
 
         public void Add(RecommendedQuantityAmountEntity recommendedQuantityAmountEntity)
