@@ -10,12 +10,12 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
     public class InventoryUtility : IInventoryUtility
     {
 
-        private ILogManager _exceptionLog;
+        private ILogManager _logManager;
         private IRepository<FoodStorageInventoryEntity> _inventoryRepository;
         public InventoryUtility(IRepository<FoodStorageInventoryEntity> inventoryRepo, ILogManager exceptionLog)
         {
             _inventoryRepository = inventoryRepo ?? throw new ArgumentNullException(nameof(inventoryRepo));
-            _exceptionLog = exceptionLog ?? throw new ArgumentNullException(nameof(exceptionLog));
+            _logManager = exceptionLog ?? throw new ArgumentNullException(nameof(exceptionLog));
         }
 
         public void AddInventory(FoodStorageInventoryEntity entity)
@@ -31,7 +31,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                 return;
             }
 
-            _exceptionLog.LogInformation($"Inventory created for account {entity.AccountId}");
+            _logManager.LogInformation($"Inventory created for account {entity.AccountId}");
         }
 
         public void AddInventoryItem(string accountId, InventoryItemEntity entity)
@@ -51,12 +51,24 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                 return;
             }
 
-            _exceptionLog.LogInformation($"Successfully added Inventory Item for account: {accountId}");
+            _logManager.LogInformation($"Successfully added Inventory Item for account: {accountId}");
         }
 
         public void DeleteInventory(FoodStorageInventoryEntity entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fs => fs.AccountId == entity.AccountId);
+            try
+            {
+                _inventoryRepository.Delete(filter);
+            }
+            catch
+            {
+                return;
+            }
+
+            _logManager.LogInformation($"Account {entity.AccountId} had their inventory deleted");
         }
 
         public FoodStorageInventoryEntity GetInventory(string accountId)
