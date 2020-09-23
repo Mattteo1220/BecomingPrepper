@@ -14,8 +14,8 @@ namespace BecomingPrepper.Data.Repositories
 
         public UserRepository(IMongoCollection<UserEntity> collection, IExceptionLogger logger)
         {
-            Collection = collection ?? throw new ArgumentNullException("No Collection was provided");
-            _logger = logger ?? throw new ArgumentNullException("No IExceptionLogger was provided");
+            Collection = collection ?? throw new ArgumentNullException(nameof(collection));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public void Add(UserEntity userEntity)

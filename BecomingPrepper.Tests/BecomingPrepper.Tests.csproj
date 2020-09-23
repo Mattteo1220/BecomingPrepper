@@ -36,118 +36,125 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="IntegrationTests\ExceptionLoggerTests\ExceptionLogger.feature.cs">
+    <Compile Update="IntegrationTests\Core\FoodStorageInventoryTests\AddInventory\CreateInventory.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\LoginTests\Login.feature.cs">
+    <Compile Update="IntegrationTests\Logger\ExceptionLoggerTests\ExceptionLogger.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\PrepGuideUtilityTests\AddTip\AddTip.feature.cs">
+    <Compile Update="IntegrationTests\Core\LoginTests\Login.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\PrepGuideUtilityTests\DeleteTip\DeleteTip.feature.cs">
+    <Compile Update="IntegrationTests\Core\PrepGuideUtilityTests\AddTip\AddTip.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\PrepGuideUtilityTests\GetPrepGuide\GetPrepGuide.feature.cs">
+    <Compile Update="IntegrationTests\Core\PrepGuideUtilityTests\DeleteTip\DeleteTip.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\RecommendedServiceTests\AddRecommendedAmount\AddRecommendedAmount.feature.cs">
+    <Compile Update="IntegrationTests\Core\PrepGuideUtilityTests\GetPrepGuide\GetPrepGuide.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\RecommendedServiceTests\GetRecommendedQuantity\GetRecommendedQuantities.feature.cs">
+    <Compile Update="IntegrationTests\Core\RecommendedServiceTests\AddRecommendedAmount\AddRecommendedAmount.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\RegisterTests\Register.feature.cs">
+    <Compile Update="IntegrationTests\Core\RecommendedServiceTests\GetRecommendedQuantity\GetRecommendedQuantities.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\RepositoryTests\FoodStorageInventoryTests.cs\FoodStorageInventoryRepository.feature.cs">
+    <Compile Update="IntegrationTests\Core\RegisterTests\Register.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\RepositoryTests\PrepGuideRepositoryTests.cs\PrepGuideRepository.feature.cs">
+    <Compile Update="IntegrationTests\Data\RepositoryTests\FoodStorageInventoryTests.cs\FoodStorageInventoryRepository.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\RepositoryTests\RecommendedQuantityRepositoryTests\RecommendedQuantityRepository.feature.cs">
+    <Compile Update="IntegrationTests\Data\RepositoryTests\PrepGuideRepositoryTests.cs\PrepGuideRepository.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\RepositoryTests\UserRepositoryTests\UserRepository.feature.cs">
+    <Compile Update="IntegrationTests\Data\RepositoryTests\RecommendedQuantityRepositoryTests\RecommendedQuantityRepository.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\ServiceAccountTests\UpdateEmail\UpdateEmail.feature.cs">
+    <Compile Update="IntegrationTests\Data\RepositoryTests\UserRepositoryTests\UserRepository.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\ServiceAccountTests\UpdateFamilySize\UpdateFamilySize.feature.cs">
+    <Compile Update="IntegrationTests\Core\ServiceAccountTests\UpdateEmail\UpdateEmail.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\ServiceAccountTests\UpdateObjective\UpdateObjective.feature.cs">
+    <Compile Update="IntegrationTests\Core\ServiceAccountTests\UpdateFamilySize\UpdateFamilySize.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\ServiceAccountTests\UpdatePassword\UpdatePassword.feature.cs">
+    <Compile Update="IntegrationTests\Core\ServiceAccountTests\UpdateObjective\UpdateObjective.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Update="IntegrationTests\Core\ServiceAccountTests\UpdatePassword\UpdatePassword.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowFeatureFiles Update="IntegrationTests\ExceptionLoggerTests\ExceptionLogger.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\FoodStorageInventoryTests\AddInventory\CreateInventory.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CreateInventory.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\Logger\ExceptionLoggerTests\ExceptionLogger.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ExceptionLogger.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\LoginTests\Login.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\LoginTests\Login.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Login.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\PrepGuideUtilityTests\AddTip\AddTip.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\PrepGuideUtilityTests\AddTip\AddTip.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AddTip.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\PrepGuideUtilityTests\DeleteTip\DeleteTip.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\PrepGuideUtilityTests\DeleteTip\DeleteTip.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>DeleteTip.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\PrepGuideUtilityTests\GetPrepGuide\GetPrepGuide.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\PrepGuideUtilityTests\GetPrepGuide\GetPrepGuide.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GetPrepGuide.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\RecommendedServiceTests\AddRecommendedAmount\AddRecommendedAmount.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\RecommendedServiceTests\AddRecommendedAmount\AddRecommendedAmount.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AddRecommendedAmount.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\RecommendedServiceTests\GetRecommendedQuantity\GetRecommendedQuantities.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\RecommendedServiceTests\GetRecommendedQuantity\GetRecommendedQuantities.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GetRecommendedQuantities.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\RegisterTests\Register.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\RegisterTests\Register.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Register.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\FoodStorageInventoryTests.cs\FoodStorageInventoryRepository.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Data\RepositoryTests\FoodStorageInventoryTests.cs\FoodStorageInventoryRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>FoodStorageInventoryRepository.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\PrepGuideRepositoryTests.cs\PrepGuideRepository.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Data\RepositoryTests\PrepGuideRepositoryTests.cs\PrepGuideRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PrepGuideRepository.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\RecommendedQuantityRepositoryTests\RecommendedQuantityRepository.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Data\RepositoryTests\RecommendedQuantityRepositoryTests\RecommendedQuantityRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>RecommendedQuantityRepository.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\RepositoryTests\UserRepositoryTests\UserRepository.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Data\RepositoryTests\UserRepositoryTests\UserRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UserRepository.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdateEmail\UpdateEmail.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\ServiceAccountTests\UpdateEmail\UpdateEmail.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UpdateEmail.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdateFamilySize\UpdateFamilySize.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\ServiceAccountTests\UpdateFamilySize\UpdateFamilySize.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UpdateFamilySize.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdateObjective\UpdateObjective.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\ServiceAccountTests\UpdateObjective\UpdateObjective.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UpdateObjective.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\ServiceAccountTests\UpdatePassword\UpdatePassword.feature">
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\ServiceAccountTests\UpdatePassword\UpdatePassword.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UpdatePassword.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>

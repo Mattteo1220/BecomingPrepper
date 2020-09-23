@@ -1,4 +1,5 @@
-﻿using BecomingPrepper.Data.Entities;
+﻿using BecomingPrepper.Core.FoodStorageInventoryUtility;
+using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Repositories;
 using BecomingPrepper.Tests.Contexts;
 using MongoDB.Driver;
@@ -20,6 +21,7 @@ namespace BecomingPrepper.Tests.Hooks
         public void BeforeScenario()
         {
             _context.FoodStorageInventoryRepository = new FoodStorageInventoryRepository(Inventory, MockExceptionLogger.Object);
+            _context.InventoryUtility = new InventoryUtility(_context.FoodStorageInventoryRepository, MockExceptionLogger.Object);
         }
 
         [AfterScenario("FoodStorageInventoryRepository", Order = 100)]

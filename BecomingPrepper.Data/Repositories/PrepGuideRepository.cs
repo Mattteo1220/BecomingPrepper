@@ -14,8 +14,8 @@ namespace BecomingPrepper.Data.Repositories
 
         public PrepGuideRepository(IMongoCollection<PrepGuideEntity> collection, IExceptionLogger exceptionLogger)
         {
-            Collection = collection ?? throw new ArgumentNullException("No Collection was provided");
-            _logger = exceptionLogger ?? throw new ArgumentNullException("No IExceptionLogger was provided");
+            Collection = collection ?? throw new ArgumentNullException(nameof(collection));
+            _logger = exceptionLogger ?? throw new ArgumentNullException(nameof(exceptionLogger));
         }
 
         public void Add(PrepGuideEntity entity)

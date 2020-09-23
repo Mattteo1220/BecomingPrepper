@@ -1,4 +1,5 @@
 ﻿using System;
+using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
 
@@ -13,5 +14,6 @@ namespace BecomingPrepper.Tests.Contexts
 
         public Action ExecutionResult { get; set; }
         public string PropertyUpdate { get; set; }
+        public IInventoryUtility InventoryUtility { get; set; }
     }
 }

@@ -21,7 +21,16 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
+            try
+            {
+                _inventoryRepository.Add(entity);
+            }
+            catch
+            {
+                return;
+            }
 
+            _exceptionLog.LogInformation($"Inventory created for account {entity.AccountId}");
         }
 
         public void AddInventoryItem(string accountId, InventoryItemEntity entity)
