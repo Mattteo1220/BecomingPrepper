@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
@@ -9,7 +10,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
 {
     public class InventoryUtility : IInventoryUtility
     {
-
+        public InventoryItemEntity ItemEntity;
         private ILogManager _logManager;
         private IRepository<FoodStorageInventoryEntity> _inventoryRepository;
         public InventoryUtility(IRepository<FoodStorageInventoryEntity> inventoryRepo, ILogManager exceptionLog)
@@ -90,9 +91,25 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             return entity;
         }
 
-        public InventoryItemEntity GetInventoryItem(string itemId)
+        public InventoryItemEntity GetInventoryItem(string accountId, string itemId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
+            if (string.IsNullOrWhiteSpace(itemId)) throw new ArgumentNullException(nameof(itemId));
+            FoodStorageInventoryEntity entity = null;
+
+            try
+            {
+                entity = GetInventory(accountId);
+            }
+            catch
+            {
+                return null;
+            }
+
+            _logManager.LogInformation($"Item {itemId} for account {accountId} was retrieved");
+
+            return ItemEntity ?? entity.Inventory.FirstOrDefault(i => i.ItemId == itemId);
+
         }
 
         public void DeleteInventoryItem(string itemId) //Update Method to remove item within inventory

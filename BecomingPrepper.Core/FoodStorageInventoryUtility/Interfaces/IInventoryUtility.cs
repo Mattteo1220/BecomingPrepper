@@ -10,6 +10,6 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces
         void UpdateInventoryItem(string accountId, InventoryItemEntity entity);
         void DeleteInventory(FoodStorageInventoryEntity entity);
         FoodStorageInventoryEntity GetInventory(string accountId);
-        InventoryItemEntity GetInventoryItem(string itemId);
+        InventoryItemEntity GetInventoryItem(string accountId, string itemId);
     }
 }
