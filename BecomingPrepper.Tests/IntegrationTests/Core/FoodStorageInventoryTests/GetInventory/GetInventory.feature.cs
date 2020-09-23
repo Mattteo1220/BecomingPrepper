@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.DeleteInventory
+namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.GetInventory
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,7 +19,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class DeleteInventoryFeature : object, Xunit.IClassFixture<DeleteInventoryFeature.FixtureData>, System.IDisposable
+    public partial class GetInventoryFeature : object, Xunit.IClassFixture<GetInventoryFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "DeleteInventory.feature"
+#line 1 "GetInventory.feature"
 #line hidden
         
-        public DeleteInventoryFeature(DeleteInventoryFeature.FixtureData fixtureData, BecomingPrepper_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public GetInventoryFeature(GetInventoryFeature.FixtureData fixtureData, BecomingPrepper_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,8 +40,8 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "IntegrationTests/Core/FoodStorageInventoryTests/DeleteInventory", "DeleteInventory", "\tIn order for some accounts to be removed\r\n\tThe Prepper of the inventory to manag" +
-                    "e their inventory\r\n\tSo that entire inventory can be redone", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "IntegrationTests/Core/FoodStorageInventoryTests/GetInventory", "GetInventory", "\tIn order for preppers to see what they have in their inventory\r\n\tThe system will" +
+                    " need to fetch it for them\r\n\tSo that they can better manage it", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -78,12 +78,12 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         
         public virtual void FeatureBackground()
         {
-#line 5
-#line hidden
 #line 6
- testRunner.Given("An Inventory", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
+ testRunner.Given("An Inventory", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 8
  testRunner.And("That Inventory has been registered", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
@@ -93,17 +93,17 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Delete Inventory")]
-        [Xunit.TraitAttribute("FeatureTitle", "DeleteInventory")]
-        [Xunit.TraitAttribute("Description", "Delete Inventory")]
+        [Xunit.SkippableFactAttribute(DisplayName="Get Inventory")]
+        [Xunit.TraitAttribute("FeatureTitle", "GetInventory")]
+        [Xunit.TraitAttribute("Description", "Get Inventory")]
         [Xunit.TraitAttribute("Category", "FoodStorageInventoryRepository")]
-        public virtual void DeleteInventory()
+        public virtual void GetInventory()
         {
             string[] tagsOfScenario = new string[] {
                     "FoodStorageInventoryRepository"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Inventory", null, tagsOfScenario, argumentsOfScenario);
-#line 10
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Inventory", null, tagsOfScenario, argumentsOfScenario);
+#line 11
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -123,14 +123,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 5
+#line 6
 this.FeatureBackground();
 #line hidden
-#line 11
- testRunner.When("The prepper decides to start over on their inventory", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
 #line 12
- testRunner.Then("the entire Inventory is deleted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("The prepper Requests to view their inventory", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 13
+ testRunner.Then("it is fetched from the database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -143,12 +143,12 @@ this.FeatureBackground();
             
             public FixtureData()
             {
-                DeleteInventoryFeature.FeatureSetup();
+                GetInventoryFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                DeleteInventoryFeature.FeatureTearDown();
+                GetInventoryFeature.FeatureTearDown();
             }
         }
     }

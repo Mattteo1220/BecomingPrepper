@@ -73,7 +73,21 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
 
         public FoodStorageInventoryEntity GetInventory(string accountId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
+            FoodStorageInventoryEntity entity = null;
+            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fs => fs.AccountId == accountId);
+
+            try
+            {
+                entity = _inventoryRepository.Get(filter);
+            }
+            catch
+            {
+                return null;
+            }
+
+            _logManager.LogInformation($"Inventory {accountId} retrieved");
+            return entity;
         }
 
         public InventoryItemEntity GetInventoryItem(string itemId)

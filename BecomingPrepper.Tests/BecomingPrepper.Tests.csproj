@@ -45,6 +45,9 @@
     <Compile Update="IntegrationTests\Core\FoodStorageInventoryTests\DeleteInventory\DeleteInventory.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="IntegrationTests\Core\FoodStorageInventoryTests\GetInventory\GetInventory.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Update="IntegrationTests\Logger\ExceptionLoggerTests\ExceptionLogger.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
@@ -107,6 +110,10 @@
     <SpecFlowFeatureFiles Update="IntegrationTests\Core\FoodStorageInventoryTests\DeleteInventory\DeleteInventory.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>DeleteInventory.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\FoodStorageInventoryTests\GetInventory\GetInventory.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GetInventory.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="IntegrationTests\Logger\ExceptionLoggerTests\ExceptionLogger.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

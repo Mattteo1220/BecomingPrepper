@@ -12,6 +12,7 @@ using Xunit;
 
 namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
 {
+    [Trait("Unit", "AddInventoryItem")]
     public class AddInventoryItemShould
     {
         private Mock<ILogManager> _mockLogger;

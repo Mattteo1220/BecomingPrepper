@@ -12,9 +12,9 @@ using Xunit;
 
 namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
 {
+    [Trait("Unit", "DeleteInventory")]
     public class DeleteInventoryShould
     {
-
         private Mock<ILogManager> _mockLogger;
         private Mock<IRepository<FoodStorageInventoryEntity>> _mockInventoryRepo;
         private Fixture _fixture;
@@ -51,7 +51,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         }
 
         [Fact]
-        public void NotCallLogInformationWhenAddThrowsAnException()
+        public void NotCallLogInformationWhenDeleteThrowsAnException()
         {
             _mockInventoryRepo.Setup(ir => ir.Delete(It.IsAny<FilterDefinition<FoodStorageInventoryEntity>>())).Throws<Exception>();
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
