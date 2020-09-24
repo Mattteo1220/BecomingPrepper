@@ -109,12 +109,25 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             _logManager.LogInformation($"Item {itemId} for account {accountId} was retrieved");
 
             return ItemEntity ?? entity.Inventory.FirstOrDefault(i => i.ItemId == itemId);
-
         }
 
-        public void DeleteInventoryItem(string itemId) //Update Method to remove item within inventory
+        public void DeleteInventoryItem(string accountId, string itemId) //Update Method to remove item within inventory
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
+            if (string.IsNullOrWhiteSpace(itemId)) throw new ArgumentNullException(nameof(itemId));
+
+            var arrayFilter = Builders<FoodStorageInventoryEntity>.Filter.Where(x => x.AccountId == accountId);
+            var update = Builders<FoodStorageInventoryEntity>.Update.PullFilter(x => x.Inventory, i => i.ItemId == itemId);
+            try
+            {
+                _inventoryRepository.Update(arrayFilter, update);
+            }
+            catch
+            {
+                return;
+            }
+
+            _logManager.LogInformation($"Account {accountId} had their inventory item {itemId} deleted");
         }
 
         public void UpdateInventoryItem(string accountId, InventoryItemEntity entity) //Update Entire item

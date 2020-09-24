@@ -12,6 +12,7 @@ using Xunit;
 
 namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
 {
+    [Trait("Unit", "GetInventoryItem")]
     public class GetInventoryItemShould
     {
         private Mock<ILogManager> _mockLogger;
@@ -38,7 +39,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         {
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
             Action noItemIdTest = () => inventoryUtility.GetInventoryItem(" ", _fixture.Create<string>());
-            noItemIdTest.Should().Throw<ArgumentNullException>("No ItemId was supplied");
+            noItemIdTest.Should().Throw<ArgumentNullException>("No accountId was supplied");
         }
 
         [Fact]
