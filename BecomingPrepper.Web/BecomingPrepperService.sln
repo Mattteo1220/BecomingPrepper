@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.Data", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.Tests", "..\BecomingPrepper.Tests\BecomingPrepper.Tests.csproj", "{7BDD40C6-4EC2-4481-A09C-AF8841468164}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.API", "BecomingPrepper.API.csproj", "{A153BAAE-AD49-4E1C-8C20-7298CF6E030A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.Web", "BecomingPrepper.Web.csproj", "{A153BAAE-AD49-4E1C-8C20-7298CF6E030A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.Logger", "..\BecomingPrepper.Logger\BecomingPrepper.Logger.csproj", "{EADCB563-1EC0-4E7F-9A65-235FCF7331BA}"
 EndProject

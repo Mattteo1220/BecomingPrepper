@@ -96,11 +96,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.Logger.ExceptionLoggerTests
         [Xunit.TraitAttribute("Description", "Log Error")]
         [Xunit.TraitAttribute("Category", "ExceptionLogger")]
         [Xunit.TraitAttribute("Category", "Manual")]
+        [Xunit.TraitAttribute("Category", "Ignore")]
         public virtual void LogError()
         {
             string[] tagsOfScenario = new string[] {
                     "ExceptionLogger",
-                    "Manual"};
+                    "Manual",
+                    "Ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Log Error", null, tagsOfScenario, argumentsOfScenario);
 #line 10
@@ -141,11 +143,13 @@ this.FeatureBackground();
         [Xunit.TraitAttribute("Description", "Log Information")]
         [Xunit.TraitAttribute("Category", "ExceptionLogger")]
         [Xunit.TraitAttribute("Category", "Manual")]
+        [Xunit.TraitAttribute("Category", "Ignore")]
         public virtual void LogInformation()
         {
             string[] tagsOfScenario = new string[] {
                     "ExceptionLogger",
-                    "Manual"};
+                    "Manual",
+                    "Ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Log Information", null, tagsOfScenario, argumentsOfScenario);
 #line 15
@@ -186,11 +190,13 @@ this.FeatureBackground();
         [Xunit.TraitAttribute("Description", "Log Warning")]
         [Xunit.TraitAttribute("Category", "ExceptionLogger")]
         [Xunit.TraitAttribute("Category", "Manual")]
+        [Xunit.TraitAttribute("Category", "Ignore")]
         public virtual void LogWarning()
         {
             string[] tagsOfScenario = new string[] {
                     "ExceptionLogger",
-                    "Manual"};
+                    "Manual",
+                    "Ignore"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Log Warning", null, tagsOfScenario, argumentsOfScenario);
 #line 20

@@ -14,6 +14,7 @@ namespace BecomingPrepper.Tests.Hooks
         public RecommendedQuantityAmountHook(ScenarioContext scenarioContext, RecommendedQuantityAmountContext userContext) : base(scenarioContext)
         {
             _recommendedQuantityAmountContext = userContext;
+            _recommendedQuantityAmountContext.RecommendedQuantityRepository = new RecommendedQuantityRepository(RecommendedQuantities, MockExceptionLogger.Object);
             _recommendedQuantityAmountContext.RecommendService = new RecommendService(_recommendedQuantityAmountContext.RecommendedQuantityRepository, MockExceptionLogger.Object);
 
         }

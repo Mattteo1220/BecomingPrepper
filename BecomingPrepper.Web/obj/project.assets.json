@@ -8352,9 +8352,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Web\\BecomingPrepper.API.csproj",
-      "projectName": "BecomingPrepper.API",
-      "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Web\\BecomingPrepper.API.csproj",
+      "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Web\\BecomingPrepper.Web.csproj",
+      "projectName": "BecomingPrepper.Web",
+      "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Web\\BecomingPrepper.Web.csproj",
       "packagesPath": "C:\\Users\\mmcentire\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Web\\obj\\",
       "projectStyle": "PackageReference",
