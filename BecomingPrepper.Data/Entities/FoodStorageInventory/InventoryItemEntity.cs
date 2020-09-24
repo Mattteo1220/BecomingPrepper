@@ -40,5 +40,6 @@ namespace BecomingPrepper.Data.Entities
         public DateTime ModifiedDate { get; set; }
         [BsonElement]
         public string ModifiedBy { get; set; }
+
     }
 }

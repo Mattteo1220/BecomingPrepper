@@ -132,7 +132,23 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
 
         public void UpdateInventoryItem(string accountId, InventoryItemEntity entity) //Update Entire item
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+            var arrayFilter = Builders<FoodStorageInventoryEntity>.Filter.And(
+                Builders<FoodStorageInventoryEntity>.Filter.Where(x => x.AccountId == accountId),
+                Builders<FoodStorageInventoryEntity>.Filter.ElemMatch(x => x.Inventory, i => i.ItemId == entity.ItemId));
+            var arrayUpdate = Builders<FoodStorageInventoryEntity>.Update.Combine(Builders<FoodStorageInventoryEntity>.Update.Set(i => i.Inventory[-1], entity));
+            try
+            {
+                _inventoryRepository.Update(arrayFilter, arrayUpdate);
+            }
+            catch
+            {
+                return;
+            }
+
+            _logManager.LogInformation($"Account {accountId} had their inventory item {entity.ItemId} updated");
         }
     }
 }
