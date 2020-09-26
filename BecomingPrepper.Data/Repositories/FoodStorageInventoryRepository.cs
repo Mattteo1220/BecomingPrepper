@@ -6,19 +6,19 @@ using MongoDB.Driver;
 
 namespace BecomingPrepper.Data.Repositories
 {
-    public class FoodStorageInventoryRepository : IRepository<FoodStorageInventoryEntity>
+    public class FoodStorageInventoryRepository : IRepository<FoodStorageEntity>
     {
         private bool _disposed = false;
-        public IMongoCollection<FoodStorageInventoryEntity> Collection { get; set; }
+        public IMongoCollection<FoodStorageEntity> Collection { get; set; }
         private ILogManager _logger;
 
-        public FoodStorageInventoryRepository(IMongoCollection<FoodStorageInventoryEntity> collection, ILogManager logger)
+        public FoodStorageInventoryRepository(IMongoCollection<FoodStorageEntity> collection, ILogManager logger)
         {
             Collection = collection ?? throw new ArgumentNullException(nameof(collection));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public void Add(FoodStorageInventoryEntity entity)
+        public void Add(FoodStorageEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
@@ -33,7 +33,7 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public void Delete(FilterDefinition<FoodStorageInventoryEntity> deleteFilter)
+        public void Delete(FilterDefinition<FoodStorageEntity> deleteFilter)
         {
             if (deleteFilter == null) throw new ArgumentNullException(nameof(deleteFilter));
 
@@ -48,11 +48,11 @@ namespace BecomingPrepper.Data.Repositories
             }
         }
 
-        public FoodStorageInventoryEntity Get(FilterDefinition<FoodStorageInventoryEntity> queryFilter)
+        public FoodStorageEntity Get(FilterDefinition<FoodStorageEntity> queryFilter)
         {
             if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
 
-            FoodStorageInventoryEntity entity = null;
+            FoodStorageEntity entity = null;
             try
             {
                 entity = Collection.Find(queryFilter).Limit(1).FirstOrDefault();
@@ -66,7 +66,7 @@ namespace BecomingPrepper.Data.Repositories
             return entity;
         }
 
-        public void Update(FilterDefinition<FoodStorageInventoryEntity> queryFilter, UpdateDefinition<FoodStorageInventoryEntity> updateFilter)
+        public void Update(FilterDefinition<FoodStorageEntity> queryFilter, UpdateDefinition<FoodStorageEntity> updateFilter)
         {
             if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
             if (updateFilter == null) throw new ArgumentNullException(nameof(updateFilter));

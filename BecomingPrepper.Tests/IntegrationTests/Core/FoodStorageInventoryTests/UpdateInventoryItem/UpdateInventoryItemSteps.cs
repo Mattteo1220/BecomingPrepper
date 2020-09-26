@@ -30,7 +30,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         [Then(@"that field is updated in the database")]
         public void ThenThatFieldIsUpdatedInTheDatabase()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
+            var filter = Builders<FoodStorageEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
             var result = _context.FoodStorageInventoryRepository.Get(filter);
             result.Inventory.First().Category.Should().BeLessOrEqualTo(3, "It was updated to 3");
         }

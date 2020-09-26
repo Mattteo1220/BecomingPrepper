@@ -12,7 +12,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
     public class AddInventoryItemSteps
     {
         private Fixture _fixture;
-        private InventoryItemEntity _item;
+        private InventoryEntity _item;
         private FoodStorageInventoryContext _context;
         public AddInventoryItemSteps(FoodStorageInventoryContext context)
         {
@@ -23,7 +23,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         [Given(@"The prepper has a new item to add")]
         public void GivenThePrepperHasANewItemToAdd()
         {
-            _item = _fixture.Create<InventoryItemEntity>();
+            _item = _fixture.Create<InventoryEntity>();
         }
 
         [When(@"The Prepper adds the new item to their inventory")]
@@ -35,7 +35,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         [Then(@"it is saved in the database")]
         public void ThenItIsSavedInTheDatabase()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
+            var filter = Builders<FoodStorageEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
             var result = _context.FoodStorageInventoryRepository.Get(filter);
             result.Inventory.Count.Should().Be(4, "An item was added");
             result.Inventory.Any(i => i.ItemId == _item.ItemId).Should().BeTrue("An Item was added");

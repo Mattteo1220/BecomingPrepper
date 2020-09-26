@@ -10,16 +10,16 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
 {
     public class InventoryUtility : IInventoryUtility
     {
-        public InventoryItemEntity ItemEntity;
+        public InventoryEntity ItemEntity;
         private ILogManager _logManager;
-        private IRepository<FoodStorageInventoryEntity> _inventoryRepository;
-        public InventoryUtility(IRepository<FoodStorageInventoryEntity> inventoryRepo, ILogManager exceptionLog)
+        private IRepository<FoodStorageEntity> _inventoryRepository;
+        public InventoryUtility(IRepository<FoodStorageEntity> inventoryRepo, ILogManager exceptionLog)
         {
             _inventoryRepository = inventoryRepo ?? throw new ArgumentNullException(nameof(inventoryRepo));
             _logManager = exceptionLog ?? throw new ArgumentNullException(nameof(exceptionLog));
         }
 
-        public void AddInventory(FoodStorageInventoryEntity entity)
+        public void AddInventory(FoodStorageEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
@@ -35,13 +35,13 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             _logManager.LogInformation($"Inventory created for account {entity.AccountId}");
         }
 
-        public void AddInventoryItem(string accountId, InventoryItemEntity entity)
+        public void AddInventoryItem(string accountId, InventoryEntity entity)
         {
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fs => fs.AccountId == accountId);
-            var updateFilter = Builders<FoodStorageInventoryEntity>.Update.Push(i => i.Inventory, entity);
+            var filter = Builders<FoodStorageEntity>.Filter.Where(fs => fs.AccountId == accountId);
+            var updateFilter = Builders<FoodStorageEntity>.Update.Push(i => i.Inventory, entity);
 
             try
             {
@@ -55,11 +55,11 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             _logManager.LogInformation($"Successfully added Inventory Item for account: {accountId}");
         }
 
-        public void DeleteInventory(FoodStorageInventoryEntity entity)
+        public void DeleteInventory(FoodStorageEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fs => fs.AccountId == entity.AccountId);
+            var filter = Builders<FoodStorageEntity>.Filter.Where(fs => fs.AccountId == entity.AccountId);
             try
             {
                 _inventoryRepository.Delete(filter);
@@ -72,11 +72,11 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             _logManager.LogInformation($"Account {entity.AccountId} had their inventory deleted");
         }
 
-        public FoodStorageInventoryEntity GetInventory(string accountId)
+        public FoodStorageEntity GetInventory(string accountId)
         {
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
-            FoodStorageInventoryEntity entity = null;
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fs => fs.AccountId == accountId);
+            FoodStorageEntity entity = null;
+            var filter = Builders<FoodStorageEntity>.Filter.Where(fs => fs.AccountId == accountId);
 
             try
             {
@@ -91,11 +91,11 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             return entity;
         }
 
-        public InventoryItemEntity GetInventoryItem(string accountId, string itemId)
+        public InventoryEntity GetInventoryItem(string accountId, string itemId)
         {
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
             if (string.IsNullOrWhiteSpace(itemId)) throw new ArgumentNullException(nameof(itemId));
-            FoodStorageInventoryEntity entity = null;
+            FoodStorageEntity entity = null;
 
             try
             {
@@ -116,8 +116,8 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
             if (string.IsNullOrWhiteSpace(itemId)) throw new ArgumentNullException(nameof(itemId));
 
-            var arrayFilter = Builders<FoodStorageInventoryEntity>.Filter.Where(x => x.AccountId == accountId);
-            var update = Builders<FoodStorageInventoryEntity>.Update.PullFilter(x => x.Inventory, i => i.ItemId == itemId);
+            var arrayFilter = Builders<FoodStorageEntity>.Filter.Where(x => x.AccountId == accountId);
+            var update = Builders<FoodStorageEntity>.Update.PullFilter(x => x.Inventory, i => i.ItemId == itemId);
             try
             {
                 _inventoryRepository.Update(arrayFilter, update);
@@ -130,15 +130,15 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             _logManager.LogInformation($"Account {accountId} had their inventory item {itemId} deleted");
         }
 
-        public void UpdateInventoryItem(string accountId, InventoryItemEntity entity) //Update Entire item
+        public void UpdateInventoryItem(string accountId, InventoryEntity entity) //Update Entire item
         {
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            var arrayFilter = Builders<FoodStorageInventoryEntity>.Filter.And(
-                Builders<FoodStorageInventoryEntity>.Filter.Where(x => x.AccountId == accountId),
-                Builders<FoodStorageInventoryEntity>.Filter.ElemMatch(x => x.Inventory, i => i.ItemId == entity.ItemId));
-            var arrayUpdate = Builders<FoodStorageInventoryEntity>.Update.Combine(Builders<FoodStorageInventoryEntity>.Update.Set(i => i.Inventory[-1], entity));
+            var arrayFilter = Builders<FoodStorageEntity>.Filter.And(
+                Builders<FoodStorageEntity>.Filter.Where(x => x.AccountId == accountId),
+                Builders<FoodStorageEntity>.Filter.ElemMatch(x => x.Inventory, i => i.ItemId == entity.ItemId));
+            var arrayUpdate = Builders<FoodStorageEntity>.Update.Combine(Builders<FoodStorageEntity>.Update.Set(i => i.Inventory[-1], entity));
             try
             {
                 _inventoryRepository.Update(arrayFilter, arrayUpdate);

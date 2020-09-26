@@ -12,7 +12,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
     public class DeleteInventoryItemSteps
     {
         private Fixture _fixture;
-        private InventoryItemEntity _item;
+        private InventoryEntity _item;
         private FoodStorageInventoryContext _context;
         public DeleteInventoryItemSteps(FoodStorageInventoryContext context)
         {
@@ -30,7 +30,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         [Then(@"that item is removed from their inventory")]
         public void ThenThatItemIsRemovedFromTheirInventory()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
+            var filter = Builders<FoodStorageEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
             var result = _context.FoodStorageInventoryRepository.Get(filter);
             result.Inventory.Count.Should().BeLessOrEqualTo(2, "An Item was removed");
             result.Inventory.Any(i => i.ItemId == _context.InventoryItemEntity.ItemId).Should().BeFalse("It Was Removed");

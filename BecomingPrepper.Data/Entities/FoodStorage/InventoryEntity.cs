@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BecomingPrepper.Data.Entities
 {
-    public class InventoryItemEntity
+    public class InventoryEntity
     {
         internal string _itemId;
         [BsonElement]

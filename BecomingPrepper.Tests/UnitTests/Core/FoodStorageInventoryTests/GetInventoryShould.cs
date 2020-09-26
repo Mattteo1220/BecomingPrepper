@@ -16,12 +16,12 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
     public class GetInventoryShould
     {
         private Mock<ILogManager> _mockLogger;
-        private Mock<IRepository<FoodStorageInventoryEntity>> _mockInventoryRepo;
+        private Mock<IRepository<FoodStorageEntity>> _mockInventoryRepo;
         private Fixture _fixture;
         public GetInventoryShould()
         {
             _mockLogger = new Mock<ILogManager>();
-            _mockInventoryRepo = new Mock<IRepository<FoodStorageInventoryEntity>>();
+            _mockInventoryRepo = new Mock<IRepository<FoodStorageEntity>>();
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
         }
@@ -39,7 +39,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         {
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
             inventoryUtility.GetInventory(_fixture.Create<string>());
-            _mockInventoryRepo.Verify(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageInventoryEntity>>()), Times.Once);
+            _mockInventoryRepo.Verify(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>()), Times.Once);
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void NotCallLogInformationWhenGetThrowsAnException()
         {
-            _mockInventoryRepo.Setup(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageInventoryEntity>>())).Throws<Exception>();
+            _mockInventoryRepo.Setup(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>())).Throws<Exception>();
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
             inventoryUtility.GetInventory(_fixture.Create<string>());
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Never);

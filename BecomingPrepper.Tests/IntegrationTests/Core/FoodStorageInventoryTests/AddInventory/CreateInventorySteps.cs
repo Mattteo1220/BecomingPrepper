@@ -23,7 +23,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         [Given(@"That inventory has never been created")]
         public void GivenThatInventoryHasNeverBeenCreated()
         {
-            _context.FoodStorageInventoryEntity = new FoodStorageInventoryEntity();
+            _context.FoodStorageInventoryEntity = new FoodStorageEntity();
             _context.FoodStorageInventoryEntity.AccountId = _fixture.Create<string>();
         }
 
@@ -36,7 +36,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         [Then(@"the Inventory is set up in the Database")]
         public void ThenTheInventoryIsSetUpInTheDatabase()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
+            var filter = Builders<FoodStorageEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
             var result = _context.FoodStorageInventoryRepository.Get(filter);
             result.AccountId.Should().BeEquivalentTo(_context.FoodStorageInventoryEntity.AccountId);
             result.Inventory.Should().BeNull();

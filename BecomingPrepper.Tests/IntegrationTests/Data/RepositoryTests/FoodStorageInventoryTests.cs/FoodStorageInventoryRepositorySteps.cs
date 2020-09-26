@@ -29,7 +29,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         [Then(@"The Inventory is added to the Mongo Database")]
         public void ThenTheInventoryIsAddedToTheMongoDatabase()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            var filter = Builders<FoodStorageEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
             var addedUser = _context.FoodStorageInventoryRepository.Get(filter);
             addedUser.Should().NotBeNull("Inventory was added to the Mongo DB");
         }
@@ -45,7 +45,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         [When(@"FoodStorageInventory Get is called")]
         public void WhenFoodStorageInventoryGetIsCalled()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            var filter = Builders<FoodStorageEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
             TestHelper.WaitUntil(() => _context.FoodStorageInventoryRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
             _context.QueryResult = () => _context.FoodStorageInventoryRepository.Get(filter);
         }
@@ -62,7 +62,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         [Given(@"That Inventory needs to be deleted")]
         public void GivenThatInventoryNeedsToBeDeleted()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            var filter = Builders<FoodStorageEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
             _context.ExecutionResult = () => _context.FoodStorageInventoryRepository.Delete(filter);
         }
 
@@ -75,7 +75,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         [Then(@"The Inventory is removed from the Mongo Database")]
         public void ThenTheInventoryIsRemovedFromTheMongoDatabase()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            var filter = Builders<FoodStorageEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
             TestHelper.WaitUntil(() => _context.FoodStorageInventoryRepository.Get(filter) == null, TimeSpan.FromMilliseconds(30000));
             _context.FoodStorageInventoryRepository.Get(filter).Should().BeNull($"Entity: {_context.FoodStorageInventoryEntity._id} was deleted");
         }
@@ -87,10 +87,10 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         public void GivenThatInventoryHasAnUpdatedProperty()
         {
             _context.PropertyUpdate = new Fixture().Create<string>();
-            var arrayFilter = Builders<FoodStorageInventoryEntity>.Filter.And(
-                Builders<FoodStorageInventoryEntity>.Filter.Where(x => x._id == _context.FoodStorageInventoryEntity._id),
-                Builders<FoodStorageInventoryEntity>.Filter.ElemMatch(x => x.Inventory, i => i.ExpiryDateRange == _context.FoodStorageInventoryEntity.Inventory.First().ExpiryDateRange));
-            var update = Builders<FoodStorageInventoryEntity>.Update.Set(u => u.Inventory[-1].ExpiryDateRange, _context.PropertyUpdate);
+            var arrayFilter = Builders<FoodStorageEntity>.Filter.And(
+                Builders<FoodStorageEntity>.Filter.Where(x => x._id == _context.FoodStorageInventoryEntity._id),
+                Builders<FoodStorageEntity>.Filter.ElemMatch(x => x.Inventory, i => i.ExpiryDateRange == _context.FoodStorageInventoryEntity.Inventory.First().ExpiryDateRange));
+            var update = Builders<FoodStorageEntity>.Update.Set(u => u.Inventory[-1].ExpiryDateRange, _context.PropertyUpdate);
 
             _context.ExecutionResult = () => _context.FoodStorageInventoryRepository.Update(arrayFilter, update);
         }
@@ -104,7 +104,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.FoodStorageInve
         [Then(@"The Inventory with its updated property should be returned")]
         public void ThenTheInventoryWithItsUpdatedPropertyShouldBeReturned()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            var filter = Builders<FoodStorageEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
             TestHelper.WaitUntil(() => _context.FoodStorageInventoryRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
             var result = _context.FoodStorageInventoryRepository.Get(filter).Inventory.FirstOrDefault();
             result.ExpiryDateRange.Should().BeEquivalentTo(_context.PropertyUpdate, "Expiry DateRange was updated.");

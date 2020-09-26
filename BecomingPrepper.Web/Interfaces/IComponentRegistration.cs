@@ -13,7 +13,7 @@ namespace BecomingPrepper.Web.Models
         IRepository<UserEntity> Users { get; set; }
         IRepository<PrepGuideEntity> PrepGuides { get; set; }
         IRepository<RecommendedQuantityAmountEntity> RecommendedQuantities { get; set; }
-        IRepository<FoodStorageInventoryEntity> FoodStorageInventory { get; set; }
+        IRepository<FoodStorageEntity> FoodStorageInventory { get; set; }
         ILogManager LogManager { get; set; }
         ISecureService SecureService { get; set; }
     }

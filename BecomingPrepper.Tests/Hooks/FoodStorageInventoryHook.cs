@@ -27,7 +27,7 @@ namespace BecomingPrepper.Tests.Hooks
         [AfterScenario("FoodStorageInventoryRepository", Order = 100)]
         public void AfterScenario()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            var filter = Builders<FoodStorageEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
             _context.FoodStorageInventoryRepository.Delete(filter);
         }
 

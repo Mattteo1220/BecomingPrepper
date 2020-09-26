@@ -15,7 +15,7 @@ namespace BecomingPrepper.Tests
         public IMongoCollection<UserEntity> Users;
         public IMongoCollection<RecommendedQuantityAmountEntity> RecommendedQuantities;
         public IMongoCollection<PrepGuideEntity> PrepGuides;
-        public IMongoCollection<FoodStorageInventoryEntity> Inventory;
+        public IMongoCollection<FoodStorageEntity> Inventory;
 
         public TestSteps(ScenarioContext scenarioContext)
         {
@@ -24,7 +24,7 @@ namespace BecomingPrepper.Tests
             Users = TestHelper.GetDatabase().GetCollection<UserEntity>("Users");
             RecommendedQuantities = TestHelper.GetDatabase().GetCollection<RecommendedQuantityAmountEntity>("RecommendedQuantities");
             PrepGuides = TestHelper.GetDatabase().GetCollection<PrepGuideEntity>("PrepGuides");
-            Inventory = TestHelper.GetDatabase().GetCollection<FoodStorageInventoryEntity>("FoodStorageInventory");
+            Inventory = TestHelper.GetDatabase().GetCollection<FoodStorageEntity>("FoodStorageInventory");
         }
     }
 }

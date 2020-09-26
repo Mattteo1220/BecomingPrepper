@@ -11,7 +11,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
     public class DeleteInventorySteps
     {
         private Fixture _fixture;
-        private InventoryItemEntity _item;
+        private InventoryEntity _item;
         private FoodStorageInventoryContext _context;
         public DeleteInventorySteps(FoodStorageInventoryContext context)
         {
@@ -28,7 +28,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         [Then(@"the entire Inventory is deleted")]
         public void ThenTheEntireInventoryIsDeleted()
         {
-            var filter = Builders<FoodStorageInventoryEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
+            var filter = Builders<FoodStorageEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
             var result = _context.FoodStorageInventoryRepository.Get(filter);
             result.Should().BeNull("The inventory was deleted");
         }

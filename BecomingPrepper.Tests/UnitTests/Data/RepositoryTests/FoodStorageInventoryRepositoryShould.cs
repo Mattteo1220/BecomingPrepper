@@ -14,17 +14,17 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
 {
     public class FoodStorageInventoryRepositoryShould
     {
-        private Mock<IMongoCollection<FoodStorageInventoryEntity>> _mockFoodStorageInventoryCollection;
+        private Mock<IMongoCollection<FoodStorageEntity>> _mockFoodStorageInventoryCollection;
         private Mock<ILogManager> _mockLogger;
-        private Mock<IRepository<FoodStorageInventoryEntity>> _mockInventoryRepository;
+        private Mock<IRepository<FoodStorageEntity>> _mockInventoryRepository;
         private Fixture _fixture;
         public FoodStorageInventoryRepositoryShould()
         {
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
-            _mockFoodStorageInventoryCollection = new Mock<IMongoCollection<FoodStorageInventoryEntity>>();
+            _mockFoodStorageInventoryCollection = new Mock<IMongoCollection<FoodStorageEntity>>();
             _mockLogger = new Mock<ILogManager>();
-            _mockInventoryRepository = new Mock<IRepository<FoodStorageInventoryEntity>>();
+            _mockInventoryRepository = new Mock<IRepository<FoodStorageEntity>>();
         }
 
         [Fact]

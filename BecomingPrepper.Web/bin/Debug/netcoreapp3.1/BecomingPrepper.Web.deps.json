@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v3.1": {
       "BecomingPrepper.Web/1.0.0": {
         "dependencies": {
+          "BecomingPrepper.Core": "1.0.0",
           "BecomingPrepper.Data": "1.0.0",
           "BecomingPrepper.Logger": "1.0.0",
           "BecomingPrepper.Security": "1.0.0",
@@ -2197,6 +2198,19 @@
         "compile": {
           "lib/netcoreapp3.0/Unity.Abstractions.dll": {},
           "lib/netcoreapp3.0/Unity.Container.dll": {}
+        }
+      },
+      "BecomingPrepper.Core/1.0.0": {
+        "dependencies": {
+          "BecomingPrepper.Data": "1.0.0",
+          "BecomingPrepper.Logger": "1.0.0",
+          "BecomingPrepper.Security": "1.0.0"
+        },
+        "runtime": {
+          "BecomingPrepper.Core.dll": {}
+        },
+        "compile": {
+          "BecomingPrepper.Core.dll": {}
         }
       },
       "BecomingPrepper.Data/1.0.0": {
@@ -4982,6 +4996,11 @@
       "sha512": "sha512-hlJ6/MuLnSb//f4wwMZyOYko6iiDt2WNNP1R8vqL0heruP/7qDhL0vCq+FRIMrtj1rUa9BaEdzR5weMbhi6gQA==",
       "path": "unity/5.11.7",
       "hashPath": "unity.5.11.7.nupkg.sha512"
+    },
+    "BecomingPrepper.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "BecomingPrepper.Data/1.0.0": {
       "type": "project",

@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace BecomingPrepper.Data.Entities.ProgressTracker.RecommendedQuantityEntity
 {
     [BsonIgnoreExtraElements]
-    public class OneMonthRecommendedAmount
+    public class OneMonthRecommendedAmount : IRecommendedAmount
     {
         [BsonElement]
         [DataMember]
