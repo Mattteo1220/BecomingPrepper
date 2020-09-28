@@ -1,21 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
+using BecomingPrepper.Data.Entities.InventoryImageFiles;
 using BecomingPrepper.Data.Interfaces;
+using BecomingPrepper.Data.Repositories;
 using BecomingPrepper.Logger;
 using MongoDB.Driver;
+using MongoDB.Driver.GridFS;
 
 namespace BecomingPrepper.Core.FoodStorageInventoryUtility
 {
     public class InventoryUtility : IInventoryUtility
     {
         public InventoryEntity ItemEntity;
+        private IGridFSBucket _bucket;
         private ILogManager _logManager;
+        private IGallery _galleryRepo;
         private IRepository<FoodStorageEntity> _inventoryRepository;
-        public InventoryUtility(IRepository<FoodStorageEntity> inventoryRepo, ILogManager exceptionLog)
+        public InventoryUtility(IRepository<FoodStorageEntity> inventoryRepo, IGallery galleryRepo, IGridFSBucket bucket, ILogManager exceptionLog)
         {
             _inventoryRepository = inventoryRepo ?? throw new ArgumentNullException(nameof(inventoryRepo));
+            _galleryRepo = galleryRepo ?? throw new ArgumentNullException(nameof(galleryRepo));
+            _bucket = bucket ?? throw new ArgumentNullException(nameof(bucket));
             _logManager = exceptionLog ?? throw new ArgumentNullException(nameof(exceptionLog));
         }
 
@@ -149,6 +157,37 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             }
 
             _logManager.LogInformation($"Account {accountId} had their inventory item {entity.ItemId} updated");
+        }
+
+        public void GetInventoryImages(List<InventoryEntity> inventory)
+        {
+            var listOfImageFileInfo = GetFileInfoOfGallery();
+            foreach (var item in inventory)
+            {
+                var objectId = listOfImageFileInfo.Where(i => i.ItemId == item.ItemId).FirstOrDefault()._id;
+                try
+                {
+                    item.Image = _bucket.DownloadAsBytes(objectId);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        private List<InventoryImageFileInfoEntity> GetFileInfoOfGallery()
+        {
+            try
+            {
+                return _galleryRepo.GetAllImages();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

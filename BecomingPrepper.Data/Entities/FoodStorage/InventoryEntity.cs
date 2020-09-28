@@ -4,6 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BecomingPrepper.Data.Entities
 {
+    [BsonIgnoreExtraElements]
     public class InventoryEntity
     {
         internal string _itemId;
@@ -18,7 +19,7 @@ namespace BecomingPrepper.Data.Entities
                 }
                 else
                 {
-                    return $"I.{Category}.{Product}.Item";
+                    return $"Item.{Category}.{Product}";
                 }
             }
             set
@@ -40,6 +41,8 @@ namespace BecomingPrepper.Data.Entities
         public DateTime ModifiedDate { get; set; }
         [BsonElement]
         public string ModifiedBy { get; set; }
+        [BsonElement]
+        public byte[] Image { get; set; }
 
     }
 }

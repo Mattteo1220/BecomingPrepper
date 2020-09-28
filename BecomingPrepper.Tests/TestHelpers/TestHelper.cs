@@ -2,16 +2,13 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Threading;
 using AutoFixture;
 using BecomingPrepper.Data;
 using BecomingPrepper.Data.Entities;
-using BecomingPrepper.Data.Entities.RecommendedQuantity;
 using BecomingPrepper.Data.Interfaces;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using Moq;
 using Newtonsoft.Json;
@@ -111,60 +108,6 @@ namespace BecomingPrepper.Tests
             {
                 Thread.Sleep(TimeSpan.FromMilliseconds(1000));
                 passed = func();
-            }
-        }
-
-        public class GenerateEntity : RecommendedAmountEntitySample
-        {
-            [BsonElement]
-            [DataMember]
-            public string Id { get; set; }
-
-            [BsonElement]
-            public double Grains { get; set; }
-
-            [BsonElement]
-            public double CannedOrDriedMeats { get; set; }
-
-            [BsonElement]
-            public double FatsAndOils { get; set; }
-
-            [BsonElement]
-            public double Beans { get; set; }
-
-            [BsonElement]
-            public double Dairy { get; set; }
-
-            [BsonElement]
-            public double Sugars { get; set; }
-
-            [BsonElement]
-            public double CookingEssentials { get; set; }
-
-            [BsonElement]
-            public double DriedFruitsAndVegetables { get; set; }
-
-            [BsonElement]
-            public double CannedFruitsAndVegetables { get; set; }
-
-            [BsonElement]
-            public double Water { get; set; }
-
-            public RecommendedAmountEntitySample Generate()
-            {
-                var fixture = new Fixture();
-                AmountId = fixture.Create<string>();
-                Beans = fixture.Create<double>();
-                Grains = fixture.Create<double>();
-                CannedOrDriedMeats = fixture.Create<double>();
-                FatsAndOils = fixture.Create<double>();
-                Dairy = fixture.Create<double>();
-                Sugars = fixture.Create<double>();
-                CookingEssentials = fixture.Create<double>();
-                DriedFruitsAndVegetables = fixture.Create<double>();
-                CannedFruitsAndVegetables = fixture.Create<double>();
-                Water = fixture.Create<double>();
-                return this;
             }
         }
     }

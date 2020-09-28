@@ -2,6 +2,7 @@
 using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Interfaces;
+using BecomingPrepper.Data.Repositories;
 
 namespace BecomingPrepper.Tests.Contexts
 {
@@ -10,6 +11,7 @@ namespace BecomingPrepper.Tests.Contexts
         public FoodStorageEntity FoodStorageInventoryEntity { get; set; }
         public InventoryEntity InventoryItemEntity { get; set; }
         public IRepository<FoodStorageEntity> FoodStorageInventoryRepository { get; set; }
+        public IGallery GalleryRepo { get; set; }
 
         public Func<FoodStorageEntity> QueryResult { get; set; }
 
