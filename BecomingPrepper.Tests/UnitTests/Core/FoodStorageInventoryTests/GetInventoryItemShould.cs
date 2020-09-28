@@ -8,7 +8,6 @@ using BecomingPrepper.Logger;
 using FluentAssertions;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.GridFS;
 using Moq;
 using Xunit;
 
@@ -18,15 +17,15 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
     public class GetInventoryItemShould
     {
         private Mock<ILogManager> _mockLogger;
-        private Mock<IGallery> _mockGalleryRepo;
-        private Mock<IGridFSBucket> _bucket;
+        private Mock<IGalleryFileHelperRepository> _mockGalleryRepo;
+        private Mock<IGalleryImageHelperRepository> _mockGalleryImageHelperRepo;
         private Mock<IRepository<FoodStorageEntity>> _mockInventoryRepo;
         private Fixture _fixture;
         public GetInventoryItemShould()
         {
             _mockLogger = new Mock<ILogManager>();
-            _mockGalleryRepo = new Mock<IGallery>();
-            _bucket = new Mock<IGridFSBucket>();
+            _mockGalleryRepo = new Mock<IGalleryFileHelperRepository>();
+            _mockGalleryImageHelperRepo = new Mock<IGalleryImageHelperRepository>();
             _mockInventoryRepo = new Mock<IRepository<FoodStorageEntity>>();
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
@@ -35,7 +34,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void ThrowWhenNoItemIdSupplied()
         {
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _bucket.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
             Action noItemIdTest = () => inventoryUtility.GetInventoryItem(_fixture.Create<string>(), null);
             noItemIdTest.Should().Throw<ArgumentNullException>("No ItemId was supplied");
         }
@@ -43,7 +42,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void ThrowWhenNoAccountIdSupplied()
         {
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _bucket.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
             Action noItemIdTest = () => inventoryUtility.GetInventoryItem(" ", _fixture.Create<string>());
             noItemIdTest.Should().Throw<ArgumentNullException>("No accountId was supplied");
         }
@@ -51,7 +50,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void CallGet()
         {
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _bucket.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
             inventoryUtility.ItemEntity = _fixture.Create<InventoryEntity>();
             inventoryUtility.GetInventoryItem(_fixture.Create<string>(), _fixture.Create<string>());
             _mockInventoryRepo.Verify(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>()), Times.Once);
@@ -60,7 +59,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void CallLogInformation()
         {
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _bucket.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
             inventoryUtility.ItemEntity = _fixture.Create<InventoryEntity>();
             inventoryUtility.GetInventoryItem(_fixture.Create<string>(), _fixture.Create<string>());
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.AtMost(2));
@@ -70,7 +69,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         public void NotCallLogInformationWhenGetThrowsAnException()
         {
             _mockInventoryRepo.Setup(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>())).Throws<Exception>();
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _bucket.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
             inventoryUtility.ItemEntity = _fixture.Create<InventoryEntity>();
             inventoryUtility.GetInventoryItem(_fixture.Create<string>(), _fixture.Create<string>());
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Once);

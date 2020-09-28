@@ -3,8 +3,8 @@ using BecomingPrepper.Data.Entities.InventoryImageFiles;
 
 namespace BecomingPrepper.Data.Repositories
 {
-    public interface IGallery
+    public interface IGalleryFileHelperRepository
     {
-        List<InventoryImageFileInfoEntity> GetAllImages();
+        List<GalleryFileInfoEntity> GetFiles();
     }
 }

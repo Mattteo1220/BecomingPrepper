@@ -25,6 +25,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
             var result = _context.QueryResult.Invoke();
             result.Should().NotBeNull("The inventory exists in the DB");
             result.AccountId.Should().BeEquivalentTo(_context.FoodStorageInventoryEntity.AccountId);
+            result.Inventory.TrueForAll(t => t.Image != null);
         }
     }
 }

@@ -13,7 +13,6 @@ using BecomingPrepper.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
-using MongoDB.Driver.GridFS;
 using Serilog;
 
 namespace BecomingPrepper.Web.Models
@@ -25,12 +24,12 @@ namespace BecomingPrepper.Web.Models
         public IRepository<PrepGuideEntity> PrepGuides { get; set; }
         public IRepository<RecommendedQuantityAmountEntity> RecommendedQuantities { get; set; }
         public IRepository<FoodStorageEntity> FoodStorageInventory { get; set; }
-        public GalleryRepository Gallery { get; set; }
         public ILogManager LogManager { get; set; }
         public ISecureService SecureService { get; set; }
         public IRecommendService RecommendService { get; set; }
         public IInventoryUtility InventoryUtility { get; set; }
-        public IGridFSBucket Bucket { get; set; }
+        public IGalleryImageHelperRepository GalleryImageHelperRepository { get; set; }
+        public IGalleryFileHelperRepository GalleryFileHelperRepository { get; set; }
 
         public void Register(ref IServiceCollection services, IConfiguration configuration)
         {
@@ -41,16 +40,10 @@ namespace BecomingPrepper.Web.Models
             var recommendedQuantities = configuration.GetSection("Collections").GetSection("RecommendedQuantityCollection").Value;
             var foodStorageInventory = configuration.GetSection("Collections").GetSection("FoodStorageInventoryCollection").Value;
             var exceptionLogs = configuration.GetSection("Collections").GetSection("ExceptionLogsCollection").Value;
-            var gallery = configuration.GetSection("Collections").GetSection("Gallery").Value;
+            var imageFiles = configuration.GetSection("Collections").GetSection("ImageFiles").Value;
+            var images = configuration.GetSection("Collections").GetSection("Images").Value;
             var mongoDatabase = new MongoClient(connectionString).GetDatabase(database);
 
-            var bucketOptions = new GridFSBucketOptions()
-            {
-                BucketName = "InventoryImages",
-                ReadPreference = ReadPreference.Primary
-            };
-
-            Bucket = new GridFSBucket(mongoDatabase, bucketOptions);
 
             //LogManager
             var logger = new LoggerConfiguration()
@@ -64,18 +57,20 @@ namespace BecomingPrepper.Web.Models
             var prepGuidesCollection = mongoDatabase.GetCollection<PrepGuideEntity>(prepGuides);
             var recommendedQuantitiesCollection = mongoDatabase.GetCollection<RecommendedQuantityAmountEntity>(recommendedQuantities);
             var foodStorageInventoryCollection = mongoDatabase.GetCollection<FoodStorageEntity>(foodStorageInventory);
-            var galleryCollection = mongoDatabase.GetCollection<InventoryImageFileInfoEntity>(gallery);
+            var galleryCollection = mongoDatabase.GetCollection<GalleryFileInfoEntity>(imageFiles);
+            var gallery = mongoDatabase.GetCollection<GalleryImageEntity>(images);
 
             var usersRepository = new UserRepository(usersCollections, exceptionLogger);
             var prepGuidesRepository = new PrepGuideRepository(prepGuidesCollection, exceptionLogger);
             var recommendedQuantitiesRepository = new RecommendedQuantityRepository(recommendedQuantitiesCollection, exceptionLogger);
             var foodStorageInventoryRepository = new FoodStorageInventoryRepository(foodStorageInventoryCollection, exceptionLogger);
-            var galleryRepository = new GalleryRepository(galleryCollection, exceptionLogger);
+            var galleryFileHelperRepository = new GalleryFileHelperRepository(galleryCollection);
+            var galleryImageHelperRepository = new GalleryImageHelperRepository(gallery);
 
             //Secure Service and Core
             var secureService = new SecureService(new HashingOptions());
             var recommendService = new RecommendService(recommendedQuantitiesRepository, LogManager);
-            var inventoryUtility = new InventoryUtility(foodStorageInventoryRepository, galleryRepository, Bucket, LogManager);
+            var inventoryUtility = new InventoryUtility(foodStorageInventoryRepository, galleryFileHelperRepository, galleryImageHelperRepository, LogManager);
 
             //Add To Services
             services.Add(new ServiceDescriptor(typeof(IComponentRegistration), new ComponentRegistration()
@@ -89,8 +84,8 @@ namespace BecomingPrepper.Web.Models
                 SecureService = secureService,
                 RecommendService = recommendService,
                 InventoryUtility = inventoryUtility,
-                Gallery = galleryRepository,
-                Bucket = Bucket
+                GalleryImageHelperRepository = GalleryImageHelperRepository,
+                GalleryFileHelperRepository = GalleryFileHelperRepository
             }));
         }
     }

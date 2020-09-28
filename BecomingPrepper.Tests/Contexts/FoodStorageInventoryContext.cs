@@ -11,7 +11,8 @@ namespace BecomingPrepper.Tests.Contexts
         public FoodStorageEntity FoodStorageInventoryEntity { get; set; }
         public InventoryEntity InventoryItemEntity { get; set; }
         public IRepository<FoodStorageEntity> FoodStorageInventoryRepository { get; set; }
-        public IGallery GalleryRepo { get; set; }
+        public IGalleryFileHelperRepository GalleryFileHelperRepository { get; set; }
+        public IGalleryImageHelperRepository GalleryImageHelperRepository { get; set; }
 
         public Func<FoodStorageEntity> QueryResult { get; set; }
 

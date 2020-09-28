@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoFixture;
 using BecomingPrepper.Core.FoodStorageInventoryUtility;
 using BecomingPrepper.Data.Entities;
+using BecomingPrepper.Data.Entities.InventoryImageFiles;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Data.Repositories;
 using BecomingPrepper.Logger;
 using FluentAssertions;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.GridFS;
 using Moq;
 using Xunit;
 
@@ -18,15 +19,15 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
     public class GetInventoryShould
     {
         private Mock<ILogManager> _mockLogger;
-        private Mock<IGridFSBucket> _mockBucket;
-        private Mock<IGallery> _gallery;
+        private Mock<IGalleryImageHelperRepository> _mockGalleryImageHelperRepo;
+        private Mock<IGalleryFileHelperRepository> _mockGalleryFileHelperRepo;
         private Mock<IRepository<FoodStorageEntity>> _mockInventoryRepo;
         private Fixture _fixture;
         public GetInventoryShould()
         {
             _mockLogger = new Mock<ILogManager>();
-            _mockBucket = new Mock<IGridFSBucket>();
-            _gallery = new Mock<IGallery>();
+            _mockGalleryImageHelperRepo = new Mock<IGalleryImageHelperRepository>();
+            _mockGalleryFileHelperRepo = new Mock<IGalleryFileHelperRepository>();
             _mockInventoryRepo = new Mock<IRepository<FoodStorageEntity>>();
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
@@ -35,7 +36,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void ThrowWhenNoEntitySupplied()
         {
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _gallery.Object, _mockBucket.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryFileHelperRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
             Action noAccountIdTest = () => inventoryUtility.GetInventory(" ");
             noAccountIdTest.Should().Throw<ArgumentNullException>("No accountId was supplied");
         }
@@ -43,7 +44,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void CallGet()
         {
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _gallery.Object, _mockBucket.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryFileHelperRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
             inventoryUtility.GetInventory(_fixture.Create<string>());
             _mockInventoryRepo.Verify(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>()), Times.Once);
         }
@@ -51,7 +52,10 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void CallLogInformation()
         {
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _gallery.Object, _mockBucket.Object, _mockLogger.Object);
+            _mockInventoryRepo.Setup(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>())).Returns(_fixture.Create<FoodStorageEntity>());
+            _mockGalleryFileHelperRepo.Setup(f => f.GetFiles()).Returns(It.IsAny<List<GalleryFileInfoEntity>>());
+            _mockGalleryImageHelperRepo.Setup(i => i.GetImage(It.IsAny<ObjectId>())).Returns(It.IsAny<byte[]>());
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryFileHelperRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
             inventoryUtility.GetInventory(_fixture.Create<string>());
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Once);
         }
@@ -60,7 +64,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         public void NotCallLogInformationWhenGetThrowsAnException()
         {
             _mockInventoryRepo.Setup(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>())).Throws<Exception>();
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _gallery.Object, _mockBucket.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryFileHelperRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
             inventoryUtility.GetInventory(_fixture.Create<string>());
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Never);
         }

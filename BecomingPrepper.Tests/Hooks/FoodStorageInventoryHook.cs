@@ -22,8 +22,9 @@ namespace BecomingPrepper.Tests.Hooks
         public void BeforeScenario()
         {
             _context.FoodStorageInventoryRepository = new FoodStorageInventoryRepository(Inventory, MockExceptionLogger.Object);
-            _context.GalleryRepo = new GalleryRepository(Gallery, MockExceptionLogger.Object);
-            _context.InventoryUtility = new InventoryUtility(_context.FoodStorageInventoryRepository, _context.GalleryRepo, MockBucket.Object, MockExceptionLogger.Object);
+            _context.GalleryFileHelperRepository = new GalleryFileHelperRepository(GalleryFileHelperRepo);
+            _context.GalleryImageHelperRepository = new GalleryImageHelperRepository(GalleryImageHelpeRepo);
+            _context.InventoryUtility = new InventoryUtility(_context.FoodStorageInventoryRepository, _context.GalleryFileHelperRepository, _context.GalleryImageHelperRepository, MockExceptionLogger.Object);
         }
 
         [AfterScenario("FoodStorageInventoryRepository", Order = 100)]

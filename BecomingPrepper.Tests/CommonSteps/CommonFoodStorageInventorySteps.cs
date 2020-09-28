@@ -20,6 +20,7 @@ namespace BecomingPrepper.Tests.CommonSteps
         {
             var fixture = new Fixture();
             fixture.Register(ObjectId.GenerateNewId);
+            fixture.Customize<InventoryEntity>(c => c.With(i => i.ItemId, "Item.4.5"));
             _foodStorageInventoryContext.FoodStorageInventoryEntity = fixture.Create<FoodStorageEntity>();
         }
 

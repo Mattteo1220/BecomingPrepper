@@ -8,22 +8,21 @@ using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Data.Repositories;
 using BecomingPrepper.Logger;
 using MongoDB.Driver;
-using MongoDB.Driver.GridFS;
 
 namespace BecomingPrepper.Core.FoodStorageInventoryUtility
 {
     public class InventoryUtility : IInventoryUtility
     {
         public InventoryEntity ItemEntity;
-        private IGridFSBucket _bucket;
+        private IGalleryImageHelperRepository _imageHelperRepo;
         private ILogManager _logManager;
-        private IGallery _galleryRepo;
+        private IGalleryFileHelperRepository _galleryRepo;
         private IRepository<FoodStorageEntity> _inventoryRepository;
-        public InventoryUtility(IRepository<FoodStorageEntity> inventoryRepo, IGallery galleryRepo, IGridFSBucket bucket, ILogManager exceptionLog)
+        public InventoryUtility(IRepository<FoodStorageEntity> inventoryRepo, IGalleryFileHelperRepository galleryRepo, IGalleryImageHelperRepository imageHelperRepo, ILogManager exceptionLog)
         {
             _inventoryRepository = inventoryRepo ?? throw new ArgumentNullException(nameof(inventoryRepo));
             _galleryRepo = galleryRepo ?? throw new ArgumentNullException(nameof(galleryRepo));
-            _bucket = bucket ?? throw new ArgumentNullException(nameof(bucket));
+            _imageHelperRepo = imageHelperRepo ?? throw new ArgumentNullException(nameof(imageHelperRepo));
             _logManager = exceptionLog ?? throw new ArgumentNullException(nameof(exceptionLog));
         }
 
@@ -92,6 +91,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             try
             {
                 entity = _inventoryRepository.Get(filter);
+                GetInventoryImages(entity.Inventory);
             }
             catch
             {
@@ -169,31 +169,37 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
         public void GetInventoryImages(List<InventoryEntity> inventory)
         {
             var listOfImageFileInfo = GetFileInfoOfGallery();
-            foreach (var item in inventory)
+            if (listOfImageFileInfo != null)
             {
-                var objectId = listOfImageFileInfo.Where(i => i.ItemId == item.ItemId).FirstOrDefault()._id;
-                try
+                foreach (var item in inventory)
                 {
-                    item.Image = _bucket.DownloadAsBytes(objectId);
+                    try
+                    {
+                        var objectId = listOfImageFileInfo.FirstOrDefault(f => f.ItemId == item.ItemId)._id;
+                        var data = _imageHelperRepo.GetImage(objectId);
+                        item.Image = data;
+                    }
+                    catch
+                    {
+                        return;
+                    }
                 }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+            }
+            else
+            {
+                return;
             }
         }
 
-        private List<InventoryImageFileInfoEntity> GetFileInfoOfGallery()
+        private List<GalleryFileInfoEntity> GetFileInfoOfGallery()
         {
             try
             {
-                return _galleryRepo.GetAllImages();
+                return _galleryRepo.GetFiles();
             }
-            catch (Exception)
+            catch
             {
-
-                throw;
+                return null;
             }
         }
     }

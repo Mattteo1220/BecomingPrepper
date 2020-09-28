@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace BecomingPrepper.Data.Entities.InventoryImageFiles
 {
     [BsonIgnoreExtraElements]
-    public class InventoryImageFileInfoEntity
+    public class GalleryFileInfoEntity
     {
         [BsonId]
         public ObjectId _id { get; set; }
