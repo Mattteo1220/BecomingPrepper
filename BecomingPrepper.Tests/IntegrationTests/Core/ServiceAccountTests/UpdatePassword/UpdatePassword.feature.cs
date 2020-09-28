@@ -86,11 +86,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.ServiceAccountTests.Update
         [Xunit.TraitAttribute("Description", "Update Password")]
         [Xunit.TraitAttribute("Category", "UserRepository")]
         [Xunit.TraitAttribute("Category", "DisposeUser")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void UpdatePassword()
         {
             string[] tagsOfScenario = new string[] {
                     "UserRepository",
-                    "DisposeUser"};
+                    "DisposeUser",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Password", null, tagsOfScenario, argumentsOfScenario);
 #line 7

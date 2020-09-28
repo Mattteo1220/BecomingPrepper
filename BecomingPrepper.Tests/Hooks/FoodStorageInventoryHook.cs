@@ -18,6 +18,7 @@ namespace BecomingPrepper.Tests.Hooks
 
         [BeforeScenario("FoodStorageInventoryRepository")]
         [BeforeStep("NewDbInstantiation")]
+        [AfterStep("NewDbInstantiation")]
         public void BeforeScenario()
         {
             _context.FoodStorageInventoryRepository = new FoodStorageInventoryRepository(Inventory, MockExceptionLogger.Object);
@@ -29,13 +30,11 @@ namespace BecomingPrepper.Tests.Hooks
         public void AfterScenario()
         {
             var filter = Builders<FoodStorageEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
+            if (_context.FoodStorageInventoryRepository.Collection == null)
+            {
+                BeforeScenario();
+            }
             _context.FoodStorageInventoryRepository.Delete(filter);
-        }
-
-        [AfterScenario("FoodStorageInventoryRepository", Order = 200)]
-        public void AfterDeleteScenario()
-        {
-            _context.FoodStorageInventoryRepository.Dispose();
         }
     }
 }

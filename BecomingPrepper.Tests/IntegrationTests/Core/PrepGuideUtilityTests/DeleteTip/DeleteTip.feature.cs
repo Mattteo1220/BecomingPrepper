@@ -95,11 +95,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.PrepGuideUtilityTests.Dele
         [Xunit.TraitAttribute("Description", "Delete Tip")]
         [Xunit.TraitAttribute("Category", "PrepGuideRepository")]
         [Xunit.TraitAttribute("Category", "DisposePrepGuide")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void DeleteTip()
         {
             string[] tagsOfScenario = new string[] {
                     "PrepGuideRepository",
-                    "DisposePrepGuide"};
+                    "DisposePrepGuide",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Tip", null, tagsOfScenario, argumentsOfScenario);
 #line 10

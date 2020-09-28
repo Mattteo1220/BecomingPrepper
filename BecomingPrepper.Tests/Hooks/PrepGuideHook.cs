@@ -18,6 +18,7 @@ namespace BecomingPrepper.Tests.Hooks
 
         [BeforeScenario("PrepGuideRepository")]
         [BeforeStep("NewDbInstantiation")]
+        [AfterStep("NewDbInstantiation")]
         public void BeforeScenario()
         {
             _prepGuideContext.PrepGuideRepository = new PrepGuideRepository(PrepGuides, MockExceptionLogger.Object);
@@ -29,12 +30,6 @@ namespace BecomingPrepper.Tests.Hooks
         {
             var filter = Builders<PrepGuideEntity>.Filter.Eq(u => u._id, _prepGuideContext.PrepGuide._id);
             _prepGuideContext.PrepGuideRepository.Delete(filter);
-        }
-
-        [AfterScenario("PrepGuideRepository", Order = 200)]
-        public void AfterDeleteScenario()
-        {
-            _prepGuideContext.PrepGuideRepository.Dispose();
         }
     }
 }

@@ -191,12 +191,14 @@ this.FeatureBackground();
         [Xunit.TraitAttribute("Category", "ExceptionLogger")]
         [Xunit.TraitAttribute("Category", "Manual")]
         [Xunit.TraitAttribute("Category", "Ignore")]
+        [Xunit.TraitAttribute("Category", "NewConnection")]
         public virtual void LogWarning()
         {
             string[] tagsOfScenario = new string[] {
                     "ExceptionLogger",
                     "Manual",
-                    "Ignore"};
+                    "Ignore",
+                    "NewConnection"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Log Warning", null, tagsOfScenario, argumentsOfScenario);
 #line 20

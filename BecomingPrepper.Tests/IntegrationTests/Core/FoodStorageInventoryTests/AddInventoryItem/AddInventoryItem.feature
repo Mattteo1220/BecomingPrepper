@@ -7,7 +7,7 @@ Background:
 	Given An Inventory
 	And That Inventory has been registered
 
-@FoodStorageInventoryRepository
+@FoodStorageInventoryRepository @NewDbInstantiation
 Scenario: Add Inventory Item
 	And The prepper has a new item to add
 	When The Prepper adds the new item to their inventory

@@ -3,7 +3,7 @@
 	They have the option of changing their passwords
 	So that their accounts can be secure
 
-@UserRepository @DisposeUser
+@UserRepository @DisposeUser @NewDbInstantiation
 Scenario: Update Password
 	Given A User
 	And That user is registered

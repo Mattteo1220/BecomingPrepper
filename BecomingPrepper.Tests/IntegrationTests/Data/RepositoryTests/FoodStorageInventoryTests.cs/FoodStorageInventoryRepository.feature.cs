@@ -95,11 +95,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.Data.RepositoryTests.FoodStorag
         [Xunit.TraitAttribute("Description", "Add Inventory")]
         [Xunit.TraitAttribute("Category", "AddInventory")]
         [Xunit.TraitAttribute("Category", "FoodStorageInventoryRepository")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void AddInventory()
         {
             string[] tagsOfScenario = new string[] {
                     "AddInventory",
-                    "FoodStorageInventoryRepository"};
+                    "FoodStorageInventoryRepository",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Inventory", null, tagsOfScenario, argumentsOfScenario);
 #line 11
@@ -143,11 +145,13 @@ this.FeatureBackground();
         [Xunit.TraitAttribute("Description", "Get Inventory")]
         [Xunit.TraitAttribute("Category", "GetInventory")]
         [Xunit.TraitAttribute("Category", "FoodStorageInventoryRepository")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void GetInventory()
         {
             string[] tagsOfScenario = new string[] {
                     "GetInventory",
-                    "FoodStorageInventoryRepository"};
+                    "FoodStorageInventoryRepository",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Inventory", null, tagsOfScenario, argumentsOfScenario);
 #line 17
@@ -191,11 +195,13 @@ this.FeatureBackground();
         [Xunit.TraitAttribute("Description", "Delete inventory")]
         [Xunit.TraitAttribute("Category", "FoodStorageInventoryRepository")]
         [Xunit.TraitAttribute("Category", "DeleteInventory")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void DeleteInventory()
         {
             string[] tagsOfScenario = new string[] {
                     "FoodStorageInventoryRepository",
-                    "DeleteInventory"};
+                    "DeleteInventory",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete inventory", null, tagsOfScenario, argumentsOfScenario);
 #line 23

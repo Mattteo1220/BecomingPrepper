@@ -40,6 +40,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                 return;
             }
 
+            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Inventory created for account {entity.AccountId}");
         }
 
@@ -60,6 +61,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                 return;
             }
 
+            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Successfully added Inventory Item for account: {accountId}");
         }
 
@@ -77,6 +79,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                 return;
             }
 
+            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Account {entity.AccountId} had their inventory deleted");
         }
 
@@ -95,6 +98,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                 return null;
             }
 
+            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Inventory {accountId} retrieved");
             return entity;
         }
@@ -114,6 +118,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                 return null;
             }
 
+            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Item {itemId} for account {accountId} was retrieved");
 
             return ItemEntity ?? entity.Inventory.FirstOrDefault(i => i.ItemId == itemId);
@@ -135,6 +140,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                 return;
             }
 
+            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Account {accountId} had their inventory item {itemId} deleted");
         }
 
@@ -156,6 +162,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                 return;
             }
 
+            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Account {accountId} had their inventory item {entity.ItemId} updated");
         }
 

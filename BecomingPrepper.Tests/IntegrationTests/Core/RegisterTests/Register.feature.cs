@@ -86,11 +86,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.RegisterTests
         [Xunit.TraitAttribute("Description", "Register User")]
         [Xunit.TraitAttribute("Category", "UserRepository")]
         [Xunit.TraitAttribute("Category", "DisposeUser")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void RegisterUser()
         {
             string[] tagsOfScenario = new string[] {
                     "UserRepository",
-                    "DisposeUser"};
+                    "DisposeUser",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register User", null, tagsOfScenario, argumentsOfScenario);
 #line 7

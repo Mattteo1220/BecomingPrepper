@@ -98,10 +98,12 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         [Xunit.TraitAttribute("FeatureTitle", "DeleteInventoryItem")]
         [Xunit.TraitAttribute("Description", "Delete Inventory Item")]
         [Xunit.TraitAttribute("Category", "FoodStorageInventoryRepository")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void DeleteInventoryItem()
         {
             string[] tagsOfScenario = new string[] {
-                    "FoodStorageInventoryRepository"};
+                    "FoodStorageInventoryRepository",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Inventory Item", null, tagsOfScenario, argumentsOfScenario);
 #line 11

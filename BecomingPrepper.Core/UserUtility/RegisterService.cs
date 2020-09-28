@@ -34,6 +34,7 @@ namespace BecomingPrepper.Core.UserUtility
                 return;
             }
 
+            _userRepo.Dispose();
             _exceptionLog.LogInformation($"User '{userEntity.AccountId}' has been registered");
         }
     }

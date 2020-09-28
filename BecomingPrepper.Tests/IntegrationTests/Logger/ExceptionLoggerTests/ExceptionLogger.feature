@@ -16,7 +16,7 @@ Scenario: Log Information
 	When LogInformation is called
 	Then The infromation is stored in the ExceptionLogs in the mongo datbase
 
-@ExceptionLogger @Manual @Ignore
+@ExceptionLogger @Manual @Ignore @NewConnection
 Scenario: Log Warning
 	When LogWarning is called
 	Then the warning is stored in the ExceptionLogs in the mongo Database

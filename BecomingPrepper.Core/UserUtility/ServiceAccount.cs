@@ -92,7 +92,7 @@ namespace BecomingPrepper.Core.UserUtility
             {
                 return;
             }
-
+            _userRepo.Dispose();
             _logManager.LogInformation(logMessage);
         }
     }

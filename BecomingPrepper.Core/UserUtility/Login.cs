@@ -48,6 +48,7 @@ namespace BecomingPrepper.Core.UserUtility
                 _exceptionLog.LogWarning(new SecurityException($"'Needs upgrading' returned true for user {username}"));
             }
 
+            _userRepo.Dispose();
             _exceptionLog.LogInformation($"User '{userEntity.AccountId}' has been verified");
 
             return result.Verified;

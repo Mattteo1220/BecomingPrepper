@@ -7,7 +7,7 @@ Background:
 	And That Inventory has been registered
 
 
-@FoodStorageInventoryRepository
+@FoodStorageInventoryRepository @NewDbInstantiation
 Scenario: Get Inventory Item
 	When Get inventory Item is called
 	Then that inventory item is returned

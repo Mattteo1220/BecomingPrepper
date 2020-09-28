@@ -7,7 +7,7 @@ Background:
 	Given An Inventory
 	And That Inventory has been registered
 
-@FoodStorageInventoryRepository
+@FoodStorageInventoryRepository @NewDbInstantiation
 Scenario: Get Inventory
 	When The prepper Requests to view their inventory
 	Then it is fetched from the database

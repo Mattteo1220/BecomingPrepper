@@ -6,7 +6,7 @@
 Background: 
 	Given A Prep Guide
 
-@PrepGuideRepository @DisposePrepGuide
+@PrepGuideRepository @DisposePrepGuide @NewDbInstantiation
 Scenario: Add Tip
 	And The Prep Guide Already Exists
 	When A prepper adds a tip

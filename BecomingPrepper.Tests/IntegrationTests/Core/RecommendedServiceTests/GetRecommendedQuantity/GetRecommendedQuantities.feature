@@ -3,7 +3,7 @@
 	I will need to fetch the recommended Quantities
 	in order to process the Progress Tracker
 
-@RecommendedQuantityRepository
+@RecommendedQuantityRepository @NewDbInstantiation
 Scenario: Get RecommendedAmount
 	When GetRecommended Quantities Is called
 	Then the Recommended Quantities are returned 

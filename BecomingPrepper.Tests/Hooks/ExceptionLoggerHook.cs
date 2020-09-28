@@ -14,6 +14,8 @@ namespace BecomingPrepper.Tests.Hooks
         }
 
         [BeforeScenario("LogManager")]
+        [BeforeStep("NewDbInstantiation")]
+        [AfterStep("NewDbInstantiation")]
         public void BeforeScenario()
         {
             _context.Logger = TestHelper.GetLogger();

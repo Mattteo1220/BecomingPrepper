@@ -6,13 +6,13 @@
 	Background: 
 		Given a Recommended Quantity amount
 
-@RecommendedQuantityRepository
+@RecommendedQuantityRepository @NewDbInstantiation
 Scenario: Get Recommended Quantity
 	Given That recommended Quantity Amount exists in the Mongo Database
 	When RecommendedQuantity Get is called
 	Then That recommended Quantity is returned
 
-@RecommendedQuantityRepository @DisposeRecommendedQuantityEntity
+@RecommendedQuantityRepository @DisposeRecommendedQuantityEntity @NewDbInstantiation
 Scenario: Update Recommended Quantity
 	Given That recommended Quantity Amount exists in the Mongo Database
 	And The recommended Quantity is updated

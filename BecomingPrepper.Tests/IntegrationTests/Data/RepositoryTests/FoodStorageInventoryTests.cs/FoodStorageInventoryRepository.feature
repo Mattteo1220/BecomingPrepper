@@ -7,19 +7,19 @@
 Background: 
 	Given An Inventory
 
-@AddInventory @FoodStorageInventoryRepository
+@AddInventory @FoodStorageInventoryRepository @NewDbInstantiation 
 Scenario: Add Inventory
 		And That Inventory has never been registered
 	When FoodStorageInventory Add is Called
 	Then The Inventory is added to the Mongo Database
 
-@GetInventory @FoodStorageInventoryRepository
+@GetInventory @FoodStorageInventoryRepository @NewDbInstantiation 
 Scenario: Get Inventory
 		And That Inventory has been registered
 	When FoodStorageInventory Get is called
 	Then the Inventory should be returned
 
-@FoodStorageInventoryRepository @DeleteInventory
+@FoodStorageInventoryRepository @DeleteInventory @NewDbInstantiation 
 Scenario: Delete inventory
 		And That Inventory has been registered
 		And That Inventory needs to be deleted

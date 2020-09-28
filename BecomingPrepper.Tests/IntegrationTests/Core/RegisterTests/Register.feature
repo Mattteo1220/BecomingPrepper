@@ -3,7 +3,7 @@
 	They will need to register their data
 	in order to inventory their food storage with the application
 
-@UserRepository @DisposeUser
+@UserRepository @DisposeUser @NewDbInstantiation
 Scenario: Register User
 	Given A User
 	And That user has never registered

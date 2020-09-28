@@ -20,6 +20,8 @@ namespace BecomingPrepper.Tests.Hooks
         }
 
         [BeforeScenario("RecommendedQuantityRepository")]
+        [BeforeStep("NewDbInstantiation")]
+        [AfterStep("NewDbInstantiation")]
         public void BeforeScenario()
         {
             _recommendedQuantityAmountContext.RecommendedQuantityRepository = new RecommendedQuantityRepository(RecommendedQuantities, MockExceptionLogger.Object);
@@ -30,12 +32,6 @@ namespace BecomingPrepper.Tests.Hooks
         {
             var filter = Builders<RecommendedQuantityAmountEntity>.Filter.Eq(u => u._id, _recommendedQuantityAmountContext.RecommendedQuantityAmountEntity._id);
             _recommendedQuantityAmountContext.RecommendedQuantityRepository.Delete(filter);
-        }
-
-        [AfterScenario("RecommendedQuantityRepository", Order = 200)]
-        public void AfterDeleteScenario()
-        {
-            _recommendedQuantityAmountContext.RecommendedQuantityRepository.Dispose();
         }
     }
 }

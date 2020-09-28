@@ -95,11 +95,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.PrepGuideUtilityTests.AddT
         [Xunit.TraitAttribute("Description", "Add Tip")]
         [Xunit.TraitAttribute("Category", "PrepGuideRepository")]
         [Xunit.TraitAttribute("Category", "DisposePrepGuide")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void AddTip()
         {
             string[] tagsOfScenario = new string[] {
                     "PrepGuideRepository",
-                    "DisposePrepGuide"};
+                    "DisposePrepGuide",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Tip", null, tagsOfScenario, argumentsOfScenario);
 #line 10

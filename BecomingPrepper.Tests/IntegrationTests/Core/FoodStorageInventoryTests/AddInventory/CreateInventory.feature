@@ -5,7 +5,7 @@
 Background: 
 	Given An Inventory
 
-@FoodStorageInventoryRepository
+@FoodStorageInventoryRepository @NewDbInstantiation
 Scenario: Add Inventory
 	And That inventory has never been created
 	When a Prepper creates their inventory

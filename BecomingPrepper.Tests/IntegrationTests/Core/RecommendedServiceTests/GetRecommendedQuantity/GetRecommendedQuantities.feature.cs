@@ -85,10 +85,12 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.RecommendedServiceTests.Ge
         [Xunit.TraitAttribute("FeatureTitle", "GetRecommendedQuantities")]
         [Xunit.TraitAttribute("Description", "Get RecommendedAmount")]
         [Xunit.TraitAttribute("Category", "RecommendedQuantityRepository")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void GetRecommendedAmount()
         {
             string[] tagsOfScenario = new string[] {
-                    "RecommendedQuantityRepository"};
+                    "RecommendedQuantityRepository",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get RecommendedAmount", null, tagsOfScenario, argumentsOfScenario);
 #line 7

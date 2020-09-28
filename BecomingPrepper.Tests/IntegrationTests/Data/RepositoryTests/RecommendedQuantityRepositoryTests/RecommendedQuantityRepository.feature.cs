@@ -95,10 +95,12 @@ namespace BecomingPrepper.Tests.IntegrationTests.Data.RepositoryTests.Recommende
         [Xunit.TraitAttribute("FeatureTitle", "RecommendedQuantityRepository")]
         [Xunit.TraitAttribute("Description", "Get Recommended Quantity")]
         [Xunit.TraitAttribute("Category", "RecommendedQuantityRepository")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void GetRecommendedQuantity()
         {
             string[] tagsOfScenario = new string[] {
-                    "RecommendedQuantityRepository"};
+                    "RecommendedQuantityRepository",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Recommended Quantity", null, tagsOfScenario, argumentsOfScenario);
 #line 10
@@ -142,11 +144,13 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.TraitAttribute("Description", "Update Recommended Quantity")]
         [Xunit.TraitAttribute("Category", "RecommendedQuantityRepository")]
         [Xunit.TraitAttribute("Category", "DisposeRecommendedQuantityEntity")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void UpdateRecommendedQuantity()
         {
             string[] tagsOfScenario = new string[] {
                     "RecommendedQuantityRepository",
-                    "DisposeRecommendedQuantityEntity"};
+                    "DisposeRecommendedQuantityEntity",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Recommended Quantity", null, tagsOfScenario, argumentsOfScenario);
 #line 16

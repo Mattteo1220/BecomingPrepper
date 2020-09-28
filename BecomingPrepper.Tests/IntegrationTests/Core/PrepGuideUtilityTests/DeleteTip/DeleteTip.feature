@@ -6,7 +6,7 @@
 Background: 
 	Given A Prep Guide
 
-@PrepGuideRepository @DisposePrepGuide
+@PrepGuideRepository @DisposePrepGuide @NewDbInstantiation
 Scenario: Delete Tip
 	Given The Prep Guide Already Exists
 	When The Tip within the PrepGuide Needs deleting

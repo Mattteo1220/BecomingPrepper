@@ -3,7 +3,7 @@
 	The family can and will update their objective periodically
 	So that their progress can show in regard to their family goals
 
-@UserRepository @DisposeUser
+@UserRepository @DisposeUser @NewDbInstantiation
 Scenario: Update Objective
 	Given A User
 	And That user is registered

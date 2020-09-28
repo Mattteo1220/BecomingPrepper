@@ -99,10 +99,12 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         [Xunit.TraitAttribute("FeatureTitle", "GetInventoryItem")]
         [Xunit.TraitAttribute("Description", "Get Inventory Item")]
         [Xunit.TraitAttribute("Category", "FoodStorageInventoryRepository")]
+        [Xunit.TraitAttribute("Category", "NewDbInstantiation")]
         public virtual void GetInventoryItem()
         {
             string[] tagsOfScenario = new string[] {
-                    "FoodStorageInventoryRepository"};
+                    "FoodStorageInventoryRepository",
+                    "NewDbInstantiation"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Inventory Item", null, tagsOfScenario, argumentsOfScenario);
 #line 11

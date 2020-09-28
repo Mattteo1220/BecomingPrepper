@@ -32,13 +32,16 @@ namespace BecomingPrepper.Core.RecommenedQuantitiesUtility
                 return;
             }
 
+            _recommendRepo.Dispose();
             _logManager.LogInformation($"New Recommended Amount was Added");
         }
 
         public RecommendedQuantityAmountEntity GetRecommendedAmounts()
         {
             var filter = Builders<RecommendedQuantityAmountEntity>.Filter.Where(rq => rq._id == ObjectId.Parse(RecommendedAmountObjectId));
-            return _recommendRepo.Get(filter);
+            var result = _recommendRepo.Get(filter);
+            _recommendRepo.Dispose();
+            return result;
         }
 
         public void UpdateRecommendedAmount(string id, dynamic newRecommendedAmount)

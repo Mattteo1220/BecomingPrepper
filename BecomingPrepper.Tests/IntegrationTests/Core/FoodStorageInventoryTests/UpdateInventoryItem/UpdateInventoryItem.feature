@@ -7,7 +7,7 @@ Background:
 	Given An Inventory
 	And That Inventory has been registered
 
-@FoodStorageInventoryRepository
+@FoodStorageInventoryRepository @NewDbInstantiation
 Scenario: Update Inventory Item
 	When The prepper updates a field within the inventory Item
 	Then that field is updated in the database

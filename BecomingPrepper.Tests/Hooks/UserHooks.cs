@@ -19,6 +19,7 @@ namespace BecomingPrepper.Tests.Hooks
 
         [BeforeScenario("UserRepository")]
         [BeforeStep("NewDbInstantiation")]
+        [AfterStep("NewDbInstantiation")]
         public void BeforeScenario()
         {
             _userContext.UserRepository = new UserRepository(Users, MockExceptionLogger.Object);
@@ -32,12 +33,6 @@ namespace BecomingPrepper.Tests.Hooks
         {
             var filter = Builders<UserEntity>.Filter.Eq(u => u._id, _userContext.UserEntity._id);
             _userContext.UserRepository.Delete(filter);
-        }
-
-        [AfterScenario("UserRepository", Order = 200)]
-        public void AfterDeleteScenario()
-        {
-            _userContext.UserRepository.Dispose();
         }
     }
 }

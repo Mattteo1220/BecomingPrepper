@@ -38,6 +38,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
                 return;
             }
 
+            _prepGuideRepo.Dispose();
             _exceptionLog.LogInformation($"Tip {tipId} was deleted");
         }
 
@@ -45,7 +46,9 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
         {
             var objectId = ObjectId.Parse(PrepGuideObjectId);
             var filter = Builders<PrepGuideEntity>.Filter.Eq(pge => pge._id, objectId);
-            return _prepGuideRepo.Get(filter);
+            var guide = _prepGuideRepo.Get(filter);
+            _prepGuideRepo.Dispose();
+            return guide;
         }
 
         public void Add(ObjectId objectId, TipEntity tip, bool isTest = false)
@@ -66,6 +69,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
                 return;
             }
 
+            _prepGuideRepo.Dispose();
             _exceptionLog.LogInformation($"Tip {tip.Id} was added");
         }
     }

@@ -7,7 +7,7 @@ Background:
 	Given An Inventory
 	And That Inventory has been registered
 
-@FoodStorageInventoryRepository
+@FoodStorageInventoryRepository @NewDbInstantiation
 Scenario: Delete Inventory Item
 	When A Prepper decides to delete an item from their inventory
 	Then that item is removed from their inventory

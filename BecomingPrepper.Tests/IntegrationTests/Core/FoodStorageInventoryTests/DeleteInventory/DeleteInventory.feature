@@ -6,7 +6,7 @@ Background:
 	Given An Inventory
 	And That Inventory has been registered
 
-@FoodStorageInventoryRepository
+@FoodStorageInventoryRepository @NewDbInstantiation
 Scenario: Delete Inventory
 	When The prepper decides to start over on their inventory
 	Then the entire Inventory is deleted
