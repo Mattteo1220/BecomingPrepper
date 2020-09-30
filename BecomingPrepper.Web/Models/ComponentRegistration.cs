@@ -69,8 +69,8 @@ namespace BecomingPrepper.Web.Models
 
             //Secure Service and Core
             var secureService = new SecureService(new HashingOptions());
-            var recommendService = new RecommendService(recommendedQuantitiesRepository, LogManager);
-            var inventoryUtility = new InventoryUtility(foodStorageInventoryRepository, galleryFileHelperRepository, galleryImageHelperRepository, LogManager);
+            var recommendService = new RecommendService(recommendedQuantitiesRepository, exceptionLogger);
+            var inventoryUtility = new InventoryUtility(foodStorageInventoryRepository, galleryFileHelperRepository, galleryImageHelperRepository, exceptionLogger);
 
             //Add To Services
             services.Add(new ServiceDescriptor(typeof(IComponentRegistration), new ComponentRegistration()

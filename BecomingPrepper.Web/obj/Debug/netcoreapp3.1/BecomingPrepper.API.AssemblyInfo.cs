@@ -11,7 +11,6 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-BecomingPrepper.Web-7CB96493-9E40-4916-BDBD-396C11784FF9")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BecomingPrepper.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]

@@ -131,7 +131,6 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\Unity.Container.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.pdb
-C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\obj\Debug\netcoreapp3.1\BecomingPrepper.Tests.csproj.CoreCompileInputs.cache
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
@@ -163,3 +162,15 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\Serilog.Sinks.Async.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Core.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Core.pdb
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Api.exe
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Api.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\BecomingPrepper.Api.pdb
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Tests\obj\Debug\netcoreapp3.1\BecomingPrepper.Tests.csproj.CoreCompileInputs.cache
