@@ -7,12 +7,12 @@ using MongoDB.Driver;
 
 namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
 {
-    public class PrepGuideUtility : IPrepGuide
+    public class PrepGuide : IPrepGuide
     {
         private ILogManager _exceptionLog;
         private IRepository<PrepGuideEntity> _prepGuideRepo;
         private const string PrepGuideObjectId = "5f6795ec3266a7ff3e2aa32e";
-        public PrepGuideUtility(IRepository<PrepGuideEntity> prepGuideRepo, ILogManager exceptionLog)
+        public PrepGuide(IRepository<PrepGuideEntity> prepGuideRepo, ILogManager exceptionLog)
         {
             _prepGuideRepo = prepGuideRepo;
             _exceptionLog = exceptionLog;

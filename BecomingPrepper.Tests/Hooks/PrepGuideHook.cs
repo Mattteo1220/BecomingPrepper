@@ -22,7 +22,7 @@ namespace BecomingPrepper.Tests.Hooks
         public void BeforeScenario()
         {
             _prepGuideContext.PrepGuideRepository = new PrepGuideRepository(PrepGuides, MockExceptionLogger.Object);
-            _prepGuideContext.PrepGuideUtility = new PrepGuideUtility(_prepGuideContext.PrepGuideRepository, MockExceptionLogger.Object);
+            _prepGuideContext.PrepGuideUtility = new PrepGuide(_prepGuideContext.PrepGuideRepository, MockExceptionLogger.Object);
         }
 
         [AfterScenario("DisposePrepGuide", Order = 100)]
