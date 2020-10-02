@@ -28,7 +28,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.UserRepositoryT
         [Then(@"The user is added to the Mongo Database")]
         public void ThenTheUserIsAddedToTheMongoDatabase()
         {
-            var filter = Builders<UserEntity>.Filter.Eq(u => u.AccountId, _userContext.UserEntity.AccountId);
+            var filter = Builders<UserEntity>.Filter.Eq(u => u.Account.AccountId, _userContext.UserEntity.Account.AccountId);
             TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
             var addedUser = _userContext.UserRepository.Get(filter);
             addedUser.Should().NotBeNull("User was added to the Mongo DB");

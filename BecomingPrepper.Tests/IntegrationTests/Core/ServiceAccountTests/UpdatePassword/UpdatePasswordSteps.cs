@@ -24,13 +24,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.ServiceAccountTests.UpdatePassw
         {
             oldPassword = _userContext.UserEntity.Account.Password;
             _userContext.PropertyUpdate = new Fixture().Create<string>();
-            _userContext.ServiceAccount.UpdatePassword(_userContext.UserEntity.AccountId, _userContext.PropertyUpdate);
+            _userContext.ServiceAccount.UpdatePassword(_userContext.UserEntity.Account.AccountId, _userContext.PropertyUpdate);
         }
 
         [Then(@"That new password is saved in the database")]
         public void ThenThatNewPasswordIsSavedInTheDatabase()
         {
-            var filter = Builders<UserEntity>.Filter.Where(u => u.AccountId == _userContext.UserEntity.AccountId);
+            var filter = Builders<UserEntity>.Filter.Where(u => u.Account.AccountId == _userContext.UserEntity.Account.AccountId);
             TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
             newPassword = _userContext.UserRepository.Get(filter).Account.Password;
             newPassword.Should().NotBeEquivalentTo(oldPassword, "Password was updated.");

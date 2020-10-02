@@ -36,7 +36,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             }
             catch
             {
-                return;
+                throw;
             }
 
             _inventoryRepository.Dispose();
@@ -57,7 +57,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             }
             catch
             {
-                return;
+                throw;
             }
 
             _inventoryRepository.Dispose();
@@ -75,7 +75,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             }
             catch
             {
-                return;
+                throw;
             }
 
             _inventoryRepository.Dispose();
@@ -95,7 +95,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             }
             catch
             {
-                return null;
+                throw;
             }
 
             _inventoryRepository.Dispose();
@@ -115,7 +115,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             }
             catch
             {
-                return null;
+                throw;
             }
 
             _inventoryRepository.Dispose();
@@ -137,7 +137,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             }
             catch
             {
-                return;
+                throw;
             }
 
             _inventoryRepository.Dispose();
@@ -159,7 +159,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             }
             catch
             {
-                return;
+                throw;
             }
 
             _inventoryRepository.Dispose();
@@ -181,7 +181,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                     }
                     catch
                     {
-                        return;
+                        throw;
                     }
                 }
             }
@@ -199,7 +199,7 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             }
             catch
             {
-                return null;
+                throw;
             }
         }
     }

@@ -70,7 +70,8 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         {
             _mockInventoryRepo.Setup(ir => ir.Update(It.IsAny<FilterDefinition<FoodStorageEntity>>(), It.IsAny<UpdateDefinition<FoodStorageEntity>>())).Throws<Exception>();
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
-            inventoryUtility.AddInventoryItem(_fixture.Create<string>(), _fixture.Create<InventoryEntity>());
+            Action errorTest = () => inventoryUtility.AddInventoryItem(_fixture.Create<string>(), _fixture.Create<InventoryEntity>());
+            errorTest.Should().Throw<Exception>();
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }

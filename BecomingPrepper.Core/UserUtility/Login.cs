@@ -13,6 +13,7 @@ namespace BecomingPrepper.Core.UserUtility
         private ISecureService _secureService;
         private ILogManager _exceptionLog;
         private IRepository<UserEntity> _userRepo;
+        public string AccountId { get; set; }
         public Login(IRepository<UserEntity> userRepo, ISecureService secureService, ILogManager exceptionLog)
         {
             _userRepo = userRepo;
@@ -25,7 +26,7 @@ namespace BecomingPrepper.Core.UserUtility
             if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
 
-            var filter = Builders<UserEntity>.Filter.Where(p => p.Account.Username == username);
+            var filter = Builders<UserEntity>.Filter.Eq(p => p.Account.Username, username);
             UserEntity userEntity = null;
             try
             {
@@ -33,7 +34,7 @@ namespace BecomingPrepper.Core.UserUtility
             }
             catch
             {
-                return false;
+                throw;
             }
 
             if (userEntity == null)
@@ -49,8 +50,9 @@ namespace BecomingPrepper.Core.UserUtility
             }
 
             _userRepo.Dispose();
-            _exceptionLog.LogInformation($"User '{userEntity.AccountId}' has been verified");
+            _exceptionLog.LogInformation($"User '{userEntity.Account.AccountId}' has been verified");
 
+            AccountId = userEntity.Account.AccountId;
             return result.Verified;
         }
     }

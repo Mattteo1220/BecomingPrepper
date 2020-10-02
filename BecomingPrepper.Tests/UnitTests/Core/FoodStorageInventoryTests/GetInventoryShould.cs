@@ -45,7 +45,8 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         public void CallGet()
         {
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryFileHelperRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
-            inventoryUtility.GetInventory(_fixture.Create<string>());
+            Action errorTest = () => inventoryUtility.GetInventory(_fixture.Create<string>());
+            errorTest.Should().Throw<Exception>();
             _mockInventoryRepo.Verify(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>()), Times.Once);
         }
 
@@ -65,7 +66,8 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         {
             _mockInventoryRepo.Setup(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>())).Throws<Exception>();
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryFileHelperRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
-            inventoryUtility.GetInventory(_fixture.Create<string>());
+            Action errorTest = () => inventoryUtility.GetInventory(_fixture.Create<string>());
+            errorTest.Should().Throw<Exception>();
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }

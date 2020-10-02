@@ -29,7 +29,7 @@ namespace BecomingPrepper.Core.RecommenedQuantitiesUtility
             }
             catch
             {
-                return;
+                throw;
             }
 
             _recommendRepo.Dispose();

@@ -21,13 +21,13 @@ namespace BecomingPrepper.Tests.IntegrationTests.ServiceAccountTests.UpdateFamil
         public void WhenThatUserUpdatesTheirFamilySize()
         {
             _userContext.PropertyUpdate = new Fixture().Create<int>();
-            _userContext.ServiceAccount.UpdateFamilySize(_userContext.UserEntity.AccountId, _userContext.PropertyUpdate);
+            _userContext.ServiceAccount.UpdateFamilySize(_userContext.UserEntity.Account.AccountId, _userContext.PropertyUpdate);
         }
 
         [Then(@"the new family size is returned from the database")]
         public void ThenTheNewFamilySizeIsReturnedFromTheDatabase()
         {
-            var filter = Builders<UserEntity>.Filter.Eq(u => u.AccountId, _userContext.UserEntity.AccountId);
+            var filter = Builders<UserEntity>.Filter.Eq(u => u.Account.AccountId, _userContext.UserEntity.Account.AccountId);
             TestHelper.WaitUntil(() => _userContext.UserRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
             _userContext.UserRepository.Get(filter).Prepper.FamilySize.Should().Be(_userContext.PropertyUpdate, "Family Size was updated");
         }

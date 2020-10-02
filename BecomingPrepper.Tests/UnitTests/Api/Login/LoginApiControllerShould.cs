@@ -48,7 +48,15 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Login
         public void ReturnOkWhenAuthorized()
         {
             _mockLogin.Setup(l => l.Authenticate(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
-            _loginController.Post(_fixture.Create<Credentials>()).Should().BeOfType<OkResult>();
+            _loginController.Post(_fixture.Create<Credentials>()).Should().BeOfType<OkObjectResult>();
+        }
+
+        [Fact]
+        public void ReturnAccountIdWhenAuthorized()
+        {
+            _mockLogin.Setup(l => l.Authenticate(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
+            var response = _loginController.Post(_fixture.Create<Credentials>()) as OkObjectResult;
+            response?.Value.ToString().Should().Contain("AccountId: ");
         }
 
         [Fact]

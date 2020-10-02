@@ -8,6 +8,7 @@ using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
 using FluentAssertions;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using Moq;
 using Xunit;
 
@@ -69,8 +70,18 @@ namespace BecomingPrepper.Tests.UnitTests.RegisterTests
         {
             _mockUserRepo.Setup(ur => ur.Add(It.IsAny<UserEntity>())).Throws<Exception>();
             _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
-            _register.Register(_fixture.Create<UserEntity>());
+            Action errorTest = () => _register.Register(_fixture.Create<UserEntity>());
+            errorTest.Should().Throw<Exception>();
             _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Never);
+        }
+
+        [Fact]
+        public void ThrowAnInvalidOperationExceptionWhenGetReturnsAUserThatHasAUsernameAlreadyInUse()
+        {
+            _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Returns(_fixture.Create<UserEntity>());
+            _register = new RegisterService(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
+            Action errorTest = () => _register.Register(_fixture.Create<UserEntity>());
+            errorTest.Should().Throw<InvalidOperationException>("A user with a username already in use was returned");
         }
     }
 }

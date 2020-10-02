@@ -81,7 +81,8 @@ namespace BecomingPrepper.Tests.UnitTests.LoginTests
         {
             _mockUserRepo.Setup(ur => ur.Get(It.IsAny<FilterDefinition<UserEntity>>())).Throws<Exception>();
             _login = new Login(_mockUserRepo.Object, _mockSecureService.Object, _mockExceptionLogger.Object);
-            _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
+            Action errorTest = () => _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
+            errorTest.Should().Throw<Exception>();
             _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }

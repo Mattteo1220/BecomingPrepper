@@ -35,7 +35,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
             }
             catch
             {
-                return;
+                throw;
             }
 
             _prepGuideRepo.Dispose();
@@ -66,7 +66,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
             }
             catch
             {
-                return;
+                throw;
             }
 
             _prepGuideRepo.Dispose();

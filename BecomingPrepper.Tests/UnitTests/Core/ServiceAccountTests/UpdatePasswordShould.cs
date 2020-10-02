@@ -71,7 +71,8 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>())).Throws<Exception>();
             _mockSecureService.Setup(ss => ss.Validate(It.IsAny<string>(), It.IsAny<string>())).Returns((false, false));
 
-            _serviceAccount.UpdatePassword(_fixture.Create<string>(), _fixture.Create<string>());
+            Action errorTest = () => _serviceAccount.UpdatePassword(_fixture.Create<string>(), _fixture.Create<string>());
+            errorTest.Should().Throw<Exception>();
             _mockExceptionLogger.Verify(ur => ur.LogInformation(It.IsAny<string>()), Times.Never);
         }
 
@@ -96,7 +97,8 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>())).Throws<Exception>();
             _mockSecureService.Setup(ss => ss.Validate(It.IsAny<string>(), It.IsAny<string>())).Returns((false, false));
 
-            _serviceAccount.UpdatePassword(_fixture.Create<string>(), _fixture.Create<string>());
+            Action errorTest = () => _serviceAccount.UpdatePassword(_fixture.Create<string>(), _fixture.Create<string>());
+            errorTest.Should().Throw<Exception>();
             _mockSecureService.Verify(ss => ss.Hash(It.IsAny<string>()), Times.Once);
         }
     }

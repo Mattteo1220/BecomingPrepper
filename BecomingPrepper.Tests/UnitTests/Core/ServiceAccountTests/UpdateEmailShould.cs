@@ -65,7 +65,8 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>())).Throws<Exception>();
 
-            _serviceAccount.UpdateEmail(_fixture.Create<string>(), _fixture.Create<string>());
+            Action errorTest = () => _serviceAccount.UpdateEmail(_fixture.Create<string>(), _fixture.Create<string>());
+            errorTest.Should().Throw<Exception>();
             _mockExceptionLogger.Verify(ur => ur.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }

@@ -58,7 +58,8 @@ namespace BecomingPrepper.Tests.UnitTests.RecommendServiceTests
         {
             var recommendedQuantityAmountEntity = _fixture.Create<RecommendedQuantityAmountEntity>();
             _mockRecommendRepo.Setup(rr => rr.Add(It.IsAny<RecommendedQuantityAmountEntity>())).Throws<Exception>();
-            _recommendService.AddRecommendedAmount(recommendedQuantityAmountEntity);
+            Action errorTest = () => _recommendService.AddRecommendedAmount(recommendedQuantityAmountEntity);
+            errorTest.Should().Throw<Exception>();
             _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }

@@ -34,7 +34,7 @@ namespace BecomingPrepper.Api.Controllers.User
                 var result = _login.Authenticate(credentials.Username, credentials.Password);
                 if (result)
                 {
-                    return Ok();
+                    return Ok("AccountId: " + _login.AccountId);
                 }
                 else
                 {

@@ -11,8 +11,6 @@ namespace BecomingPrepper.Data.Entities
         [BsonElement]
         public string LastName { get; set; }
         [BsonElement]
-        public string Email { get; set; }
-        [BsonElement]
         public string ModifiedBy { get; set; }
         [BsonElement]
         public DateTime ModifiedDate { get; set; }

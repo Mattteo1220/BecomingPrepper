@@ -26,10 +26,9 @@ namespace BecomingPrepper.Core.UserUtility
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
             if (string.IsNullOrWhiteSpace(email)) throw new ArgumentNullException(nameof(email));
 
-            var filter = Builders<UserEntity>.Filter.Eq(ue => ue.AccountId, accountId);
+            var filter = Builders<UserEntity>.Filter.Eq(ue => ue.Account.AccountId, accountId);
             var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.Account.Email, email);
             UpdateValue(filter, updateFilter, $"User '{accountId}' updated Their email to {email}");
-
         }
 
         public void UpdateFamilySize(string accountId, int familySize)
@@ -37,7 +36,7 @@ namespace BecomingPrepper.Core.UserUtility
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
             if (familySize <= 0) throw new InvalidOperationException("Family size must be greater than 0");
 
-            var filter = Builders<UserEntity>.Filter.Eq(ue => ue.AccountId, accountId);
+            var filter = Builders<UserEntity>.Filter.Eq(ue => ue.Account.AccountId, accountId);
             var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.Prepper.FamilySize, familySize);
             UpdateValue(filter, updateFilter, $"User '{accountId}' updated their FamilySize to {familySize}");
         }
@@ -47,7 +46,7 @@ namespace BecomingPrepper.Core.UserUtility
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
             if (objective < 1 || objective > 9) throw new InvalidOperationException("Objective must be a supported objective");
 
-            var filter = Builders<UserEntity>.Filter.Eq(ue => ue.AccountId, accountId);
+            var filter = Builders<UserEntity>.Filter.Eq(ue => ue.Account.AccountId, accountId);
             var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.Prepper.Objective, objective);
             UpdateValue(filter, updateFilter, $"User '{accountId}' updated their Objective to {objective}");
         }
@@ -57,7 +56,7 @@ namespace BecomingPrepper.Core.UserUtility
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
 
-            var initialFilter = Builders<UserEntity>.Filter.Where(p => p.AccountId == accountId);
+            var initialFilter = Builders<UserEntity>.Filter.Where(p => p.Account.AccountId == accountId);
             UserEntity userEntity = null;
             try
             {
@@ -65,7 +64,7 @@ namespace BecomingPrepper.Core.UserUtility
             }
             catch
             {
-                return;
+                throw;
             }
 
             if (_secureService.Validate(userEntity.Account.Password, password).Verified)
@@ -76,7 +75,7 @@ namespace BecomingPrepper.Core.UserUtility
 
             password = _secureService.Hash(password);
 
-            var finalFilter = Builders<UserEntity>.Filter.Where(ue => ue.AccountId == accountId);
+            var finalFilter = Builders<UserEntity>.Filter.Where(ue => ue.Account.AccountId == accountId);
             var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.Account.Password, password);
             UpdateValue(finalFilter, updateFilter, $"User '{accountId}' updated their Password to {password}");
 
@@ -90,7 +89,7 @@ namespace BecomingPrepper.Core.UserUtility
             }
             catch
             {
-                return;
+                throw;
             }
             _userRepo.Dispose();
             _logManager.LogInformation(logMessage);

@@ -62,7 +62,8 @@ namespace BecomingPrepper.Tests.UnitTests.PrepGuideUtilityTests
         public void NotCallLogInformationWhenExceptionThrownOnDelete()
         {
             _mockPrepGuideRepo.Setup(pgr => pgr.Update(It.IsAny<FilterDefinition<PrepGuideEntity>>(), It.IsAny<UpdateDefinition<PrepGuideEntity>>())).Throws<Exception>();
-            _prepGuideUtility.Delete(_fixture.Create<ObjectId>(), _fixture.Create<string>(), true);
+            Action errorTest = () => _prepGuideUtility.Delete(_fixture.Create<ObjectId>(), _fixture.Create<string>(), true);
+            errorTest.Should().Throw<Exception>();
             _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }

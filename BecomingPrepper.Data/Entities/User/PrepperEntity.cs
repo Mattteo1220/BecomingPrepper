@@ -7,13 +7,9 @@ namespace BecomingPrepper.Data.Entities
     public class PrepperEntity
     {
         [BsonElement]
-        public string PrepperPersonification { get; set; }
-        [BsonElement]
         public int FamilySize { get; set; }
         [BsonElement]
         public int Objective { get; set; }
-        [BsonElement]
-        public string Role { get; set; } = "Prepper";
         [BsonElement]
         public DateTime ModifiedDate { get; set; }
         [BsonElement]

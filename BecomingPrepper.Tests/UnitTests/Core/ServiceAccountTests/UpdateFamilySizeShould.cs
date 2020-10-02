@@ -72,7 +72,8 @@ namespace BecomingPrepper.Tests.UnitTests.ServiceAccountTests
         {
             _mockUserRepo.Setup(ur => ur.Update(It.IsAny<FilterDefinition<UserEntity>>(), It.IsAny<UpdateDefinition<UserEntity>>())).Throws<Exception>();
 
-            _serviceAccount.UpdateFamilySize(_fixture.Create<string>(), _fixture.Create<int>());
+            Action errorTest = () => _serviceAccount.UpdateFamilySize(_fixture.Create<string>(), _fixture.Create<int>());
+            errorTest.Should().Throw<Exception>();
             _mockExceptionLogger.Verify(ur => ur.LogInformation(It.IsAny<string>()), Times.Never);
         }
     }

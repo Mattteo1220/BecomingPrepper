@@ -20,18 +20,6 @@ namespace BecomingPrepper.Web.Models
 {
     public class ComponentRegistration
     {
-        //public IMongoDatabase MongoDatabase { get; set; }
-        //public IRepository<UserEntity> Users { get; set; }
-        //public IRepository<PrepGuideEntity> PrepGuides { get; set; }
-        //public IRepository<RecommendedQuantityAmountEntity> RecommendedQuantities { get; set; }
-        //public IRepository<FoodStorageEntity> FoodStorageInventory { get; set; }
-        //public ILogManager LogManager { get; set; }
-        //public ISecureService SecureService { get; set; }
-        //public IRecommendService RecommendService { get; set; }
-        //public IInventoryUtility InventoryUtility { get; set; }
-        //public IGalleryImageHelperRepository GalleryImageHelperRepository { get; set; }
-        //public IGalleryFileHelperRepository GalleryFileHelperRepository { get; set; }
-
         public void Register(ref IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetSection("MongoClient").GetSection("Connection").Value;
@@ -95,23 +83,6 @@ namespace BecomingPrepper.Web.Models
             services.AddSingleton<ILogin, Login>();
             services.AddSingleton<IRegister, RegisterService>();
             services.AddSingleton<IServiceAccount, ServiceAccount>();
-            //Add To Services
-            //services.Add(new ServiceDescriptor(typeof(IComponentRegistration), new ComponentRegistration()
-            //{
-            //    MongoDatabase = mongoDatabase,
-            //    Users = usersRepository,
-            //    PrepGuides = prepGuidesRepository,
-            //    RecommendedQuantities = recommendedQuantitiesRepository,
-            //    FoodStorageInventory = foodStorageInventoryRepository,
-            //    LogManager = exceptionLogger,
-            //    SecureService = secureService,
-            //    RecommendService = recommendService,
-            //    InventoryUtility = inventoryUtility,
-            //    GalleryImageHelperRepository = GalleryImageHelperRepository,
-            //    GalleryFileHelperRepository = GalleryFileHelperRepository
-            //}));
-
-
         }
     }
 }
