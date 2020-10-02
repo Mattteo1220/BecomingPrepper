@@ -14,9 +14,9 @@ namespace BecomingPrepper.Api.Controllers.User
     [ApiController]
     public class RegisterController : ControllerBase
     {
-        private IRegister _registration;
-        private IMapper _mapper;
-        private ILogManager _logger;
+        private readonly IRegister _registration;
+        private readonly IMapper _mapper;
+        private readonly ILogManager _logger;
         public RegisterController(IRegister registration, IMapper mapper, ILogManager logger)
         {
             _registration = registration ?? throw new ArgumentNullException(nameof(registration));

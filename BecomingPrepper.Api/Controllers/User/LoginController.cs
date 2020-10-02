@@ -16,8 +16,8 @@ namespace BecomingPrepper.Api.Controllers.User
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private ILogin _login;
-        private ILogManager _logger;
+        private readonly ILogin _login;
+        private readonly ILogManager _logger;
         public LoginController(ILogin login, ILogManager logger)
         {
             _login = login ?? throw new ArgumentNullException(nameof(login));

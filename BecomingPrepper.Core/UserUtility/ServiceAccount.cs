@@ -21,6 +21,17 @@ namespace BecomingPrepper.Core.UserUtility
             _logManager = logManager;
         }
 
+        public UserEntity GetAccountDetails(string accountId)
+        {
+            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
+
+            var filter = Builders<UserEntity>.Filter.Eq(ue => ue.Account.AccountId, accountId);
+            UserEntity entity = null;
+            entity = _userRepo.Get(filter);
+
+            return entity;
+        }
+
         public void UpdateEmail(string accountId, string email)
         {
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));

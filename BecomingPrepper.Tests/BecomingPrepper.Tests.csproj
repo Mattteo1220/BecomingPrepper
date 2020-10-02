@@ -58,6 +58,9 @@
     <Compile Update="IntegrationTests\Core\FoodStorageInventoryTests\UpdateInventoryItem\UpdateInventoryItem.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Update="IntegrationTests\Core\ServiceAccountTests\GetAccountDetails\GetAccountDetails.feature.cs">
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Update="IntegrationTests\Logger\ExceptionLoggerTests\ExceptionLogger.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
@@ -133,6 +136,10 @@
     <SpecFlowFeatureFiles Update="IntegrationTests\Core\FoodStorageInventoryTests\UpdateInventoryItem\UpdateInventoryItem.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UpdateInventoryItem.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="IntegrationTests\Core\ServiceAccountTests\GetAccountDetails\GetAccountDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GetAccountDetails.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="IntegrationTests\Logger\ExceptionLoggerTests\ExceptionLogger.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
