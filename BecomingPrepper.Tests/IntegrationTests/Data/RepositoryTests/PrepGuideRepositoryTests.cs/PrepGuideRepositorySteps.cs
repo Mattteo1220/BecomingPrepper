@@ -99,11 +99,11 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
         [When(@"PrepGuideRepository Delete is called")]
         public void WhenPrepGuideRepositoryDeleteIsCalled()
         {
-            _prepGuideContext.PropertyUpdate = _prepGuideContext.PrepGuide.Tips.First().Id;
+            _prepGuideContext.PropertyUpdate = _prepGuideContext.PrepGuide.Tips.First().TipId;
             var arrayFilter = Builders<PrepGuideEntity>.Filter.And(
                 Builders<PrepGuideEntity>.Filter.Where(x => x._id == _prepGuideContext.PrepGuide._id),
-                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.Id == _prepGuideContext.PrepGuide.Tips.First().Id));
-            var update = Builders<PrepGuideEntity>.Update.PullFilter(u => u.Tips, t => t.Id == _prepGuideContext.PropertyUpdate);// [-1] means update first matching array element
+                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.TipId == _prepGuideContext.PrepGuide.Tips.First().TipId));
+            var update = Builders<PrepGuideEntity>.Update.PullFilter(u => u.Tips, t => t.TipId == _prepGuideContext.PropertyUpdate);// [-1] means update first matching array element
 
             _prepGuideContext.PrepGuideRepository.Update(arrayFilter, update);
         }
@@ -113,7 +113,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.RepositoryTests.PrepGuideReposi
         {
             var filter = Builders<PrepGuideEntity>.Filter.Eq(u => u._id, _prepGuideContext.PrepGuide._id);
             TestHelper.WaitUntil(() => _prepGuideContext.PrepGuideRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            _prepGuideContext.PrepGuideRepository.Get(filter).Tips.Should().NotContain(x => x.Id == _prepGuideContext.PropertyUpdate);
+            _prepGuideContext.PrepGuideRepository.Get(filter).Tips.Should().NotContain(x => x.TipId == _prepGuideContext.PropertyUpdate);
         }
 
         #endregion

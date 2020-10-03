@@ -7,22 +7,17 @@ namespace BecomingPrepper.Data.Repositories
 {
     public class GalleryFileHelperRepository : IGalleryFileHelperRepository
     {
-        public IMongoCollection<GalleryFileInfoEntity> Collection { get; set; }
-        public GalleryFileHelperRepository(IMongoCollection<GalleryFileInfoEntity> collection)
+        private IMongoDatabase _mongoContext;
+        private IMongoCollection<GalleryFileInfoEntity> _collection;
+        public GalleryFileHelperRepository(IMongoDatabase mongoContext)
         {
-            Collection = collection ?? throw new ArgumentNullException(nameof(collection));
+            _mongoContext = mongoContext ?? throw new ArgumentNullException(nameof(mongoContext));
+            _collection = _mongoContext.GetCollection<GalleryFileInfoEntity>("InventoryImages.files");
         }
 
         public List<GalleryFileInfoEntity> GetFiles()
         {
-            try
-            {
-                return Collection.Find("{}").ToList();
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            return _collection.Find("{}").ToList();
         }
     }
 }

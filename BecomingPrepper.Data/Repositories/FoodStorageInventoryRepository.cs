@@ -8,13 +8,14 @@ namespace BecomingPrepper.Data.Repositories
 {
     public class FoodStorageInventoryRepository : IRepository<FoodStorageEntity>
     {
-        private bool _disposed = false;
-        public IMongoCollection<FoodStorageEntity> Collection { get; set; }
+        private IMongoDatabase _mongoContext;
+        private IMongoCollection<FoodStorageEntity> _collection;
         private ILogManager _logger;
 
-        public FoodStorageInventoryRepository(IMongoCollection<FoodStorageEntity> collection, ILogManager logger)
+        public FoodStorageInventoryRepository(IMongoDatabase mongoContext, ILogManager logger)
         {
-            Collection = collection ?? throw new ArgumentNullException(nameof(collection));
+            _mongoContext = mongoContext ?? throw new ArgumentNullException(nameof(mongoContext));
+            _collection = _mongoContext.GetCollection<FoodStorageEntity>("Inventory");
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
@@ -24,7 +25,7 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                Collection.InsertOne(entity);
+                _collection.InsertOne(entity);
             }
             catch (Exception e)
             {
@@ -39,7 +40,7 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                Collection.FindOneAndDelete(deleteFilter);
+                _collection.FindOneAndDelete(deleteFilter);
             }
             catch (Exception e)
             {
@@ -55,7 +56,7 @@ namespace BecomingPrepper.Data.Repositories
             FoodStorageEntity entity = null;
             try
             {
-                entity = Collection.Find(queryFilter).Limit(1).FirstOrDefault();
+                entity = _collection.Find(queryFilter).Limit(1).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -73,27 +74,12 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                Collection.FindOneAndUpdate(queryFilter, updateFilter);
+                _collection.FindOneAndUpdate(queryFilter, updateFilter);
             }
             catch (Exception e)
             {
                 _logger.LogError(e);
                 throw;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                Collection = null;
-                _disposed = true;
             }
         }
     }

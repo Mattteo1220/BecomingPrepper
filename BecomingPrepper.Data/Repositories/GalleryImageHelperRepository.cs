@@ -8,24 +8,19 @@ namespace BecomingPrepper.Data.Repositories
 {
     public class GalleryImageHelperRepository : IGalleryImageHelperRepository
     {
-        public IMongoCollection<GalleryImageEntity> Collection { get; set; }
-        public GalleryImageHelperRepository(IMongoCollection<GalleryImageEntity> collection)
+        private IMongoDatabase _mongoContext;
+        private IMongoCollection<GalleryImageEntity> _collection;
+        public GalleryImageHelperRepository(IMongoDatabase mongoContext)
         {
-            Collection = collection;
+            _mongoContext = mongoContext ?? throw new ArgumentNullException(nameof(mongoContext));
+            _collection = _mongoContext.GetCollection<GalleryImageEntity>("InventoryImages.chunks");
         }
 
         public byte[] GetImage(ObjectId id)
         {
             var filter = Builders<GalleryImageEntity>.Filter.Where(im => im.files_id == id);
-            try
-            {
-                var result = Collection.Find(filter).Limit(1).FirstOrDefault();
-                return result.data;
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            var result = _collection.Find(filter).Limit(1).FirstOrDefault();
+            return result.data;
         }
     }
 }

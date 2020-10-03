@@ -14,7 +14,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
 {
     public class FoodStorageInventoryRepositoryShould
     {
-        private Mock<IMongoCollection<FoodStorageEntity>> _mockFoodStorageInventoryCollection;
+        private Mock<IMongoDatabase> _mockFoodStorageInventoryCollection;
         private Mock<ILogManager> _mockLogger;
         private Mock<IRepository<FoodStorageEntity>> _mockInventoryRepository;
         private Fixture _fixture;
@@ -22,7 +22,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
         {
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
-            _mockFoodStorageInventoryCollection = new Mock<IMongoCollection<FoodStorageEntity>>();
+            _mockFoodStorageInventoryCollection = new Mock<IMongoDatabase>();
             _mockLogger = new Mock<ILogManager>();
             _mockInventoryRepository = new Mock<IRepository<FoodStorageEntity>>();
         }
@@ -37,7 +37,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             foodStorageInventoryRepository = () => new FoodStorageInventoryRepository(null, _mockLogger.Object);
 
             //Assert
-            foodStorageInventoryRepository.Should().Throw<ArgumentNullException>(because: "No Collection was supplied");
+            foodStorageInventoryRepository.Should().Throw<ArgumentNullException>(because: "No _collection was supplied");
         }
 
         [Fact]
@@ -51,20 +51,6 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
 
             //Assert
             foodStorageInventoryRepository.Should().Throw<ArgumentNullException>(because: "No LogManager was supplied");
-        }
-
-        [Fact]
-        public void DisposeProperly()
-        {
-            //Arrrange
-            var mockDatabase = TestHelper.GetMockDatabase();
-
-            //Act
-            var foodStorageInventoryRepository = new FoodStorageInventoryRepository(_mockFoodStorageInventoryCollection.Object, _mockLogger.Object);
-            foodStorageInventoryRepository.Dispose();
-
-            //Asssert
-            foodStorageInventoryRepository.Collection.Should().BeNull(because: "It was disposed of");
         }
     }
 }

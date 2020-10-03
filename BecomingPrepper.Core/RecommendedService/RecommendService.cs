@@ -32,7 +32,6 @@ namespace BecomingPrepper.Core.RecommenedQuantitiesUtility
                 throw;
             }
 
-            _recommendRepo.Dispose();
             _logManager.LogInformation($"New Recommended Amount was Added");
         }
 
@@ -40,7 +39,6 @@ namespace BecomingPrepper.Core.RecommenedQuantitiesUtility
         {
             var filter = Builders<RecommendedQuantityAmountEntity>.Filter.Where(rq => rq._id == ObjectId.Parse(RecommendedAmountObjectId));
             var result = _recommendRepo.Get(filter);
-            _recommendRepo.Dispose();
             return result;
         }
 

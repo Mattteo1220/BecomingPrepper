@@ -13,6 +13,7 @@ namespace BecomingPrepper.Tests
     {
         public ScenarioContext ScenarioContext;
         public Mock<ILogManager> MockExceptionLogger;
+        public IMongoDatabase MongoContext;
         public IMongoCollection<GalleryImageEntity> GalleryImageHelpeRepo;
         public IMongoCollection<UserEntity> Users;
         public IMongoCollection<RecommendedQuantityAmountEntity> RecommendedQuantities;
@@ -24,6 +25,7 @@ namespace BecomingPrepper.Tests
         {
             this.ScenarioContext = scenarioContext ?? throw new ArgumentNullException(nameof(scenarioContext));
             MockExceptionLogger = new Mock<ILogManager>();
+            MongoContext = TestHelper.GetDatabase();
             Users = TestHelper.GetDatabase().GetCollection<UserEntity>("Users");
             RecommendedQuantities = TestHelper.GetDatabase().GetCollection<RecommendedQuantityAmountEntity>("RecommendedQuantities");
             PrepGuides = TestHelper.GetDatabase().GetCollection<PrepGuideEntity>("PrepGuides");

@@ -33,7 +33,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.PrepGuideUtilityTests.AddTip
         {
             var filter = Builders<PrepGuideEntity>.Filter.Eq(u => u._id, _prepGuideContext.PrepGuide._id);
             TestHelper.WaitUntil(() => _prepGuideContext.PrepGuideRepository.Get(filter) != null, TimeSpan.FromMilliseconds(30000));
-            _prepGuideContext.PrepGuideRepository.Get(filter).Tips.Should().Contain(x => x.Id == _tip.Id);
+            _prepGuideContext.PrepGuideRepository.Get(filter).Tips.Should().Contain(x => x.TipId == _tip.TipId);
         }
     }
 }

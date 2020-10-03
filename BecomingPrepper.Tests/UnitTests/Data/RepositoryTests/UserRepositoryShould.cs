@@ -36,19 +36,5 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             //Assert
             userRepository.Should().Throw<ArgumentNullException>("No IMongo database was supplied.");
         }
-
-        [Fact]
-        public void DisposeProperly()
-        {
-            //Arrrange
-            var mockDatabase = TestHelper.GetMockDatabase();
-
-            //Act
-            var userRepository = new UserRepository(_mockUserRepo.Object, _mockLogger.Object);
-            userRepository.Dispose();
-
-            //Asssert
-            userRepository.Collection.Should().BeNull("It was disposed of");
-        }
     }
 }

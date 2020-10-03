@@ -9,12 +9,14 @@ namespace BecomingPrepper.Data.Repositories
     public class RecommendedQuantityRepository : IRepository<RecommendedQuantityAmountEntity>
     {
         private bool _disposed = false;
-        public IMongoCollection<RecommendedQuantityAmountEntity> Collection { get; set; }
+        private IMongoCollection<RecommendedQuantityAmountEntity> _collection;
+        private IMongoDatabase _mongoContext;
         private ILogManager _logger;
 
-        public RecommendedQuantityRepository(IMongoCollection<RecommendedQuantityAmountEntity> collection, ILogManager logManager)
+        public RecommendedQuantityRepository(IMongoDatabase mongoContext, ILogManager logManager)
         {
-            Collection = collection ?? throw new ArgumentNullException(nameof(collection));
+            _mongoContext = mongoContext ?? throw new ArgumentNullException(nameof(mongoContext));
+            _collection = _mongoContext.GetCollection<RecommendedQuantityAmountEntity>("RecommendedQuantities");
             _logger = logManager ?? throw new ArgumentNullException(nameof(logManager));
         }
 
@@ -23,7 +25,7 @@ namespace BecomingPrepper.Data.Repositories
             if (recommendedQuantityAmountEntity == null) throw new ArgumentNullException(nameof(recommendedQuantityAmountEntity));
             try
             {
-                Collection.InsertOneAsync(recommendedQuantityAmountEntity);
+                _collection.InsertOneAsync(recommendedQuantityAmountEntity);
             }
             catch (Exception e)
             {
@@ -38,7 +40,7 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                Collection.FindOneAndDeleteAsync(deleteFilter);
+                _collection.FindOneAndDeleteAsync(deleteFilter);
             }
             catch (Exception e)
             {
@@ -54,7 +56,7 @@ namespace BecomingPrepper.Data.Repositories
             RecommendedQuantityAmountEntity entity = null;
             try
             {
-                entity = Collection.Find(filter).Limit(1).FirstOrDefault();
+                entity = _collection.Find(filter).Limit(1).FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -72,27 +74,12 @@ namespace BecomingPrepper.Data.Repositories
 
             try
             {
-                Collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
+                _collection.FindOneAndUpdateAsync(queryFilter, updateFilter);
             }
             catch (Exception e)
             {
                 _logger.LogError(e);
                 throw;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                Collection = null;
-                _disposed = true;
             }
         }
     }

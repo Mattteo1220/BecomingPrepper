@@ -34,21 +34,7 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
             PrepGuideRepository = () => new PrepGuideRepository(null, _mockLogger.Object);
 
             //Assert
-            PrepGuideRepository.Should().Throw<ArgumentNullException>("No Collection was supplied.");
-        }
-
-        [Fact]
-        public void DisposeProperly()
-        {
-            //Arrrange
-            var mockDatabase = TestHelper.GetMockDatabase();
-
-            //Act
-            var prepGuideRepository = new PrepGuideRepository(_mockFoodStorageInventoryCollection.Object, _mockLogger.Object);
-            prepGuideRepository.Dispose();
-
-            //Asssert
-            prepGuideRepository.Collection.Should().BeNull("It was disposed of");
+            PrepGuideRepository.Should().Throw<ArgumentNullException>("No _collection was supplied.");
         }
     }
 }

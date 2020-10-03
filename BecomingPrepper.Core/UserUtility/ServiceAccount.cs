@@ -94,15 +94,7 @@ namespace BecomingPrepper.Core.UserUtility
 
         private void UpdateValue(FilterDefinition<UserEntity> filter, UpdateDefinition<UserEntity> Update, string logMessage)
         {
-            try
-            {
-                _userRepo.Update(filter, Update);
-            }
-            catch
-            {
-                throw;
-            }
-            _userRepo.Dispose();
+            _userRepo.Update(filter, Update);
             _logManager.LogInformation(logMessage);
         }
     }

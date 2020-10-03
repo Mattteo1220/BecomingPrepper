@@ -125,11 +125,5 @@ namespace BecomingPrepper.Api.Controllers.User
 
             return Ok("Password updated successfully");
         }
-
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

@@ -21,9 +21,9 @@ namespace BecomingPrepper.Tests.Hooks
         [AfterStep("NewDbInstantiation")]
         public void BeforeScenario()
         {
-            _context.FoodStorageInventoryRepository = new FoodStorageInventoryRepository(Inventory, MockExceptionLogger.Object);
-            _context.GalleryFileHelperRepository = new GalleryFileHelperRepository(GalleryFileHelperRepo);
-            _context.GalleryImageHelperRepository = new GalleryImageHelperRepository(GalleryImageHelpeRepo);
+            _context.FoodStorageInventoryRepository = new FoodStorageInventoryRepository(MongoContext, MockExceptionLogger.Object);
+            _context.GalleryFileHelperRepository = new GalleryFileHelperRepository(MongoContext);
+            _context.GalleryImageHelperRepository = new GalleryImageHelperRepository(MongoContext);
             _context.InventoryUtility = new InventoryUtility(_context.FoodStorageInventoryRepository, _context.GalleryFileHelperRepository, _context.GalleryImageHelperRepository, MockExceptionLogger.Object);
         }
 
@@ -31,10 +31,6 @@ namespace BecomingPrepper.Tests.Hooks
         public void AfterScenario()
         {
             var filter = Builders<FoodStorageEntity>.Filter.Eq(u => u._id, _context.FoodStorageInventoryEntity._id);
-            if (_context.FoodStorageInventoryRepository.Collection == null)
-            {
-                BeforeScenario();
-            }
             _context.FoodStorageInventoryRepository.Delete(filter);
         }
     }

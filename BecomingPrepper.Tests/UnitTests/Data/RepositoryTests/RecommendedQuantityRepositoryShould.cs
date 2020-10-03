@@ -1,6 +1,5 @@
 ﻿using System;
 using AutoFixture;
-using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Data.Repositories;
 using BecomingPrepper.Logger;
 using FluentAssertions;
@@ -13,14 +12,14 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
 {
     public class RecommendedQuantityRepositoryShould
     {
-        private Mock<IMongoCollection<RecommendedQuantityAmountEntity>> _mockFoodStorageInventoryCollection;
+        private Mock<IMongoDatabase> _mockMongoContext;
         private Mock<ILogManager> _mockLogger;
         private Fixture _fixture;
         public RecommendedQuantityRepositoryShould()
         {
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
-            _mockFoodStorageInventoryCollection = new Mock<IMongoCollection<RecommendedQuantityAmountEntity>>();
+            _mockMongoContext = new Mock<IMongoDatabase>();
             _mockLogger = new Mock<ILogManager>();
         }
 
@@ -35,20 +34,6 @@ namespace BecomingPrepper.Tests.UnitTests.RepositoryTests
 
             //Assert
             recommendedQuantityRespository.Should().Throw<ArgumentNullException>("No IMongo database was supplied.");
-        }
-
-        [Fact]
-        public void DisposeProperly()
-        {
-            //Arrange
-            var mockDatabase = TestHelper.GetMockDatabase();
-
-            //Act
-            var recommendedQuantityRepository = new RecommendedQuantityRepository(_mockFoodStorageInventoryCollection.Object, _mockLogger.Object);
-            recommendedQuantityRepository.Dispose();
-
-            //Assert
-            recommendedQuantityRepository.Collection.Should().BeNull("It was disposed of");
         }
     }
 }

@@ -26,8 +26,8 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
 
             var arrayFilter = Builders<PrepGuideEntity>.Filter.And(
                 Builders<PrepGuideEntity>.Filter.Where(x => x._id == objectId),
-                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.Id == tipId));
-            var update = Builders<PrepGuideEntity>.Update.PullFilter(u => u.Tips, t => t.Id == tipId);
+                Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.TipId == tipId));
+            var update = Builders<PrepGuideEntity>.Update.PullFilter(u => u.Tips, t => t.TipId == tipId);
 
             try
             {
@@ -38,7 +38,6 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
                 throw;
             }
 
-            _prepGuideRepo.Dispose();
             _exceptionLog.LogInformation($"Tip {tipId} was deleted");
         }
 
@@ -47,7 +46,6 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
             var objectId = ObjectId.Parse(PrepGuideObjectId);
             var filter = Builders<PrepGuideEntity>.Filter.Eq(pge => pge._id, objectId);
             var guide = _prepGuideRepo.Get(filter);
-            _prepGuideRepo.Dispose();
             return guide;
         }
 
@@ -69,8 +67,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
                 throw;
             }
 
-            _prepGuideRepo.Dispose();
-            _exceptionLog.LogInformation($"Tip {tip.Id} was added");
+            _exceptionLog.LogInformation($"Tip {tip.TipId} was added");
         }
     }
 }

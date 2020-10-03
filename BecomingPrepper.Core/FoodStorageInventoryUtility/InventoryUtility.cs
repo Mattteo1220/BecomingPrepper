@@ -30,16 +30,8 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            try
-            {
-                _inventoryRepository.Add(entity);
-            }
-            catch
-            {
-                throw;
-            }
+            _inventoryRepository.Add(entity);
 
-            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Inventory created for account {entity.AccountId}");
         }
 
@@ -51,16 +43,8 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             var filter = Builders<FoodStorageEntity>.Filter.Where(fs => fs.AccountId == accountId);
             var updateFilter = Builders<FoodStorageEntity>.Update.Push(i => i.Inventory, entity);
 
-            try
-            {
-                _inventoryRepository.Update(filter, updateFilter);
-            }
-            catch
-            {
-                throw;
-            }
+            _inventoryRepository.Update(filter, updateFilter);
 
-            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Successfully added Inventory Item for account: {accountId}");
         }
 
@@ -69,16 +53,8 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
             var filter = Builders<FoodStorageEntity>.Filter.Where(fs => fs.AccountId == entity.AccountId);
-            try
-            {
-                _inventoryRepository.Delete(filter);
-            }
-            catch
-            {
-                throw;
-            }
+            _inventoryRepository.Delete(filter);
 
-            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Account {entity.AccountId} had their inventory deleted");
         }
 
@@ -88,17 +64,9 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             FoodStorageEntity entity = null;
             var filter = Builders<FoodStorageEntity>.Filter.Where(fs => fs.AccountId == accountId);
 
-            try
-            {
-                entity = _inventoryRepository.Get(filter);
-                GetInventoryImages(entity.Inventory);
-            }
-            catch
-            {
-                throw;
-            }
+            entity = _inventoryRepository.Get(filter);
+            GetInventoryImages(entity.Inventory);
 
-            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Inventory {accountId} retrieved");
             return entity;
         }
@@ -109,16 +77,8 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             if (string.IsNullOrWhiteSpace(itemId)) throw new ArgumentNullException(nameof(itemId));
             FoodStorageEntity entity = null;
 
-            try
-            {
-                entity = GetInventory(accountId);
-            }
-            catch
-            {
-                throw;
-            }
+            entity = GetInventory(accountId);
 
-            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Item {itemId} for account {accountId} was retrieved");
 
             return ItemEntity ?? entity.Inventory.FirstOrDefault(i => i.ItemId == itemId);
@@ -131,16 +91,8 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
 
             var arrayFilter = Builders<FoodStorageEntity>.Filter.Where(x => x.AccountId == accountId);
             var update = Builders<FoodStorageEntity>.Update.PullFilter(x => x.Inventory, i => i.ItemId == itemId);
-            try
-            {
-                _inventoryRepository.Update(arrayFilter, update);
-            }
-            catch
-            {
-                throw;
-            }
+            _inventoryRepository.Update(arrayFilter, update);
 
-            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Account {accountId} had their inventory item {itemId} deleted");
         }
 
@@ -153,16 +105,8 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
                 Builders<FoodStorageEntity>.Filter.Where(x => x.AccountId == accountId),
                 Builders<FoodStorageEntity>.Filter.ElemMatch(x => x.Inventory, i => i.ItemId == entity.ItemId));
             var arrayUpdate = Builders<FoodStorageEntity>.Update.Combine(Builders<FoodStorageEntity>.Update.Set(i => i.Inventory[-1], entity));
-            try
-            {
-                _inventoryRepository.Update(arrayFilter, arrayUpdate);
-            }
-            catch
-            {
-                throw;
-            }
+            _inventoryRepository.Update(arrayFilter, arrayUpdate);
 
-            _inventoryRepository.Dispose();
             _logManager.LogInformation($"Account {accountId} had their inventory item {entity.ItemId} updated");
         }
 
@@ -173,34 +117,16 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             {
                 foreach (var item in inventory)
                 {
-                    try
-                    {
-                        var objectId = listOfImageFileInfo.FirstOrDefault(f => f.ItemId == item.ItemId)._id;
-                        var data = _imageHelperRepo.GetImage(objectId);
-                        item.Image = data;
-                    }
-                    catch
-                    {
-                        throw;
-                    }
+                    var objectId = listOfImageFileInfo.FirstOrDefault(f => f.ItemId == item.ItemId)._id;
+                    var data = _imageHelperRepo.GetImage(objectId);
+                    item.Image = data;
                 }
-            }
-            else
-            {
-                return;
             }
         }
 
         private List<GalleryFileInfoEntity> GetFileInfoOfGallery()
         {
-            try
-            {
-                return _galleryRepo.GetFiles();
-            }
-            catch
-            {
-                throw;
-            }
+            return _galleryRepo.GetFiles();
         }
     }
 }
