@@ -23,14 +23,7 @@ namespace BecomingPrepper.Core.RecommenedQuantitiesUtility
         {
             if (recommendedAmount == null) throw new ArgumentNullException(nameof(recommendedAmount));
 
-            try
-            {
-                _recommendRepo.Add(recommendedAmount);
-            }
-            catch
-            {
-                throw;
-            }
+            _recommendRepo.Add(recommendedAmount);
 
             _logManager.LogInformation($"New Recommended Amount was Added");
         }

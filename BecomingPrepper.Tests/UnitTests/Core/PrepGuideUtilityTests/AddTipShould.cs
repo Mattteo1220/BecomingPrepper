@@ -42,7 +42,7 @@ namespace BecomingPrepper.Tests.UnitTests.PrepGuideUtilityTests
         }
 
         [Fact]
-        public void CallDeleteTip()
+        public void CallUpdateTip()
         {
             _prepGuideUtility.Add(_fixture.Create<ObjectId>(), _fixture.Create<TipEntity>(), true);
             _mockPrepGuideRepo.Verify(pge => pge.Update(It.IsAny<FilterDefinition<PrepGuideEntity>>(), It.IsAny<UpdateDefinition<PrepGuideEntity>>()), Times.Once());

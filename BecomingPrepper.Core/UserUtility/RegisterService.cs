@@ -23,29 +23,15 @@ namespace BecomingPrepper.Core.UserUtility
         public void Register(UserEntity userEntity)
         {
             if (userEntity == null) throw new ArgumentNullException(nameof(userEntity));
-            try
+            var filter = Builders<UserEntity>.Filter.Eq(p => p.Account.Username, userEntity.Account.Username);
+            if (_userRepo.Get(filter) != null)
             {
-                var filter = Builders<UserEntity>.Filter.Eq(p => p.Account.Username, userEntity.Account.Username);
-                if (_userRepo.Get(filter) != null)
-                {
-                    throw new InvalidOperationException("Username already in use");
-                };
-            }
-            catch (InvalidOperationException)
-            {
-                throw;
-            }
+                throw new InvalidOperationException("Username already in use");
+            };
 
             userEntity.Account.Password = _secureService.Hash(userEntity.Account.Password);
 
-            try
-            {
-                _userRepo.Add(userEntity);
-            }
-            catch
-            {
-                throw;
-            }
+            _userRepo.Add(userEntity);
 
             _exceptionLog.LogInformation($"User '{userEntity.Account.AccountId}' has been registered");
         }

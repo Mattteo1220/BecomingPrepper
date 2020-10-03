@@ -69,14 +69,7 @@ namespace BecomingPrepper.Core.UserUtility
 
             var initialFilter = Builders<UserEntity>.Filter.Where(p => p.Account.AccountId == accountId);
             UserEntity userEntity = null;
-            try
-            {
-                userEntity = _userRepo.Get(initialFilter);
-            }
-            catch
-            {
-                throw;
-            }
+            userEntity = _userRepo.Get(initialFilter);
 
             if (_secureService.Validate(userEntity.Account.Password, password).Verified)
             {

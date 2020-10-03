@@ -29,14 +29,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
                 Builders<PrepGuideEntity>.Filter.ElemMatch(x => x.Tips, i => i.TipId == tipId));
             var update = Builders<PrepGuideEntity>.Update.PullFilter(u => u.Tips, t => t.TipId == tipId);
 
-            try
-            {
-                _prepGuideRepo.Update(arrayFilter, update);
-            }
-            catch
-            {
-                throw;
-            }
+            _prepGuideRepo.Update(arrayFilter, update);
 
             _exceptionLog.LogInformation($"Tip {tipId} was deleted");
         }
@@ -58,14 +51,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
             var arrayFilter = Builders<PrepGuideEntity>.Filter.Where(x => x._id == objectId);
             var update = Builders<PrepGuideEntity>.Update.Combine(Builders<PrepGuideEntity>.Update.Push(t => t.Tips, tip));
 
-            try
-            {
-                _prepGuideRepo.Update(arrayFilter, update);
-            }
-            catch
-            {
-                throw;
-            }
+            _prepGuideRepo.Update(arrayFilter, update);
 
             _exceptionLog.LogInformation($"Tip {tip.TipId} was added");
         }
