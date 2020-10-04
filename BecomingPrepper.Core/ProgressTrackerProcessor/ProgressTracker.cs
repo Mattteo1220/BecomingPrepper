@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Core.RecommenedQuantitiesUtility.Interfaces;
-using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Entities.ProgressTracker.RecommendedQuantityEntity;
 using BecomingPrepper.Data.Enums;
@@ -14,45 +13,44 @@ namespace BecomingPrepper.Core.ProgressTrackerProcessor
     {
         private IRecommendService _recommendService;
         private IInventoryUtility _inventoryUtility;
-        private IServiceAccount _serviceAccount;
         public ProgressTracker(IRecommendService recommendService, IInventoryUtility inventoryUtility)
         {
             _recommendService = recommendService ?? throw new ArgumentNullException(nameof(recommendService));
             _inventoryUtility = inventoryUtility ?? throw new ArgumentNullException(nameof(inventoryUtility));
         }
 
-        public ObjectiveProgress GetProgress(string accountId, int objective, int familySize)
+        public ObjectiveProgress GetProgress(string accountId, Objective objective, int familySize)
         {
             var recommendedAmounts = _recommendService.GetRecommendedAmounts();
             var foodStorage = _inventoryUtility.GetInventory(accountId);
             Dictionary<string, double> recommendation;
             switch (objective)
             {
-                case 1:
+                case Objective.TwoWeek:
                     recommendation = CalculateRecommendation(recommendedAmounts.TwoWeekRecommendedAmount, familySize);
                     return CalculateProgress(foodStorage.Inventory, recommendation);
-                case 2:
+                case Objective.OneMonth:
                     recommendation = CalculateRecommendation(recommendedAmounts.OneMonthRecommendedAmount, familySize);
                     return CalculateProgress(foodStorage.Inventory, recommendation);
-                case 3:
+                case Objective.TwoMonth:
                     recommendation = CalculateRecommendation(recommendedAmounts.TwoMonthRecommendedAmount, familySize);
                     return CalculateProgress(foodStorage.Inventory, recommendation);
-                case 4:
+                case Objective.ThreeMonth:
                     recommendation = CalculateRecommendation(recommendedAmounts.ThreeMonthRecommendedAmount, familySize);
                     return CalculateProgress(foodStorage.Inventory, recommendation);
-                case 5:
+                case Objective.SixMonth:
                     recommendation = CalculateRecommendation(recommendedAmounts.SixMonthRecommendedAmount, familySize);
                     return CalculateProgress(foodStorage.Inventory, recommendation);
-                case 6:
+                case Objective.OneYear:
                     recommendation = CalculateRecommendation(recommendedAmounts.OneYearRecommendedAmount, familySize);
                     return CalculateProgress(foodStorage.Inventory, recommendation);
-                case 7:
+                case Objective.FiveYear:
                     recommendation = CalculateRecommendation(recommendedAmounts.FiveYearRecommendedAmount, familySize);
                     return CalculateProgress(foodStorage.Inventory, recommendation);
-                case 8:
+                case Objective.TenYear:
                     recommendation = CalculateRecommendation(recommendedAmounts.TenYearRecommendedAmount, familySize);
                     return CalculateProgress(foodStorage.Inventory, recommendation);
-                case 9:
+                case Objective.TwentyYear:
                     recommendation = CalculateRecommendation(recommendedAmounts.TwentyYearRecommendedAmount, familySize);
                     return CalculateProgress(foodStorage.Inventory, recommendation);
                 default:

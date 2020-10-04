@@ -90,7 +90,6 @@ namespace BecomingPrepper.Api.Controllers.User
         public IActionResult PatchObjective(string accountId, [FromBody] Scheme scheme)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
-            if (scheme.Objective <= 0 || scheme.Objective >= 10) return BadRequest("objective not supported. Must be between 1 - 9");
 
             try
             {

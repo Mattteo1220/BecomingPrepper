@@ -2,6 +2,9 @@
 using BecomingPrepper.Core.FoodStorageInventoryUtility;
 using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Core.PrepGuideUtility.Interfaces;
+using BecomingPrepper.Core.ProgressTrackerProcessor;
+using BecomingPrepper.Core.RecommenedQuantitiesUtility;
+using BecomingPrepper.Core.RecommenedQuantitiesUtility.Interfaces;
 using BecomingPrepper.Core.UserUtility;
 using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
@@ -49,6 +52,8 @@ namespace BecomingPrepper.Web.Models
             services.AddSingleton<ILogin, Login>();
             services.AddSingleton<IRegister, RegisterService>();
             services.AddSingleton<IServiceAccount, ServiceAccount>();
+            services.AddSingleton<IRecommendService, RecommendService>();
+            services.AddSingleton<IProgressTracker, ProgressTracker>();
         }
     }
 }

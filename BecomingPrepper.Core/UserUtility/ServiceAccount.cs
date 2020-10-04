@@ -1,6 +1,7 @@
 ﻿using System;
 using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
+using BecomingPrepper.Data.Enums;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
@@ -52,10 +53,9 @@ namespace BecomingPrepper.Core.UserUtility
             UpdateValue(filter, updateFilter, $"User '{accountId}' updated their FamilySize to {familySize}");
         }
 
-        public void UpdateObjective(string accountId, int objective)
+        public void UpdateObjective(string accountId, Objective objective)
         {
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
-            if (objective < 1 || objective > 9) throw new InvalidOperationException("Objective must be a supported objective");
 
             var filter = Builders<UserEntity>.Filter.Eq(ue => ue.Account.AccountId, accountId);
             var updateFilter = Builders<UserEntity>.Update.Set(ue => ue.Prepper.Objective, objective);

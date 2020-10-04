@@ -1,7 +1,9 @@
-﻿namespace BecomingPrepper.Api.Objects
+﻿using BecomingPrepper.Data.Enums;
+
+namespace BecomingPrepper.Api.Objects
 {
     public class Scheme
     {
-        public int Objective { get; set; }
+        public Objective Objective { get; set; }
     }
 }

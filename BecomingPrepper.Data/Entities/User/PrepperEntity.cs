@@ -1,4 +1,5 @@
 ﻿using System;
+using BecomingPrepper.Data.Enums;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -9,7 +10,7 @@ namespace BecomingPrepper.Data.Entities
         [BsonElement]
         public int FamilySize { get; set; }
         [BsonElement]
-        public int Objective { get; set; }
+        public Objective Objective { get; set; }
         [BsonElement]
         public DateTime ModifiedDate { get; set; }
         [BsonElement]
