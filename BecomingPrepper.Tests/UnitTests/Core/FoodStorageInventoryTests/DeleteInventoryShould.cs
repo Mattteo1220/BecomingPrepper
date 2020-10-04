@@ -43,7 +43,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         public void CallDelete()
         {
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
-            inventoryUtility.DeleteInventory(_fixture.Create<FoodStorageEntity>());
+            inventoryUtility.DeleteInventory(_fixture.Create<string>());
             _mockInventoryRepo.Verify(ir => ir.Delete(It.IsAny<FilterDefinition<FoodStorageEntity>>()), Times.Once);
         }
 
@@ -51,7 +51,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         public void CallLogInformation()
         {
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
-            inventoryUtility.DeleteInventory(_fixture.Create<FoodStorageEntity>());
+            inventoryUtility.DeleteInventory(_fixture.Create<string>());
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Once);
         }
 
@@ -60,7 +60,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         {
             _mockInventoryRepo.Setup(ir => ir.Delete(It.IsAny<FilterDefinition<FoodStorageEntity>>())).Throws<Exception>();
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
-            Action errorTest = () => inventoryUtility.DeleteInventory(_fixture.Create<FoodStorageEntity>());
+            Action errorTest = () => inventoryUtility.DeleteInventory(_fixture.Create<string>());
             errorTest.Should().Throw<Exception>();
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Never);
         }

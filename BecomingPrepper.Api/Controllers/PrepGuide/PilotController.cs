@@ -27,7 +27,7 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // GET: api/<PrepGuideController>
         [HttpGet]
-        [Route("/[controller]/Prep-Guide")]
+        [Route("/[controller]/prep-guide")]
         public IActionResult GetPrepGuide()
         {
             try
@@ -49,7 +49,7 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // POST api/<PrepGuideController>
         [HttpPost]
-        [Route("/[controller]/Prep-Guide/Tip")]
+        [Route("/[controller]/prep-guide/tip")]
         public IActionResult Post([FromBody] TipInfo tip)
         {
             if (tip == null) return NotFound();
@@ -68,7 +68,7 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // DELETE api/<PrepGuideController>/5
         [HttpDelete]
-        [Route("/[controller]/Prep-Guide/Tip/{tipId}")]
+        [Route("/[controller]/prep-guide/tip/{tipId}")]
         public IActionResult Delete(string tipId)
         {
             if (string.IsNullOrWhiteSpace(tipId)) return NotFound();

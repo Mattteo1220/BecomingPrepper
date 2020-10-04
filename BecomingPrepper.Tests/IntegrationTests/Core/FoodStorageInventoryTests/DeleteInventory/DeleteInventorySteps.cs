@@ -22,7 +22,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         [When(@"The prepper decides to start over on their inventory")]
         public void WhenThePrepperDecidesToStartOverOnTheirInventory()
         {
-            _context.InventoryUtility.DeleteInventory(_context.FoodStorageInventoryEntity);
+            _context.InventoryUtility.DeleteInventory(_context.FoodStorageInventoryEntity.AccountId);
         }
 
         [Then(@"the entire Inventory is deleted")]

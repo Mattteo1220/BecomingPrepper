@@ -23,7 +23,7 @@ namespace BecomingPrepper.Api.Controllers.User
 
         //Api get Account Details
         [HttpGet]
-        [Route("/[Controller]/Account-Management/{accountId}")]
+        [Route("/[Controller]/account-management/{accountId}")]
         public IActionResult GetAccountDetails(string accountId)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
@@ -46,7 +46,7 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // Patch Update Email
         [HttpPatch]
-        [Route("/[Controller]/Account-Management/{accountId}/Email")]
+        [Route("/[Controller]/account-Management/{accountId}/email")]
         public IActionResult PatchEmail(string accountId, [FromBody] ECommunication ecomm)
         {
             if (string.IsNullOrWhiteSpace(accountId) || ecomm == null) return NotFound();
@@ -65,7 +65,7 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // PATCH Update FamilySize
         [HttpPatch]
-        [Route("/[Controller]/Account-Management/{accountId}/FamilySize")]
+        [Route("/[Controller]/account-management/{accountId}/familySize")]
         public IActionResult PatchFamilySize(string accountId, [FromBody] Family family)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
@@ -86,7 +86,7 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // PATCH Update FamilySize
         [HttpPatch]
-        [Route("/[Controller]/Account-Management/{accountId}/Objective")]
+        [Route("/[Controller]/account-management/{accountId}/objective")]
         public IActionResult PatchObjective(string accountId, [FromBody] Scheme scheme)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
@@ -106,7 +106,7 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // PATCH Update FamilySize
         [HttpPatch]
-        [Route("/[Controller]/Account-Management/{accountId}/Credentials")]
+        [Route("/[Controller]account-management/{accountId}/credentials")]
         public IActionResult ChangePassword(string accountId, [FromBody] Authentication authentication)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();

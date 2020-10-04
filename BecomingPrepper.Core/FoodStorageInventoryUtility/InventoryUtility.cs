@@ -48,14 +48,14 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             _logManager.LogInformation($"Successfully added Inventory Item for account: {accountId}");
         }
 
-        public void DeleteInventory(FoodStorageEntity entity)
+        public void DeleteInventory(string accountId)
         {
-            if (entity == null) throw new ArgumentNullException(nameof(entity));
+            if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
 
-            var filter = Builders<FoodStorageEntity>.Filter.Where(fs => fs.AccountId == entity.AccountId);
+            var filter = Builders<FoodStorageEntity>.Filter.Where(fs => fs.AccountId == accountId);
             _inventoryRepository.Delete(filter);
 
-            _logManager.LogInformation($"Account {entity.AccountId} had their inventory deleted");
+            _logManager.LogInformation($"Account {accountId} had their inventory deleted");
         }
 
         public FoodStorageEntity GetInventory(string accountId)
