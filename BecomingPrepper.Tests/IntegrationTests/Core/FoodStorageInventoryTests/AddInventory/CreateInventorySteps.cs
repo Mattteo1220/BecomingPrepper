@@ -39,7 +39,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
             var filter = Builders<FoodStorageEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
             var result = _context.FoodStorageInventoryRepository.Get(filter);
             result.AccountId.Should().BeEquivalentTo(_context.FoodStorageInventoryEntity.AccountId);
-            result.Inventory.Should().BeNull();
+            result.Inventory.Should().NotBeNull();
             result._id.Should().NotBeNull();
         }
     }

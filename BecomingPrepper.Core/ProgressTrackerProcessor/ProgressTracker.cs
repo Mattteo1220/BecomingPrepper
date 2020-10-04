@@ -6,6 +6,7 @@ using BecomingPrepper.Core.RecommenedQuantitiesUtility.Interfaces;
 using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Entities.ProgressTracker.RecommendedQuantityEntity;
+using BecomingPrepper.Data.Enums;
 
 namespace BecomingPrepper.Core.ProgressTrackerProcessor
 {
@@ -86,16 +87,16 @@ namespace BecomingPrepper.Core.ProgressTrackerProcessor
 
             return new ObjectiveProgress()
             {
-                Grains = Convert.ToDouble(((items.Where(i => i.Category == 1).Sum(i => i.Weight) / recommendation["Grains"]) * 100).ToString("F").Split('%')[0]),
-                CannedOrDriedMeats = Convert.ToDouble(((items.Where(i => i.Category == 2).Sum(i => i.Weight) / recommendation["CannedOrDriedMeats"]) * 100).ToString("F").Split('%')[0]),
-                FatsAndOils = Convert.ToDouble(((items.Where(i => i.Category == 3).Sum(i => i.Weight) / recommendation["FatsAndOils"]) * 100).ToString("F").Split('%')[0]),
-                Beans = Convert.ToDouble(((items.Where(i => i.Category == 4).Sum(i => i.Weight) / recommendation["Beans"]) * 100).ToString("F").Split('%')[0]),
-                Dairy = Convert.ToDouble(((items.Where(i => i.Category == 5).Sum(i => i.Weight) / recommendation["Dairy"]) * 100).ToString("F").Split('%')[0]),
-                Sugars = Convert.ToDouble(((items.Where(i => i.Category == 6).Sum(i => i.Weight) / recommendation["Sugars"]) * 100).ToString("F").Split('%')[0]),
-                CookingEssentials = Convert.ToDouble(((items.Where(i => i.Category == 7).Sum(i => i.Weight) / recommendation["CookingEssentials"]) * 100).ToString("F").Split('%')[0]),
-                DriedFruitsAndVegetables = Convert.ToDouble(((items.Where(i => i.Category == 8).Sum(i => i.Weight) / recommendation["DriedFruitsAndVegetables"]) * 100).ToString("F").Split('%')[0]),
-                CannedFruitsAndVegetables = Convert.ToDouble(((items.Where(i => i.Category == 9).Sum(i => i.Weight) / recommendation["CannedFruitsAndVegetables"]) * 100).ToString("F").Split('%')[0]),
-                Water = Convert.ToDouble(((items.Where(i => i.Category == 10).Sum(i => i.Weight) / recommendation["Water"]) * 100).ToString("F").Split('%')[0])
+                Grains = Convert.ToDouble(((items.Where(i => i.CategoryId == Category.Grains).Sum(i => i.Weight) / recommendation["Grains"]) * 100).ToString("F").Split('%')[0]),
+                CannedOrDriedMeats = Convert.ToDouble(((items.Where(i => i.CategoryId == Category.CannedOrDriedMeats).Sum(i => i.Weight) / recommendation["CannedOrDriedMeats"]) * 100).ToString("F").Split('%')[0]),
+                FatsAndOils = Convert.ToDouble(((items.Where(i => i.CategoryId == Category.FatsAndOils).Sum(i => i.Weight) / recommendation["FatsAndOils"]) * 100).ToString("F").Split('%')[0]),
+                Beans = Convert.ToDouble(((items.Where(i => i.CategoryId == Category.Beans).Sum(i => i.Weight) / recommendation["Beans"]) * 100).ToString("F").Split('%')[0]),
+                Dairy = Convert.ToDouble(((items.Where(i => i.CategoryId == Category.Dairy).Sum(i => i.Weight) / recommendation["Dairy"]) * 100).ToString("F").Split('%')[0]),
+                Sugars = Convert.ToDouble(((items.Where(i => i.CategoryId == Category.Sugars).Sum(i => i.Weight) / recommendation["Sugars"]) * 100).ToString("F").Split('%')[0]),
+                CookingEssentials = Convert.ToDouble(((items.Where(i => i.CategoryId == Category.CookingEssentials).Sum(i => i.Weight) / recommendation["CookingEssentials"]) * 100).ToString("F").Split('%')[0]),
+                DriedFruitsAndVegetables = Convert.ToDouble(((items.Where(i => i.CategoryId == Category.DriedFruitsAndVegetables).Sum(i => i.Weight) / recommendation["DriedFruitsAndVegetables"]) * 100).ToString("F").Split('%')[0]),
+                CannedFruitsAndVegetables = Convert.ToDouble(((items.Where(i => i.CategoryId == Category.CannedFruitsAndVegetables).Sum(i => i.Weight) / recommendation["CannedFruitsAndVegetables"]) * 100).ToString("F").Split('%')[0]),
+                Water = Convert.ToDouble(((items.Where(i => i.CategoryId == Category.Water).Sum(i => i.Weight) / recommendation["Water"]) * 100).ToString("F").Split('%')[0])
             };
         }
     }

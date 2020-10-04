@@ -29,7 +29,7 @@ namespace BecomingPrepper.Tests
             Users = TestHelper.GetDatabase().GetCollection<UserEntity>("Users");
             RecommendedQuantities = TestHelper.GetDatabase().GetCollection<RecommendedQuantityAmountEntity>("RecommendedQuantities");
             PrepGuides = TestHelper.GetDatabase().GetCollection<PrepGuideEntity>("PrepGuides");
-            Inventory = TestHelper.GetDatabase().GetCollection<FoodStorageEntity>("FoodStorageInventory");
+            Inventory = TestHelper.GetDatabase().GetCollection<FoodStorageEntity>("Inventory");
             GalleryFileHelperRepo = TestHelper.GetDatabase().GetCollection<GalleryFileInfoEntity>("InventoryImages.files");
             GalleryImageHelpeRepo = TestHelper.GetDatabase().GetCollection<GalleryImageEntity>("InventoryImages.chunks");
         }

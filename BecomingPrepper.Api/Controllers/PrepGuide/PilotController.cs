@@ -1,7 +1,11 @@
 ﻿using System;
+using AutoMapper;
+using BecomingPrepper.Api.Objects;
 using BecomingPrepper.Core.PrepGuideUtility.Interfaces;
+using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Logger;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,10 +16,12 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
     public class PilotController : ControllerBase
     {
         private readonly IPrepGuide _prepGuide;
+        private readonly IMapper _mapper;
         private readonly ILogManager _logManager;
-        public PilotController(IPrepGuide prepGuide, ILogManager logManager)
+        public PilotController(IPrepGuide prepGuide, IMapper mapper, ILogManager logManager)
         {
             _prepGuide = prepGuide ?? throw new ArgumentNullException(nameof(prepGuide));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logManager = logManager ?? throw new ArgumentNullException(nameof(logManager));
         }
 
@@ -41,29 +47,41 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
             }
         }
 
-        // GET api/<PrepGuideController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/<PrepGuideController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("/[controller]/Prep-Guide/Tip")]
+        public IActionResult Post([FromBody] TipInfo tip)
         {
-        }
-
-        // PUT api/<PrepGuideController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            if (tip == null) return NotFound();
+            try
+            {
+                var entity = _mapper.Map<TipEntity>(tip);
+                _prepGuide.Add(ObjectId.Empty, entity);
+                return Ok($"tip {tip.Name} added Successfully");
+            }
+            catch (Exception ex)
+            {
+                _logManager.LogError(ex);
+                return NotFound();
+            }
         }
 
         // DELETE api/<PrepGuideController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("/[controller]/Prep-Guide/Tip/{tipId}")]
+        public IActionResult Delete(string tipId)
         {
+            if (string.IsNullOrWhiteSpace(tipId)) return NotFound();
+            try
+            {
+                _prepGuide.Delete(ObjectId.Empty, tipId);
+                return Ok($"Tip {tipId} successfully removed");
+            }
+            catch (Exception e)
+            {
+                _logManager.LogError(e);
+                return NotFound();
+            }
         }
     }
 }

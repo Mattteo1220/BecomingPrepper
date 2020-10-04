@@ -8,6 +8,7 @@ using BecomingPrepper.Core.RecommenedQuantitiesUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Data.Entities.ProgressTracker.RecommendedQuantityEntity;
+using BecomingPrepper.Data.Enums;
 using FluentAssertions;
 using MongoDB.Bson;
 using Moq;
@@ -46,8 +47,8 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
             {
                 new InventoryEntity()
                 {
-                    Category = 1,
-                    Product = 3,
+                    CategoryId = Category.Grains,
+                    ProductId = 3,
                     ItemId = $"Item.1.3",
                     ExpiryDateRange = "2020/01/20 - 2022/09/30",
                     Quantity = 10,
@@ -55,8 +56,8 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
                 },
                 new InventoryEntity()
                 {
-                    Category = 2,
-                    Product = 3,
+                    CategoryId = Category.CannedOrDriedMeats,
+                    ProductId = 3,
                     ItemId = $"Item.1.3",
                     ExpiryDateRange = "2020/01/20 - 2022/09/30",
                     Quantity = 10,
@@ -64,8 +65,8 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
                 },
                 new InventoryEntity()
                 {
-                    Category = 3,
-                    Product = 3,
+                    CategoryId = Category.FatsAndOils,
+                    ProductId = 3,
                     ItemId = $"Item.1.3",
                     ExpiryDateRange = "2020/01/20 - 2022/09/30",
                     Quantity = 10,
@@ -73,8 +74,8 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
                 },
                 new InventoryEntity()
                 {
-                    Category = 4,
-                    Product = 3,
+                    CategoryId = Category.Beans,
+                    ProductId = 3,
                     ItemId = $"Item.1.3",
                     ExpiryDateRange = "2020/01/20 - 2022/09/30",
                     Quantity = 10,
@@ -82,8 +83,8 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
                 },
                 new InventoryEntity()
                 {
-                    Category = 5,
-                    Product = 3,
+                    CategoryId = Category.Dairy,
+                    ProductId = 3,
                     ItemId = $"Item.1.3",
                     ExpiryDateRange = "2020/01/20 - 2022/09/30",
                     Quantity = 10,
@@ -91,8 +92,8 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
                 },
                 new InventoryEntity()
                 {
-                    Category = 6,
-                    Product = 3,
+                    CategoryId = Category.Sugars,
+                    ProductId = 3,
                     ItemId = $"Item.1.3",
                     ExpiryDateRange = "2020/01/20 - 2022/09/30",
                     Quantity = 10,
@@ -100,8 +101,8 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
                 },
                 new InventoryEntity()
                 {
-                    Category = 7,
-                    Product = 3,
+                    CategoryId = Category.CookingEssentials,
+                    ProductId = 3,
                     ItemId = $"Item.1.3",
                     ExpiryDateRange = "2020/01/20 - 2022/09/30",
                     Quantity = 10,
@@ -109,8 +110,8 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
                 },
                 new InventoryEntity()
                 {
-                    Category = 8,
-                    Product = 3,
+                    CategoryId = Category.DriedFruitsAndVegetables,
+                    ProductId = 3,
                     ItemId = $"Item.1.3",
                     ExpiryDateRange = "2020/01/20 - 2022/09/30",
                     Quantity = 10,
@@ -118,8 +119,8 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
                 },
                 new InventoryEntity()
                 {
-                    Category = 9,
-                    Product = 3,
+                    CategoryId = Category.CannedFruitsAndVegetables,
+                    ProductId = 3,
                     ItemId = $"Item.1.3",
                     ExpiryDateRange = "2020/01/20 - 2022/09/30",
                     Quantity = 10,
@@ -127,8 +128,8 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
                 },
                 new InventoryEntity()
                 {
-                    Category = 10,
-                    Product = 3,
+                    CategoryId = Category.Water,
+                    ProductId = 3,
                     ItemId = $"Item.1.3",
                     ExpiryDateRange = "2020/01/20 - 2022/09/30",
                     Quantity = 10,
@@ -140,7 +141,7 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
             _fixture.Customize<double>(c => c.FromFactory<int>(i => i * 1.33));
             var weight = _fixture.Create<double>();
             _fixture.Customize<InventoryEntity>(compose =>
-                compose.With(ii => ii.Category, 1)
+                compose.With(ii => ii.CategoryId, Category.Grains)
                     .With(ii => ii.Weight, weight));
             _fixture.Customize<FoodStorageEntity>(compose =>
                 compose.With(fsi => fsi.Inventory, inventoryItems));
@@ -243,16 +244,16 @@ namespace BecomingPrepper.Tests.UnitTests.ProgressTracker
             var foodStorage = _fixture.Create<FoodStorageEntity>();
             var expected = new TwoWeekRecommendedAmount()
             {
-                Grains = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.Category == 1).Sum(i => i.Weight) / twoWeekRecommendation["Grains"]) * 100).ToString("F").Split('%')[0]),
-                CannedOrDriedMeats = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.Category == 2).Sum(i => i.Weight) / twoWeekRecommendation["CannedOrDriedMeats"]) * 100).ToString("F").Split('%')[0]),
-                FatsAndOils = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.Category == 3).Sum(i => i.Weight) / twoWeekRecommendation["FatsAndOils"]) * 100).ToString("F").Split('%')[0]),
-                Beans = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.Category == 4).Sum(i => i.Weight) / twoWeekRecommendation["Beans"]) * 100).ToString("F").Split('%')[0]),
-                Dairy = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.Category == 5).Sum(i => i.Weight) / twoWeekRecommendation["Dairy"]) * 100).ToString("F").Split('%')[0]),
-                Sugars = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.Category == 6).Sum(i => i.Weight) / twoWeekRecommendation["Sugars"]) * 100).ToString("F").Split('%')[0]),
-                CookingEssentials = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.Category == 7).Sum(i => i.Weight) / twoWeekRecommendation["CookingEssentials"]) * 100).ToString("F").Split('%')[0]),
-                DriedFruitsAndVegetables = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.Category == 8).Sum(i => i.Weight) / twoWeekRecommendation["DriedFruitsAndVegetables"]) * 100).ToString("F").Split('%')[0]),
-                CannedFruitsAndVegetables = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.Category == 9).Sum(i => i.Weight) / twoWeekRecommendation["CannedFruitsAndVegetables"]) * 100).ToString("F").Split('%')[0]),
-                Water = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.Category == 10).Sum(i => i.Weight) / twoWeekRecommendation["Water"]) * 100).ToString("F").Split('%')[0])
+                Grains = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.CategoryId == Category.Grains).Sum(i => i.Weight) / twoWeekRecommendation["Grains"]) * 100).ToString("F").Split('%')[0]),
+                CannedOrDriedMeats = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.CategoryId == Category.CannedOrDriedMeats).Sum(i => i.Weight) / twoWeekRecommendation["CannedOrDriedMeats"]) * 100).ToString("F").Split('%')[0]),
+                FatsAndOils = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.CategoryId == Category.FatsAndOils).Sum(i => i.Weight) / twoWeekRecommendation["FatsAndOils"]) * 100).ToString("F").Split('%')[0]),
+                Beans = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.CategoryId == Category.Beans).Sum(i => i.Weight) / twoWeekRecommendation["Beans"]) * 100).ToString("F").Split('%')[0]),
+                Dairy = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.CategoryId == Category.Dairy).Sum(i => i.Weight) / twoWeekRecommendation["Dairy"]) * 100).ToString("F").Split('%')[0]),
+                Sugars = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.CategoryId == Category.Sugars).Sum(i => i.Weight) / twoWeekRecommendation["Sugars"]) * 100).ToString("F").Split('%')[0]),
+                CookingEssentials = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.CategoryId == Category.CookingEssentials).Sum(i => i.Weight) / twoWeekRecommendation["CookingEssentials"]) * 100).ToString("F").Split('%')[0]),
+                DriedFruitsAndVegetables = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.CategoryId == Category.DriedFruitsAndVegetables).Sum(i => i.Weight) / twoWeekRecommendation["DriedFruitsAndVegetables"]) * 100).ToString("F").Split('%')[0]),
+                CannedFruitsAndVegetables = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.CategoryId == Category.CannedFruitsAndVegetables).Sum(i => i.Weight) / twoWeekRecommendation["CannedFruitsAndVegetables"]) * 100).ToString("F").Split('%')[0]),
+                Water = Convert.ToDouble(((foodStorage.Inventory.Where(i => i.CategoryId == Category.Water).Sum(i => i.Weight) / twoWeekRecommendation["Water"]) * 100).ToString("F").Split('%')[0])
             };
 
             var actual = _progressTracker.CalculateProgress(foodStorage.Inventory, twoWeekRecommendation);

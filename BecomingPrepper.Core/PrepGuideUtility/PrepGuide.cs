@@ -9,13 +9,13 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
 {
     public class PrepGuide : IPrepGuide
     {
-        private ILogManager _exceptionLog;
+        private ILogManager _logManager;
         private IRepository<PrepGuideEntity> _prepGuideRepo;
         private const string PrepGuideObjectId = "5f6795ec3266a7ff3e2aa32e";
         public PrepGuide(IRepository<PrepGuideEntity> prepGuideRepo, ILogManager exceptionLog)
         {
             _prepGuideRepo = prepGuideRepo;
-            _exceptionLog = exceptionLog;
+            _logManager = exceptionLog;
         }
 
         public void Delete(ObjectId objectId, string tipId, bool isTest = false)
@@ -31,7 +31,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
 
             _prepGuideRepo.Update(arrayFilter, update);
 
-            _exceptionLog.LogInformation($"Tip {tipId} was deleted");
+            _logManager.LogInformation($"Tip {tipId} was deleted");
         }
 
         public PrepGuideEntity GetPrepGuide()
@@ -53,7 +53,7 @@ namespace BecomingPrepper.Core.PrepGuideUtility.Interfaces
 
             _prepGuideRepo.Update(arrayFilter, update);
 
-            _exceptionLog.LogInformation($"Tip {tip.TipId} was added");
+            _logManager.LogInformation($"Tip {tip.TipId} was added");
         }
     }
 }

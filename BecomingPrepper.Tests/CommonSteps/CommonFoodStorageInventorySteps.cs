@@ -1,4 +1,5 @@
-﻿using AutoFixture;
+﻿using System.Linq;
+using AutoFixture;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Tests.Contexts;
 using MongoDB.Bson;
@@ -20,6 +21,7 @@ namespace BecomingPrepper.Tests.CommonSteps
         {
             var fixture = new Fixture();
             fixture.Register(ObjectId.GenerateNewId);
+            fixture.Create<Generator<int>>().Where(x => x >= 1 && x <= 9);
             fixture.Customize<InventoryEntity>(c => c.With(i => i.ItemId, "Item.4.5"));
             _foodStorageInventoryContext.FoodStorageInventoryEntity = fixture.Create<FoodStorageEntity>();
         }

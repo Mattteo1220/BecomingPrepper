@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using AutoFixture;
 using BecomingPrepper.Data.Entities;
+using BecomingPrepper.Data.Enums;
 using BecomingPrepper.Tests.Contexts;
 using FluentAssertions;
 using MongoDB.Driver;
@@ -23,7 +24,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         public void WhenThePrepperUpdatesAFieldWithinTheInventoryItem()
         {
             _context.InventoryItemEntity = _context.FoodStorageInventoryEntity.Inventory.First();
-            _context.InventoryItemEntity.Category = 3;
+            _context.InventoryItemEntity.CategoryId = Category.FatsAndOils;
             _context.InventoryUtility.UpdateInventoryItem(_context.FoodStorageInventoryEntity.AccountId, _context.InventoryItemEntity);
         }
 
@@ -32,7 +33,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.Core.FoodStorageInventoryTests.
         {
             var filter = Builders<FoodStorageEntity>.Filter.Where(fsie => fsie.AccountId == _context.FoodStorageInventoryEntity.AccountId);
             var result = _context.FoodStorageInventoryRepository.Get(filter);
-            result.Inventory.First().Category.Should().BeLessOrEqualTo(3, "It was updated to 3");
+            result.Inventory.First().CategoryId.Should().BeEquivalentTo(Category.FatsAndOils, "It was updated to 3");
         }
     }
 }
