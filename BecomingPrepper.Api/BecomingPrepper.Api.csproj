@@ -15,5 +15,9 @@
     <ProjectReference Include="..\BecomingPrepper.Data\BecomingPrepper.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Authentication\" />
+  </ItemGroup>
+
 
 </Project>

@@ -54,5 +54,11 @@ namespace BecomingPrepper.Core.UserUtility
             AccountId = userEntity.Account.AccountId;
             return result.Verified;
         }
+
+        public bool IsAuthenticated(string accountId)
+        {
+            var filter = Builders<UserEntity>.Filter.Where(u => u.Account.AccountId == accountId);
+            return _userRepo.Get(filter) != null;
+        }
     }
 }

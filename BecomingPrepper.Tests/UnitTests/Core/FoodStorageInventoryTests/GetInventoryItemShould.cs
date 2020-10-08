@@ -52,12 +52,11 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         {
             var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
             inventoryUtility.ItemEntity = _fixture.Create<InventoryEntity>();
-            Action errorTest = () => inventoryUtility.GetInventoryItem(_fixture.Create<string>(), _fixture.Create<string>());
-            errorTest.Should().Throw<Exception>();
+            inventoryUtility.GetInventoryItem(_fixture.Create<string>(), _fixture.Create<string>());
             _mockInventoryRepo.Verify(ir => ir.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>()), Times.Once);
         }
 
-        [Fact(Skip = "Needs additional work")]
+        [Fact]
         public void CallLogInformation()
         {
             _mockInventoryRepo.Setup(i => i.Get(It.IsAny<FilterDefinition<FoodStorageEntity>>())).Returns(_fixture.Create<FoodStorageEntity>());

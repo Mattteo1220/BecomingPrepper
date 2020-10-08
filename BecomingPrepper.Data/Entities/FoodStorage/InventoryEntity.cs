@@ -20,7 +20,8 @@ namespace BecomingPrepper.Data.Entities
                 }
                 else
                 {
-                    return $"Item.{CategoryId}.{ProductId}";
+                    var category = (int)Enum.Parse(typeof(Category), CategoryId.ToString());
+                    return $"Item.{category}.{ProductId}";
                 }
             }
             set
@@ -28,8 +29,10 @@ namespace BecomingPrepper.Data.Entities
                 this._itemId = value;
             }
         }
+
         [BsonElement]
         public Category CategoryId { get; set; }
+
 
         [BsonElement]
         public string CategoryName => CategoryId.ToString();
@@ -95,8 +98,6 @@ namespace BecomingPrepper.Data.Entities
         public DateTime ModifiedDate { get; set; }
         [BsonElement]
         public string ModifiedBy { get; set; }
-        [BsonElement]
-        public byte[] Image { get; set; }
 
     }
 }

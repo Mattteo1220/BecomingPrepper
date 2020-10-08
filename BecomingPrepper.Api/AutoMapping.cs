@@ -12,6 +12,8 @@ namespace BecomingPrepper.Api
             CreateMap<AccountInfo, AccountEntity>();
             CreateMap<PersonInfo, PersonEntity>();
             CreateMap<PrepperInfo, PrepperEntity>();
+            CreateMap<FoodStorageInventoryInfo, FoodStorageEntity>();
+            CreateMap<InventoryInfo, InventoryEntity>();
         }
     }
 }

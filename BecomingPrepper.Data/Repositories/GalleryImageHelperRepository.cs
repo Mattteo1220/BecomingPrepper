@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BecomingPrepper.Data.Entities.InventoryImageFiles;
 using BecomingPrepper.Data.Interfaces;
 using MongoDB.Bson;
@@ -21,6 +22,11 @@ namespace BecomingPrepper.Data.Repositories
             var filter = Builders<GalleryImageEntity>.Filter.Where(im => im.files_id == id);
             var result = _collection.Find(filter).Limit(1).FirstOrDefault();
             return result.data;
+        }
+
+        public IEnumerable<GalleryImageEntity> GetChunks()
+        {
+            return _collection.Find(new BsonDocument()).ToList();
         }
     }
 }

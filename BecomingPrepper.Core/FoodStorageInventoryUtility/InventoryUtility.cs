@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
-using BecomingPrepper.Data.Entities.InventoryImageFiles;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Data.Repositories;
 using BecomingPrepper.Logger;
@@ -39,7 +37,6 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
         {
             if (string.IsNullOrWhiteSpace(accountId)) throw new ArgumentNullException(nameof(accountId));
             if (entity == null) throw new ArgumentNullException(nameof(entity));
-
             var filter = Builders<FoodStorageEntity>.Filter.Where(fs => fs.AccountId == accountId);
             var updateFilter = Builders<FoodStorageEntity>.Update.Push(i => i.Inventory, entity);
 
@@ -65,7 +62,6 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             var filter = Builders<FoodStorageEntity>.Filter.Where(fs => fs.AccountId == accountId);
 
             entity = _inventoryRepository.Get(filter);
-            GetInventoryImages(entity.Inventory);
 
             _logManager.LogInformation($"Inventory {accountId} retrieved");
             return entity;
@@ -108,25 +104,6 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
             _inventoryRepository.Update(arrayFilter, arrayUpdate);
 
             _logManager.LogInformation($"Account {accountId} had their inventory item {entity.ItemId} updated");
-        }
-
-        public void GetInventoryImages(List<InventoryEntity> inventory)
-        {
-            var listOfImageFileInfo = GetFileInfoOfGallery();
-            if (listOfImageFileInfo != null)
-            {
-                foreach (var item in inventory)
-                {
-                    var objectId = listOfImageFileInfo.FirstOrDefault(f => f.ItemId == item.ItemId)._id;
-                    var data = _imageHelperRepo.GetImage(objectId);
-                    item.Image = data;
-                }
-            }
-        }
-
-        private List<GalleryFileInfoEntity> GetFileInfoOfGallery()
-        {
-            return _galleryRepo.GetFiles();
         }
     }
 }

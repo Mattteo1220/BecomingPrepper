@@ -4,5 +4,6 @@
     {
         string AccountId { get; set; }
         bool Authenticate(string username, string password);
+        bool IsAuthenticated(string accountId);
     }
 }

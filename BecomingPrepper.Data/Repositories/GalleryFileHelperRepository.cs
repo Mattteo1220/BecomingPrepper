@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BecomingPrepper.Data.Entities.InventoryImageFiles;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace BecomingPrepper.Data.Repositories
@@ -15,9 +16,9 @@ namespace BecomingPrepper.Data.Repositories
             _collection = _mongoContext.GetCollection<GalleryFileInfoEntity>("InventoryImages.files");
         }
 
-        public List<GalleryFileInfoEntity> GetFiles()
+        public List<GalleryFileInfoEntity> GetFileDetails()
         {
-            return _collection.Find("{}").ToList();
+            return _collection.Find(new BsonDocument()).ToList();
         }
     }
 }

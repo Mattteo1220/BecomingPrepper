@@ -31,7 +31,7 @@ namespace BecomingPrepper.Web.Models
 
             //LogManager
             var logger = new LoggerConfiguration()
-                .WriteTo.MongoDB(connectionString, collectionName: "ExceptionLogs", period: TimeSpan.Zero)
+                .WriteTo.MongoDB(connectionString, collectionName: "Logs", period: TimeSpan.Zero)
                 .MinimumLevel.Debug()
                 .CreateLogger();
 

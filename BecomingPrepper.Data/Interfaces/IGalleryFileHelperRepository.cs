@@ -5,6 +5,6 @@ namespace BecomingPrepper.Data.Repositories
 {
     public interface IGalleryFileHelperRepository
     {
-        List<GalleryFileInfoEntity> GetFiles();
+        List<GalleryFileInfoEntity> GetFileDetails();
     }
 }

@@ -1,4 +1,5 @@
-﻿using BecomingPrepper.Core.FoodStorageInventoryUtility;
+﻿using BecomingPrepper.Api.Controllers.Inventory;
+using BecomingPrepper.Core.FoodStorageInventoryUtility;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Repositories;
 using BecomingPrepper.Tests.Contexts;
@@ -18,13 +19,13 @@ namespace BecomingPrepper.Tests.Hooks
 
         [BeforeScenario("FoodStorageInventoryRepository")]
         [BeforeStep("NewDbInstantiation")]
-        [AfterStep("NewDbInstantiation")]
         public void BeforeScenario()
         {
             _context.FoodStorageInventoryRepository = new FoodStorageInventoryRepository(MongoContext, MockExceptionLogger.Object);
             _context.GalleryFileHelperRepository = new GalleryFileHelperRepository(MongoContext);
             _context.GalleryImageHelperRepository = new GalleryImageHelperRepository(MongoContext);
             _context.InventoryUtility = new InventoryUtility(_context.FoodStorageInventoryRepository, _context.GalleryFileHelperRepository, _context.GalleryImageHelperRepository, MockExceptionLogger.Object);
+            _context.FoodStorageController = new FoodStorageController(_context.InventoryUtility, MockMapper.Object, MockExceptionLogger.Object);
         }
 
         [AfterScenario("FoodStorageInventoryRepository", Order = 100)]

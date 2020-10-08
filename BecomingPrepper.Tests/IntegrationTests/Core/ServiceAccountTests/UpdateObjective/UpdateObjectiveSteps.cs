@@ -1,5 +1,6 @@
 ﻿using System;
 using BecomingPrepper.Data.Entities;
+using BecomingPrepper.Data.Enums;
 using FluentAssertions;
 using MongoDB.Driver;
 using TechTalk.SpecFlow;
@@ -22,7 +23,7 @@ namespace BecomingPrepper.Tests.IntegrationTests.ServiceAccountTests.UpdateObjec
         public void WhenThatUserUpdatesTheirObjective()
         {
             _userContext.PropertyUpdate = CreateSupportedObjectiveRange();
-            _userContext.ServiceAccount.UpdateObjective(_userContext.UserEntity.Account.AccountId, _userContext.PropertyUpdate);
+            _userContext.ServiceAccount.UpdateObjective(_userContext.UserEntity.Account.AccountId, (Objective)_userContext.PropertyUpdate);
         }
 
         [Then(@"The updated property is returned from the database")]

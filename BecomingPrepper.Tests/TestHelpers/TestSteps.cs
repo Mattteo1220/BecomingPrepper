@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Data.Entities.InventoryImageFiles;
 using BecomingPrepper.Data.Entities.ProgressTracker;
@@ -13,6 +14,7 @@ namespace BecomingPrepper.Tests
     {
         public ScenarioContext ScenarioContext;
         public Mock<ILogManager> MockExceptionLogger;
+        public Mock<IMapper> MockMapper;
         public IMongoDatabase MongoContext;
         public IMongoCollection<GalleryImageEntity> GalleryImageHelpeRepo;
         public IMongoCollection<UserEntity> Users;
@@ -25,6 +27,7 @@ namespace BecomingPrepper.Tests
         {
             this.ScenarioContext = scenarioContext ?? throw new ArgumentNullException(nameof(scenarioContext));
             MockExceptionLogger = new Mock<ILogManager>();
+            MockMapper = new Mock<IMapper>();
             MongoContext = TestHelper.GetDatabase();
             Users = TestHelper.GetDatabase().GetCollection<UserEntity>("Users");
             RecommendedQuantities = TestHelper.GetDatabase().GetCollection<RecommendedQuantityAmountEntity>("RecommendedQuantities");

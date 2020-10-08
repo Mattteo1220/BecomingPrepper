@@ -25,6 +25,7 @@ namespace BecomingPrepper.Api.Controllers.Inventory
         }
 
         [HttpGet]
+        //[ResponseCache(Duration = 3600, Location = ResponseCacheLocation.Any)]
         [Route("/[controller]/inventory/{accountId}")]
         public IActionResult GetFoodStorageInventory(string accountId)
         {
