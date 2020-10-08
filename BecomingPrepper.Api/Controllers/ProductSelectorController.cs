@@ -15,7 +15,7 @@ namespace BecomingPrepper.Api.Controllers
 
         public ProductSelectorController(ILogManager logManager)
         {
-            _logManager = logManager;
+            _logManager = logManager ?? throw new ArgumentNullException(nameof(logManager));
         }
 
         [HttpGet]
