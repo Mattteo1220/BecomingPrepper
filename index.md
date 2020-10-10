@@ -1,9 +1,8 @@
 ## Technologies
-####Backend
-#####C#
-#####ASP.NET Core
-#####Gherkin
-#####
+##### Backend
+##### C#
+##### ASP.NET Core
+##### Gherkin
 
 ## Code Review
 
