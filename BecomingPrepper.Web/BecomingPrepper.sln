@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.Tests", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.Logger", "..\BecomingPrepper.Logger\BecomingPrepper.Logger.csproj", "{EADCB563-1EC0-4E7F-9A65-235FCF7331BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BecomingPrepper.Api", "..\BecomingPrepper.Api\BecomingPrepper.Api.csproj", "{A58E18A8-AADB-4E0F-B83E-587477CFB1C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BecomingPrepper.Api", "..\BecomingPrepper.Api\BecomingPrepper.Api.csproj", "{A58E18A8-AADB-4E0F-B83E-587477CFB1C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

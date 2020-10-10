@@ -14,6 +14,7 @@ namespace BecomingPrepper.Core.UserUtility
         private ILogManager _exceptionLog;
         private IRepository<UserEntity> _userRepo;
         public string AccountId { get; set; }
+        public string Email { get; set; }
         public Login(IRepository<UserEntity> userRepo, ISecureService secureService, ILogManager exceptionLog)
         {
             _userRepo = userRepo;
@@ -52,6 +53,7 @@ namespace BecomingPrepper.Core.UserUtility
             _exceptionLog.LogInformation($"User '{userEntity.Account.AccountId}' has been verified");
 
             AccountId = userEntity.Account.AccountId;
+            Email = userEntity.Account.Email;
             return result.Verified;
         }
 

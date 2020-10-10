@@ -16,12 +16,12 @@ namespace BecomingPrepper.Tests
         public Mock<ILogManager> MockExceptionLogger;
         public Mock<IMapper> MockMapper;
         public IMongoDatabase MongoContext;
-        public IMongoCollection<GalleryImageEntity> GalleryImageHelpeRepo;
+        public IMongoCollection<ChunkEntity> GalleryImageHelpeRepo;
         public IMongoCollection<UserEntity> Users;
         public IMongoCollection<RecommendedQuantityAmountEntity> RecommendedQuantities;
         public IMongoCollection<PrepGuideEntity> PrepGuides;
         public IMongoCollection<FoodStorageEntity> Inventory;
-        public IMongoCollection<GalleryFileInfoEntity> GalleryFileHelperRepo;
+        public IMongoCollection<FileDetailEntity> GalleryFileHelperRepo;
 
         public TestSteps(ScenarioContext scenarioContext)
         {
@@ -33,8 +33,8 @@ namespace BecomingPrepper.Tests
             RecommendedQuantities = TestHelper.GetDatabase().GetCollection<RecommendedQuantityAmountEntity>("RecommendedQuantities");
             PrepGuides = TestHelper.GetDatabase().GetCollection<PrepGuideEntity>("PrepGuides");
             Inventory = TestHelper.GetDatabase().GetCollection<FoodStorageEntity>("Inventory");
-            GalleryFileHelperRepo = TestHelper.GetDatabase().GetCollection<GalleryFileInfoEntity>("InventoryImages.files");
-            GalleryImageHelpeRepo = TestHelper.GetDatabase().GetCollection<GalleryImageEntity>("InventoryImages.chunks");
+            GalleryFileHelperRepo = TestHelper.GetDatabase().GetCollection<FileDetailEntity>("InventoryImages.files");
+            GalleryImageHelpeRepo = TestHelper.GetDatabase().GetCollection<ChunkEntity>("InventoryImages.chunks");
         }
     }
 }

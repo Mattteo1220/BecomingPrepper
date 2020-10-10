@@ -1,5 +1,4 @@
-﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -8,23 +7,25 @@
       "sslPort": 44354
     }
   },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "ProductSelector",
+      "launchUrl": "Api/ProductSelector",
       "environmentVariables": {
+        "Secret": "401b09eab3c013d4cd54922bb802Azc8fd5318192b0a75f201d8b3727429090fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-  "BecomingPrepper.Api": {
-    "commandName": "Project",
-    "launchBrowser": true,
-    "launchUrl": "ProductSelector",
-    "applicationUrl": "https://localhost:5001;http://localhost:5000",
-    "environmentVariables": {
-    "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+    "BecomingPrepper.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "Api/ProductSelector",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }
   }
 }

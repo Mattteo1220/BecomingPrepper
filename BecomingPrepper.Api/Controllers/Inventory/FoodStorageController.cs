@@ -4,13 +4,15 @@ using BecomingPrepper.Api.Objects;
 using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Logger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BecomingPrepper.Api.Controllers.Inventory
 {
-    [Route("[controller]")]
+    [Route("Api/[controller]")]
     [ApiController]
     public class FoodStorageController : ControllerBase
     {
@@ -25,8 +27,8 @@ namespace BecomingPrepper.Api.Controllers.Inventory
         }
 
         [HttpGet]
-        //[ResponseCache(Duration = 3600, Location = ResponseCacheLocation.Any)]
-        [Route("/[controller]/inventory/{accountId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("Inventory/{accountId}")]
         public IActionResult GetFoodStorageInventory(string accountId)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
@@ -48,7 +50,8 @@ namespace BecomingPrepper.Api.Controllers.Inventory
         }
 
         [HttpGet]
-        [Route("/[controller]/inventory/{accountId}/item/{itemId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("Inventory/{accountId}/item/{itemId}")]
         public IActionResult GetInventoryItem(string accountId, string itemId)
         {
             if (string.IsNullOrWhiteSpace(accountId) || string.IsNullOrWhiteSpace(itemId)) return NotFound();
@@ -70,7 +73,8 @@ namespace BecomingPrepper.Api.Controllers.Inventory
         }
 
         [HttpPost]
-        [Route("/[controller]/inventory")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("Inventory")]
         public IActionResult AddInventory([FromBody] FoodStorageInventoryInfo foodStorageInventory)
         {
             if (foodStorageInventory == null) return NotFound();
@@ -88,7 +92,8 @@ namespace BecomingPrepper.Api.Controllers.Inventory
         }
 
         [HttpPost]
-        [Route("/[controller]/inventory/{accountId}/item")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("Inventory/{accountId}/item")]
         public IActionResult AddInventoryItem(string accountId, [FromBody] InventoryInfo inventoryInfo)
         {
             if (string.IsNullOrWhiteSpace(accountId) || inventoryInfo == null) return NotFound();
@@ -106,7 +111,8 @@ namespace BecomingPrepper.Api.Controllers.Inventory
         }
 
         [HttpPut]
-        [Route("/[controller]/inventory/{accountId}/item")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("Inventory/{accountId}/item")]
         public IActionResult UpdateInventoryItem(string accountId, [FromBody] InventoryInfo inventoryInfo)
         {
             if (string.IsNullOrWhiteSpace(accountId) || inventoryInfo == null) return NotFound();
@@ -124,7 +130,9 @@ namespace BecomingPrepper.Api.Controllers.Inventory
             }
         }
 
-        [HttpDelete("/[controller]/inventory/{accountId}")]
+        [HttpDelete]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("Inventory/{accountId}")]
         public IActionResult DeleteInventory(string accountId)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
@@ -140,7 +148,9 @@ namespace BecomingPrepper.Api.Controllers.Inventory
             }
         }
 
-        [HttpDelete("/[controller]/inventory/{accountId}/item/{itemId}")]
+        [HttpDelete]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("Inventory/{accountId}/item/{itemId}")]
         public IActionResult DeleteInventoryItem(string accountId, string itemId)
         {
             if (string.IsNullOrWhiteSpace(accountId) || string.IsNullOrWhiteSpace(itemId)) return NotFound();

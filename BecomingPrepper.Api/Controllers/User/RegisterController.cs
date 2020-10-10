@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BecomingPrepper.Api.Controllers.User
 {
-    [Route("[controller]")]
+    [Route("Api/[controller]")]
     [ApiController]
     public class RegisterController : ControllerBase
     {

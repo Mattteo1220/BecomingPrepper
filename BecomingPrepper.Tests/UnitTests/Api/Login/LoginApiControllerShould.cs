@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoFixture;
+using BecomingPrepper.Api.Authentication;
 using BecomingPrepper.Api.Controllers.User;
 using BecomingPrepper.Api.Objects;
 using BecomingPrepper.Core.UserUtility;
@@ -16,12 +17,14 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Login
         private Mock<ILogin> _mockLogin;
         private LoginController _loginController;
         private Mock<ILogManager> _mockLogger;
+        private Mock<ITokenManager> _mockTokenManager;
         private Fixture _fixture;
         public LoginApiControllerShould()
         {
             _mockLogin = new Mock<ILogin>();
             _mockLogger = new Mock<ILogManager>();
-            _loginController = new LoginController(_mockLogin.Object, _mockLogger.Object);
+            _mockTokenManager = new Mock<ITokenManager>();
+            _loginController = new LoginController(_mockLogin.Object, _mockLogger.Object, _mockTokenManager.Object);
             _fixture = new Fixture();
         }
 
@@ -52,11 +55,11 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Login
         }
 
         [Fact]
-        public void ReturnAccountIdWhenAuthorized()
+        public void ReturnBearerTokenWhenAuthorized()
         {
             _mockLogin.Setup(l => l.Authenticate(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
             var response = _loginController.Post(_fixture.Create<Credentials>()) as OkObjectResult;
-            response?.Value.ToString().Should().Contain("AccountId: ");
+            response?.Value.ToString().Should().Contain("Token: ");
         }
 
         [Fact]

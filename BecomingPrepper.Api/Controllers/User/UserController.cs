@@ -3,13 +3,15 @@ using BecomingPrepper.Api.Objects;
 using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Logger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BecomingPrepper.Api.Controllers.User
 {
-    [Route("[controller]")]
+    [Route("Api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -23,7 +25,8 @@ namespace BecomingPrepper.Api.Controllers.User
 
         //Api get Account Details
         [HttpGet]
-        [Route("/[Controller]/account-management/{accountId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("account-management/{accountId}")]
         public IActionResult GetAccountDetails(string accountId)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
@@ -46,7 +49,8 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // Patch Update Email
         [HttpPatch]
-        [Route("/[Controller]/account-Management/{accountId}/email")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("account-Management/{accountId}/email")]
         public IActionResult PatchEmail(string accountId, [FromBody] ECommunication ecomm)
         {
             if (string.IsNullOrWhiteSpace(accountId) || ecomm == null) return NotFound();
@@ -65,7 +69,8 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // PATCH Update FamilySize
         [HttpPatch]
-        [Route("/[Controller]/account-management/{accountId}/familySize")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("account-management/{accountId}/familySize")]
         public IActionResult PatchFamilySize(string accountId, [FromBody] Family family)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
@@ -86,7 +91,8 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // PATCH Update FamilySize
         [HttpPatch]
-        [Route("/[Controller]/account-management/{accountId}/objective")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("account-management/{accountId}/objective")]
         public IActionResult PatchObjective(string accountId, [FromBody] Scheme scheme)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
@@ -106,8 +112,9 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // PATCH Update FamilySize
         [HttpPatch]
-        [Route("/[Controller]account-management/{accountId}/credentials")]
-        public IActionResult ChangePassword(string accountId, [FromBody] Authentication authentication)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("account-management/{accountId}/credentials")]
+        public IActionResult ChangePassword(string accountId, [FromBody] Objects.Authentication authentication)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
             if (authentication == null) return NotFound();

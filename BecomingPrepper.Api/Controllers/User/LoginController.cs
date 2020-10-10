@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using BecomingPrepper.Api.Authentication;
 using BecomingPrepper.Api.Objects;
 using BecomingPrepper.Core.UserUtility;
 using BecomingPrepper.Logger;
@@ -12,16 +13,18 @@ using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace BecomingPrepper.Api.Controllers.User
 {
-    [Route("[controller]")]
+    [Route("Api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
         private readonly ILogin _login;
         private readonly ILogManager _logger;
-        public LoginController(ILogin login, ILogManager logger)
+        private readonly ITokenManager _tokenManager;
+        public LoginController(ILogin login, ILogManager logger, ITokenManager tokenManager)
         {
             _login = login ?? throw new ArgumentNullException(nameof(login));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _tokenManager = tokenManager ?? throw new ArgumentNullException(nameof(tokenManager));
         }
 
         // POST api/<UserController>
@@ -34,7 +37,8 @@ namespace BecomingPrepper.Api.Controllers.User
                 var result = _login.Authenticate(credentials.Username, credentials.Password);
                 if (result)
                 {
-                    return Ok("AccountId: " + _login.AccountId);
+                    var token = _tokenManager.Generate(_login.AccountId, _login.Email);
+                    return Ok($"Token: {token}");
                 }
                 else
                 {

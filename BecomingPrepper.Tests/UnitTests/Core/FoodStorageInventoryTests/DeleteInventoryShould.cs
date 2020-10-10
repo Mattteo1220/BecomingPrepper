@@ -17,15 +17,15 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
     public class DeleteInventoryShould
     {
         private Mock<ILogManager> _mockLogger;
-        private Mock<IGalleryFileHelperRepository> _mockGalleryRepo;
-        private Mock<IGalleryImageHelperRepository> _mockGalleryImageHelperRepo;
+        private Mock<IFileDetailRepository> _mockGalleryRepo;
+        private Mock<IChunkRepository> _mockGalleryImageHelperRepo;
         private Mock<IRepository<FoodStorageEntity>> _mockInventoryRepo;
         private Fixture _fixture;
         public DeleteInventoryShould()
         {
             _mockLogger = new Mock<ILogManager>();
-            _mockGalleryRepo = new Mock<IGalleryFileHelperRepository>();
-            _mockGalleryImageHelperRepo = new Mock<IGalleryImageHelperRepository>();
+            _mockGalleryRepo = new Mock<IFileDetailRepository>();
+            _mockGalleryImageHelperRepo = new Mock<IChunkRepository>();
             _mockInventoryRepo = new Mock<IRepository<FoodStorageEntity>>();
             _fixture = new Fixture();
             _fixture.Register(ObjectId.GenerateNewId);
@@ -34,7 +34,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void ThrowWhenNoEntitySupplied()
         {
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
             Action nullEntityTest = () => inventoryUtility.DeleteInventory(null);
             nullEntityTest.Should().Throw<ArgumentNullException>("No Entity was supplied");
         }
@@ -42,7 +42,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void CallDelete()
         {
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
             inventoryUtility.DeleteInventory(_fixture.Create<string>());
             _mockInventoryRepo.Verify(ir => ir.Delete(It.IsAny<FilterDefinition<FoodStorageEntity>>()), Times.Once);
         }
@@ -50,7 +50,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         [Fact]
         public void CallLogInformation()
         {
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
             inventoryUtility.DeleteInventory(_fixture.Create<string>());
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Once);
         }
@@ -59,7 +59,7 @@ namespace BecomingPrepper.Tests.UnitTests.Core.FoodStorageInventoryTests
         public void NotCallLogInformationWhenDeleteThrowsAnException()
         {
             _mockInventoryRepo.Setup(ir => ir.Delete(It.IsAny<FilterDefinition<FoodStorageEntity>>())).Throws<Exception>();
-            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockGalleryRepo.Object, _mockGalleryImageHelperRepo.Object, _mockLogger.Object);
+            var inventoryUtility = new InventoryUtility(_mockInventoryRepo.Object, _mockLogger.Object);
             Action errorTest = () => inventoryUtility.DeleteInventory(_fixture.Create<string>());
             errorTest.Should().Throw<Exception>();
             _mockLogger.Verify(l => l.LogInformation(It.IsAny<string>()), Times.Never);

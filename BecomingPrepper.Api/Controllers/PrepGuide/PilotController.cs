@@ -4,6 +4,8 @@ using BecomingPrepper.Api.Objects;
 using BecomingPrepper.Core.PrepGuideUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Logger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
@@ -11,7 +13,7 @@ using MongoDB.Bson;
 
 namespace BecomingPrepper.Api.Controllers.PrepGuide
 {
-    [Route("[controller]")]
+    [Route("Api/[controller]")]
     [ApiController]
     public class PilotController : ControllerBase
     {
@@ -27,7 +29,8 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // GET: api/<PrepGuideController>
         [HttpGet]
-        [Route("/[controller]/prep-guide")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("prep-guide")]
         public IActionResult GetPrepGuide()
         {
             try
@@ -49,7 +52,8 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // POST api/<PrepGuideController>
         [HttpPost]
-        [Route("/[controller]/prep-guide/tip")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("prep-guide/tip")]
         public IActionResult Post([FromBody] TipInfo tip)
         {
             if (tip == null) return NotFound();
@@ -68,7 +72,8 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // DELETE api/<PrepGuideController>/5
         [HttpDelete]
-        [Route("/[controller]/prep-guide/tip/{tipId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("prep-guide/tip/{tipId}")]
         public IActionResult Delete(string tipId)
         {
             if (string.IsNullOrWhiteSpace(tipId)) return NotFound();

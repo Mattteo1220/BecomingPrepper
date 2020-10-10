@@ -12,15 +12,13 @@ namespace BecomingPrepper.Core.FoodStorageInventoryUtility
     public class InventoryUtility : IInventoryUtility
     {
         public InventoryEntity ItemEntity;
-        private IGalleryImageHelperRepository _imageHelperRepo;
+        private IChunkRepository _imageHelperRepo;
         private ILogManager _logManager;
-        private IGalleryFileHelperRepository _galleryRepo;
+        private IFileDetailRepository _galleryRepo;
         private IRepository<FoodStorageEntity> _inventoryRepository;
-        public InventoryUtility(IRepository<FoodStorageEntity> inventoryRepo, IGalleryFileHelperRepository galleryRepo, IGalleryImageHelperRepository imageHelperRepo, ILogManager exceptionLog)
+        public InventoryUtility(IRepository<FoodStorageEntity> inventoryRepo, ILogManager exceptionLog)
         {
             _inventoryRepository = inventoryRepo ?? throw new ArgumentNullException(nameof(inventoryRepo));
-            _galleryRepo = galleryRepo ?? throw new ArgumentNullException(nameof(galleryRepo));
-            _imageHelperRepo = imageHelperRepo ?? throw new ArgumentNullException(nameof(imageHelperRepo));
             _logManager = exceptionLog ?? throw new ArgumentNullException(nameof(exceptionLog));
         }
 

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using BecomingPrepper.Data;
 using BecomingPrepper.Data.Enums;
 using BecomingPrepper.Logger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ControllerBase = Microsoft.AspNetCore.Mvc.ControllerBase;
 
 namespace BecomingPrepper.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Api/[controller]")]
     public class ProductSelectorController : ControllerBase
     {
         private readonly ILogManager _logManager;
@@ -18,14 +21,17 @@ namespace BecomingPrepper.Api.Controllers
             _logManager = logManager ?? throw new ArgumentNullException(nameof(logManager));
         }
 
+
         [HttpGet]
-        public string Get()
+        public string Start()
         {
             return "Becoming Prepper Service";
         }
 
+
         [HttpGet]
-        [Route("/[controller]/category/{category}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("category/{category}")]
         public IActionResult GetProducts(int category)
         {
             _logManager.LogInformation($"Fetching Products for Category {category} to display on UI");
@@ -55,6 +61,7 @@ namespace BecomingPrepper.Api.Controllers
                     return BadRequest("Invalid Category");
             }
         }
+
 
         private List<string> GetEnumDescriptions<T>() where T : struct
         {
