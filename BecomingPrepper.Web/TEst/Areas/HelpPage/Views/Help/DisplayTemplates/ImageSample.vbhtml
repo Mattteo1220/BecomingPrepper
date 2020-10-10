@@ -1,4 +1,0 @@
-@Imports TEst.Areas.HelpPage
-@ModelType ImageSample
-
-<img src="@Model.Src" />
