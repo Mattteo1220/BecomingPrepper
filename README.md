@@ -5,15 +5,15 @@
 
 ###Technologies
 ###### BackEnd
-CSharp
-ASP.NET Core
-Gherkin
-Mongo DB
-Specflow
-Fluent Assertions
-Fixture
-Xunit
-JSON Web Token
+- CSharp
+- ASP.NET Core
+- Gherkin
+- Mongo DB
+- Specflow
+- Fluent Assertions
+- Fixture
+- Xunit
+- JSON Web Token
 
 ###### FrontEnd
 Yet To come
