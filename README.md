@@ -25,7 +25,7 @@
  - [First Design Session](https://www.youtube.com/watch?v=MgYgdPEFuso)
  - [Second Design Session](https://www.youtube.com/watch?v=FTVtyh6OuhI)
  
- ### Tenants
+ ### Artifacts
   Within the project, I needed to follow some software practices and guidelines as I underwent the development or enhancements portions of this project. Some of these tenants within software revolved around, security, testing, databases, or advanced software. I chose to prove three of these tenants which are:
   - Software Security
   - Software Quality And Testing
