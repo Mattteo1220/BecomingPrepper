@@ -31,40 +31,10 @@
   - Software Quality And Testing
   - Database Management through Mongo DB
   
- Through these tenants I learned quite a bit.
- 
- You can use the [editor on GitHub](https://github.com/Mattteo1220/BecomingPrepper/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Through these tenants I learned quite a bit.
+- Security : I learned how to implement JWT or Json Web Tokens to secure my api endpoints. Through this I can ensure that my endpoint's are locked down and that only through true validation on the login screen can users actually utilize the service. I also followed the practice of defensible programming as I ensure that if invalid, null or empty parameters or arguments are caught and exceptions are thrown and messages returned to ensure that the application doesn't crash unexpectedly.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+- Software Quality and Testing: Since this is my forte and current position, this was a little easier to implement but I undertook a different approach. I learned new technologies and libraries so expand my skill set. I implemented Behavior Driven Development utilizing specflow with c# and fluent assertions with Fixture for unit tests to create smaller, more manageable test suites. Below is an example of Fluent Assertions with Fixture.
+[FluentAssertionsExample](https://github.com/Mattteo1220/BecomingPrepper/blob/master/BecomingPrepper.Tests/UnitTests/Api/FoodStorage/GetInventoryItemShould.cs)
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Mattteo1220/BecomingPrepper/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+- Database Management through Mongo Db: This was a fun way to learn a new database management system. Mongo DB is a no sql document based management system. Through collections, documents instead of databases and tables, I am able to prove that Preppers can update, add, delete and read their data effectively and securely on this web application. GridFS is a specification for storing and retrieving large files such as documents, images, and videos. GridFS utilizes two collections, one that stores file details and the other that stores the bytes of the file itself called chunks.
