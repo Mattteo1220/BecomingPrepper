@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZB4fEV1hiayOzSRRNfltfe1C7W1z5zZwLWKrVzKSVFxseBNr/M9M6E8UKCDYWNeRzOfhGqkc29xx2vlj51awJA==",
+  "dgSpecHash": "Joqpd5NE+W1wWbxvhru01EGtk0uBtWwtsG2tnYiCPCLQ3KUVQBCDhKXvByMOTxg7Y5LC5Ulh+HvtSefU/5VDzQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Tests\\BecomingPrepper.Tests.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,7 @@
     "C:\\Users\\mmcentire\\.nuget\\packages\\fluentassertions\\5.10.3\\fluentassertions.5.10.3.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\gherkin\\6.0.0\\gherkin.6.0.0.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\google.protobuf\\3.7.0\\google.protobuf.3.7.0.nupkg.sha512",
+    "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.7\\microsoft.aspnet.mvc.5.2.7.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.7\\microsoft.aspnet.razor.3.2.7.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
@@ -204,6 +205,16 @@
     "C:\\Users\\mmcentire\\.nuget\\packages\\xunit.skippablefact\\1.3.12\\xunit.skippablefact.1.3.12.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Identity.Core",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

@@ -190,6 +190,15 @@
           "lib/netstandard1.0/Google.Protobuf.dll": {}
         }
       },
+      "Microsoft.AspNet.Identity.Core/2.2.3": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
+        }
+      },
       "Microsoft.AspNet.Mvc/5.2.7": {
         "type": "package",
         "dependencies": {
@@ -3119,6 +3128,7 @@
         "dependencies": {
           "AutoMapper": "10.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.0.1",
+          "BecomingPrepper.Auth": "1.0.0",
           "BecomingPrepper.Core": "1.0.0",
           "BecomingPrepper.Data": "1.0.0",
           "Microsoft.AspNet.Mvc": "5.2.7",
@@ -3137,6 +3147,19 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "BecomingPrepper.Auth/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.AspNet.Identity.Core": "2.2.3"
+        },
+        "compile": {
+          "bin/placeholder/BecomingPrepper.Auth.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BecomingPrepper.Auth.dll": {}
+        }
       },
       "BecomingPrepper.Core/1.0.0": {
         "type": "project",
@@ -3500,6 +3523,19 @@
         "lib/netstandard1.0/Google.Protobuf.dll",
         "lib/netstandard1.0/Google.Protobuf.pdb",
         "lib/netstandard1.0/Google.Protobuf.xml"
+      ]
+    },
+    "Microsoft.AspNet.Identity.Core/2.2.3": {
+      "sha512": "Mv5FpoaxspE8hlWLE4r1IdZtovg/OyFgVRhxQbx47J4sqdLImN1hnM1lnwCj+/wLmqtqFk/RYMoZ5GAcwm/00g==",
+      "type": "package",
+      "path": "microsoft.aspnet.identity.core/2.2.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Microsoft.AspNet.Identity.Core.dll",
+        "lib/net45/Microsoft.AspNet.Identity.Core.xml",
+        "microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",
+        "microsoft.aspnet.identity.core.nuspec"
       ]
     },
     "Microsoft.AspNet.Mvc/5.2.7": {
@@ -9591,6 +9627,11 @@
       "path": "../BecomingPrepper.Api/BecomingPrepper.Api.csproj",
       "msbuildProject": "../BecomingPrepper.Api/BecomingPrepper.Api.csproj"
     },
+    "BecomingPrepper.Auth/1.0.0": {
+      "type": "project",
+      "path": "../BecomingPrepper.Auth/BecomingPrepper.Auth.csproj",
+      "msbuildProject": "../BecomingPrepper.Auth/BecomingPrepper.Auth.csproj"
+    },
     "BecomingPrepper.Core/1.0.0": {
       "type": "project",
       "path": "../BecomingPrepper.Core/BecomingPrepper.Core.csproj",
@@ -9762,6 +9803,16 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Identity.Core",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",
