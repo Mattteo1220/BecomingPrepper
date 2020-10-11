@@ -1,5 +1,22 @@
-## Welcome to GitHub Pages
+## BecomingPrepper
+  Is a Web Application with Api Service to gradually aid ordinary citizens preparedness for emergency situations and doomsday type events, ultimately, BecomingPrepper. To aid in both the short and long term of emergency preparedness. BecomingPrepper will allow citizens to stock up on every day items such as food, water, first Aid, Ammo and track their products. Preppers will be able to Update, Add, and Delete products from their inventory as well as track their progress against a selected objective created during account registration. These objectives range from two weeks to twenty years. As their inventory grows, so too will their confidence in being prepared for the unknown. 
+
+  Not only is this a great tracking tool for inventory needs but it is also a way to learn to live off the environment around them. 
+
 ###Technologies
+###### BackEnd
+CSharp
+ASP.NET Core
+Gherkin
+Mongo DB
+Specflow
+Fluent Assertions
+Fixture
+Xunit
+JSON Web Token
+
+###### FrontEnd
+Yet To come
 
 You can use the [editor on GitHub](https://github.com/Mattteo1220/BecomingPrepper/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
