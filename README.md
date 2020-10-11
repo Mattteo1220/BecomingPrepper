@@ -5,7 +5,7 @@
 
 ###Technologies
 ###### BackEnd
-- CSharp
+- C#
 - ASP.NET Core
 - Gherkin
 - Mongo DB
