@@ -22,8 +22,8 @@
 ### Design And Analysis
   In order for the project to be understood and designed, I had to undergo an analysis process utilizing UML or Unified Modeling Language. This helped me design the API portion of BecomingPrepper. 
   Here below are the links to the videos as I demonstrate the analysis and design phase of this project. 
- [FirstHalfOfDesign](https://www.youtube.com/watch?v=MgYgdPEFuso)
- [SecondHalfOfDesign](https://www.youtube.com/watch?v=FTVtyh6OuhI)
+ - [FirstHalfOfDesign](https://www.youtube.com/watch?v=MgYgdPEFuso)
+ - [SecondHalfOfDesign](https://www.youtube.com/watch?v=FTVtyh6OuhI)
  
  You can use the [editor on GitHub](https://github.com/Mattteo1220/BecomingPrepper/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
