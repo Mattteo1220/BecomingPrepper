@@ -22,8 +22,16 @@
 ### Design And Analysis
   In order for the project to be understood and designed, I had to undergo an analysis process utilizing UML or Unified Modeling Language. This helped me design the API portion of BecomingPrepper. 
   Here below are the links to the videos as I demonstrate the analysis and design phase of this project. 
- - [FirstHalfOfDesign](https://www.youtube.com/watch?v=MgYgdPEFuso)
- - [SecondHalfOfDesign](https://www.youtube.com/watch?v=FTVtyh6OuhI)
+ - [First Design Session](https://www.youtube.com/watch?v=MgYgdPEFuso)
+ - [Second Design Session](https://www.youtube.com/watch?v=FTVtyh6OuhI)
+ 
+ ### Tenants
+  Within the project, I needed to follow some software practices and guidelines as I underwent the development or enhancements portions of this project. Some of these tenants within software revolved around, security, testing, databases, or advanced software. I chose to prove three of these tenants which are:
+  - Software Security
+  - Software Quality And Testing
+  - Database Management through Mongo DB
+  
+ Through these tenants I learned quite a bit.
  
  You can use the [editor on GitHub](https://github.com/Mattteo1220/BecomingPrepper/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
