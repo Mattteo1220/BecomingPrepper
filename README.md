@@ -3,7 +3,7 @@
 
   Not only is this a great tracking tool for inventory needs but it is also a way to learn to live off the environment around them. There are ten categories for which preppers should stock up. Some of them are Water, Grains, Sugars, Canned Fruits and Vegetables and Dried Meats. With each product, a cooresponding image will be returned from the Mongo Database. These images are designed in a way to not only give the prepper a physical sense of what each product is, but teaches the prepper about where in the environment they can encounter these products. i.e. olive oil is natural to temperate climates such as the Mediterranean as well as areas in South America and Australia. The image returned would be able to educate the prepper about where to find the product, seasons to harvest, preparation and long term preservation.  
 
-###Technologies
+### Technologies
 ###### BackEnd
 - C#
 - ASP.NET Core
@@ -13,7 +13,7 @@
 - Fluent Assertions
 - Fixture
 - Xunit
-- JSON Web Token
+- JSON Web Token or JWT (Api Authorization)
 
 ###### FrontEnd
 Yet To come
