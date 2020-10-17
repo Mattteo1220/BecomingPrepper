@@ -28,6 +28,8 @@
 - Fluent Assertions
 - Fixture
 - Xunit
+- Serilog
+- Custom Filter for throttling Requests
 - JSON Web Token or JWT (Api Authorization)
 
 ###### FrontEnd
