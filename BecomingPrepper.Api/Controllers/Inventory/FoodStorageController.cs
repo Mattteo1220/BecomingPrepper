@@ -1,12 +1,12 @@
 ﻿using System;
 using AutoMapper;
 using BecomingPrepper.Api.Objects;
+using BecomingPrepper.Auth;
 using BecomingPrepper.Core.FoodStorageInventoryUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -29,7 +29,7 @@ namespace BecomingPrepper.Api.Controllers.Inventory
 
         [HttpGet]
         [ThrottleFilter(nameof(GetFoodStorageInventory), 100, 60)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("Inventory/{accountId}")]
         public IActionResult GetFoodStorageInventory(string accountId)
         {
@@ -53,7 +53,7 @@ namespace BecomingPrepper.Api.Controllers.Inventory
 
         [HttpGet]
         [ThrottleFilter(nameof(GetInventoryItem), 100, 60)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("Inventory/{accountId}/item/{itemId}")]
         public IActionResult GetInventoryItem(string accountId, string itemId)
         {
@@ -77,7 +77,7 @@ namespace BecomingPrepper.Api.Controllers.Inventory
 
         [HttpPost]
         [ThrottleFilter(nameof(AddInventory), 100, 60)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("Inventory")]
         public IActionResult AddInventory([FromBody] FoodStorageInventoryInfo foodStorageInventory)
         {
@@ -97,7 +97,7 @@ namespace BecomingPrepper.Api.Controllers.Inventory
 
         [HttpPost]
         [ThrottleFilter(nameof(AddInventoryItem), 100, 60)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("Inventory/{accountId}/item")]
         public IActionResult AddInventoryItem(string accountId, [FromBody] InventoryInfo inventoryInfo)
         {
@@ -117,7 +117,7 @@ namespace BecomingPrepper.Api.Controllers.Inventory
 
         [HttpPut]
         [ThrottleFilter(nameof(UpdateInventoryItem), 100, 60)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("Inventory/{accountId}/item")]
         public IActionResult UpdateInventoryItem(string accountId, [FromBody] InventoryInfo inventoryInfo)
         {
@@ -138,7 +138,7 @@ namespace BecomingPrepper.Api.Controllers.Inventory
 
         [HttpDelete]
         [ThrottleFilter(nameof(DeleteInventory), 100, 60)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("Inventory/{accountId}")]
         public IActionResult DeleteInventory(string accountId)
         {
@@ -157,7 +157,7 @@ namespace BecomingPrepper.Api.Controllers.Inventory
 
         [HttpDelete]
         [ThrottleFilter(nameof(DeleteInventoryItem), 100, 60)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("Inventory/{accountId}/item/{itemId}")]
         public IActionResult DeleteInventoryItem(string accountId, string itemId)
         {

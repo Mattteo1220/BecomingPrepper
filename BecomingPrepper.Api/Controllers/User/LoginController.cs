@@ -40,7 +40,8 @@ namespace BecomingPrepper.Api.Controllers.User
                 if (result)
                 {
                     var token = _tokenManager.Generate(_login.AccountId, _login.Email);
-                    return Ok($"Token: {token}");
+                    _tokenManager.CreateCookie(token, Response);
+                    return Ok();
                 }
                 else
                 {

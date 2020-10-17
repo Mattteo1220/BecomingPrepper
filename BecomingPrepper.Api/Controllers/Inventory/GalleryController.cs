@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using BecomingPrepper.Auth;
 using BecomingPrepper.Core.ImageResourceHelper;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -26,7 +26,7 @@ namespace BecomingPrepper.Api.Controllers.Inventory
         // GET api/<GalleryController>/5
         [HttpGet]
         [ThrottleFilter(nameof(GetImage), 500, 60)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route(("Image/{itemId}"))]
         public async Task<IActionResult> GetImage(string itemId)
         {

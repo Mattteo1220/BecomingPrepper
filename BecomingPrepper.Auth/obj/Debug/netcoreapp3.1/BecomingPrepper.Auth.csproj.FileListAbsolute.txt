@@ -7,3 +7,8 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Auth\obj\Debug\netcoreapp3.1\BecomingPrepper.Auth.pdb
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Auth\obj\Debug\netcoreapp3.1\BecomingPrepper.Auth.csproj.CoreCompileInputs.cache
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Auth\obj\Debug\netcoreapp3.1\BecomingPrepper.Auth.csprojAssemblyReference.cache
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Auth\bin\Debug\netcoreapp3.1\BecomingPrepper.Data.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Auth\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Auth\bin\Debug\netcoreapp3.1\BecomingPrepper.Data.pdb
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Auth\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.pdb
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Auth\obj\Debug\netcoreapp3.1\BecomingPrepper.Auth.csproj.CopyComplete

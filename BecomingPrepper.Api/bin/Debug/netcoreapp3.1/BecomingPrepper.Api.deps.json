@@ -2017,6 +2017,7 @@
       },
       "BecomingPrepper.Auth/1.0.0": {
         "dependencies": {
+          "BecomingPrepper.Data": "1.0.0",
           "Microsoft.AspNet.Identity.Core": "2.2.3",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.9",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0"

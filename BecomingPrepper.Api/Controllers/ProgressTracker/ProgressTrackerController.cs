@@ -1,10 +1,10 @@
 ﻿using System;
+using BecomingPrepper.Auth;
 using BecomingPrepper.Core.ProgressTrackerProcessor;
 using BecomingPrepper.Data.Enums;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -26,7 +26,7 @@ namespace BecomingPrepper.Api.Controllers.ProgressTracker
         // GET api/<ProgressTrackerController>/5
         [HttpGet("{accountId}/{objective}/{familySize}")]
         [ThrottleFilter(nameof(GetProgress), 100, 60)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetProgress(string accountId, Objective objective, int familySize)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();

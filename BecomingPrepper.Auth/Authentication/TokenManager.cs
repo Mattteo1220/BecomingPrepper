@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
+using BecomingPrepper.Data.Entities;
+using BecomingPrepper.Data.Interfaces;
 using Microsoft.AspNetCore.Http;
+using MongoDB.Driver;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace BecomingPrepper.Api.Authentication
 {
     public class TokenManager : ITokenManager
     {
-        private TokenInfo _tokenInfo;
-        public TokenManager(TokenInfo tokenInfo)
+        private readonly TokenInfo _tokenInfo;
+        private readonly IRepository<UserEntity> _userRepo;
+        public string AccountIdUsedForAuthorization { get; set; }
+        public TokenManager(TokenInfo tokenInfo, IRepository<UserEntity> userRepository)
         {
             _tokenInfo = tokenInfo ?? throw new ArgumentNullException(nameof(tokenInfo));
+            _userRepo = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
         public string Generate(string accountId, string email)
         {
@@ -34,13 +41,25 @@ namespace BecomingPrepper.Api.Authentication
             string accessToken = new JwtSecurityTokenHandler()
                 .WriteToken(token);
 
-            return $"Bearer {accessToken}";
+            return accessToken;
+        }
+
+        public bool Authorize(string token)
+        {
+            var secret = Environment.GetEnvironmentVariable("Secret");
+            var handler = new JwtSecurityTokenHandler();
+            var tokenInformation = handler.ReadJwtToken(token);
+
+            AccountIdUsedForAuthorization = tokenInformation.Claims.First(claim => claim.Type == "sub").Value;
+            var filter = Builders<UserEntity>.Filter.Where(u => u.Account.AccountId == AccountIdUsedForAuthorization);
+            return _userRepo.Get(filter) != null;
         }
 
         public void CreateCookie(string token, HttpResponse response)
         {
             var options = new CookieOptions();
             options.HttpOnly = true;
+            options.Secure = true;
             options.MaxAge = TimeSpan.FromMinutes(240);
             response.Cookies.Append("Token", token, options);
         }

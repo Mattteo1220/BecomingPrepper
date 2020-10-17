@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using BecomingPrepper.Auth;
 using BecomingPrepper.Data;
 using BecomingPrepper.Data.Enums;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ControllerBase = Microsoft.AspNetCore.Mvc.ControllerBase;
 
@@ -39,8 +39,8 @@ namespace BecomingPrepper.Api.Controllers
 
 
         [HttpGet]
+        [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ThrottleFilter(nameof(GetProducts), 100, 60)]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("category/{category}")]
         public IActionResult GetProducts(int category)
         {
