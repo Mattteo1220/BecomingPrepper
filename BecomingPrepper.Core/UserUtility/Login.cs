@@ -28,15 +28,7 @@ namespace BecomingPrepper.Core.UserUtility
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
 
             var filter = Builders<UserEntity>.Filter.Eq(p => p.Account.Username, username);
-            UserEntity userEntity = null;
-            try
-            {
-                userEntity = _userRepo.Get(filter);
-            }
-            catch
-            {
-                throw;
-            }
+            var userEntity = _userRepo.Get(filter);
 
             if (userEntity == null)
             {

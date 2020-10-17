@@ -33,20 +33,20 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Pilot
         [Fact]
         public void ReturnNotFoundWhenNoTipIdProvided()
         {
-            _pilotController.Delete(string.Empty).Should().BeOfType<NotFoundResult>("No TipId was provided");
+            _pilotController.DeleteTip(string.Empty).Should().BeOfType<NotFoundResult>("No TipId was provided");
         }
 
         [Fact]
         public void ReturnOkWhenTipIsDeletedSuccessfully()
         {
-            _pilotController.Delete(_fixture.Create<string>()).Should().BeOfType<OkObjectResult>("The tip was deleted Successfully");
+            _pilotController.DeleteTip(_fixture.Create<string>()).Should().BeOfType<OkObjectResult>("The tip was deleted Successfully");
         }
 
         [Fact]
         public void ReturnNotFoundWhenExceptionIsThrown()
         {
             _mockPrepGuide.Setup(pg => pg.Delete(It.IsAny<ObjectId>(), It.IsAny<string>(), false)).Throws<Exception>();
-            _pilotController.Delete(_fixture.Create<string>()).Should().BeOfType<NotFoundResult>("An Exception was Thrown");
+            _pilotController.DeleteTip(_fixture.Create<string>()).Should().BeOfType<NotFoundResult>("An Exception was Thrown");
             _mockLogger.Verify(l => l.LogError(It.IsAny<Exception>()), Times.Once);
         }
     }

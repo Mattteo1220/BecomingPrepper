@@ -55,7 +55,7 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Register
         public void ReturnNotFoundIfNoUserRegistrationIfNotSupplied()
         {
             _registerController = new RegisterController(_mockRegister.Object, _mockMapper.Object, _mockLogger.Object);
-            _registerController.Post(null).Should().BeOfType<NotFoundResult>("No UserRegistration was supplied");
+            _registerController.Register(null).Should().BeOfType<NotFoundResult>("No UserRegistration was supplied");
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Register
         {
             _mockMapper.Setup(m => m.Map<UserEntity>(It.IsAny<UserRegistrationInfo>())).Returns(_fixture.Create<UserEntity>());
             _registerController = new RegisterController(_mockRegister.Object, _mockMapper.Object, _mockLogger.Object);
-            _registerController.Post(_fixture.Create<UserRegistrationInfo>()).Should().BeOfType<OkResult>("The user was registered successfully.");
+            _registerController.Register(_fixture.Create<UserRegistrationInfo>()).Should().BeOfType<OkResult>("The user was registered successfully.");
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Register
             _mockMapper.Setup(m => m.Map<UserEntity>(It.IsAny<UserRegistrationInfo>())).Returns(_fixture.Create<UserEntity>());
             _mockRegister.Setup(r => r.Register(It.IsAny<UserEntity>())).Throws<InvalidOperationException>();
             _registerController = new RegisterController(_mockRegister.Object, _mockMapper.Object, _mockLogger.Object);
-            _registerController.Post(_fixture.Create<UserRegistrationInfo>()).Should().BeOfType<NotFoundObjectResult>("A username already in use was supplied.");
+            _registerController.Register(_fixture.Create<UserRegistrationInfo>()).Should().BeOfType<NotFoundObjectResult>("A username already in use was supplied.");
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Register
             _mockMapper.Setup(m => m.Map<UserEntity>(It.IsAny<UserRegistrationInfo>())).Returns(_fixture.Create<UserEntity>());
             _mockRegister.Setup(r => r.Register(It.IsAny<UserEntity>())).Throws<Exception>();
             _registerController = new RegisterController(_mockRegister.Object, _mockMapper.Object, _mockLogger.Object);
-            _registerController.Post(_fixture.Create<UserRegistrationInfo>()).Should().BeOfType<NotFoundObjectResult>("An Exception was thrown");
+            _registerController.Register(_fixture.Create<UserRegistrationInfo>()).Should().BeOfType<NotFoundObjectResult>("An Exception was thrown");
             _mockLogger.Verify(l => l.LogError(It.IsAny<Exception>()), Times.Once);
         }
     }

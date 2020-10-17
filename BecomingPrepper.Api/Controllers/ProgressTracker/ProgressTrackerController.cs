@@ -2,6 +2,7 @@
 using BecomingPrepper.Core.ProgressTrackerProcessor;
 using BecomingPrepper.Data.Enums;
 using BecomingPrepper.Logger;
+using BecomingPrepper.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +25,9 @@ namespace BecomingPrepper.Api.Controllers.ProgressTracker
 
         // GET api/<ProgressTrackerController>/5
         [HttpGet("{accountId}/{objective}/{familySize}")]
+        [ThrottleFilter(nameof(GetProgress), 100, 60)]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Get(string accountId, Objective objective, int familySize)
+        public IActionResult GetProgress(string accountId, Objective objective, int familySize)
         {
             if (string.IsNullOrWhiteSpace(accountId)) return NotFound();
             if (familySize <= 0) return BadRequest("FamilySize must be greater than or equal to 1");

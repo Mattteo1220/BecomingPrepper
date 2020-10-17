@@ -4,6 +4,7 @@ using BecomingPrepper.Api.Objects;
 using BecomingPrepper.Core.PrepGuideUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Logger;
+using BecomingPrepper.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,7 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // GET: api/<PrepGuideController>
         [HttpGet]
+        [ThrottleFilter(nameof(GetPrepGuide), 100, 60)]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("prep-guide")]
         public IActionResult GetPrepGuide()
@@ -52,9 +54,10 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // POST api/<PrepGuideController>
         [HttpPost]
+        [ThrottleFilter(nameof(AddTip), 100, 60)]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("prep-guide/tip")]
-        public IActionResult Post([FromBody] TipInfo tip)
+        public IActionResult AddTip([FromBody] TipInfo tip)
         {
             if (tip == null) return NotFound();
             try
@@ -72,9 +75,10 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // DELETE api/<PrepGuideController>/5
         [HttpDelete]
+        [ThrottleFilter(nameof(DeleteTip), 100, 60)]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("prep-guide/tip/{tipId}")]
-        public IActionResult Delete(string tipId)
+        public IActionResult DeleteTip(string tipId)
         {
             if (string.IsNullOrWhiteSpace(tipId)) return NotFound();
             try

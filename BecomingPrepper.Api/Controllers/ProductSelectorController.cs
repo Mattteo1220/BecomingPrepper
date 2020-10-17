@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BecomingPrepper.Data;
 using BecomingPrepper.Data.Enums;
 using BecomingPrepper.Logger;
+using BecomingPrepper.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,13 +24,22 @@ namespace BecomingPrepper.Api.Controllers
 
 
         [HttpGet]
-        public string Start()
+        [ThrottleFilter(nameof(Welcome), 100, 60)]
+        public string Welcome()
         {
-            return "Becoming Prepper Service";
+            return @"Is a Web Application with an Api Service that will gradually aid ordinary citizens preparedness for emergency situations and doomsday type events, ultimately, BecomingPrepper. 
+                    To aid in both the short and long term of emergency preparedness. BecomingPrepper will allow citizens to stock up on every day items such as food, water, first Aid, Ammo and track their products. 
+                    Preppers will be able to Update, Add, and Delete products from their inventory as well as track their progress against a selected objective created during account registration. 
+                    These objectives range from two weeks to twenty years. As their inventory grows, so too will their confidence in being prepared for the unknown.
+                    Not only is this a great tracking tool for inventory needs but it is also a way to learn to live off the environment around them.
+                    There are ten categories for which preppers should stock up.Some of them are Water, Grains, Sugars, Canned Fruits and Vegetables and Dried Meats.
+                    With each product, a cooresponding image will be returned from the Mongo Database.These images are designed in a way to not only give the prepper a physical sense of what each product is, but teaches the prepper about where in the environment they can encounter these products.i.e. olive oil is natural to temperate climates such as the Mediterranean as well as areas in South America and Australia.
+                    The image returned would be able to educate the prepper about where to find the product, seasons to harvest, preparation and long term preservation.";
         }
 
 
         [HttpGet]
+        [ThrottleFilter(nameof(GetProducts), 100, 60)]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("category/{category}")]
         public IActionResult GetProducts(int category)

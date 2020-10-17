@@ -4,6 +4,7 @@ using BecomingPrepper.Api.Objects;
 using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Logger;
+using BecomingPrepper.Security;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -26,7 +27,8 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // POST api/<RegisterController>
         [HttpPost]
-        public IActionResult Post([FromBody] UserRegistrationInfo user)
+        [ThrottleFilter(nameof(Register), 100, 60)]
+        public IActionResult Register([FromBody] UserRegistrationInfo user)
         {
             if (user == null) return NotFound();
 

@@ -31,34 +31,34 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Login
         [Fact]
         public void ReturnNotFoundIfNoCredentialsSupplied()
         {
-            _loginController.Post(null).Should().BeOfType<NotFoundResult>();
+            _loginController.Login(null).Should().BeOfType<NotFoundResult>();
         }
 
         [Fact]
         public void CallAuthenticateOnLogin()
         {
-            _loginController.Post(_fixture.Create<Credentials>());
+            _loginController.Login(_fixture.Create<Credentials>());
             _mockLogin.Verify(l => l.Authenticate(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
         [Fact]
         public void ReturnUnAuthorizedWhenInvalidCredentialsAreSupplied()
         {
-            _loginController.Post(_fixture.Create<Credentials>()).Should().BeOfType<UnauthorizedResult>();
+            _loginController.Login(_fixture.Create<Credentials>()).Should().BeOfType<UnauthorizedResult>();
         }
 
         [Fact]
         public void ReturnOkWhenAuthorized()
         {
             _mockLogin.Setup(l => l.Authenticate(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
-            _loginController.Post(_fixture.Create<Credentials>()).Should().BeOfType<OkObjectResult>();
+            _loginController.Login(_fixture.Create<Credentials>()).Should().BeOfType<OkObjectResult>();
         }
 
         [Fact]
         public void ReturnBearerTokenWhenAuthorized()
         {
             _mockLogin.Setup(l => l.Authenticate(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
-            var response = _loginController.Post(_fixture.Create<Credentials>()) as OkObjectResult;
+            var response = _loginController.Login(_fixture.Create<Credentials>()) as OkObjectResult;
             response?.Value.ToString().Should().Contain("Token: ");
         }
 
@@ -66,7 +66,7 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Login
         public void ReturnNotFoundWhenExceptionIsThrown()
         {
             _mockLogin.Setup(l => l.Authenticate(It.IsAny<string>(), It.IsAny<string>())).Throws<Exception>();
-            _loginController.Post(_fixture.Create<Credentials>()).Should().BeOfType<NotFoundResult>();
+            _loginController.Login(_fixture.Create<Credentials>()).Should().BeOfType<NotFoundResult>();
             _mockLogger.Verify(l => l.LogError(It.IsAny<Exception>()), Times.Once);
         }
     }

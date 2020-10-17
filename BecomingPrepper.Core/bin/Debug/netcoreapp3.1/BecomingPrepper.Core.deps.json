@@ -1234,6 +1234,7 @@
       },
       "BecomingPrepper.Security/1.0.0": {
         "dependencies": {
+          "BecomingPrepper.Data": "1.0.0",
           "DotNetCore.Security": "12.31.0",
           "Microsoft.Extensions.Options": "3.1.8"
         },

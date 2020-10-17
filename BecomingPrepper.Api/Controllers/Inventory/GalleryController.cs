@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BecomingPrepper.Core.ImageResourceHelper;
 using BecomingPrepper.Logger;
+using BecomingPrepper.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace BecomingPrepper.Api.Controllers.Inventory
 
         // GET api/<GalleryController>/5
         [HttpGet]
+        [ThrottleFilter(nameof(GetImage), 500, 60)]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route(("Image/{itemId}"))]
         public async Task<IActionResult> GetImage(string itemId)

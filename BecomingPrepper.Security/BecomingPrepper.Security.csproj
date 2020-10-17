@@ -9,4 +9,8 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BecomingPrepper.Data\BecomingPrepper.Data.csproj" />
+  </ItemGroup>
+
 </Project>

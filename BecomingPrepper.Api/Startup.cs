@@ -27,6 +27,7 @@ namespace BecomingPrepper.Api
             var componentRegistration = new ComponentRegistration();
             componentRegistration.Register(ref services, Configuration, environment);
 
+            services.AddMemoryCache();
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
 

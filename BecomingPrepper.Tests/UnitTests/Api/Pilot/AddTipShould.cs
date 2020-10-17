@@ -35,20 +35,20 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Pilot
         [Fact]
         public void ReturnNotFoundWhenNoTipProvided()
         {
-            _pilotController.Post(null).Should().BeOfType<NotFoundResult>("No TipInfo was provided");
+            _pilotController.AddTip(null).Should().BeOfType<NotFoundResult>("No TipInfo was provided");
         }
 
         [Fact]
         public void ReturnOkWhenTipIsAddedSuccessfully()
         {
-            _pilotController.Post(_fixture.Create<TipInfo>()).Should().BeOfType<OkObjectResult>("Tip was Added successfully");
+            _pilotController.AddTip(_fixture.Create<TipInfo>()).Should().BeOfType<OkObjectResult>("Tip was Added successfully");
         }
 
         [Fact]
         public void ReturnNotFoundWhenExceptionIsThrown()
         {
             _mockPrepGuide.Setup(pg => pg.Add(ObjectId.Empty, It.IsAny<TipEntity>(), false)).Throws<Exception>();
-            _pilotController.Post(_fixture.Create<TipInfo>()).Should().BeOfType<NotFoundResult>("An Exception was thrown");
+            _pilotController.AddTip(_fixture.Create<TipInfo>()).Should().BeOfType<NotFoundResult>("An Exception was thrown");
             _mockLogger.Verify(l => l.LogError(It.IsAny<Exception>()), Times.Once);
         }
     }

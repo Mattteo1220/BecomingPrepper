@@ -4,6 +4,7 @@ using BecomingPrepper.Api.Controllers;
 using BecomingPrepper.Logger;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Moq;
 using Xunit;
 
@@ -14,9 +15,11 @@ namespace BecomingPrepper.Tests.UnitTests.Api
     {
         private Mock<ILogManager> _mockLogManager;
         private ProductSelectorController _productSelector;
+        private Mock<IMemoryCache> _mockMemoryCache;
         public ProductSelectorShould()
         {
             _mockLogManager = new Mock<ILogManager>();
+            _mockMemoryCache = new Mock<IMemoryCache>();
             _productSelector = new ProductSelectorController(_mockLogManager.Object);
         }
 

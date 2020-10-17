@@ -31,26 +31,26 @@ namespace BecomingPrepper.Tests.UnitTests.Api.ProgressTracker
         [Fact]
         public void ReturnNotFoundWhenNoAccountIdProvided()
         {
-            _progressTrackerController.Get(string.Empty, _fixture.Create<Objective>(), _fixture.Create<int>()).Should().BeOfType<NotFoundResult>("No accountId was provided");
+            _progressTrackerController.GetProgress(string.Empty, _fixture.Create<Objective>(), _fixture.Create<int>()).Should().BeOfType<NotFoundResult>("No accountId was provided");
         }
 
         [Fact]
         public void ReturnNotFoundWhenInvalidFamilySizeProvided()
         {
-            _progressTrackerController.Get(_fixture.Create<string>(), Objective.FiveYear, -1).Should().BeOfType<BadRequestObjectResult>("Invalid Family Size was provided");
+            _progressTrackerController.GetProgress(_fixture.Create<string>(), Objective.FiveYear, -1).Should().BeOfType<BadRequestObjectResult>("Invalid Family Size was provided");
         }
 
         [Fact]
         public void ReturnOkWhenProgressTrackingIsReturned()
         {
-            _progressTrackerController.Get(_fixture.Create<string>(), Objective.FiveYear, 3).Should().BeOfType<OkObjectResult>("Progress Tracker was returned");
+            _progressTrackerController.GetProgress(_fixture.Create<string>(), Objective.FiveYear, 3).Should().BeOfType<OkObjectResult>("Progress Tracker was returned");
         }
 
         [Fact]
         public void ReturnNotFoundWhenExceptionIsThrown()
         {
             _mockProgressTracker.Setup(pt => pt.GetProgress(It.IsAny<string>(), It.IsAny<Objective>(), It.IsAny<int>())).Throws<Exception>();
-            _progressTrackerController.Get(_fixture.Create<string>(), _fixture.Create<Objective>(), _fixture.Create<int>()).Should().BeOfType<NotFoundResult>("An Exception was thrown");
+            _progressTrackerController.GetProgress(_fixture.Create<string>(), _fixture.Create<Objective>(), _fixture.Create<int>()).Should().BeOfType<NotFoundResult>("An Exception was thrown");
             _mockLogManager.Verify(l => l.LogError(It.IsAny<Exception>()), Times.Once);
         }
     }
