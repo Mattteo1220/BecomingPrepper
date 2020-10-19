@@ -44,7 +44,7 @@ namespace BecomingPrepper.Api.Authentication
             return accessToken;
         }
 
-        public bool Authorize(string token)
+        public bool IsAuthorized(string token)
         {
             var secret = Environment.GetEnvironmentVariable("Secret");
             var handler = new JwtSecurityTokenHandler();
@@ -55,13 +55,22 @@ namespace BecomingPrepper.Api.Authentication
             return _userRepo.Get(filter) != null;
         }
 
-        public void CreateCookie(string token, HttpResponse response)
+        public void CreateCookie(string token, string accountId, HttpResponse response, bool httpOnly = true, bool isSecure = true)
         {
             var options = new CookieOptions();
-            options.HttpOnly = true;
-            options.Secure = true;
+            options.HttpOnly = httpOnly;
+            options.Secure = isSecure;
             options.MaxAge = TimeSpan.FromMinutes(240);
-            response.Cookies.Append("Token", token, options);
+            response.Cookies.Append(accountId, token, options);
+        }
+
+        public void CreateCookie(string accountId, HttpResponse response, bool httpOnly = true, bool isSecure = true)
+        {
+            var options = new CookieOptions();
+            options.HttpOnly = httpOnly;
+            options.Secure = isSecure;
+            options.MaxAge = TimeSpan.FromMinutes(240);
+            response.Cookies.Append("AccountId", accountId, options);
         }
     }
 }

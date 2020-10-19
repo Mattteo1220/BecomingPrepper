@@ -11,10 +11,11 @@ namespace BecomingPrepper.Auth
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var tokenExists = context.HttpContext.Request.Cookies.TryGetValue("Token", out var token);
+            context.HttpContext.Request.Cookies.TryGetValue("AccountId", out var accountId);
+            var tokenExists = context.HttpContext.Request.Cookies.TryGetValue(accountId, out var token);
             var tokenManager = context.HttpContext.RequestServices.GetService<ITokenManager>();
             var logManager = context.HttpContext.RequestServices.GetService<ILogManager>();
-            if (!tokenManager.Authorize(token))
+            if (!tokenManager.IsAuthorized(token))
             {
                 logManager.LogInformation($"UnAuthorized Attempt to access Service with accountId {tokenManager.AccountIdUsedForAuthorization}");
                 context.Result = new UnauthorizedResult();
