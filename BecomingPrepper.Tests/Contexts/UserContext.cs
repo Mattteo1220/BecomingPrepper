@@ -16,7 +16,7 @@ namespace BecomingPrepper.Tests.IntegrationTests
 
         public Action ExecutionResult { get; set; }
         public dynamic PropertyUpdate { get; set; }
-        public ILogin Login { get; set; }
+        public ILoginUtility Login { get; set; }
         public ISecureService SecureService { get; set; }
         public IServiceAccount ServiceAccount { get; set; }
 

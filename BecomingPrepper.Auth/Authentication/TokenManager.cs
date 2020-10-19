@@ -15,6 +15,7 @@ namespace BecomingPrepper.Api.Authentication
     {
         private readonly TokenInfo _tokenInfo;
         private readonly IRepository<UserEntity> _userRepo;
+        public bool IsTokenExpired { get; set; }
         public string AccountIdUsedForAuthorization { get; set; }
         public TokenManager(TokenInfo tokenInfo, IRepository<UserEntity> userRepository)
         {
@@ -49,28 +50,22 @@ namespace BecomingPrepper.Api.Authentication
             var secret = Environment.GetEnvironmentVariable("Secret");
             var handler = new JwtSecurityTokenHandler();
             var tokenInformation = handler.ReadJwtToken(token);
-
+            if (DateTime.Now >= tokenInformation.ValidTo)
+            {
+                IsTokenExpired = true;
+            }
             AccountIdUsedForAuthorization = tokenInformation.Claims.First(claim => claim.Type == "sub").Value;
             var filter = Builders<UserEntity>.Filter.Where(u => u.Account.AccountId == AccountIdUsedForAuthorization);
             return _userRepo.Get(filter) != null;
         }
 
-        public void CreateCookie(string token, string accountId, HttpResponse response, bool httpOnly = true, bool isSecure = true)
+        public void CreateCookie(string key, string value, HttpResponse response, bool httpOnly = true, bool isSecure = true)
         {
             var options = new CookieOptions();
             options.HttpOnly = httpOnly;
             options.Secure = isSecure;
             options.MaxAge = TimeSpan.FromMinutes(240);
-            response.Cookies.Append(accountId, token, options);
-        }
-
-        public void CreateCookie(string accountId, HttpResponse response, bool httpOnly = true, bool isSecure = true)
-        {
-            var options = new CookieOptions();
-            options.HttpOnly = httpOnly;
-            options.Secure = isSecure;
-            options.MaxAge = TimeSpan.FromMinutes(240);
-            response.Cookies.Append("AccountId", accountId, options);
+            response.Cookies.Append(key, value, options);
         }
     }
 }

@@ -8,10 +8,9 @@ namespace BecomingPrepper.Data.Repositories
 {
     public class RecommendedQuantityRepository : IRepository<RecommendedQuantityAmountEntity>
     {
-        private bool _disposed = false;
-        private IMongoCollection<RecommendedQuantityAmountEntity> _collection;
-        private IMongoDatabase _mongoContext;
-        private ILogManager _logger;
+        private readonly IMongoCollection<RecommendedQuantityAmountEntity> _collection;
+        private readonly IMongoDatabase _mongoContext;
+        private readonly ILogManager _logger;
 
         public RecommendedQuantityRepository(IMongoDatabase mongoContext, ILogManager logManager)
         {

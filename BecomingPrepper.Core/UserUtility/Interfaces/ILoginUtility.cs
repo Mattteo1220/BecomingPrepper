@@ -1,6 +1,6 @@
 ﻿namespace BecomingPrepper.Core.UserUtility
 {
-    public interface ILogin
+    public interface ILoginUtility
     {
         string AccountId { get; set; }
         string Email { get; set; }

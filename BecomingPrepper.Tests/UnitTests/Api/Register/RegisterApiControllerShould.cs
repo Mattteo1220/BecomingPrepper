@@ -16,14 +16,14 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Register
 {
     public class RegisterApiControllerShould
     {
-        private Mock<IRegister> _mockRegister;
+        private Mock<IRegisterService> _mockRegister;
         private RegisterController _registerController;
         private Mock<ILogManager> _mockLogger;
         private Mock<IMapper> _mockMapper;
         private Fixture _fixture;
         public RegisterApiControllerShould()
         {
-            _mockRegister = new Mock<IRegister>();
+            _mockRegister = new Mock<IRegisterService>();
             _mockLogger = new Mock<ILogManager>();
             _mockMapper = new Mock<IMapper>();
             _fixture = new Fixture();

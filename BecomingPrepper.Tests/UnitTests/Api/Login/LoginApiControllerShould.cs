@@ -14,14 +14,14 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Login
 {
     public class LoginApiControllerShould
     {
-        private Mock<ILogin> _mockLogin;
+        private Mock<ILoginUtility> _mockLogin;
         private LoginController _loginController;
         private Mock<ILogManager> _mockLogger;
         private Mock<ITokenManager> _mockTokenManager;
         private Fixture _fixture;
         public LoginApiControllerShould()
         {
-            _mockLogin = new Mock<ILogin>();
+            _mockLogin = new Mock<ILoginUtility>();
             _mockLogger = new Mock<ILogManager>();
             _mockTokenManager = new Mock<ITokenManager>();
             _loginController = new LoginController(_mockLogin.Object, _mockLogger.Object, _mockTokenManager.Object);

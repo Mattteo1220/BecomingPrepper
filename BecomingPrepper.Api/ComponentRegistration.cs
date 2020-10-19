@@ -10,9 +10,12 @@ using BecomingPrepper.Core.PrepGuideUtility.Interfaces;
 using BecomingPrepper.Core.ProgressTrackerProcessor;
 using BecomingPrepper.Core.RecommenedQuantitiesUtility;
 using BecomingPrepper.Core.RecommenedQuantitiesUtility.Interfaces;
+using BecomingPrepper.Core.TokenService;
+using BecomingPrepper.Core.TokenService.Interface;
 using BecomingPrepper.Core.UserUtility;
 using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
+using BecomingPrepper.Data.Entities.Logins;
 using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Data.Repositories;
@@ -54,7 +57,7 @@ namespace BecomingPrepper.Web.Models
             {
                 ValidateAudience = true,
                 ValidateIssuer = true,
-                ValidateLifetime = true,
+                ValidateLifetime = false,
                 IssuerSigningKey = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(key)),
                 ValidIssuer = tokenInfo.Issuer,
@@ -67,10 +70,10 @@ namespace BecomingPrepper.Web.Models
                 // invoked when the token validation fails
                 OnAuthenticationFailed = (context) =>
                 {
-                    if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
-                    {
-                        context.Response.Headers.Add("Token-Expired", "true");
-                    }
+                    //if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                    //{
+                    //    context.Response.Headers.Add("Token-Expired", "true");
+                    //}
                     return Task.CompletedTask;
                 },
 
@@ -107,17 +110,19 @@ namespace BecomingPrepper.Web.Models
             services.AddSingleton<IRepository<FoodStorageEntity>, FoodStorageInventoryRepository>();
             services.AddSingleton<IRepository<PrepGuideEntity>, PrepGuideRepository>();
             services.AddSingleton<IRepository<RecommendedQuantityAmountEntity>, RecommendedQuantityRepository>();
+            services.AddSingleton<IRepository<Login>, LoginRepository>();
 
             services.AddSingleton<IPrepGuide, PrepGuide>();
             services.AddSingleton<IInventoryUtility, InventoryUtility>();
-            services.AddSingleton<ILogin, Login>();
-            services.AddSingleton<IRegister, RegisterService>();
+            services.AddSingleton<ILoginUtility, LoginUtility>();
+            services.AddSingleton<IRegisterService, RegisterService>();
             services.AddSingleton<IServiceAccount, ServiceAccount>();
             services.AddSingleton<IRecommendService, RecommendService>();
             services.AddSingleton<IProgressTracker, ProgressTracker>();
             services.AddSingleton<IGridFSHelper, GridFSHelper>();
             services.AddSingleton(x => tokenInfo);
             services.AddSingleton<ITokenManager, TokenManager>();
+            services.AddSingleton<ILoginDataService, LoginDataService>();
         }
     }
 }

@@ -8,7 +8,7 @@ using MongoDB.Driver;
 
 namespace BecomingPrepper.Core.UserUtility
 {
-    public class RegisterService : IRegister
+    public class RegisterService : IRegisterService
     {
         private ISecureService _secureService;
         private ILogManager _exceptionLog;

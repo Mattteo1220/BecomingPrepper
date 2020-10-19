@@ -8,9 +8,9 @@ namespace BecomingPrepper.Data.Repositories
 {
     public class FoodStorageInventoryRepository : IRepository<FoodStorageEntity>
     {
-        private IMongoDatabase _mongoContext;
-        private IMongoCollection<FoodStorageEntity> _collection;
-        private ILogManager _logger;
+        private readonly IMongoDatabase _mongoContext;
+        private readonly IMongoCollection<FoodStorageEntity> _collection;
+        private readonly ILogManager _logger;
 
         public FoodStorageInventoryRepository(IMongoDatabase mongoContext, ILogManager logger)
         {

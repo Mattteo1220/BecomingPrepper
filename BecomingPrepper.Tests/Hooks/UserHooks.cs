@@ -24,7 +24,7 @@ namespace BecomingPrepper.Tests.Hooks
         {
             _userContext.UserRepository = new UserRepository(MongoContext, MockExceptionLogger.Object);
             _userContext.SecureService = new SecureService(new HashingOptions());
-            _userContext.Login = new Login(_userContext.UserRepository, _userContext.SecureService, MockExceptionLogger.Object);
+            _userContext.Login = new LoginUtility(_userContext.UserRepository, _userContext.SecureService, MockExceptionLogger.Object);
             _userContext.ServiceAccount = new ServiceAccount(_userContext.UserRepository, _userContext.SecureService, MockExceptionLogger.Object);
         }
 

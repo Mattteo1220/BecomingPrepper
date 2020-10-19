@@ -17,14 +17,14 @@ namespace BecomingPrepper.Tests.UnitTests.RegisterTests
     [Trait("Unit", "RegisterUser")]
     public class RegisterShould
     {
-        private IRegister _register;
+        private IRegisterService _register;
         private Mock<IRepository<UserEntity>> _mockUserRepo;
         private Mock<ILogManager> _mockExceptionLogger;
         private Mock<ISecureService> _mockSecureService;
         private Fixture _fixture;
         public RegisterShould()
         {
-            _register = Mock.Of<IRegister>();
+            _register = Mock.Of<IRegisterService>();
             _mockUserRepo = new Mock<IRepository<UserEntity>>();
             _mockExceptionLogger = new Mock<ILogManager>();
             _mockSecureService = new Mock<ISecureService>();

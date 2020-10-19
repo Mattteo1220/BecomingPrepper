@@ -8,14 +8,14 @@ using MongoDB.Driver;
 
 namespace BecomingPrepper.Core.UserUtility
 {
-    public class Login : ILogin
+    public class LoginUtility : ILoginUtility
     {
         private ISecureService _secureService;
         private ILogManager _exceptionLog;
         private IRepository<UserEntity> _userRepo;
         public string AccountId { get; set; }
         public string Email { get; set; }
-        public Login(IRepository<UserEntity> userRepo, ISecureService secureService, ILogManager exceptionLog)
+        public LoginUtility(IRepository<UserEntity> userRepo, ISecureService secureService, ILogManager exceptionLog)
         {
             _userRepo = userRepo;
             _secureService = secureService;

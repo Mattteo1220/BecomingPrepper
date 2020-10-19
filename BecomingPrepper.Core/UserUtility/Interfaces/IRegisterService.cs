@@ -2,7 +2,7 @@
 
 namespace BecomingPrepper.Core.UserUtility.Interfaces
 {
-    public interface IRegister
+    public interface IRegisterService
     {
         void Register(UserEntity userEntity);
     }
