@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace BecomingPrepper.Api.Authentication
 {
@@ -9,5 +10,6 @@ namespace BecomingPrepper.Api.Authentication
         bool IsAuthorized(string token);
         string AccountIdUsedForAuthorization { get; set; }
         bool IsTokenExpired { get; set; }
+        DateTime ValidTo { get; set; }
     }
 }

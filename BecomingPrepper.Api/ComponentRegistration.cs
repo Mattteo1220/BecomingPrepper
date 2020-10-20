@@ -110,7 +110,7 @@ namespace BecomingPrepper.Web.Models
             services.AddSingleton<IRepository<FoodStorageEntity>, FoodStorageInventoryRepository>();
             services.AddSingleton<IRepository<PrepGuideEntity>, PrepGuideRepository>();
             services.AddSingleton<IRepository<RecommendedQuantityAmountEntity>, RecommendedQuantityRepository>();
-            services.AddSingleton<IRepository<Login>, LoginRepository>();
+            services.AddSingleton<IRepository<Login>, LoginDataRepository>();
 
             services.AddSingleton<IPrepGuide, PrepGuide>();
             services.AddSingleton<IInventoryUtility, InventoryUtility>();

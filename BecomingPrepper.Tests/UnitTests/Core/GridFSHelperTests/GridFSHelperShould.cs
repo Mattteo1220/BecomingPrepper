@@ -2,7 +2,6 @@
 using AutoFixture;
 using BecomingPrepper.Core.GridFSHelper;
 using BecomingPrepper.Core.ImageResourceHelper;
-using BecomingPrepper.Data.Entities.InventoryImageFiles;
 using BecomingPrepper.Data.Interfaces;
 using BecomingPrepper.Data.Repositories;
 using FluentAssertions;
@@ -40,18 +39,6 @@ namespace BecomingPrepper.Tests.UnitTests.Core.GridFSHelperTests
         {
             Action nullIFileDetailRepo = () => new GridFSHelper(_mockFileDetailRepo.Object, null);
             nullIFileDetailRepo.Should().Throw<ArgumentNullException>("No ChunkRepo was provided");
-        }
-
-        [Fact(Skip = "Not calling as i expect it too")]
-        public void CallRepoMethods()
-        {
-            _mockFileDetailRepo.Setup(fd => fd.GetInventoryImageFilesAsync(It.IsAny<string>()))
-                .ReturnsAsync(_fixture.Create<FileDetailEntity>());
-            _mockChunkRepo.Setup(fd => fd.GetInventoryImageChunksAsync(It.IsAny<ObjectId>()))
-                .ReturnsAsync(_fixture.Create<ChunkEntity>());
-            _gridFsHelper.GetChunks(_fixture.Create<string>());
-            _mockFileDetailRepo.Verify(fd => fd.GetInventoryImageFilesAsync(It.IsAny<string>()), Times.Once);
-            _mockChunkRepo.Verify(cr => cr.GetInventoryImageChunksAsync(It.IsAny<ObjectId>()), Times.Once);
         }
     }
 }

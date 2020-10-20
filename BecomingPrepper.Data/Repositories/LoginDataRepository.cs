@@ -6,12 +6,12 @@ using MongoDB.Driver;
 
 namespace BecomingPrepper.Data.Repositories
 {
-    public class LoginRepository : IRepository<Login>
+    public class LoginDataRepository : IRepository<Login>
     {
         private readonly IMongoDatabase _mongoContext;
         private readonly IMongoCollection<Login> _collection;
         private readonly ILogManager _logger;
-        public LoginRepository(IMongoDatabase mongoContext, ILogManager logger)
+        public LoginDataRepository(IMongoDatabase mongoContext, ILogManager logger)
         {
             _mongoContext = mongoContext ?? throw new ArgumentNullException(nameof(mongoContext));
             _collection = _mongoContext.GetCollection<Login>("Logins");
@@ -20,6 +20,7 @@ namespace BecomingPrepper.Data.Repositories
 
         public void Add(Login login)
         {
+            if (login == null) throw new ArgumentNullException(nameof(login));
             try
             {
                 _collection.InsertOne(login);
@@ -38,6 +39,7 @@ namespace BecomingPrepper.Data.Repositories
 
         public Login Get(FilterDefinition<Login> queryFilter)
         {
+            if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
             try
             {
                 var login = _collection.Find(queryFilter).FirstOrDefault();
@@ -52,6 +54,8 @@ namespace BecomingPrepper.Data.Repositories
 
         public void Update(FilterDefinition<Login> queryFilter, UpdateDefinition<Login> updateFilter)
         {
+            if (queryFilter == null) throw new ArgumentNullException(nameof(queryFilter));
+            if (updateFilter == null) throw new ArgumentNullException(nameof(updateFilter));
             try
             {
                 _collection.FindOneAndUpdate(queryFilter, updateFilter);

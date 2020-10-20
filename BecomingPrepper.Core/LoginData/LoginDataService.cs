@@ -1,8 +1,8 @@
 ﻿using System;
 using BecomingPrepper.Core.TokenService.Interface;
-using BecomingPrepper.Data.Entities.Logins;
 using BecomingPrepper.Data.Interfaces;
 using MongoDB.Driver;
+using Login = BecomingPrepper.Data.Entities.Logins.Login;
 
 namespace BecomingPrepper.Core.TokenService
 {
@@ -25,6 +25,13 @@ namespace BecomingPrepper.Core.TokenService
             if (login == null) throw new ArgumentNullException(nameof(login));
 
             _loginRepository.Add(login);
+        }
+
+        public void RefreshToken(string accountId, string token)
+        {
+            var filter = Builders<Login>.Filter.Where(l => l.AccountId == accountId);
+            var update = Builders<Login>.Update.Set(l => l.AccessToken, token);
+            _loginRepository.Update(filter, update);
         }
     }
 }

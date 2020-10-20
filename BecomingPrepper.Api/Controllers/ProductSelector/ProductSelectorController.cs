@@ -24,6 +24,7 @@ namespace BecomingPrepper.Api.Controllers
 
 
         [HttpGet]
+        [Route("Welcome")]
         [ThrottleFilter(nameof(Welcome), 100, 60)]
         public string Welcome()
         {
@@ -41,7 +42,6 @@ namespace BecomingPrepper.Api.Controllers
         [HttpGet]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ThrottleFilter(nameof(GetProducts), 100, 60)]
-        [Route("category/{category}")]
         public IActionResult GetProducts(int category)
         {
             _logManager.LogInformation($"Fetching Products for Category {category} to display on UI");

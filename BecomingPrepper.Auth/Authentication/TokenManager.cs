@@ -16,6 +16,7 @@ namespace BecomingPrepper.Api.Authentication
         private readonly TokenInfo _tokenInfo;
         private readonly IRepository<UserEntity> _userRepo;
         public bool IsTokenExpired { get; set; }
+        public DateTime ValidTo { get; set; }
         public string AccountIdUsedForAuthorization { get; set; }
         public TokenManager(TokenInfo tokenInfo, IRepository<UserEntity> userRepository)
         {
@@ -50,12 +51,14 @@ namespace BecomingPrepper.Api.Authentication
             var secret = Environment.GetEnvironmentVariable("Secret");
             var handler = new JwtSecurityTokenHandler();
             var tokenInformation = handler.ReadJwtToken(token);
-            if (DateTime.Now >= tokenInformation.ValidTo)
+            ValidTo = tokenInformation.ValidTo.ToLocalTime();
+            if (DateTime.Now >= ValidTo)
             {
                 IsTokenExpired = true;
             }
             AccountIdUsedForAuthorization = tokenInformation.Claims.First(claim => claim.Type == "sub").Value;
             var filter = Builders<UserEntity>.Filter.Where(u => u.Account.AccountId == AccountIdUsedForAuthorization);
+
             return _userRepo.Get(filter) != null;
         }
 

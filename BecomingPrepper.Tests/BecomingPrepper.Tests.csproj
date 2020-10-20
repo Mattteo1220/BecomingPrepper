@@ -69,9 +69,6 @@
     <Compile Update="IntegrationTests\Core\ServiceAccountTests\GetAccountDetails\GetAccountDetails.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Update="IntegrationTests\Logger\ExceptionLoggerTests\ExceptionLogger.feature.cs">
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Update="IntegrationTests\Core\LoginTests\Login.feature.cs">
       <DesignTime>True</DesignTime>
     </Compile>
@@ -149,10 +146,6 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GetAccountDetails.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="IntegrationTests\Logger\ExceptionLoggerTests\ExceptionLogger.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ExceptionLogger.feature.cs</LastGenOutput>
-    </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="IntegrationTests\Core\LoginTests\Login.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Login.feature.cs</LastGenOutput>
@@ -209,6 +202,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UpdatePassword.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitTests\Auth\" />
   </ItemGroup>
 
 </Project>

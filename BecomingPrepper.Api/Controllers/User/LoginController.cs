@@ -52,9 +52,14 @@ namespace BecomingPrepper.Api.Controllers.User
                     {
                         AccessToken = token,
                         AccountId = _login.AccountId,
-                        LoginStamp = DateTime.Now.AddHours(8)
+                        LoginStamp = DateTime.Now
                     };
                     _loginDataService.CreateLoginData(loginData);
+                }
+
+                if (login?.LoginStamp <= DateTime.Now.AddHours(-8))
+                {
+                    _loginDataService.RefreshToken(_login.AccountId, token);
                 }
                 return Ok();
 

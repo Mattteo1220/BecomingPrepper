@@ -24,7 +24,7 @@ namespace BecomingPrepper.Api.Controllers.ProgressTracker
         }
 
         // GET api/<ProgressTrackerController>/5
-        [HttpGet("{accountId}/{objective}/{familySize}")]
+        [HttpGet]
         [ThrottleFilter(nameof(GetProgress), 100, 60)]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetProgress(string accountId, Objective objective, int familySize)

@@ -16,6 +16,9 @@ namespace BecomingPrepper.Security
 
         public Throttle(string key, int requestLimit, int timeoutInSeconds)
         {
+            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (requestLimit <= 0) throw new ArgumentOutOfRangeException(nameof(requestLimit));
+            if (timeoutInSeconds <= 0) throw new ArgumentOutOfRangeException(nameof(timeoutInSeconds));
             _key = key;
             _requestLimit = requestLimit;
             _timeoutInSeconds = timeoutInSeconds;

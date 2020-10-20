@@ -3,6 +3,7 @@ using AutoFixture;
 using BecomingPrepper.Api.Authentication;
 using BecomingPrepper.Api.Controllers.User;
 using BecomingPrepper.Api.Objects;
+using BecomingPrepper.Core.TokenService.Interface;
 using BecomingPrepper.Core.UserUtility;
 using BecomingPrepper.Logger;
 using FluentAssertions;
@@ -18,13 +19,15 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Login
         private LoginController _loginController;
         private Mock<ILogManager> _mockLogger;
         private Mock<ITokenManager> _mockTokenManager;
+        private readonly Mock<ILoginDataService> _mockLoginDataService;
         private Fixture _fixture;
         public LoginApiControllerShould()
         {
             _mockLogin = new Mock<ILoginUtility>();
             _mockLogger = new Mock<ILogManager>();
             _mockTokenManager = new Mock<ITokenManager>();
-            _loginController = new LoginController(_mockLogin.Object, _mockLogger.Object, _mockTokenManager.Object);
+            _mockLoginDataService = new Mock<ILoginDataService>();
+            _loginController = new LoginController(_mockLogin.Object, _mockLoginDataService.Object, _mockLogger.Object, _mockTokenManager.Object);
             _fixture = new Fixture();
         }
 
@@ -51,7 +54,7 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Login
         public void ReturnOkWhenAuthorized()
         {
             _mockLogin.Setup(l => l.Authenticate(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
-            _loginController.Login(_fixture.Create<Credentials>()).Should().BeOfType<OkObjectResult>();
+            _loginController.Login(_fixture.Create<Credentials>()).Should().BeOfType<OkResult>();
         }
 
         [Fact]
