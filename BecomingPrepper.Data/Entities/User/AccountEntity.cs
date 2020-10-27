@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace BecomingPrepper.Data.Entities
@@ -11,13 +12,14 @@ namespace BecomingPrepper.Data.Entities
         {
             get
             {
+                var random = new Random();
                 if (_accountId != null)
                 {
                     return _accountId;
                 }
-                return _accountId = $"L.{Username}";
+                return _accountId = $"{random.Next(111111111, 999999999)}";
             }
-            set { this._accountId = value; }
+            set => this._accountId = value;
         }
 
         [BsonElement]
