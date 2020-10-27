@@ -13,7 +13,7 @@ using Xunit;
 
 namespace BecomingPrepper.Tests.UnitTests.LoginTests
 {
-    [Trait("Unit", "LoginUser")]
+    [Trait("Unit", "LoginUtility")]
     public class LoginShould
     {
         private ILoginUtility _login;
