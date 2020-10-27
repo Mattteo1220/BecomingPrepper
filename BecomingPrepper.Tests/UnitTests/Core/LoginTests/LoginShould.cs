@@ -85,5 +85,26 @@ namespace BecomingPrepper.Tests.UnitTests.LoginTests
             errorTest.Should().Throw<Exception>();
             _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Never);
         }
+
+        [Fact]
+        public void ThrowWhenNoUserRepoSupplied()
+        {
+            Action nullCtorArgumentTest = () => new LoginUtility(null, _mockSecureService.Object, _mockExceptionLogger.Object);
+            nullCtorArgumentTest.Should().Throw<ArgumentNullException>("No UserRepository was provided");
+        }
+
+        [Fact]
+        public void ThrowWhenNoSecureServiceSupplied()
+        {
+            Action nullCtorArgumentTest = () => new LoginUtility(_mockUserRepo.Object, null, _mockExceptionLogger.Object);
+            nullCtorArgumentTest.Should().Throw<ArgumentNullException>("No SecureService was provided");
+        }
+
+        [Fact]
+        public void ThrowWhenNoLogManagerSupplied()
+        {
+            Action nullCtorArgumentTest = () => new LoginUtility(_mockUserRepo.Object, _mockSecureService.Object, null);
+            nullCtorArgumentTest.Should().Throw<ArgumentNullException>("No LogManager was provided");
+        }
     }
 }

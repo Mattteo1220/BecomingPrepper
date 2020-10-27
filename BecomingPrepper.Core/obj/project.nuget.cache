@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UblpVGiw6tUmOdFnT5EGD2q5pp7cQDqyYWHOAUwg1cJ7SpDeoqj+xLIsZell6Go0dQBb2c5M3xSDYMCLo3lT4Q==",
+  "dgSpecHash": "sZ+BC+goAboGRbRGr4avAXEJJI2Z9W4AYV+AFLbghV82nE6N/MYi+0qPism0LvqQPnRrS2jQocsp7KOBK4GONA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj",
+  "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mmcentire\\.nuget\\packages\\dnsclient\\1.3.1\\dnsclient.1.3.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\dotnetcore.security\\12.31.0\\dotnetcore.security.12.31.0.nupkg.sha512",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iRMXR9fwumBviCwZlLrzSChKuJhpsMBaCtBGfEGQMh+Cq0BLsSvJ9iB8vMVh2jiDSHu4YNElpH24sUohTx0gqg==",
+  "dgSpecHash": "XarF8acFKuamDNuhtbQpwN2fhtwcnSRBkVUB9fLKWjFxYvnln91l01xjwKWe5c3AzSqKcT5JJ2ox1OrG28Qxmg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Tests\\BecomingPrepper.Tests.csproj",
+  "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Tests\\BecomingPrepper.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mmcentire\\.nuget\\packages\\autofixture\\4.13.0\\autofixture.4.13.0.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\autofixture.xunit2\\4.13.0\\autofixture.xunit2.4.13.0.nupkg.sha512",

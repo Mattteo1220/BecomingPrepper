@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1M8aIyKvNh2rWG8f/mjFUZ59Eplg8L0pRJwDbwwTEVfkMflv4eDVLBae5A8PapIIkUHATShu+FE5Xd1dhzyrcA==",
+  "dgSpecHash": "dlMM1sZWDcnVqCTyQ/VaguiYgbi7lEjESgsEGtmGO4GFnbBq5W745LOvYqntf1KR9lx/nSex6vZZ9o2WbNpt0A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
+  "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\2.0.4\\microsoft.dotnet.platformabstractions.2.0.4.nupkg.sha512",
