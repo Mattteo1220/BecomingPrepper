@@ -36,7 +36,7 @@ namespace BecomingPrepper.Api.Controllers.User
         public IActionResult Register([Microsoft.AspNetCore.Mvc.FromBody] UserRegistrationInfo user)
         {
             if (user == null) return NotFound();
-            if (PasswordCheck.GetPasswordStrength(user.Account.Password) >= PasswordStrength.Medium) return BadRequest("Password is to Weak");
+            if (PasswordCheck.GetPasswordStrength(user.Account.Password) >= PasswordStrength.Medium) return Conflict("Password is to Weak");
 
             var userEntity = _mapper.Map<UserEntity>(user);
             try
