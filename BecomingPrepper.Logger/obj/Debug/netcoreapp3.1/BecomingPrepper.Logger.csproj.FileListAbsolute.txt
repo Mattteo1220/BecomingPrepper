@@ -7,3 +7,12 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Logger\obj\Debug\netcoreapp3.1\BecomingPrepper.Logger.pdb
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Logger\obj\Debug\netcoreapp3.1\BecomingPrepper.Logger.csproj.CoreCompileInputs.cache
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Logger\obj\Debug\netcoreapp3.1\BecomingPrepper.Logger.csprojAssemblyReference.cache
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Logger\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.deps.json
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Logger\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.dll
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Logger\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.pdb
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Logger\obj\Debug\netcoreapp3.1\BecomingPrepper.Logger.csprojAssemblyReference.cache
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Logger\obj\Debug\netcoreapp3.1\BecomingPrepper.Logger.AssemblyInfoInputs.cache
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Logger\obj\Debug\netcoreapp3.1\BecomingPrepper.Logger.AssemblyInfo.cs
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Logger\obj\Debug\netcoreapp3.1\BecomingPrepper.Logger.csproj.CoreCompileInputs.cache
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Logger\obj\Debug\netcoreapp3.1\BecomingPrepper.Logger.dll
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Logger\obj\Debug\netcoreapp3.1\BecomingPrepper.Logger.pdb

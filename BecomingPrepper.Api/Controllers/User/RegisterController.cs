@@ -46,7 +46,7 @@ namespace BecomingPrepper.Api.Controllers.User
             }
             catch (InvalidOperationException)
             {
-                return NotFound("Username already used");
+                return Conflict("Username already used");
             }
             catch (Exception ex)
             {
