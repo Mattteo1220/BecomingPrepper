@@ -13,7 +13,7 @@ using Xunit;
 
 namespace BecomingPrepper.Tests.UnitTests.LoginTests
 {
-    [Trait("Unit", "LoginUser")]
+    [Trait("Unit", "LoginUtility")]
     public class LoginShould
     {
         private ILoginUtility _login;
@@ -84,6 +84,27 @@ namespace BecomingPrepper.Tests.UnitTests.LoginTests
             Action errorTest = () => _login.Authenticate(_fixture.Create<string>(), _fixture.Create<string>());
             errorTest.Should().Throw<Exception>();
             _mockExceptionLogger.Verify(el => el.LogInformation(It.IsAny<string>()), Times.Never);
+        }
+
+        [Fact]
+        public void ThrowWhenNoUserRepoSupplied()
+        {
+            Action nullCtorArgumentTest = () => new LoginUtility(null, _mockSecureService.Object, _mockExceptionLogger.Object);
+            nullCtorArgumentTest.Should().Throw<ArgumentNullException>("No UserRepository was provided");
+        }
+
+        [Fact]
+        public void ThrowWhenNoSecureServiceSupplied()
+        {
+            Action nullCtorArgumentTest = () => new LoginUtility(_mockUserRepo.Object, null, _mockExceptionLogger.Object);
+            nullCtorArgumentTest.Should().Throw<ArgumentNullException>("No SecureService was provided");
+        }
+
+        [Fact]
+        public void ThrowWhenNoLogManagerSupplied()
+        {
+            Action nullCtorArgumentTest = () => new LoginUtility(_mockUserRepo.Object, _mockSecureService.Object, null);
+            nullCtorArgumentTest.Should().Throw<ArgumentNullException>("No LogManager was provided");
         }
     }
 }

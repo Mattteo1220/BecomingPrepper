@@ -72,7 +72,7 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Register
             _mockMapper.Setup(m => m.Map<UserEntity>(It.IsAny<UserRegistrationInfo>())).Returns(_fixture.Create<UserEntity>());
             _mockRegister.Setup(r => r.Register(It.IsAny<UserEntity>())).Throws<InvalidOperationException>();
             _registerController = new RegisterController(_mockRegister.Object, _mockMapper.Object, _mockLogger.Object);
-            _registerController.Register(_fixture.Create<UserRegistrationInfo>()).Should().BeOfType<NotFoundObjectResult>("A username already in use was supplied.");
+            _registerController.Register(_fixture.Create<UserRegistrationInfo>()).Should().BeOfType<ConflictObjectResult>("A username already in use was supplied.");
         }
 
         [Fact]

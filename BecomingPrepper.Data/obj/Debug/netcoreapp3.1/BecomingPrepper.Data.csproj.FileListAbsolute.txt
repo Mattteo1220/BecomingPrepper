@@ -10,3 +10,15 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Data\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Data\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.pdb
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Data\obj\Debug\netcoreapp3.1\BecomingPrepper.Data.csproj.CopyComplete
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\bin\Debug\netcoreapp3.1\BecomingPrepper.Data.deps.json
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\bin\Debug\netcoreapp3.1\BecomingPrepper.Data.dll
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\bin\Debug\netcoreapp3.1\BecomingPrepper.Data.pdb
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.dll
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\bin\Debug\netcoreapp3.1\BecomingPrepper.Logger.pdb
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\obj\Debug\netcoreapp3.1\BecomingPrepper.Data.csprojAssemblyReference.cache
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\obj\Debug\netcoreapp3.1\BecomingPrepper.Data.AssemblyInfoInputs.cache
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\obj\Debug\netcoreapp3.1\BecomingPrepper.Data.AssemblyInfo.cs
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\obj\Debug\netcoreapp3.1\BecomingPrepper.Data.csproj.CoreCompileInputs.cache
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\obj\Debug\netcoreapp3.1\BecomingPrepper.Data.csproj.CopyComplete
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\obj\Debug\netcoreapp3.1\BecomingPrepper.Data.dll
+C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Data\obj\Debug\netcoreapp3.1\BecomingPrepper.Data.pdb

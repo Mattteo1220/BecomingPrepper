@@ -6,6 +6,7 @@ using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
+using BecomingPrepper.Security.Enums;
 using Microsoft.AspNetCore.Mvc;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
@@ -35,6 +36,7 @@ namespace BecomingPrepper.Api.Controllers.User
         public IActionResult Register([Microsoft.AspNetCore.Mvc.FromBody] UserRegistrationInfo user)
         {
             if (user == null) return NotFound();
+            if (PasswordCheck.GetPasswordStrength(user.Account.Password) >= PasswordStrength.Medium) return Conflict("Password is to Weak");
 
             var userEntity = _mapper.Map<UserEntity>(user);
             try
@@ -44,7 +46,7 @@ namespace BecomingPrepper.Api.Controllers.User
             }
             catch (InvalidOperationException)
             {
-                return NotFound("Username already used");
+                return Conflict("Username already used");
             }
             catch (Exception ex)
             {

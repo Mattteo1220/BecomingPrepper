@@ -10,16 +10,16 @@ namespace BecomingPrepper.Core.UserUtility
 {
     public class LoginUtility : ILoginUtility
     {
-        private ISecureService _secureService;
-        private ILogManager _exceptionLog;
-        private IRepository<UserEntity> _userRepo;
+        private readonly ISecureService _secureService;
+        private readonly ILogManager _exceptionLog;
+        private readonly IRepository<UserEntity> _userRepo;
         public string AccountId { get; set; }
         public string Email { get; set; }
         public LoginUtility(IRepository<UserEntity> userRepo, ISecureService secureService, ILogManager exceptionLog)
         {
-            _userRepo = userRepo;
-            _secureService = secureService;
-            _exceptionLog = exceptionLog;
+            _userRepo = userRepo ?? throw new ArgumentNullException(nameof(userRepo));
+            _secureService = secureService ?? throw new ArgumentNullException(nameof(secureService));
+            _exceptionLog = exceptionLog ?? throw new ArgumentNullException(nameof(exceptionLog));
         }
 
         public bool Authenticate(string username, string password)
