@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj": {}
+    "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj": {
+    "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
+        "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
         "projectName": "BecomingPrepper.Logger",
-        "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
+        "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
         "packagesPath": "C:\\Users\\mmcentire\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\obj\\",
+        "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

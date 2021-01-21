@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j53+E6Ca5k5veAGJuUVIIhDXQzk/orQyA+h3avKutmA4a03lcxIbBeY2pWKLsqkPXRfuox7fbWBX9CsiVh55Mg==",
+  "dgSpecHash": "F5j7tChacXl6H04jiGjwXhZmx5aW1Rr1UH6fPFOUgNkXZmvANZfSGzVBFpf++NVo2r02ih+11hAFwkMsSkA4Zg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj",
+  "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mmcentire\\.nuget\\packages\\dnsclient\\1.3.1\\dnsclient.1.3.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",

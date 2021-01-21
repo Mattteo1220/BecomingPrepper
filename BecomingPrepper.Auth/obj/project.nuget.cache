@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yLIRZbdJwsGuwzXlqAYIz3FG58jPHTzyfjU5IBt6l0KyaInvH7DEda2WmkNiTN3Rkrp70nkARanKs7NGwWMbZQ==",
+  "dgSpecHash": "a0XbOtnQ0settoRijtBsWg/UafnFmtCZPeTBCj6FK59KajzvkmAPRnRSsLFdfiv7ltlFrQIFfqvNGZBHjQqEUw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Auth\\BecomingPrepper.Auth.csproj",
+  "projectFilePath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Auth\\BecomingPrepper.Auth.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mmcentire\\.nuget\\packages\\dnsclient\\1.3.1\\dnsclient.1.3.1.nupkg.sha512",
     "C:\\Users\\mmcentire\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",

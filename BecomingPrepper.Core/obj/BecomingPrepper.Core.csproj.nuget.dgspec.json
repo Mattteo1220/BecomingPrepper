@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj": {}
+    "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj": {
+    "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj",
+        "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj",
         "projectName": "BecomingPrepper.Core",
-        "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj",
+        "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Core\\BecomingPrepper.Core.csproj",
         "packagesPath": "C:\\Users\\mmcentire\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Core\\obj\\",
+        "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -32,14 +32,14 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj": {
-                "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj"
+              "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj": {
+                "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj"
               },
-              "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj": {
-                "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj"
+              "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj": {
+                "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj"
               },
-              "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj": {
-                "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj"
+              "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj": {
+                "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj"
               }
             }
           }
@@ -74,14 +74,14 @@
         }
       }
     },
-    "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj": {
+    "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj",
+        "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj",
         "projectName": "BecomingPrepper.Data",
-        "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj",
+        "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj",
         "packagesPath": "C:\\Users\\mmcentire\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Data\\obj\\",
+        "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -102,8 +102,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj": {
-                "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj"
+              "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj": {
+                "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj"
               }
             }
           }
@@ -156,14 +156,14 @@
         }
       }
     },
-    "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj": {
+    "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
+        "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
         "projectName": "BecomingPrepper.Logger",
-        "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
+        "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\BecomingPrepper.Logger.csproj",
         "packagesPath": "C:\\Users\\mmcentire\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Logger\\obj\\",
+        "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Logger\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -242,14 +242,14 @@
         }
       }
     },
-    "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj": {
+    "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj",
+        "projectUniqueName": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj",
         "projectName": "BecomingPrepper.Security",
-        "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj",
+        "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Security\\BecomingPrepper.Security.csproj",
         "packagesPath": "C:\\Users\\mmcentire\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Security\\obj\\",
+        "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Security\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -270,8 +270,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj": {
-                "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FullStackProjects\\BecomingPrepper\\ServiceBackEnd\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj"
+              "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj": {
+                "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Data\\BecomingPrepper.Data.csproj"
               }
             }
           }
