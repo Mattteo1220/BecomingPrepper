@@ -90,3 +90,4 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\BecomingPrepper.Api.pdb
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\BecomingPrepper.Api.genruntimeconfig.cache
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\BecomingPrepper.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
