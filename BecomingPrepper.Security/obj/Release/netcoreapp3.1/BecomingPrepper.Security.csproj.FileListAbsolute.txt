@@ -1,0 +1,14 @@
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\bin\Release\netcoreapp3.1\BecomingPrepper.Security.deps.json
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\bin\Release\netcoreapp3.1\BecomingPrepper.Security.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\bin\Release\netcoreapp3.1\BecomingPrepper.Security.pdb
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\bin\Release\netcoreapp3.1\BecomingPrepper.Data.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\bin\Release\netcoreapp3.1\BecomingPrepper.Logger.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\bin\Release\netcoreapp3.1\BecomingPrepper.Data.pdb
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\bin\Release\netcoreapp3.1\BecomingPrepper.Logger.pdb
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\obj\Release\netcoreapp3.1\BecomingPrepper.Security.csprojAssemblyReference.cache
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\obj\Release\netcoreapp3.1\BecomingPrepper.Security.AssemblyInfoInputs.cache
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\obj\Release\netcoreapp3.1\BecomingPrepper.Security.AssemblyInfo.cs
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\obj\Release\netcoreapp3.1\BecomingPrepper.Security.csproj.CoreCompileInputs.cache
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\obj\Release\netcoreapp3.1\BecomingPrepper.Security.csproj.CopyComplete
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\obj\Release\netcoreapp3.1\BecomingPrepper.Security.dll
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Security\obj\Release\netcoreapp3.1\BecomingPrepper.Security.pdb

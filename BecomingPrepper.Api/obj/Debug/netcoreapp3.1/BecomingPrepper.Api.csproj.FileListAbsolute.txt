@@ -1,6 +1,5 @@
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\BecomingPrepper.Api.exe
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\BecomingPrepper.Api.deps.json
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\BecomingPrepper.Api.runtimeconfig.json
@@ -54,7 +53,6 @@ C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\Becomin
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\Serilog.Formatting.Compact.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\Serilog.Settings.Configuration.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\Serilog.Sinks.Async.dll
-C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\Serilog.Sinks.ColoredConsole.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\Serilog.Sinks.Console.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\Serilog.Sinks.Debug.dll
 C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\bin\Debug\netcoreapp3.1\Serilog.Sinks.File.dll
@@ -182,3 +180,4 @@ C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceB
 C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\BecomingPrepper.Api.dll
 C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\BecomingPrepper.Api.pdb
 C:\Users\mmcentire\Documents\Personal\FullStackProjects\BecomingPrepper\ServiceBackEnd\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\BecomingPrepper.Api.genruntimeconfig.cache
+C:\Users\mmcentire\Documents\Personal\FinalSchoolProject\BecomingPrepper\BecomingPrepper.Api\obj\Debug\netcoreapp3.1\scopedcss\bundle\BecomingPrepper.Api.styles.css

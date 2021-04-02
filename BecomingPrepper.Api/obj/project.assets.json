@@ -1153,19 +1153,6 @@
           "lib/netstandard2.0/Serilog.Sinks.Async.dll": {}
         }
       },
-      "Serilog.Sinks.ColoredConsole/3.0.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "Serilog.Sinks.Console": "3.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.3/Serilog.Sinks.ColoredConsole.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Serilog.Sinks.ColoredConsole.dll": {}
-        }
-      },
       "Serilog.Sinks.Console/3.1.1": {
         "type": "package",
         "dependencies": {
@@ -2388,10 +2375,7 @@
         },
         "runtime": {
           "bin/placeholder/BecomingPrepper.Auth.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       },
       "BecomingPrepper.Core/1.0.0": {
         "type": "project",
@@ -2406,10 +2390,7 @@
         },
         "runtime": {
           "bin/placeholder/BecomingPrepper.Core.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       },
       "BecomingPrepper.Data/1.0.0": {
         "type": "project",
@@ -2426,10 +2407,7 @@
         },
         "runtime": {
           "bin/placeholder/BecomingPrepper.Data.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       },
       "BecomingPrepper.Logger/1.0.0": {
         "type": "project",
@@ -2439,7 +2417,6 @@
           "Serilog.Extensions.Logging": "3.0.1",
           "Serilog.Settings.Configuration": "3.1.0",
           "Serilog.Sinks.Async": "1.4.0",
-          "Serilog.Sinks.ColoredConsole": "3.0.1",
           "Serilog.Sinks.MongoDB": "4.0.0"
         },
         "compile": {
@@ -2447,10 +2424,7 @@
         },
         "runtime": {
           "bin/placeholder/BecomingPrepper.Logger.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       },
       "BecomingPrepper.Security/1.0.0": {
         "type": "project",
@@ -2465,10 +2439,7 @@
         },
         "runtime": {
           "bin/placeholder/BecomingPrepper.Security.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       }
     }
   },
@@ -3845,19 +3816,6 @@
         "lib/netstandard2.0/Serilog.Sinks.Async.xml",
         "serilog.sinks.async.1.4.0.nupkg.sha512",
         "serilog.sinks.async.nuspec"
-      ]
-    },
-    "Serilog.Sinks.ColoredConsole/3.0.1": {
-      "sha512": "Upbxq6I1v3hwOIXzyWb19Hdm7UtdxSLiW6MhkJgyN12Vw71Sv/U7BfhbTxiJ0v/ut3KOwBVigHj24i5b3yiXJw==",
-      "type": "package",
-      "path": "serilog.sinks.coloredconsole/3.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net45/Serilog.Sinks.ColoredConsole.dll",
-        "lib/netstandard1.3/Serilog.Sinks.ColoredConsole.dll",
-        "serilog.sinks.coloredconsole.3.0.1.nupkg.sha512",
-        "serilog.sinks.coloredconsole.nuspec"
       ]
     },
     "Serilog.Sinks.Console/3.1.1": {
@@ -7610,7 +7568,8 @@
   },
   "packageFolders": {
     "C:\\Users\\mmcentire\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -7623,11 +7582,13 @@
       "outputPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\mmcentire\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -7640,6 +7601,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
             "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Auth\\BecomingPrepper.Auth.csproj": {
               "projectPath": "C:\\Users\\mmcentire\\Documents\\Personal\\FinalSchoolProject\\BecomingPrepper\\BecomingPrepper.Auth\\BecomingPrepper.Auth.csproj"
@@ -7661,6 +7623,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "AutoMapper": {
             "target": "Package",
@@ -7705,7 +7668,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   },
