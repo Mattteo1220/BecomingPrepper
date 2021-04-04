@@ -14,7 +14,7 @@ namespace BecomingPrepper.Tests.UnitTests.SecureServiceTests
         public SecureServiceShould()
         {
             _fixture = new Fixture();
-            _secureService = new Security.SecureService(new HashingOptions());
+            _secureService = new BecomingPrepper.Security.SecureService(new HashingOptions());
         }
 
         [Fact]
