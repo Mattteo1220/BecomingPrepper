@@ -7,6 +7,7 @@ using BecomingPrepper.Core.UserUtility;
 using BecomingPrepper.Data.Entities.Logins;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
+using BecomingPrepper.Security.Enums;
 using Microsoft.AspNetCore.Mvc;
 using FromBodyAttribute = Microsoft.AspNetCore.Mvc.FromBodyAttribute;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
@@ -33,7 +34,7 @@ namespace BecomingPrepper.Api.Controllers.User
         // POST api/<UserController>
         [HttpPost]
         [AllowAnonymous]
-        [ThrottleFilter(nameof(Login), 100, 60)]
+        [ThrottleFilter(Endpoint.Login)]
         public IActionResult Login([FromBody] Credentials credentials)
         {
             if (credentials == null || string.IsNullOrWhiteSpace(credentials.Username) || string.IsNullOrWhiteSpace(credentials.Password)) return NotFound();

@@ -32,7 +32,7 @@ namespace BecomingPrepper.Api.Controllers.User
         // POST api/<RegisterController>
         [HttpPost]
         [AllowAnonymous]
-        [ThrottleFilter(nameof(Register), 100, 60)]
+        [ThrottleFilter(Endpoint.Register)]
         public IActionResult Register([Microsoft.AspNetCore.Mvc.FromBody] UserRegistrationInfo user)
         {
             if (user == null) return NotFound();

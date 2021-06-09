@@ -5,6 +5,7 @@ using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
+using BecomingPrepper.Security.Enums;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ namespace BecomingPrepper.Api.Controllers.User
 
         //Api get Account Details
         [HttpGet]
-        [ThrottleFilter(nameof(GetAccountDetails), 100, 60)]
+        [ThrottleFilter(Endpoint.GetAccountDetails)]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("account-management/{accountId}")]
         public IActionResult GetAccountDetails(string accountId)
@@ -51,7 +52,7 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // Patch Update Email
         [HttpPatch]
-        [ThrottleFilter(nameof(PatchEmail), 100, 60)]
+        [ThrottleFilter(Endpoint.PatchEmail)]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("account-Management/{accountId}/email")]
         public IActionResult PatchEmail(string accountId, [FromBody] ECommunication ecomm)
@@ -72,7 +73,7 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // PATCH Update FamilySize
         [HttpPatch]
-        [ThrottleFilter(nameof(PatchFamilySize), 100, 60)]
+        [ThrottleFilter(Endpoint.PatchFamilySize)]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("account-management/{accountId}/familySize")]
         public IActionResult PatchFamilySize(string accountId, [FromBody] Family family)
@@ -95,7 +96,7 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // PATCH Update FamilySize
         [HttpPatch]
-        [ThrottleFilter(nameof(PatchObjective), 100, 60)]
+        [ThrottleFilter(Endpoint.PatchObjective)]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("account-management/{accountId}/objective")]
         public IActionResult PatchObjective(string accountId, [FromBody] Scheme scheme)
@@ -117,7 +118,7 @@ namespace BecomingPrepper.Api.Controllers.User
 
         // PATCH Update FamilySize
         [HttpPatch]
-        [ThrottleFilter(nameof(ChangePassword), 100, 60)]
+        [ThrottleFilter(Endpoint.ChangePassword)]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("account-management/{accountId}/credentials")]
         public IActionResult ChangePassword(string accountId, [FromBody] Objects.Authentication authentication)

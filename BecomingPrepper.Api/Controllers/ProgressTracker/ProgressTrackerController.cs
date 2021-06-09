@@ -4,6 +4,7 @@ using BecomingPrepper.Core.ProgressTrackerProcessor;
 using BecomingPrepper.Data.Enums;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
+using BecomingPrepper.Security.Enums;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +26,7 @@ namespace BecomingPrepper.Api.Controllers.ProgressTracker
 
         // GET api/<ProgressTrackerController>/5
         [HttpGet]
-        [ThrottleFilter(nameof(GetProgress), 100, 60)]
+        [ThrottleFilter(Endpoint.GetProgress)]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetProgress(string accountId, Objective objective, int familySize)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using BecomingPrepper.Data.Entities.Endpoint;
 using BecomingPrepper.Security;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -16,9 +17,10 @@ namespace BecomingPrepper.Tests.UnitTests.SecureService
         private readonly Mock<IMemoryCache> _mockMemoryCache;
         private readonly IServiceCollection _serviceCollection;
         private readonly Mock<ResultExecutingContext> _mockResultExecutingContext;
+        private EndpointEntity _endpointEntity;
         public ThrottleShould()
         {
-            _throttle = new Throttle("GetProducts", 100, 60);
+            _endpointEntity = new EndpointEntity();
             _mockMemoryCache = new Mock<IMemoryCache>();
             _serviceCollection = new ServiceCollection();
             _mockResultExecutingContext = new Mock<ResultExecutingContext>();
@@ -26,10 +28,9 @@ namespace BecomingPrepper.Tests.UnitTests.SecureService
 
         [Theory]
         [InlineData(null)]
-        [InlineData(" ")]
-        public void ThrowArgumentNullExceptionWhenNoKeyProvided(string key)
+        public void ThrowArgumentNullExceptionWhenNoKeyProvided(EndpointEntity entity)
         {
-            Action nullKey = () => new Throttle(key, 1, 1);
+            Action nullKey = () => new Throttle(entity);
             nullKey.Should().Throw<ArgumentNullException>("No Key was provided");
         }
 
@@ -40,7 +41,8 @@ namespace BecomingPrepper.Tests.UnitTests.SecureService
         [InlineData(-100)]
         public void ThrowArgumentOutOfRangeExceptionWhenNoValidRequestLimitIsProvided(int requestLimit)
         {
-            Action invalidRequestLimit = () => new Throttle("GetProducts", requestLimit, 2);
+            _endpointEntity.RequestLimit = requestLimit;
+            Action invalidRequestLimit = () => new Throttle(_endpointEntity);
             invalidRequestLimit.Should().Throw<ArgumentOutOfRangeException>("An Invalid Request Limit was provided");
         }
 
@@ -51,24 +53,9 @@ namespace BecomingPrepper.Tests.UnitTests.SecureService
         [InlineData(-200)]
         public void ThrowArgumentOutOfRangeExceptionWhenNoValidTimeoutInSecondsIsProvided(int timeoutInSeconds)
         {
-            Action invalidRequestLimit = () => new Throttle("GetProducts", 2, timeoutInSeconds);
+            _endpointEntity.Timeout = timeoutInSeconds;
+            Action invalidRequestLimit = () => new Throttle(_endpointEntity);
             invalidRequestLimit.Should().Throw<ArgumentOutOfRangeException>("An Invalid timeoutInSeconds was provided");
         }
-
-        //[Theory]
-        //[InlineData(1, false)]
-        //[InlineData(2, false)]
-        //[InlineData(3, false)]
-        //[InlineData(98, false)]
-        //[InlineData(99, false)]
-        //[InlineData(100, false)]
-        //[InlineData(101, true)]
-        //[InlineData(102, true)]
-        //public void ReturnCorrectlyBasedOnHowManyRequestsHaveBeenSubmitted(int numOfRequests, bool result)
-        //{
-        //    _serviceCollection.AddMemoryCache();
-        //    _mockMemoryCache.Setup(mc => mc.TryGetValue(It.IsAny<string>(), out It.IsAny<Throttle.ThrottleInfo>())).Returns()
-        //    _throttle.MemoryCache = _mockMemoryCache.Object;
-        //}
     }
 }

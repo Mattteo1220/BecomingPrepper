@@ -5,6 +5,7 @@ using BecomingPrepper.Data;
 using BecomingPrepper.Data.Enums;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
+using BecomingPrepper.Security.Enums;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using ControllerBase = Microsoft.AspNetCore.Mvc.ControllerBase;
@@ -25,7 +26,7 @@ namespace BecomingPrepper.Api.Controllers
 
         [HttpGet]
         [Route("Welcome")]
-        [ThrottleFilter(nameof(Welcome), 100, 60)]
+        [ThrottleFilter(Endpoint.Welcome)]
         public string Welcome()
         {
             return @"Is a Web Application with an Api Service that will gradually aid ordinary citizens preparedness for emergency situations and doomsday type events, ultimately, BecomingPrepper. 
@@ -41,7 +42,7 @@ namespace BecomingPrepper.Api.Controllers
 
         [HttpGet]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [ThrottleFilter(nameof(GetProducts), 100, 60)]
+        [ThrottleFilter(Endpoint.GetProducts)]
         public IActionResult GetProducts(int category)
         {
             _logManager.LogInformation($"Fetching Products for Category {category} to display on UI");

@@ -6,6 +6,7 @@ using BecomingPrepper.Core.PrepGuideUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
+using BecomingPrepper.Security.Enums;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -30,7 +31,7 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // GET: api/<PrepGuideController>
         [HttpGet]
-        [ThrottleFilter(nameof(GetPrepGuide), 100, 60)]
+        [ThrottleFilter(Endpoint.GetPrepGuide)]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("prep-guide")]
         public IActionResult GetPrepGuide()
@@ -54,7 +55,7 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // POST api/<PrepGuideController>
         [HttpPost]
-        [ThrottleFilter(nameof(AddTip), 100, 60)]
+        [ThrottleFilter(Endpoint.AddTip)]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("prep-guide/tip")]
         public IActionResult AddTip([FromBody] TipInfo tip)
@@ -75,7 +76,7 @@ namespace BecomingPrepper.Api.Controllers.PrepGuide
 
         // DELETE api/<PrepGuideController>/5
         [HttpDelete]
-        [ThrottleFilter(nameof(DeleteTip), 100, 60)]
+        [ThrottleFilter(Endpoint.DeleteTip)]
         [AuthorizePrepper(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("prep-guide/tip/{tipId}")]
         public IActionResult DeleteTip(string tipId)

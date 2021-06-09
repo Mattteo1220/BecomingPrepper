@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Globalization;
+using BecomingPrepper.Data.Entities.Endpoint;
+using BecomingPrepper.Data.Interfaces;
+using BecomingPrepper.Security.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
+using MongoDB.Driver;
 
 namespace BecomingPrepper.Security
 {
     public class ThrottleFilter : ResultFilterAttribute
     {
-        private readonly string _key;
-        private readonly int _requestLimit;
-        private readonly int _timeoutInSeconds;
-        public ThrottleFilter(string key, int requestLimit, int timeoutInSeconds)
+        private readonly Endpoint _endPoint;
+        public ThrottleFilter(Endpoint endpoint)
         {
-            _key = key;
-            _requestLimit = requestLimit;
-            _timeoutInSeconds = timeoutInSeconds;
+            _endPoint = endpoint;
         }
 
         public void OnActionExecuted(ActionExecutedContext executedContext)
@@ -27,7 +27,10 @@ namespace BecomingPrepper.Security
 
         public override void OnResultExecuting(ResultExecutingContext executingContext)
         {
-            var throttle = new Throttle(_key, _requestLimit, _timeoutInSeconds);
+            var endpointRepository = executingContext.HttpContext.RequestServices.GetService<IRepository<EndpointEntity>>();
+            var filter = Builders<EndpointEntity>.Filter.Where(e => e.Id == Convert.ToInt32(_endPoint));
+            var endpoint = endpointRepository.Get(filter);
+            var throttle = new Throttle(endpoint);
             throttle.MemoryCache = executingContext.HttpContext.RequestServices.GetService<IMemoryCache>();
             if (throttle.ShouldRequestBeThrottled())
             {
