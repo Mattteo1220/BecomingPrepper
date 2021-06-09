@@ -15,6 +15,7 @@ using BecomingPrepper.Core.TokenService.Interface;
 using BecomingPrepper.Core.UserUtility;
 using BecomingPrepper.Core.UserUtility.Interfaces;
 using BecomingPrepper.Data.Entities;
+using BecomingPrepper.Data.Entities.Endpoint;
 using BecomingPrepper.Data.Entities.Logins;
 using BecomingPrepper.Data.Entities.ProgressTracker;
 using BecomingPrepper.Data.Interfaces;
@@ -111,6 +112,7 @@ namespace BecomingPrepper.Web.Models
             services.AddSingleton<IRepository<PrepGuideEntity>, PrepGuideRepository>();
             services.AddSingleton<IRepository<RecommendedQuantityAmountEntity>, RecommendedQuantityRepository>();
             services.AddSingleton<IRepository<Login>, LoginDataRepository>();
+            services.AddSingleton<IRepository<EndpointEntity>, EndpointRepository>();
 
             services.AddSingleton<IPrepGuide, PrepGuide>();
             services.AddSingleton<IInventoryUtility, InventoryUtility>();
