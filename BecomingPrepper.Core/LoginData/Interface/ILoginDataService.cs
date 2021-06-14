@@ -6,6 +6,6 @@ namespace BecomingPrepper.Core.TokenService.Interface
     {
         Login FetchLastLoginData(string accountId);
         void CreateLoginData(Login login);
-        void RefreshToken(string accountId, string token);
+        void UpdateToken(string accountId, string token);
     }
 }

@@ -3,25 +3,20 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using BecomingPrepper.Data.Entities;
-using BecomingPrepper.Data.Interfaces;
+using BecomingPrepper.Api.Authentication;
 using Microsoft.AspNetCore.Http;
-using MongoDB.Driver;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
-namespace BecomingPrepper.Api.Authentication
+namespace BecomingPrepper.Auth.Authentication
 {
     public class TokenManager : ITokenManager
     {
         private readonly TokenInfo _tokenInfo;
-        private readonly IRepository<UserEntity> _userRepo;
-        public bool IsTokenExpired { get; set; }
-        public DateTime ValidTo { get; set; }
-        public string AccountIdUsedForAuthorization { get; set; }
-        public TokenManager(TokenInfo tokenInfo, IRepository<UserEntity> userRepository)
+        private string _accountId;
+        private string _email;
+        public TokenManager(TokenInfo tokenInfo)
         {
             _tokenInfo = tokenInfo ?? throw new ArgumentNullException(nameof(tokenInfo));
-            _userRepo = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
         public string Generate(string accountId, string email)
         {
@@ -48,18 +43,21 @@ namespace BecomingPrepper.Api.Authentication
 
         public bool IsAuthorized(string token)
         {
-            var secret = Environment.GetEnvironmentVariable("Secret");
             var handler = new JwtSecurityTokenHandler();
             var tokenInformation = handler.ReadJwtToken(token);
-            ValidTo = tokenInformation.ValidTo.ToLocalTime();
-            if (DateTime.Now >= ValidTo)
-            {
-                IsTokenExpired = true;
-            }
-            AccountIdUsedForAuthorization = tokenInformation.Claims.First(claim => claim.Type == "sub").Value;
-            var filter = Builders<UserEntity>.Filter.Where(u => u.Account.AccountId == AccountIdUsedForAuthorization);
 
-            return _userRepo.Get(filter) != null;
+            var isValidToValid = tokenInformation.ValidTo.ToLocalTime() >= DateTime.Now;
+            var isIssuerValid = tokenInformation.Claims.Any(c => c.Issuer == _tokenInfo.Issuer);
+            var isAudienceValid = tokenInformation.Audiences.Any(a => a == _tokenInfo.Audience);
+
+            _accountId = tokenInformation.Claims.First(claim => claim.Type == "sub").Value;
+            _email = tokenInformation.Claims.First(claim => claim.Type == "email").Value;
+            return (isValidToValid && isIssuerValid && isAudienceValid);
+        }
+
+        public string RefreshToken()
+        {
+            return Generate(_accountId, _email);
         }
 
         public void CreateCookie(string key, string value, HttpResponse response, bool httpOnly = true, bool isSecure = true)

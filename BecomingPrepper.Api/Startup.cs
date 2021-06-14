@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using BecomingPrepper.Web.Models;
 using Microsoft.AspNetCore.Builder;
@@ -27,6 +28,7 @@ namespace BecomingPrepper.Api
             var componentRegistration = new ComponentRegistration();
             componentRegistration.Register(ref services, Configuration, environment);
 
+            services.AddSession();
             services.AddMemoryCache();
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
@@ -44,6 +46,8 @@ namespace BecomingPrepper.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSession(new SessionOptions() { IdleTimeout = TimeSpan.FromMinutes(60) });
 
             app.UseAuthorization();
             app.UseAuthentication();

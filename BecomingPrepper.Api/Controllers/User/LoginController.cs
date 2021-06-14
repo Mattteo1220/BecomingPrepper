@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Web.Http;
-using BecomingPrepper.Api.Authentication;
 using BecomingPrepper.Api.Objects;
+using BecomingPrepper.Auth.Authentication;
 using BecomingPrepper.Core.TokenService.Interface;
 using BecomingPrepper.Core.UserUtility;
 using BecomingPrepper.Data.Entities.Logins;
 using BecomingPrepper.Logger;
 using BecomingPrepper.Security;
-using BecomingPrepper.Security.Enums;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Endpoint = BecomingPrepper.Security.Enums.Endpoint;
 using FromBodyAttribute = Microsoft.AspNetCore.Mvc.FromBodyAttribute;
 using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
@@ -37,15 +38,24 @@ namespace BecomingPrepper.Api.Controllers.User
         [ThrottleFilter(Endpoint.Login)]
         public IActionResult Login([FromBody] Credentials credentials)
         {
-            if (credentials == null || string.IsNullOrWhiteSpace(credentials.Username) || string.IsNullOrWhiteSpace(credentials.Password)) return NotFound();
+            if (credentials == null || string.IsNullOrWhiteSpace(credentials.Username) ||
+                string.IsNullOrWhiteSpace(credentials.Password))
+            {
+                return NotFound();
+            }
+
             try
             {
                 var result = _login.Authenticate(credentials.Username, credentials.Password);
-                if (!result) return Unauthorized();
+                if (!result)
+                {
+                    return Unauthorized();
+                }
 
                 var token = _tokenManager.Generate(_login.AccountId, _login.Email);
-                _tokenManager.CreateCookie("Email", _login.Email, Response, false, false);
-                _tokenManager.CreateCookie("AccountId", _login.AccountId, Response, false, false);
+                var key = Guid.NewGuid().ToString();
+                _tokenManager.CreateCookie("Key", key, Response, false, false);
+
                 var login = _loginDataService.FetchLastLoginData(_login.AccountId);
                 if (login == null)
                 {
@@ -58,10 +68,7 @@ namespace BecomingPrepper.Api.Controllers.User
                     _loginDataService.CreateLoginData(loginData);
                 }
 
-                if (login?.LoginStamp <= DateTime.Now.AddHours(-8))
-                {
-                    _loginDataService.RefreshToken(_login.AccountId, token);
-                }
+                HttpContext.Session.SetString(key, token);
                 return Ok();
 
             }

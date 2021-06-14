@@ -27,7 +27,7 @@ namespace BecomingPrepper.Core.TokenService
             _loginRepository.Add(login);
         }
 
-        public void RefreshToken(string accountId, string token)
+        public void UpdateToken(string accountId, string token)
         {
             var filter = Builders<Login>.Filter.Where(l => l.AccountId == accountId);
             var update = Builders<Login>.Update.Set(l => l.AccessToken, token);

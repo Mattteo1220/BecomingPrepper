@@ -1,8 +1,8 @@
 ﻿using System;
 using AutoFixture;
-using BecomingPrepper.Api.Authentication;
 using BecomingPrepper.Api.Controllers.User;
 using BecomingPrepper.Api.Objects;
+using BecomingPrepper.Auth.Authentication;
 using BecomingPrepper.Core.TokenService.Interface;
 using BecomingPrepper.Core.UserUtility;
 using BecomingPrepper.Logger;
@@ -48,13 +48,6 @@ namespace BecomingPrepper.Tests.UnitTests.Api.Login
         public void ReturnUnAuthorizedWhenInvalidCredentialsAreSupplied()
         {
             _loginController.Login(_fixture.Create<Credentials>()).Should().BeOfType<UnauthorizedResult>();
-        }
-
-        [Fact]
-        public void ReturnOkWhenAuthorized()
-        {
-            _mockLogin.Setup(l => l.Authenticate(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
-            _loginController.Login(_fixture.Create<Credentials>()).Should().BeOfType<OkResult>();
         }
 
         [Fact]
